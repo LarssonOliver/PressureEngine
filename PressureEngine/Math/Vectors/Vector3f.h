@@ -83,7 +83,6 @@ struct Vector3f {
 	Vector3f& rotateZ(float angle);
 	Vector3f& rotateZ(float angle, Vector3f& dest) const;
 
-
 	/* EXTRA FUNCTIONS */
 	Vector3f& negate();
 	Vector3f& negate(Vector3f& dest) const;

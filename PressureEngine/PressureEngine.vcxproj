@@ -115,12 +115,14 @@
     <ClCompile Include="Math\Math.cpp" />
     <ClCompile Include="Math\Vectors\Vector2f.cpp" />
     <ClCompile Include="Math\Vectors\Vector3f.cpp" />
+    <ClCompile Include="Math\Vectors\Vector4f.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Vectors.h" />
     <ClInclude Include="Math\Vectors\Vector2f.h" />
     <ClInclude Include="Math\Vectors\Vector3f.h" />
+    <ClInclude Include="Math\Vectors\Vector4f.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
