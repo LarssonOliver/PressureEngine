@@ -44,12 +44,21 @@ Matrix4f& Matrix4f::identity() {
 }
 
 /* GETTERS */
-
+float Matrix4f::get(int col, int row) const {
+	return val[col + row * 4];
+}
 
 /* SETTERS */
-//Matrix4f& Matrix4f::set(const Matrix4f& m) {
-//	
-//}
+Matrix4f& Matrix4f::set(int col, int row, float value) {
+	val[col + row * 4] = value;
+	return *this;
+}
+
+Matrix4f& Matrix4f::set(const Matrix4f& m) {
+	for (int i = 0; i < 4 * 4; i++) {
+		set(i % 4, i / 4, m.get(i % 4, i / 4));
+	} return *this;
+}
 
 Matrix4f& Matrix4f::set(const Vector4f& col0, const Vector4f& col1, const Vector4f& col2, const Vector4f& col3) {
 	// Col0

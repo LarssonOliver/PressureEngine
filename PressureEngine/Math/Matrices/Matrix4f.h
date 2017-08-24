@@ -15,10 +15,11 @@ struct Matrix4f {
 	Matrix4f& identity();
 
 	/* GETTERS */
-	float* getArray() const;
+	//float* getArray() const;
 	float get(int col, int row) const;
 
 	/* SETTERS */
+	Matrix4f& set(int col, int row, float value);
 	Matrix4f& set(const Matrix4f& m);
 	Matrix4f& set(const Vector4f& col0, const Vector4f& col1, const Vector4f& col2, const Vector4f& col3);
 	Matrix4f& setColumn(int col, const Vector4f& v);
