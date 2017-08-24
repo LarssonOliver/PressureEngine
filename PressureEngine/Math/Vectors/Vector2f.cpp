@@ -130,6 +130,43 @@ Vector2f& Vector2f::mul(const Vector2f& v, Vector2f& dest) const {
 	return dest;
 }
 
+/* DIVISION */
+Vector2f& Vector2f::div(float scalar) {
+	this->x /= scalar;
+	this->y /= scalar;
+	return *this;
+}
+
+Vector2f& Vector2f::div(float scalar, Vector2f& dest) const {
+	dest.x = this->x / scalar;
+	dest.y = this->y / scalar;
+	return dest;
+}
+
+Vector2f& Vector2f::div(float x, float y) {
+	this->x /= x;
+	this->y /= y;
+	return *this;
+}
+
+Vector2f& Vector2f::div(float x, float y, Vector2f& dest) const {
+	dest.x = this->x / x;
+	dest.y = this->y / y;
+	return dest;
+}
+
+Vector2f& Vector2f::div(const Vector2f& v) {
+	this->x /= v.getX();
+	this->y /= v.getY();
+	return *this;
+}
+
+Vector2f& Vector2f::div(const Vector2f& v, Vector2f& dest) const {
+	dest.x = this->x / v.getX();
+	dest.y = this->y / v.getY();
+	return dest;
+}
+
 /* EQUALITY CHECK */
 bool Vector2f::equals(const Vector2f& v) const {
 	return this->x == v.getX() && this->y == v.getY();
@@ -157,6 +194,10 @@ float Vector2f::angle(const Vector2f& v) const {
 }
 
 /* VECTOR MATH */
+float Vector2f::dot(float x, float y) const {
+	return this->x * x + this->y * y;
+}
+
 float Vector2f::dot(const Vector2f& v) const {
 	return x * v.getX() + y * v.getY();
 }

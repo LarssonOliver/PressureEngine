@@ -41,6 +41,14 @@ struct Vector2f {
 	Vector2f& mul(const Vector2f& v);
 	Vector2f& mul(const Vector2f& v, Vector2f& dest) const;
 
+	/* DIVISION */
+	Vector2f& div(float scalar);
+	Vector2f& div(float scalar, Vector2f& dest) const;
+	Vector2f& div(float x, float y);
+	Vector2f& div(float x, float y, Vector2f& dest) const;
+	Vector2f& div(const Vector2f& v);
+	Vector2f& div(const Vector2f& v, Vector2f& dest) const;
+
 	/* EQUALITY CHECK */
 	bool equals(const Vector2f& v) const;
 
@@ -51,6 +59,7 @@ struct Vector2f {
 	float angle(const Vector2f& v) const;
 
 	/* VECTOR MATH */
+	float dot(float x, float y) const;
 	float dot(const Vector2f& v) const;
 	Vector2f& normalize();
 	Vector2f& normalize(Vector2f& dest) const;
