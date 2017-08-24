@@ -17,11 +17,11 @@ Vector2f::Vector2f(float d) {
 }
 
 /* GETTERS */
-float Vector2f::getX() {
+float Vector2f::getX() const {
 	return x;
 }
 
-float Vector2f::getY() {
+float Vector2f::getY() const {
 	return y;
 }
 
@@ -38,8 +38,8 @@ Vector2f& Vector2f::set(float x, float y) {
 }
 
 Vector2f& Vector2f::set(const Vector2f& v) {
-	this->x = v.x;
-	this->y = v.y;
+	this->x = v.getX();
+	this->y = v.getY();
 	return *this;
 }
 
@@ -57,14 +57,14 @@ Vector2f& Vector2f::add(float x, float y, Vector2f& dest) {
 }
 
 Vector2f& Vector2f::add(const Vector2f& v) {
-	this->x += v.x;
-	this->y += v.y;
+	this->x += v.getX();
+	this->y += v.getY();
 	return *this;
 }
 
 Vector2f& Vector2f::add(const Vector2f& v, Vector2f& dest) {
-	dest.x = this->x + v.x;
-	dest.y = this->y + v.y;
+	dest.x = this->x + v.getX();
+	dest.y = this->y + v.getY();
 	return dest;
 }
 
@@ -82,14 +82,14 @@ Vector2f& Vector2f::sub(float x, float y, Vector2f& dest) {
 }
 
 Vector2f& Vector2f::sub(const Vector2f& v) {
-	this->x -= v.x;
-	this->y -= v.y;
+	this->x -= v.getX();
+	this->y -= v.getY();
 	return *this;
 }
 
 Vector2f& Vector2f::sub(const Vector2f& v, Vector2f& dest) {
-	dest.x = this->x - v.x;
-	dest.y = this->y - v.y;
+	dest.x = this->x - v.getX();
+	dest.y = this->y - v.getY();
 	return dest;
 }
 
@@ -119,27 +119,79 @@ Vector2f& Vector2f::mul(float x, float y, Vector2f& dest) {
 }
 
 Vector2f& Vector2f::mul(const Vector2f& v) {
-	this->x *= v.x;
-	this->y *= v.y;
+	this->x *= v.getX();
+	this->y *= v.getY();
 	return *this;
 }
 
 Vector2f& Vector2f::mul(const Vector2f& v, Vector2f& dest) {
-	dest.x = this->x * v.x;
-	dest.y = this->y * v.y;
+	dest.x = this->x * v.getX();
+	dest.y = this->y * v.getY();
 	return dest;
 }
 
 /* EQUALITY CHECK */
 bool Vector2f::equals(const Vector2f& v) {
-	return this->x == v.x && this->y == v.y;
+	return this->x == v.getX() && this->y == v.getY();
 }
 
 /* TRIGONOMETRY */
-//TODO: length, distance x2, angle
+float Vector2f::length() {
+	return std::sqrtf(x * x + y * y);
+}
+
+float Vector2f::distance(float x, float y) {
+	float dx = this->x - x;
+	float dy = this->y - y;
+	return std::sqrtf(dx * dx + dy * dy);
+}
+
+float Vector2f::distance(const Vector2f& v) {
+	return distance(v.getX(), v.getY());
+}
+
+float Vector2f::angle(const Vector2f& v) {
+	float dot = x * v.getX() + y * v.getY();
+	float det = x * v.getY() - y * v.getX();
+	return std::atan2f(det, dot);
+}
 
 /* VECTOR MATH */
-//TODO: EVERYTHING HERE
+float Vector2f::dot(const Vector2f& v) {
+	return x * v.getX() + y * v.getY();
+}
+
+Vector2f& Vector2f::normalize() {
+	float invLength = 1.f / std::sqrtf(x * x + y * y);
+	x *= invLength;
+	y *= invLength;
+	return *this;
+}
+
+Vector2f& Vector2f::normalize(Vector2f& dest) {
+	float invLength = 1.f / std::sqrtf(x * x + y * y);
+	dest.x = x * invLength;
+	dest.y = y * invLength;
+	return dest;
+}
+
+Vector2f& Vector2f::normalize(float length) {
+	float invLength = (1.f / std::sqrtf(x * x + y * y)) * length;
+	x *= invLength;
+	y *= invLength;
+	return *this;
+}
+
+Vector2f& Vector2f::normalize(float length, Vector2f& dest) {
+	float invLength = (1.f / std::sqrtf(x * x + y * y)) * length;
+	dest.x = x * invLength;
+	dest.y = y * invLength;
+	return dest;
+}
+
+Vector2f& Vector2f::perpendicular() {
+	return set(y, x * -1);
+}
 
 /* EXTRA FUNCTIONS */
 Vector2f& Vector2f::negate() {
@@ -160,28 +212,10 @@ Vector2f& Vector2f::zero() {
 }
 
 /* OPERATOR OVERLOADING */
-//Vector2f& operator+(Vector2f& left, const Vector2f& right) {
-//	return left.add(right);
-//}
-//
-//Vector2f& operator-(Vector2f& left, const Vector2f& right) {
-//	return left.sub(right);
-//}
-//
-//Vector2f& operator*(Vector2f& left, const Vector2f& right) {
-//	return left.mul(right);
-//}
-//
-//Vector2f& operator/(Vector2f& left, const Vector2f& right) {
-//	left.x /= right.x;
-//	left.y /= right.y;
-//	return left;
-//}
-//
-//bool operator==(Vector2f& left, const Vector2f& right) {
-//	return left.equals(right);
-//}
-//
-//bool operator!=(Vector2f& left, const Vector2f& right) {
-//	return !left.equals(right);
-//}
+bool Vector2f::operator==(const Vector2f& other) const {
+	return x == other.x && y == other.y;
+}
+
+bool Vector2f::operator!=(const Vector2f& other) const {
+	return !(*this == other);
+}

@@ -13,8 +13,8 @@ struct Vector2f {
 	Vector2f(float x, float y);
 
 	/* GETTERS */
-	float getX();
-	float getY();
+	float getX() const;
+	float getY() const;
 
 	/* SETTERS */
 	Vector2f& set(float d);
@@ -53,24 +53,18 @@ struct Vector2f {
 	/* VECTOR MATH */
 	float dot(const Vector2f& v);
 	Vector2f& normalize();
+	Vector2f& normalize(Vector2f& dest);
 	Vector2f& normalize(float length);
 	Vector2f& normalize(float length, Vector2f& dest);
-	Vector2f& normalize(Vector2f& dest);
 	Vector2f& perpendicular();
 
 	/* EXTRA FUNCTIONS */
 	Vector2f& negate();
 	Vector2f& negate(Vector2f& dest);
 	Vector2f& zero();
-	//const char* toString(); //implement later?
 
 	/* OPERATOR OVERLOADING */
-	//friend Vector2f& operator+(Vector2f& left, const Vector2f& right);
-	//friend Vector2f& operator-(Vector2f& left, const Vector2f& right);
-	//friend Vector2f& operator*(Vector2f& left, const Vector2f& right);
-	//friend Vector2f& operator/(Vector2f& left, const Vector2f& right);
-
-	//friend bool operator==(Vector2f& left, const Vector2f& right);
-	//friend bool operator!=(Vector2f& left, const Vector2f& right);
+	bool operator==(const Vector2f& other) const;
+	bool operator!=(const Vector2f& other) const;
 
 };
