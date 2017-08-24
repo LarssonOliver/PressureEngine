@@ -50,7 +50,7 @@ Vector2f& Vector2f::add(float x, float y) {
 	return *this;
 }
 
-Vector2f& Vector2f::add(float x, float y, Vector2f& dest) {
+Vector2f& Vector2f::add(float x, float y, Vector2f& dest) const {
 	dest.x = this->x + x;
 	dest.y = this->y + y;
 	return dest;
@@ -62,7 +62,7 @@ Vector2f& Vector2f::add(const Vector2f& v) {
 	return *this;
 }
 
-Vector2f& Vector2f::add(const Vector2f& v, Vector2f& dest) {
+Vector2f& Vector2f::add(const Vector2f& v, Vector2f& dest) const {
 	dest.x = this->x + v.getX();
 	dest.y = this->y + v.getY();
 	return dest;
@@ -75,7 +75,7 @@ Vector2f& Vector2f::sub(float x, float y) {
 	return *this;
 }
 
-Vector2f& Vector2f::sub(float x, float y, Vector2f& dest) {
+Vector2f& Vector2f::sub(float x, float y, Vector2f& dest) const {
 	dest.x = this->x - x;
 	dest.y = this->y - y;
 	return dest;
@@ -87,7 +87,7 @@ Vector2f& Vector2f::sub(const Vector2f& v) {
 	return *this;
 }
 
-Vector2f& Vector2f::sub(const Vector2f& v, Vector2f& dest) {
+Vector2f& Vector2f::sub(const Vector2f& v, Vector2f& dest) const {
 	dest.x = this->x - v.getX();
 	dest.y = this->y - v.getY();
 	return dest;
@@ -100,7 +100,7 @@ Vector2f& Vector2f::mul(float scalar) {
 	return *this;
 }
 
-Vector2f& Vector2f::mul(float scalar, Vector2f& dest) {
+Vector2f& Vector2f::mul(float scalar, Vector2f& dest) const {
 	dest.x = this->x * scalar;
 	dest.y = this->y * scalar;
 	return dest;
@@ -112,7 +112,7 @@ Vector2f& Vector2f::mul(float x, float y) {
 	return *this;
 }
 
-Vector2f& Vector2f::mul(float x, float y, Vector2f& dest) {
+Vector2f& Vector2f::mul(float x, float y, Vector2f& dest) const {
 	dest.x = this->x * x;
 	dest.y = this->y * y;
 	return dest;
@@ -124,40 +124,40 @@ Vector2f& Vector2f::mul(const Vector2f& v) {
 	return *this;
 }
 
-Vector2f& Vector2f::mul(const Vector2f& v, Vector2f& dest) {
+Vector2f& Vector2f::mul(const Vector2f& v, Vector2f& dest) const {
 	dest.x = this->x * v.getX();
 	dest.y = this->y * v.getY();
 	return dest;
 }
 
 /* EQUALITY CHECK */
-bool Vector2f::equals(const Vector2f& v) {
+bool Vector2f::equals(const Vector2f& v) const {
 	return this->x == v.getX() && this->y == v.getY();
 }
 
 /* TRIGONOMETRY */
-float Vector2f::length() {
+float Vector2f::length() const {
 	return std::sqrtf(x * x + y * y);
 }
 
-float Vector2f::distance(float x, float y) {
+float Vector2f::distance(float x, float y) const {
 	float dx = this->x - x;
 	float dy = this->y - y;
 	return std::sqrtf(dx * dx + dy * dy);
 }
 
-float Vector2f::distance(const Vector2f& v) {
+float Vector2f::distance(const Vector2f& v) const {
 	return distance(v.getX(), v.getY());
 }
 
-float Vector2f::angle(const Vector2f& v) {
+float Vector2f::angle(const Vector2f& v) const {
 	float dot = x * v.getX() + y * v.getY();
 	float det = x * v.getY() - y * v.getX();
 	return std::atan2f(det, dot);
 }
 
 /* VECTOR MATH */
-float Vector2f::dot(const Vector2f& v) {
+float Vector2f::dot(const Vector2f& v) const {
 	return x * v.getX() + y * v.getY();
 }
 
@@ -168,7 +168,7 @@ Vector2f& Vector2f::normalize() {
 	return *this;
 }
 
-Vector2f& Vector2f::normalize(Vector2f& dest) {
+Vector2f& Vector2f::normalize(Vector2f& dest) const {
 	float invLength = 1.f / std::sqrtf(x * x + y * y);
 	dest.x = x * invLength;
 	dest.y = y * invLength;
@@ -182,7 +182,7 @@ Vector2f& Vector2f::normalize(float length) {
 	return *this;
 }
 
-Vector2f& Vector2f::normalize(float length, Vector2f& dest) {
+Vector2f& Vector2f::normalize(float length, Vector2f& dest) const {
 	float invLength = (1.f / std::sqrtf(x * x + y * y)) * length;
 	dest.x = x * invLength;
 	dest.y = y * invLength;
@@ -200,7 +200,7 @@ Vector2f& Vector2f::negate() {
 	return *this;
 }
 
-Vector2f& Vector2f::negate(Vector2f& dest) {
+Vector2f& Vector2f::negate(Vector2f& dest) const {
 	dest.x = -x;
 	dest.y = -y;
 	return dest;
@@ -213,9 +213,9 @@ Vector2f& Vector2f::zero() {
 
 /* OPERATOR OVERLOADING */
 bool Vector2f::operator==(const Vector2f& other) const {
-	return x == other.x && y == other.y;
+	return equals(other);
 }
 
 bool Vector2f::operator!=(const Vector2f& other) const {
-	return !(*this == other);
+	return !equals(other);
 }
