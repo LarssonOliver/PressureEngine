@@ -113,12 +113,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math\Math.cpp" />
+    <ClCompile Include="Math\Matrices\Matrix4f.cpp" />
     <ClCompile Include="Math\Vectors\Vector2f.cpp" />
     <ClCompile Include="Math\Vectors\Vector3f.cpp" />
     <ClCompile Include="Math\Vectors\Vector4f.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Math\Matrices\Matrix4f.h" />
     <ClInclude Include="Math\Vectors.h" />
     <ClInclude Include="Math\Vectors\Vector2f.h" />
     <ClInclude Include="Math\Vectors\Vector3f.h" />

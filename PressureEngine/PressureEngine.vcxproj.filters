@@ -30,6 +30,9 @@
     <ClCompile Include="Math\Vectors\Vector4f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Matrices\Matrix4f.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vectors\Vector2f.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Math\Vectors\Vector4f.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrices\Matrix4f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
