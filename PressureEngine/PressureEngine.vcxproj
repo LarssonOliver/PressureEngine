@@ -123,6 +123,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="Src\Callbacks.cpp" />
+    <ClCompile Include="Src\Graphics\Window.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
     <ClCompile Include="Src\Math\Matrices\Matrix4f.cpp" />
     <ClCompile Include="Src\Math\Vectors\Vector2f.cpp" />
@@ -130,6 +133,9 @@
     <ClCompile Include="Src\Math\Vectors\Vector4f.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Engine.h" />
+    <ClInclude Include="Src\Callbacks.h" />
+    <ClInclude Include="Src\Graphics\Window.h" />
     <ClInclude Include="Src\Math\Math.h" />
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h" />
     <ClInclude Include="Src\Math\Vectors\Vector2f.h" />
