@@ -1,8 +1,15 @@
 #include <iostream>
-#include "Math\Vectors.h"
+#include <GLFW\glfw3.h>
+#include "src\Math\Math.h"
+
+using namespace Pressure;
 
 int main() {
 	
+	if (!glfwInit()) {
+		std::cout << "GLFW INIT ERROR!" << std::endl;
+	}
+
 	//TESTAR GIT
 
 	Vector2f vec(2);

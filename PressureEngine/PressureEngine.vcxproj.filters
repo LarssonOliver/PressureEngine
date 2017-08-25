@@ -18,39 +18,36 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Vectors\Vector2f.cpp">
+    <ClCompile Include="Src\Math\Matrices\Matrix4f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Vectors\Vector3f.cpp">
+    <ClCompile Include="Src\Math\Vectors\Vector2f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Math.cpp">
+    <ClCompile Include="Src\Math\Vectors\Vector3f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Vectors\Vector4f.cpp">
+    <ClCompile Include="Src\Math\Vectors\Vector4f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Matrices\Matrix4f.cpp">
+    <ClCompile Include="Src\Math\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Math\Vectors\Vector2f.h">
+    <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vectors\Vector3f.h">
+    <ClInclude Include="Src\Math\Vectors\Vector2f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vectors.h">
+    <ClInclude Include="Src\Math\Vectors\Vector3f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Math.h">
+    <ClInclude Include="Src\Math\Vectors\Vector4f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Math\Vectors\Vector4f.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Matrices\Matrix4f.h">
+    <ClInclude Include="Src\Math\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
