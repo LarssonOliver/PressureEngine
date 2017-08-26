@@ -133,6 +133,7 @@
     <ClCompile Include="Src\Math\Vectors\Vector4f.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Common.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
     <ClInclude Include="Src\Graphics\Window.h" />

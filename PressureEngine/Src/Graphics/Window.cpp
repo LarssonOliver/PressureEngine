@@ -11,6 +11,7 @@ namespace Pressure {
 	}
 
 	Window::~Window() {
+		glfwSetWindowShouldClose(window, true);
 		glfwDestroyWindow(window);
 	}
 
