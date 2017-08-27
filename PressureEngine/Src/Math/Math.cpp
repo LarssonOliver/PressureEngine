@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES
 
-#include <cmath>
-#include <math.h>
+#include "../Common.h"
+#include <chrono>
 #include "Math.h"
 
 namespace Pressure {
@@ -15,6 +15,14 @@ namespace Pressure {
 		if (b >= M_PI)
 			return -cos;
 		return cos;
+	}
+
+	long Math::getTimeMillis() {
+		return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	}
+
+	long Math::getTimeNano() {
+		return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	}
 
 }

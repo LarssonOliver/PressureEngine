@@ -1,11 +1,11 @@
 #include "Window.h"
+#include "../Callbacks.h"
 
 namespace Pressure {
 
 	Window::Window(int width, int height, const char* title, bool fullscreen, bool vsync)
 		: width(width), height(height), title(title), fullscreen(fullscreen), vsync(vsync) {
 		if (!Init()) {
-			// TODO: Handle window creation error.
 			
 		}
 	}
@@ -31,6 +31,9 @@ namespace Pressure {
 
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glfwSetWindowSizeCallback(window, Callbacks::window_resize_callback);
+		glfwSetKeyCallback(window, Callbacks::key_callback);
 
 		glfwShowWindow(window);
 

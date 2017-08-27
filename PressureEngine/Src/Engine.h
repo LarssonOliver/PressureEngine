@@ -20,6 +20,10 @@ namespace Pressure {
 		void loop();
 		void terminate();
 
+	private:
+		void tick();
+		void render();
+
 	};
 
 }

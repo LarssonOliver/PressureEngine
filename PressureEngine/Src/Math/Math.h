@@ -12,6 +12,9 @@ namespace Pressure {
 
 		static float cosFromSin(float sin, float angle);
 
+		static long getTimeMillis();
+		static long getTimeNano();
+
 	};
 
 }
