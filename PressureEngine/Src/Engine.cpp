@@ -16,6 +16,7 @@ namespace Pressure {
 			std::cout << "GLFW Failed to initialize!" << std::endl;
 			// TODO: Handle this error.
 		}
+
 		glfwSetErrorCallback(Callbacks::error_callback);
 		
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
