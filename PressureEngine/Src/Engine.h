@@ -1,5 +1,8 @@
 #pragma once
+#include "Common.h"
 #include "Graphics\Window.h"
+#include "Graphics\Loader.h"
+#include "Graphics\Randerer.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -11,6 +14,10 @@ namespace Pressure {
 
 	private:
 		Window* window;
+		Loader* loader;
+		Renderer* renderer;
+
+		RawModel* model;
 
 	public:
 		Engine();

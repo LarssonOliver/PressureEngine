@@ -126,6 +126,7 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="Src\Callbacks.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
+    <ClCompile Include="Src\Graphics\Randerer.cpp" />
     <ClCompile Include="Src\Graphics\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Window.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Src\Common.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
+    <ClInclude Include="Src\Graphics\Randerer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />
     <ClInclude Include="Src\Graphics\RawModel.h" />
     <ClInclude Include="Src\Graphics\Window.h" />

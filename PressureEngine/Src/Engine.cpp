@@ -1,5 +1,5 @@
 #include <chrono>
-#include "Common.h"
+#include <vector>
 #include "Engine.h"
 #include "Callbacks.h"
 
@@ -20,8 +20,13 @@ namespace Pressure {
 		glfwSetErrorCallback(Callbacks::error_callback);
 		
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
-		glClearColor(0.5, 0.5, 0.5, 1);
+		loader = new Loader();
+		renderer = new Renderer();
 		
+		std::vector<float> vertices = { -0.5f, 0.5f, 0.f, -0.5f, -0.5f, 0.f, 0.5f, -0.5f, 0.f, 0.5f, -0.5f, 0.f, 0.5f, 0.5f, 0.f, -0.5f, 0.5f, 0.f };
+
+		model = loader->loadToVao(vertices);
+
 	}
 
 	void Engine::loop() {
@@ -58,7 +63,11 @@ namespace Pressure {
 	}
 
 	void Engine::terminate() {
+		loader->cleanUp();
+		delete loader;
+		delete renderer;
 		delete window;
+		delete model;
 		glfwTerminate();
 	}
 
@@ -67,7 +76,8 @@ namespace Pressure {
 	}
 
 	void Engine::render() {
-		glClear(GL_COLOR_BUFFER_BIT);
+		renderer->prepare();
+		renderer->render(*model);
 
 		glfwSwapBuffers(window->getWindow());
 	}
