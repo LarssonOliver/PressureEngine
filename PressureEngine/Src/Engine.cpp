@@ -34,7 +34,7 @@ namespace Pressure {
 
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
-			std::cout << "GLFW Failed to initialize!" << std::endl;
+			std::cout << "GLEW Failed to initialize!" << std::endl;
 			// TODO: Handle this error.
 		}
 
