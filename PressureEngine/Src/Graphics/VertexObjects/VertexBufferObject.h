@@ -6,10 +6,13 @@ namespace Pressure {
 	class VertexBufferObject {
 
 	private:
+		GLenum type;
 		bool created = false;
 		unsigned int ID;
 
 	public:
+		VertexBufferObject(GLenum type);
+
 		unsigned int getID() const;
 		bool isCreated() const;
 

@@ -3,6 +3,10 @@
 
 namespace Pressure {
 
+	VertexBufferObject::VertexBufferObject(GLenum type) {
+		this->type = type;
+	}
+
 	unsigned int VertexBufferObject::getID() const {
 		return ID;
 	}
@@ -18,11 +22,11 @@ namespace Pressure {
 	}
 
 	void VertexBufferObject::bind() const {
-		glBindBuffer(GL_ARRAY_BUFFER, ID);
+		glBindBuffer(type, ID);
 	}
 
 	void VertexBufferObject::unbind() const {
-		glBindBuffer(GL_ARRAY_BUFFER, NULL);
+		glBindBuffer(type, NULL);
 	}
 
 	void VertexBufferObject::cleanUp() {

@@ -10,7 +10,7 @@ namespace Pressure {
 	void Renderer::render(const RawModel& model) const {
 		model.getVao()->bind();
 		glEnableVertexAttribArray(0);
-		glDrawArrays(GL_TRIANGLES, 0, model.getVertexCount());
+		glDrawElements(GL_TRIANGLES, model.getVertexCount(), GL_UNSIGNED_INT, 0);
 		glDisableVertexAttribArray(0);
 		model.getVao()->unbind();
 	}

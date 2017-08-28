@@ -19,19 +19,29 @@ namespace Pressure {
 
 		glfwSetErrorCallback(Callbacks::error_callback);
 		
-		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
-		loader = new Loader();
-		renderer = new Renderer();
-		
-		std::vector<float> vertices = { -0.5f, 0.5f, 0.f, -0.5f, -0.5f, 0.f, 0.5f, -0.5f, 0.f, 0.5f, -0.5f, 0.f, 0.5f, 0.5f, 0.f, -0.5f, 0.5f, 0.f };
-		
+		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);		
+
+		std::vector<float> vertices = {
+			-0.5f, 0.5f, 0,
+			-0.5f, -0.5f, 0,
+			0.5f, -0.5f, 0, 
+			0.5f, 0.5f, 0
+		};
+		std::vector<int> indices = {  
+			0, 1, 3,
+			1, 2, 3
+		};
+
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
 			std::cout << "GLFW Failed to initialize!" << std::endl;
 			// TODO: Handle this error.
 		}
 
-		model = loader->loadToVao(vertices);
+		loader = new Loader();
+		renderer = new Renderer();
+		shader = new StaticShader();
+		model = loader->loadToVao(vertices, indices);
 
 	}
 
@@ -68,23 +78,26 @@ namespace Pressure {
 		}
 	}
 
-	void Engine::terminate() {
-		loader->cleanUp();
-		delete loader;
-		delete renderer;
-		delete window;
-		glfwTerminate();
-	}
-
 	void Engine::tick() {
 		glfwPollEvents();		
 	}
 
 	void Engine::render() {
 		renderer->prepare();
+		shader->start();
 		renderer->render(*model);
-
+		shader->stop();
 		glfwSwapBuffers(window->getWindow());
+	}
+
+	void Engine::terminate() {
+		loader->cleanUp();
+		shader->cleanUp();
+		delete window;
+		delete loader;
+		delete shader;
+		delete renderer;
+		glfwTerminate();
 	}
 
 }

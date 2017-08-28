@@ -10,6 +10,9 @@
 #include <cmath>
 #include <math.h>
 #include <vector>
+#include <string>
+#include <fstream>
+#include <algorithm>
 
 #include <GLFW\glfw3.h>
 
