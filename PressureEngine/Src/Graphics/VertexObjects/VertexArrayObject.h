@@ -10,15 +10,14 @@ namespace Pressure {
 		unsigned int ID;
 
 	public:
-		VertexArrayObject();
-		~VertexArrayObject();
-
 		unsigned int getID() const;
 		bool isCreated() const;
 
+		unsigned int generate();
 		void bind() const;
 		void unbind() const;
 
+		void cleanUp();
 
 	};
 

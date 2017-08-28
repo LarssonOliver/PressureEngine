@@ -2,8 +2,8 @@
 
 namespace Pressure {
 
-	RawModel::RawModel(const unsigned int vaoID, const int vertexCount) {
-		this->vaoID = vaoID;
+	RawModel::RawModel(VertexArrayObject* vao, const int vertexCount) {
+		this->vaoID = vao->getID();
 		this->vertexCount = vertexCount;
 	}
 

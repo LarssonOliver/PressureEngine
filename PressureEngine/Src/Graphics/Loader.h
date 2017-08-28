@@ -1,13 +1,14 @@
 #pragma once
 #include "../Common.h"
 #include "RawModel.h"
+#include "VertexObjects\VertexArrayObject.h"
 
 namespace Pressure {
 
 	class Loader {
 
 	private:
-		std::vector<unsigned int> vaos;
+		std::vector<VertexArrayObject*> vaos;
 		std::vector<unsigned int> vbos;
 		std::vector<RawModel*> rawModels;
 
@@ -16,9 +17,8 @@ namespace Pressure {
 		void cleanUp();
 
 	private:
-		int createVAO();
+		VertexArrayObject* createVAO();
 		void storeDataInAttributeList(int attributeNumber, const std::vector<float>& data);
-		void unbindVAO() const;
 
 	};
 

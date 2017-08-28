@@ -128,6 +128,7 @@
     <ClCompile Include="Src\Graphics\Loader.cpp" />
     <ClCompile Include="Src\Graphics\Randerer.cpp" />
     <ClCompile Include="Src\Graphics\RawModel.cpp" />
+    <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp" />
     <ClCompile Include="Src\Graphics\Window.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
     <ClCompile Include="Src\Math\Matrices\Matrix4f.cpp" />

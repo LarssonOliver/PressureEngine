@@ -1,4 +1,5 @@
 #pragma once
+#include "VertexObjects\VertexArrayObject.h"
 
 namespace Pressure {
 
@@ -9,7 +10,7 @@ namespace Pressure {
 		int vertexCount;
 
 	public:
-		RawModel(const unsigned int vaoID, const int vertexCount);
+		RawModel(VertexArrayObject* vao, const int vertexCount);
 		unsigned int getVaoID() const;
 		int getVertexCount() const;
 
