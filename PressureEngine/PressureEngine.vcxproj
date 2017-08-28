@@ -142,6 +142,7 @@
     <ClInclude Include="Src\Graphics\Randerer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />
     <ClInclude Include="Src\Graphics\RawModel.h" />
+    <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h" />
     <ClInclude Include="Src\Graphics\Window.h" />
     <ClInclude Include="Src\Math\Math.h" />
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h" />

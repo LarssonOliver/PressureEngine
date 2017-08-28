@@ -13,7 +13,7 @@ namespace Pressure {
 	}
 
 	int Loader::createVAO() {
-		unsigned vaoID = 0;
+		unsigned int vaoID;
 		glGenVertexArrays(1, &vaoID);
 		vaos.push_back(vaoID);
 		glBindVertexArray(vaoID);
@@ -21,7 +21,7 @@ namespace Pressure {
 	}
 
 	void Loader::storeDataInAttributeList(int attributeNumber, const std::vector<float>& data) {
-		unsigned vboID = 0;
+		unsigned int vboID;
 		glGenBuffers(1, &vboID);
 		vbos.push_back(vboID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);

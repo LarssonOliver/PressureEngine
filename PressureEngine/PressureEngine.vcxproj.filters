@@ -89,5 +89,8 @@
     <ClInclude Include="Src\Graphics\Randerer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

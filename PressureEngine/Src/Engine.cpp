@@ -24,6 +24,12 @@ namespace Pressure {
 		renderer = new Renderer();
 		
 		std::vector<float> vertices = { -0.5f, 0.5f, 0.f, -0.5f, -0.5f, 0.f, 0.5f, -0.5f, 0.f, 0.5f, -0.5f, 0.f, 0.5f, 0.5f, 0.f, -0.5f, 0.5f, 0.f };
+		
+		GLenum err = glewInit();
+		if (GLEW_OK != err) {
+			std::cout << "GLFW Failed to initialize!" << std::endl;
+			// TODO: Handle this error.
+		}
 
 		model = loader->loadToVao(vertices);
 
@@ -67,7 +73,9 @@ namespace Pressure {
 		delete loader;
 		delete renderer;
 		delete window;
-		delete model;
+
+		//TODO: Delete properly.
+		//delete model;
 		glfwTerminate();
 	}
 
