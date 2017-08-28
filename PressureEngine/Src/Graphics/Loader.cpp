@@ -2,7 +2,6 @@
 
 namespace Pressure {
 
-	// TODO: return type?
 	RawModel* Loader::loadToVao(const std::vector<float>& positions) {
 		VertexArrayObject* vao = createVAO();
 		storeDataInAttributeList(0, positions);
@@ -21,13 +20,13 @@ namespace Pressure {
 	}
 
 	void Loader::storeDataInAttributeList(int attributeNumber, const std::vector<float>& data) {
-		unsigned int vboID;
-		glGenBuffers(1, &vboID);
-		vbos.push_back(vboID);
-		glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		VertexBufferObject* vbo = new VertexBufferObject();
+		vbo->generate();
+		vbos.push_back(vbo);
+		vbo->bind();
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data.size(), &data.front(), GL_STATIC_DRAW);
 		glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, false, 0, 0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		vbo->unbind();
 	}
 
 	void Loader::cleanUp() {
@@ -36,7 +35,8 @@ namespace Pressure {
 			delete vaos[i];
 		}
 		for (unsigned i = 0; i < vbos.size(); i++) {
-			glDeleteBuffers(1, &vbos[i]);
+			vbos[i]->cleanUp();
+			delete vbos[i];
 		}
 		for (unsigned i = 0; i < rawModels.size(); i++) {
 			delete rawModels[i];

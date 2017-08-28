@@ -2,7 +2,7 @@
 #include "Common.h"
 #include "Graphics\Window.h"
 #include "Graphics\Loader.h"
-#include "Graphics\Randerer.h"
+#include "Graphics\Renderer.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720

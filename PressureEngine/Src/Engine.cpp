@@ -73,9 +73,6 @@ namespace Pressure {
 		delete loader;
 		delete renderer;
 		delete window;
-
-		//TODO: Delete properly.
-		//delete model;
 		glfwTerminate();
 	}
 

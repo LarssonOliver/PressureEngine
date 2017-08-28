@@ -1,7 +1,6 @@
 #pragma once
 #include "../Common.h"
-#include "RawModel.h"
-#include "VertexObjects\VertexArrayObject.h"
+#include "GraphicsCommon.h"
 
 namespace Pressure {
 
@@ -9,7 +8,7 @@ namespace Pressure {
 
 	private:
 		std::vector<VertexArrayObject*> vaos;
-		std::vector<unsigned int> vbos;
+		std::vector<VertexBufferObject*> vbos;
 		std::vector<RawModel*> rawModels;
 
 	public:

@@ -6,11 +6,12 @@ namespace Pressure {
 	class RawModel {
 
 	private:
-		unsigned int vaoID;
+		VertexArrayObject* vao;
 		int vertexCount;
 
 	public:
 		RawModel(VertexArrayObject* vao, const int vertexCount);
+		VertexArrayObject* getVao() const;
 		unsigned int getVaoID() const;
 		int getVertexCount() const;
 
