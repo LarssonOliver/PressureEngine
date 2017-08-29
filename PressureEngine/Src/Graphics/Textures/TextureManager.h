@@ -37,6 +37,7 @@ namespace Pressure {
 
 		//set the current texture
 		bool BindTexture(const unsigned int texID);
+		void UnbindTexture();
 
 		//free all texture memory
 		void UnloadAllTextures();

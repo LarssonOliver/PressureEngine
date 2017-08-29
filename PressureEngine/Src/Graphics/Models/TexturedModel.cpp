@@ -2,9 +2,8 @@
 
 namespace Pressure {
 
-	TexturedModel::TexturedModel(RawModel* model, ModelTexture* texture) {
-		rawModel = model;
-		this->texture = texture;
+	TexturedModel::TexturedModel(RawModel* model, ModelTexture* texture)
+		: rawModel(model), texture(texture) {
 	}
 
 	TexturedModel::~TexturedModel() {

@@ -52,7 +52,7 @@ namespace Pressure {
 		//pointer to the image data
 		BYTE* bits(0);
 		//image width and height
-		unsigned int width(0), height(0);
+		unsigned int width(0), height(0), bpp(0);
 		//OpenGL's image ID to map to
 		GLuint gl_texID;
 
@@ -77,9 +77,18 @@ namespace Pressure {
 		//get the image width and height
 		width = FreeImage_GetWidth(dib);
 		height = FreeImage_GetHeight(dib);
+		bpp = FreeImage_GetBPP(dib);
 		//if this somehow one of these failed (they shouldn't), return failure
-		if ((bits == 0) || (width == 0) || (height == 0))
+		if ((bits == 0) || (width == 0) || (height == 0) || (bpp == 0))
 			return false;
+
+		if (bpp != 24) {
+			if (bpp == 32) {
+				image_format = GL_RGBA;
+				internal_format = GL_RGBA;
+			}
+			else return false;
+		}
 
 		//if this texture ID is in use, unload the current texture
 		if (m_texID.find(texID) != m_texID.end())
@@ -93,7 +102,9 @@ namespace Pressure {
 		glBindTexture(GL_TEXTURE_2D, gl_texID);
 		//store the texture data for OpenGL use
 		glTexImage2D(GL_TEXTURE_2D, level, internal_format, width, height,
-			border, image_format, GL_UNSIGNED_BYTE, bits);
+			border, image_format, GL_UNSIGNED_BYTE, (GLvoid*)bits);
+		//unbind the texture.
+		glBindTexture(GL_TEXTURE_2D, NULL);
 
 		//Free FreeImage's copy of the data
 		FreeImage_Unload(dib);
@@ -133,6 +144,10 @@ namespace Pressure {
 		return result;
 	}
 
+	void TextureManager::UnbindTexture() {
+		glBindTexture(GL_TEXTURE_2D, NULL);
+	}
+
 	void TextureManager::UnloadAllTextures()
 	{
 		//start at the begginning of the texture map
@@ -142,7 +157,6 @@ namespace Pressure {
 		while (i != m_texID.end()) {
 			UnloadTexture(i++->first);
 		}
-
 
 		//clear the texture map
 		m_texID.clear();

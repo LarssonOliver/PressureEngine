@@ -22,20 +22,20 @@ namespace Pressure {
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);		
 
 		std::vector<float> vertices = {
-			-0.5f, 0.5f, 0,
-			-0.5f, -0.5f, 0,
-			0.5f, -0.5f, 0, 
-			0.5f, 0.5f, 0
+			-0.75f, 0.75f, 0,
+			-0.75f, -0.75f, 0,
+			0.75f, -0.75f, 0, 
+			0.75f, 0.75f, 0
 		};
 		std::vector<int> indices = {  
 			0, 1, 3,
-			1, 2, 3
+			3, 1, 2
 		};
 		std::vector<float> textureCoords = {
-			0, 0,
-			0, 1,
-			1, 1,
-			1, 0
+			0.f, 0.f,
+			0.f, 1.f,
+			1.f, 1.f,
+			1.f, 0.f
 		};
 
 
@@ -50,7 +50,7 @@ namespace Pressure {
 		shader = new StaticShader();
 
 		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
-		ModelTexture* texture = new ModelTexture(loader->loadTexture("Res/2017-08-28.png"));
+		ModelTexture* texture = new ModelTexture(loader->loadTexture("2017-08-28.png"));
 		texturedModel = new TexturedModel(model, texture);
 
 	}
@@ -82,7 +82,7 @@ namespace Pressure {
 
 			if (Math::getTimeMillis() - timer > 1000) {
 				timer += 1000;
-				std::cout << "FPS: " << frames << std::endl;
+				//std::cout << "FPS: " << frames << std::endl;
 				frames = 0;
 			}
 		}

@@ -21,7 +21,7 @@ namespace Pressure {
 
 	private:
 		VertexArrayObject* createVAO();
-		void storeDataInAttributeList(int attributeNumber, int coordinateSize, const std::vector<float>& data);
+		void storeDataInAttributeList(const int attributeNumber, const int coordinateSize, const std::vector<float>& data);
 		void bindIndicesBuffer(const std::vector<int>& indices);
 
 	};

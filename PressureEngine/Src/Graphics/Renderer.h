@@ -10,6 +10,9 @@ namespace Pressure {
 		void prepare() const;
 		void render(const TexturedModel& model) const;
 
+	private:
+		void setTexParams() const;
+
 	};
 
 }

@@ -1,12 +1,13 @@
 #include "Loader.h"
+#include <string>
 
 namespace Pressure {
 
-	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCords, const std::vector<int>& indices) {
+	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<int>& indices) {
 		VertexArrayObject* vao = createVAO();
 		bindIndicesBuffer(indices);
 		storeDataInAttributeList(0, 3, positions);
-		storeDataInAttributeList(1, 2, textureCords);
+		storeDataInAttributeList(1, 2, textureCoords);
 		vao->unbind();
 		RawModel* model = new RawModel(vao, indices.size());
 		rawModels.emplace_back(model);
@@ -15,10 +16,10 @@ namespace Pressure {
 
 	unsigned int Loader::loadTexture(const char* filePath) {
 		unsigned int newTextureID = textures.size();
-		if (!TextureManager::Inst()->LoadTexture(filePath, newTextureID)) {
-			textures.emplace_back(newTextureID);
+		if (!TextureManager::Inst()->LoadTexture((std::string("Res/") + filePath).c_str(), newTextureID)) {
 			return NULL;
 		}
+		textures.emplace_back(newTextureID);
 		return newTextureID;
 	}
 
@@ -30,7 +31,7 @@ namespace Pressure {
 		return vao;
 	}
 
-	void Loader::storeDataInAttributeList(int attributeNumber, int coordinateSize, const std::vector<float>& data) {
+	void Loader::storeDataInAttributeList(const int attributeNumber, const int coordinateSize, const std::vector<float>& data) {
 		VertexBufferObject* vbo = new VertexBufferObject(GL_ARRAY_BUFFER);
 		vbo->generate();
 		vbos.emplace_back(vbo);
