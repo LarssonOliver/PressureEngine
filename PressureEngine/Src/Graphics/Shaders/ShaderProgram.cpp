@@ -12,6 +12,7 @@ namespace Pressure {
 		bindAttributes();
 		glLinkProgram(programID);
 		glValidateProgram(programID);
+		getAllUniformLocations();
 	}
 
 	std::string ShaderProgram::readFile(const char* filePath) {
@@ -53,6 +54,11 @@ namespace Pressure {
 
 	void ShaderProgram::bindAttribute(int attribute, const char* variableName) {
 		glBindAttribLocation(programID, attribute, variableName);
+	}
+
+	int ShaderProgram::getUniformLocation(const char* uniformName) {
+		return glGetUniformLocation(programID, uniformName);
+
 	}
 
 	unsigned int ShaderProgram::loadShader(const char* filePath, GLenum type) {
