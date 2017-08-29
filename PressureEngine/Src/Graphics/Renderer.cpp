@@ -7,11 +7,16 @@ namespace Pressure {
 		glClearColor(0.5, 0.5, 0.5, 1);
 	}
 
-	void Renderer::render(const RawModel& model) const {
+	void Renderer::render(const TexturedModel& texturedModel) const {
+		RawModel& model = *texturedModel.getRawModel();
 		model.getVao()->bind();
 		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glActiveTexture(GL_TEXTURE0);
+		TextureManager::Inst()->BindTexture(texturedModel.getTexture()->getID());
 		glDrawElements(GL_TRIANGLES, model.getVertexCount(), GL_UNSIGNED_INT, 0);
-		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(0); 
+		glDisableVertexAttribArray(1);
 		model.getVao()->unbind();
 	}
 

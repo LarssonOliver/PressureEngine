@@ -4,6 +4,7 @@
 #include "Graphics\Loader.h"
 #include "Graphics\Renderer.h"
 #include "Graphics\Shaders\StaticShader.h"
+#include "Graphics\GraphicsCommon.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -18,8 +19,8 @@ namespace Pressure {
 		Loader* loader;
 		Renderer* renderer;
 
-		RawModel* model;
 		StaticShader* shader;
+		TexturedModel* texturedModel;
 
 	public:
 		Engine();

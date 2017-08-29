@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -105,7 +105,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -126,10 +126,13 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="Src\Callbacks.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
+    <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
     <ClCompile Include="Src\Graphics\Renderer.cpp" />
-    <ClCompile Include="Src\Graphics\RawModel.cpp" />
+    <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\StaticShader.cpp" />
+    <ClCompile Include="Src\Graphics\Textures\ModelTexture.cpp" />
+    <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp" />
     <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp" />
     <ClCompile Include="Src\Graphics\Window.cpp" />
@@ -144,11 +147,14 @@
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
+    <ClInclude Include="Src\Graphics\Models\TexturedModel.h" />
     <ClInclude Include="Src\Graphics\Renderer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />
-    <ClInclude Include="Src\Graphics\RawModel.h" />
+    <ClInclude Include="Src\Graphics\Models\RawModel.h" />
     <ClInclude Include="Src\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Src\Graphics\Shaders\StaticShader.h" />
+    <ClInclude Include="Src\Graphics\Textures\ModelTexture.h" />
+    <ClInclude Include="Src\Graphics\Textures\TextureManager.h" />
     <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h" />
     <ClInclude Include="Src\Graphics\VertexObjects\VertexBufferObject.h" />
     <ClInclude Include="Src\Graphics\Window.h" />
@@ -161,6 +167,9 @@
   <ItemGroup>
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
     <Text Include="Src\Graphics\Shaders\VertexShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\2017-08-28.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

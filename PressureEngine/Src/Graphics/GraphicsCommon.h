@@ -1,6 +1,8 @@
 #pragma once
 
-#include "RawModel.h"
 #include "VertexObjects\VertexArrayObject.h"
 #include "VertexObjects\VertexBufferObject.h"
-
+#include "Models\RawModel.h"
+#include "Textures\TextureManager.h"
+#include "Textures\ModelTexture.h"
+#include "Models\TexturedModel.h"

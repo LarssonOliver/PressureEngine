@@ -2,14 +2,24 @@
 
 namespace Pressure {
 
-	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<int>& indices) {
+	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCords, const std::vector<int>& indices) {
 		VertexArrayObject* vao = createVAO();
 		bindIndicesBuffer(indices);
-		storeDataInAttributeList(0, positions);
+		storeDataInAttributeList(0, 3, positions);
+		storeDataInAttributeList(1, 2, textureCords);
 		vao->unbind();
 		RawModel* model = new RawModel(vao, indices.size());
 		rawModels.emplace_back(model);
 		return model;
+	}
+
+	unsigned int Loader::loadTexture(const char* filePath) {
+		unsigned int newTextureID = textures.size();
+		if (!TextureManager::Inst()->LoadTexture(filePath, newTextureID)) {
+			textures.emplace_back(newTextureID);
+			return NULL;
+		}
+		return newTextureID;
 	}
 
 	VertexArrayObject* Loader::createVAO() {
@@ -20,13 +30,13 @@ namespace Pressure {
 		return vao;
 	}
 
-	void Loader::storeDataInAttributeList(int attributeNumber, const std::vector<float>& data) {
+	void Loader::storeDataInAttributeList(int attributeNumber, int coordinateSize, const std::vector<float>& data) {
 		VertexBufferObject* vbo = new VertexBufferObject(GL_ARRAY_BUFFER);
 		vbo->generate();
 		vbos.emplace_back(vbo);
 		vbo->bind();
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data.size(), &data.front(), GL_STATIC_DRAW);
-		glVertexAttribPointer(attributeNumber, 3, GL_FLOAT, false, 0, 0);
+		glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, false, 0, 0);
 		vbo->unbind();
 	}
 
@@ -50,6 +60,7 @@ namespace Pressure {
 		for (unsigned i = 0; i < rawModels.size(); i++) {
 			delete rawModels[i];
 		}
+		TextureManager::Inst()->UnloadAllTextures();
 	}
 
 }

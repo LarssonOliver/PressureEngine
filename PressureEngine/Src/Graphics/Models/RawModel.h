@@ -1,5 +1,5 @@
 #pragma once
-#include "VertexObjects\VertexArrayObject.h"
+#include "..\VertexObjects\VertexArrayObject.h"
 
 namespace Pressure {
 

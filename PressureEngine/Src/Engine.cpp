@@ -31,6 +31,13 @@ namespace Pressure {
 			0, 1, 3,
 			1, 2, 3
 		};
+		std::vector<float> textureCoords = {
+			0, 0,
+			0, 1,
+			1, 1,
+			1, 0
+		};
+
 
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
@@ -41,7 +48,10 @@ namespace Pressure {
 		loader = new Loader();
 		renderer = new Renderer();
 		shader = new StaticShader();
-		model = loader->loadToVao(vertices, indices);
+
+		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
+		ModelTexture* texture = new ModelTexture(loader->loadTexture("Res/2017-08-28.png"));
+		texturedModel = new TexturedModel(model, texture);
 
 	}
 
@@ -85,7 +95,7 @@ namespace Pressure {
 	void Engine::render() {
 		renderer->prepare();
 		shader->start();
-		renderer->render(*model);
+		renderer->render(*texturedModel);
 		shader->stop();
 		glfwSwapBuffers(window->getWindow());
 	}
@@ -93,10 +103,13 @@ namespace Pressure {
 	void Engine::terminate() {
 		loader->cleanUp();
 		shader->cleanUp();
+
 		delete window;
 		delete loader;
 		delete shader;
 		delete renderer;
+		delete texturedModel;
+
 		glfwTerminate();
 	}
 

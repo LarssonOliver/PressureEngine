@@ -1,6 +1,6 @@
 #pragma once
 #include "../Common.h"
-#include "RawModel.h"
+#include "GraphicsCommon.h"
 
 namespace Pressure {
 
@@ -8,7 +8,7 @@ namespace Pressure {
 
 	public:
 		void prepare() const;
-		void render(const RawModel& model) const;
+		void render(const TexturedModel& model) const;
 
 	};
 
