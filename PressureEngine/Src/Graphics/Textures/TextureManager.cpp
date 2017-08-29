@@ -3,6 +3,8 @@
 //Written by Ben English
 //benjamin.english@oit.edu
 //
+//Modified by me >:)
+//
 //For use with OpenGL and the FreeImage library
 //**********************************************
 
@@ -72,6 +74,9 @@ namespace Pressure {
 		if (!dib)
 			return false;
 
+		//flips image vertically.
+		FreeImage_FlipVertical(dib);
+
 		//retrieve the image data
 		bits = FreeImage_GetBits(dib);
 		//get the image width and height
@@ -84,7 +89,7 @@ namespace Pressure {
 
 		if (bpp != 24) {
 			if (bpp == 32) {
-				image_format = GL_RGBA;
+				image_format = GL_BGRA_EXT;
 				internal_format = GL_RGBA;
 			}
 			else return false;

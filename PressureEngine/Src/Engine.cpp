@@ -82,7 +82,7 @@ namespace Pressure {
 
 			if (Math::getTimeMillis() - timer > 1000) {
 				timer += 1000;
-				//std::cout << "FPS: " << frames << std::endl;
+				std::cout << "FPS: " << frames << std::endl;
 				frames = 0;
 			}
 		}
