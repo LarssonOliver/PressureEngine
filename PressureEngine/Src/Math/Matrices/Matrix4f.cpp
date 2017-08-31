@@ -1,4 +1,6 @@
 #include "Matrix4f.h"
+#include "../Math.h"
+#include <cmath>
 
 namespace Pressure {
 
@@ -43,6 +45,10 @@ namespace Pressure {
 		val[3 + 3 * 4] = 1.f;
 
 		return *this;
+	}
+
+	const float* Matrix4f::getArray() {
+		return &val[0];
 	}
 
 	/* GETTERS */
@@ -176,6 +182,103 @@ namespace Pressure {
 		dest.set(3, 2, nm32);
 		dest.set(3, 3, nm33);
 		return dest;
+	}
+
+	/* MATRIX SPECIFIC FUNCTIONS */
+	Matrix4f& Matrix4f::createTransformationMatrix(const Vector3f& translation, const Vector3f& rotation, const float scale) {
+		identity();
+		translate(translation);
+		rotate(Math::toRadians(rotation.getX()), Vector3f(1, 0, 0));
+		rotate(Math::toRadians(rotation.getY()), Vector3f(0, 1, 0));
+		rotate(Math::toRadians(rotation.getZ()), Vector3f(0, 0, 1));
+		this->scale(scale);
+		return *this;
+	}
+
+	Matrix4f& Matrix4f::translate(const Vector3f& offset, Matrix4f& dest) const {
+		dest.set(3, 0, (get(0, 0) * offset.getX() + get(1, 0) * offset.getY() + get(2, 0) * offset.getZ() + get(3, 0)));
+		dest.set(3, 1, (get(0, 1) * offset.getX() + get(1, 1) * offset.getY() + get(2, 1) * offset.getZ() + get(3, 1)));
+		dest.set(3, 2, (get(0, 2) * offset.getX() + get(1, 2) * offset.getY() + get(2, 2) * offset.getZ() + get(3, 2)));
+		dest.set(3, 3, (get(0, 3) * offset.getX() + get(1, 3) * offset.getY() + get(2, 3) * offset.getZ() + get(3, 3)));
+		return dest;
+	}
+
+	Matrix4f& Matrix4f::translate(const Vector3f& offset) {
+		return translate(offset, *this);
+	}
+
+	Matrix4f& Matrix4f::rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const {
+		float x = axis.getX();
+		float y = axis.getY();
+		float z = axis.getZ();
+		float s = std::sinf(angle);
+		float c = Math::cosFromSin(s, angle);
+		float C = 1.f - c;
+		float xx = x * x, xy = x * y, xz = x * z;
+		float yy = y * y, yz = y * z;
+		float zz = z * z;
+		float rm00 = xx * C + c;
+		float rm01 = xy * C + z + s;
+		float rm02 = xz * C - y * s;
+		float rm10 = xy * C - z * s;
+		float rm11 = yy * C + c;
+		float rm12 = yz * C + x * s;
+		float rm20 = xz * C + y * s;
+		float rm21 = yz * C - x * s;
+		float rm22 = zz * C + c;
+		float nm00 = get(0, 0) * rm00 + get(1, 0) * rm01 + get(2, 0) * rm02;
+		float nm01 = get(0, 1) * rm00 + get(1, 1) * rm01 + get(2, 1) * rm02;
+		float nm02 = get(0, 2) * rm00 + get(1, 2) * rm01 + get(2, 2) * rm02;
+		float nm03 = get(0, 3) * rm00 + get(1, 3) * rm01 + get(2, 3) * rm02;
+		float nm10 = get(0, 0) * rm10 + get(1, 0) * rm11 + get(2, 0) * rm12;
+		float nm11 = get(0, 1) * rm10 + get(1, 1) * rm11 + get(2, 1) * rm12;
+		float nm12 = get(0, 2) * rm10 + get(1, 2) * rm11 + get(2, 2) * rm12;
+		float nm13 = get(0, 3) * rm10 + get(1, 3) * rm11 + get(2, 3) * rm12;
+		dest.set(2, 0, get(0, 0) * rm20 + get(1, 0) * rm21 + get(2, 0) * rm22);
+		dest.set(2, 1, get(0, 1) * rm20 + get(1, 1) * rm21 + get(2, 1) * rm22);
+		dest.set(2, 2, get(0, 2) * rm20 + get(1, 2) * rm21 + get(2, 2) * rm22);
+		dest.set(2, 3, get(0, 3) * rm20 + get(1, 3) * rm21 + get(2, 3) * rm22);
+		dest.set(0, 0, nm00);
+		dest.set(0, 1, nm01);
+		dest.set(0, 2, nm02);
+		dest.set(0, 3, nm03);
+		dest.set(1, 0, nm10);
+		dest.set(1, 1, nm11);
+		dest.set(1, 2, nm12);
+		dest.set(1, 3, nm13);
+		dest.set(3, 0, get(3, 0));
+		dest.set(3, 1, get(3, 1));
+		dest.set(3, 2, get(3, 2));
+		dest.set(3, 3, get(3, 3));
+		return dest;
+	}
+
+	Matrix4f& Matrix4f::rotate(const float angle, const Vector3f& axis) {
+		return rotate(angle, axis, *this);
+	}
+
+	Matrix4f& Matrix4f::scale(const float xyz, Matrix4f& dest) const {
+		dest.set(0, 0, get(0, 0) * xyz);
+		dest.set(0, 1, get(0, 1) * xyz);
+		dest.set(0, 2, get(0, 2) * xyz);
+		dest.set(0, 3, get(0, 3) * xyz);
+		dest.set(1, 0, get(1, 0) * xyz);
+		dest.set(1, 1, get(1, 1) * xyz);
+		dest.set(1, 2, get(1, 2) * xyz);
+		dest.set(1, 3, get(1, 3) * xyz);
+		dest.set(2, 0, get(2, 0) * xyz);
+		dest.set(2, 1, get(2, 1) * xyz);
+		dest.set(2, 2, get(2, 2) * xyz);
+		dest.set(2, 3, get(2, 3) * xyz);
+		dest.set(3, 0, get(3, 0));
+		dest.set(3, 1, get(3, 1));
+		dest.set(3, 2, get(3, 2));
+		dest.set(3, 3, get(3, 3));
+		return dest;
+	}
+
+	Matrix4f& Matrix4f::scale(const float xyz) {
+		return scale(xyz, *this);
 	}
 
 	/* EQUALITY  CHECK */

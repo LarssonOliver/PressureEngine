@@ -58,7 +58,22 @@ namespace Pressure {
 
 	int ShaderProgram::getUniformLocation(const char* uniformName) {
 		return glGetUniformLocation(programID, uniformName);
+	}
 
+	void ShaderProgram::loadFloat(const int location, const float value) {
+		glUniform1f(location, value);
+	}
+
+	void ShaderProgram::loadVector(const int location, const Vector3f& value) {
+		glUniform3f(location, value.getX(), value.getY(), value.getZ());
+	}
+
+	void ShaderProgram::loadBool(const int location, const bool value) {
+		glUniform1f(location, value);
+	}
+
+	void ShaderProgram::loadMatrix(const int location, Matrix4f& value) {
+		glUniformMatrix4fv(location, 1, GL_FALSE, value.getArray());
 	}
 
 	unsigned int ShaderProgram::loadShader(const char* filePath, GLenum type) {

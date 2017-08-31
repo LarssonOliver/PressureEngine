@@ -25,4 +25,8 @@ namespace Pressure {
 		return (long)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	}
 
+	double Math::toRadians(const double v) {
+		return v * (M_PI / 180.0);
+	}
+
 }

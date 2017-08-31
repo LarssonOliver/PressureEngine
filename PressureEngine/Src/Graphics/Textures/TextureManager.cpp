@@ -74,7 +74,7 @@ namespace Pressure {
 		if (!dib)
 			return false;
 
-		//flips image vertically.
+		//flips image vertically
 		FreeImage_FlipVertical(dib);
 
 		//retrieve the image data

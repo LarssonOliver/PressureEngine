@@ -15,6 +15,8 @@ namespace Pressure {
 		static long getTimeMillis();
 		static long getTimeNano();
 
+		static double toRadians(const double v);
+
 	};
 
 }

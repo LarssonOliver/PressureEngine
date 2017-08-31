@@ -11,5 +11,13 @@ namespace Pressure {
 		ShaderProgram::bindAttribute(1, "textureCoords");
 	}
 
+	void StaticShader::getAllUniformLocations() {
+		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
+	}
+
+	void StaticShader::loadTransformationMatrix(Matrix4f& matrix) {
+		ShaderProgram::loadMatrix(location_transformationMatrix, matrix);
+	}
+
 }
 

@@ -17,7 +17,7 @@ namespace Pressure {
 		Matrix4f& identity();
 
 		/* GETTERS */
-		//float* getArray() const;
+		const float* getArray();
 		float get(int col, int row) const;
 		float get(int element) const;
 
@@ -37,7 +37,14 @@ namespace Pressure {
 		Matrix4f& mul(const Matrix4f& m);
 		Matrix4f& mul(const Matrix4f& m, Matrix4f& dest) const;
 
-		//TODO: implement matrix specific functions as needed.
+		/* MATRIX SPECIFIC FUNCTIONS */
+		Matrix4f& createTransformationMatrix(const Vector3f& translation, const Vector3f& rotation, const float scale);
+		Matrix4f& translate(const Vector3f& offset, Matrix4f& dest) const;
+		Matrix4f& translate(const Vector3f& offset);
+		Matrix4f& rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const;
+		Matrix4f& rotate(const float angle, const Vector3f& axis);
+		Matrix4f& scale(const float xyz, Matrix4f& dest) const;
+		Matrix4f& scale(const float xyz);
 
 		/* EQUALITY CHECK */
 		bool equals(const Matrix4f& m) const;

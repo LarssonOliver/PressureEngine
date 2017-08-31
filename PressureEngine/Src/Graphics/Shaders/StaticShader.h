@@ -13,6 +13,15 @@ namespace Pressure {
 
 	protected:
 		virtual void bindAttributes() override;
+		virtual void getAllUniformLocations() override;
+
+	public:
+		//load uniforms.
+		void loadTransformationMatrix(Matrix4f& matrix);
+
+	private:
+		//uniform locations.
+		int location_transformationMatrix;
 
 	};
 
