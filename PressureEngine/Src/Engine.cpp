@@ -22,10 +22,10 @@ namespace Pressure {
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);		
 
 		std::vector<float> vertices = {
-			-0.75f, 0.75f, 0,
-			-0.75f, -0.75f, 0,
-			0.75f, -0.75f, 0, 
-			0.75f, 0.75f, 0
+			-0.75f, 0.75f, 0.2f,
+			-0.75f, -0.75f, 0.2f,
+			0.75f, -0.75f, 0.2f,
+			0.75f, 0.75f, 0.2f
 		};
 		std::vector<int> indices = {  
 			0, 1, 3,
