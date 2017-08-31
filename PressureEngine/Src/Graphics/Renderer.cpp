@@ -7,11 +7,15 @@ namespace Pressure {
 		glClearColor(0.5, 0.5, 0.5, 1);
 	}
 
-	void Renderer::render(const TexturedModel& texturedModel) const {
-		RawModel& model = *texturedModel.getRawModel();
+	void Renderer::render(const Entity& entity, StaticShader& shader) const {
+		TexturedModel& texturedModel = entity.getTexturedModel();
+		RawModel model = *texturedModel.getRawModel();
 		model.getVao()->bind();
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		Matrix4f transformationMatrix;
+		transformationMatrix.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
+		shader.loadTransformationMatrix(transformationMatrix);
 		glActiveTexture(GL_TEXTURE0);
 		TextureManager::Inst()->BindTexture(texturedModel.getTexture()->getID());
 		setTexParams();

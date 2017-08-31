@@ -1,5 +1,6 @@
 #pragma once
-#include "../GraphicsCommon.h"
+#include "../Models/RawModel.h"
+#include "../Textures/ModelTexture.h"
 
 namespace Pressure {
 

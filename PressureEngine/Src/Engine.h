@@ -20,7 +20,7 @@ namespace Pressure {
 		Renderer* renderer;
 
 		StaticShader* shader;
-		TexturedModel* texturedModel;
+		Entity* entity;
 
 	public:
 		Engine();

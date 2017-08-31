@@ -9,6 +9,7 @@ namespace Pressure {
 	private:
 		TexturedModel model;
 		Vector3f rotation;
+		Vector3f rotationSpeed;
 		float scale;
 
 		Vector3f position;
@@ -20,14 +21,26 @@ namespace Pressure {
 
 		void tick();
 
-		TexturedModel& getTexturedModel();
-		Vector3f& getRotation();
+		TexturedModel getTexturedModel() const;
+		Vector3f getRotation() const;
+		Vector3f getRotationSpeed() const;
 		float getScale() const;
 
-		Vector3f& getPosition();
-		Vector3f& getSpeed();
-		Vector3f& getAcceleration();
+		Vector3f getPosition() const;
+		Vector3f getSpeed() const;
+		Vector3f getAcceleration() const;
 
+		void rotate(const float x, const float y, const float z);
+		void setRotation(const float x, const float y, const float z);
+		void setRotationSpeed(const float x, const float y, const float z);
+
+		void addScale(const float xyz);
+		void setScale(const float xyz);
+
+		void move(const float x, const float y, const float z);
+		void setPosition(const float x, const float y, const float z);
+		void setSpeed(const float x, const float y, const float z);
+		void setAcceleration(const float x, const float y, const float z);
 
 	};
 

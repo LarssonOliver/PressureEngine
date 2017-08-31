@@ -6,3 +6,4 @@
 #include "Textures\TextureManager.h"
 #include "Textures\ModelTexture.h"
 #include "Models\TexturedModel.h"
+#include "Entities\Entity.h"

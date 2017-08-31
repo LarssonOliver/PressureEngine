@@ -51,7 +51,9 @@ namespace Pressure {
 
 		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("2017-08-28.png"));
-		texturedModel = new TexturedModel(model, texture);
+		TexturedModel* texturedModel = new TexturedModel(model, texture);
+		entity = new Entity(*texturedModel, Vector3f(-1, 0, 0), Vector3f(0, 0, 0), 1.f);
+		
 
 	}
 
@@ -95,7 +97,7 @@ namespace Pressure {
 	void Engine::render() {
 		renderer->prepare();
 		shader->start();
-		renderer->render(*texturedModel);
+		renderer->render(*entity, *shader);
 		shader->stop();
 		glfwSwapBuffers(window->getWindow());
 	}
@@ -108,7 +110,7 @@ namespace Pressure {
 		delete loader;
 		delete shader;
 		delete renderer;
-		delete texturedModel;
+		delete entity;
 
 		glfwTerminate();
 	}
