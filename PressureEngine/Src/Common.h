@@ -4,6 +4,8 @@
 
 #define GLEW_STATIC
 
+#include "Constants.h"
+
 #include <GL\glew.h>
 
 #include <iostream>

@@ -32,12 +32,16 @@ namespace Pressure {
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glfwSetWindowSizeCallback(window, Callbacks::window_resize_callback);
+		glfwSetWindowSizeCallback(window, window_resize_callback);
 		glfwSetKeyCallback(window, Callbacks::key_callback);
 
 		glfwShowWindow(window);
 
 		return true;
+	}
+
+	void Window::window_resize_callback(GLFWwindow* window, int width, int height) {
+		glViewport(0, 0, width, height);
 	}
 
 	void Window::tick() {

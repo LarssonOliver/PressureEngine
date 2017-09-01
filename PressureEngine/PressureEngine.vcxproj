@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Common.h" />
+    <ClInclude Include="Src\Constants.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />

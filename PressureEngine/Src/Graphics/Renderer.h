@@ -7,7 +7,11 @@ namespace Pressure {
 
 	const class Renderer {
 
+	private:
+		Matrix4f projectionMatrix;
+
 	public:
+		Renderer(StaticShader& shader);
 		void prepare() const;
 		void render(const Entity& entity, StaticShader& shader) const;
 

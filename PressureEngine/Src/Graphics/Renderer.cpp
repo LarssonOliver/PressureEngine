@@ -1,6 +1,13 @@
 #include "Renderer.h"
 
 namespace Pressure {
+	
+	Renderer::Renderer(StaticShader& shader) {
+		projectionMatrix.createProjectionMatrix();
+		shader.start();
+		shader.loadProjectionmatrix(projectionMatrix);
+		shader.stop();
+	}
 
 	void Renderer::prepare() const {
 		glClear(GL_COLOR_BUFFER_BIT);

@@ -28,6 +28,8 @@ namespace Pressure {
 		void setVsync(bool enabled);
 		bool isVsync() const;
 
+		static void window_resize_callback(GLFWwindow* window, int width, int height);
+
 	private: 
 		bool Init();
 

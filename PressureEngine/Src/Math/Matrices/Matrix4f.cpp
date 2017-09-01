@@ -1,6 +1,7 @@
 #include "Matrix4f.h"
 #include "../Math.h"
 #include <cmath>
+#include "../../Constants.h"
 
 namespace Pressure {
 
@@ -192,6 +193,22 @@ namespace Pressure {
 		rotate(Math::toRadians(rotation.getY()), Vector3f(0, 1, 0));
 		rotate(Math::toRadians(rotation.getZ()), Vector3f(0, 0, 1));
 		this->scale(scale);
+		return *this;
+	}
+
+	Matrix4f& Matrix4f::createProjectionMatrix() {
+		//TODO: change to dynamic loading.
+		float aspectRatio = 16 / 9;
+		float y_scale = (1.f / tanf(Math::toRadians(PRESSRE_FOV / 2.f)) * aspectRatio);
+		float x_scale = y_scale / aspectRatio;
+		float frustum_length = PRESSRE_FAR_PLANE - PRESSRE_NEAR_PLANE;
+
+		set(0, 0, x_scale);
+		set(1, 1, y_scale);
+		set(2, 2, -((PRESSRE_FAR_PLANE + PRESSRE_NEAR_PLANE) / frustum_length));
+		set(2, 3, -1.f);
+		set(3, 2, -((2 * PRESSRE_FAR_PLANE * PRESSRE_NEAR_PLANE) / frustum_length));
+		set(3, 3, 0.f);
 		return *this;
 	}
 

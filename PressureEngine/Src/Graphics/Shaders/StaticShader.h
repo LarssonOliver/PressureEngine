@@ -18,10 +18,12 @@ namespace Pressure {
 	public:
 		//load uniforms.
 		void loadTransformationMatrix(Matrix4f& matrix);
+		void loadProjectionmatrix(Matrix4f& matrix);
 
 	private:
 		//uniform locations.
 		int location_transformationMatrix;
+		int location_projectionMatrix;
 
 	};
 

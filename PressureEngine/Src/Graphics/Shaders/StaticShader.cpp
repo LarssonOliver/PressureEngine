@@ -13,10 +13,15 @@ namespace Pressure {
 
 	void StaticShader::getAllUniformLocations() {
 		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
+		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
 	}
 
 	void StaticShader::loadTransformationMatrix(Matrix4f& matrix) {
 		ShaderProgram::loadMatrix(location_transformationMatrix, matrix);
+	}
+
+	void StaticShader::loadProjectionmatrix(Matrix4f& matrix) {
+		ShaderProgram::loadMatrix(location_projectionMatrix, matrix);
 	}
 
 }

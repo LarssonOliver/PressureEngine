@@ -46,8 +46,8 @@ namespace Pressure {
 		}
 
 		loader = new Loader();
-		renderer = new Renderer();
 		shader = new StaticShader();
+		renderer = new Renderer(*shader);
 
 		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("2017-08-28.png"));
@@ -92,6 +92,7 @@ namespace Pressure {
 	void Engine::tick() {
 		glfwPollEvents();		
 		entity->tick();
+		entity->move(0, 0, -.1);
 	}
 
 	void Engine::render() {
