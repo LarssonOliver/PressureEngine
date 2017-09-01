@@ -55,7 +55,7 @@ namespace Pressure {
 	float Matrix4f::get(int col, int row) const {
 		if (col < 0 || col > 3 || row < 0 || row > 3)
 			return -1;
-		return val[col + row * 4];
+		return val[row + col * 4];
 	}
 
 	float Matrix4f::get(int element) const {
@@ -68,7 +68,7 @@ namespace Pressure {
 	Matrix4f& Matrix4f::set(int col, int row, float value) {
 		if (col < 0 || col > 3 || row < 0 || row > 3)
 			return *this;
-		val[col + row * 4] = value;
+		val[row + col * 4] = value;
 		return *this;
 	}
 
@@ -218,7 +218,7 @@ namespace Pressure {
 		float yy = y * y, yz = y * z;
 		float zz = z * z;
 		float rm00 = xx * C + c;
-		float rm01 = xy * C + z + s;
+		float rm01 = xy * C + z * s;
 		float rm02 = xz * C - y * s;
 		float rm10 = xy * C - z * s;
 		float rm11 = yy * C + c;

@@ -6,7 +6,7 @@ namespace Pressure {
 	struct Matrix4f {
 
 		/* COMPONENTS */
-		// Formatted val[column + row * 4]
+		// Formatted val[row + column * 4]
 		float val[4 * 4];
 
 		/* CONSTRUCTORS */

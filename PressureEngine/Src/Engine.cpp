@@ -22,10 +22,10 @@ namespace Pressure {
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);		
 
 		std::vector<float> vertices = {
-			-0.75f, 0.75f, 0.2f,
-			-0.75f, -0.75f, 0.2f,
-			0.75f, -0.75f, 0.2f,
-			0.75f, 0.75f, 0.2f
+			-0.5f, 0.5f, 0.f,
+			-0.5f, -0.5f, 0.f,
+			0.5f, -0.5f, 0.f,
+			0.5f, 0.5f, 0.f
 		};
 		std::vector<int> indices = {  
 			0, 1, 3,
@@ -52,8 +52,7 @@ namespace Pressure {
 		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("2017-08-28.png"));
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(-1, 0, 0), Vector3f(0, 0, 0), 1.f);
-		
+		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
 
 	}
 
@@ -92,6 +91,7 @@ namespace Pressure {
 
 	void Engine::tick() {
 		glfwPollEvents();		
+		entity->tick();
 	}
 
 	void Engine::render() {
