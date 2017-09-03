@@ -2,6 +2,7 @@
 #include <vector>
 #include "Engine.h"
 #include "Callbacks.h"
+#include "Graphics\OBJLoader.h"
 
 namespace Pressure {
 
@@ -21,7 +22,7 @@ namespace Pressure {
 
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
 
-		std::vector<float> vertices = {
+	/*	std::vector<float> vertices = {
 			-0.5f,0.5f,-0.5f,
 			-0.5f,-0.5f,-0.5f,
 			0.5f,-0.5f,-0.5f,
@@ -93,7 +94,7 @@ namespace Pressure {
 			19,17,18,
 			20,21,23,
 			23,21,22
-		};
+		};*/
 
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
@@ -105,11 +106,11 @@ namespace Pressure {
 		shader = new StaticShader();
 		renderer = new Renderer(*shader, window->getWindow());
 
-		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
-		ModelTexture* texture = new ModelTexture(loader->loadTexture("test.png"));
+		RawModel* model = OBJLoader::loadObjModel("stall", *loader);
+		ModelTexture* texture = new ModelTexture(loader->loadTexture("stallTexture.png"));
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, 0, -5), Vector3f(0, 0, 0), 1.f);
-		entity->setRotationSpeed(1, 1, 0);
+		entity = new Entity(*texturedModel, Vector3f(0, -3, -20), Vector3f(0, 0, 0), 1.f);
+		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 
 	}

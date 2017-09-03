@@ -129,6 +129,7 @@
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
     <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
+    <ClCompile Include="Src\Graphics\OBJLoader.cpp" />
     <ClCompile Include="Src\Graphics\Renderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
     <ClInclude Include="Src\Graphics\Models\TexturedModel.h" />
+    <ClInclude Include="Src\Graphics\OBJLoader.h" />
     <ClInclude Include="Src\Graphics\Renderer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />
     <ClInclude Include="Src\Graphics\Models\RawModel.h" />
@@ -172,9 +174,6 @@
   <ItemGroup>
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
     <Text Include="Src\Graphics\Shaders\VertexShader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Res\2017-08-28.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

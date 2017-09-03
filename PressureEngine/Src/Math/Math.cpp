@@ -18,4 +18,22 @@ namespace Pressure {
 		return v * (M_PI / 180.0);
 	}
 
+	std::vector<std::string> Math::strSplit(const std::string& s, const char& c) {
+		std::string buff{ "" };
+		std::vector<std::string> v;
+
+		for (auto n : s)
+		{
+			if (n != c) buff += n; else
+				if (n == c && buff != "") { v.push_back(buff); buff = ""; }
+		}
+		if (buff != "") v.push_back(buff);
+
+		return v;
+	}
+
+	bool Math::strStartsWith(const std::string& s, const char* c) {
+		return (s.substr(0, strlen(c)) == c);
+	}
+
 }

@@ -6,6 +6,9 @@
 
 #include "Matrices\Matrix4f.h"
 
+#include <vector>
+#include <string>
+
 namespace Pressure {
 
 	struct Math {
@@ -14,6 +17,9 @@ namespace Pressure {
 		static long getTimeNano();
 
 		static double toRadians(const double v);
+
+		static std::vector<std::string> strSplit(const std::string& s, const char& c);
+		static bool strStartsWith(const std::string& s, const char* c);
 
 	};
 
