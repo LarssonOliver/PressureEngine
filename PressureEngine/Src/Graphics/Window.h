@@ -21,8 +21,10 @@ namespace Pressure {
 		void tick();
 		void setTitle(const char* title);
 
-		int getWidth() const;
-		int getHeight() const;
+		static bool resized;
+
+		int getWidth();
+		int getHeight();
 		GLFWwindow* getWindow() const;
 
 		void setVsync(bool enabled);

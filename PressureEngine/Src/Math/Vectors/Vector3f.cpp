@@ -314,7 +314,7 @@ namespace Pressure {
 	/* ROTATION */
 	Vector3f& Vector3f::rotateX(float angle) {
 		float sin = std::sinf(angle * 0.5f);
-		float cos = Math::cosFromSin(sin, angle * 0.5f);
+		float cos = std::cosf(angle * 0.5f);
 		this->y = y * cos - z * sin;
 		this->z = y * sin + z * cos;
 		return *this;
@@ -322,7 +322,7 @@ namespace Pressure {
 
 	Vector3f& Vector3f::rotateX(float angle, Vector3f& dest) const {
 		float sin = std::sinf(angle * 0.5f);
-		float cos = Math::cosFromSin(sin, angle * 0.5f);
+		float cos = std::cosf(angle * 0.5f);
 		dest.x = x;
 		dest.y = y * cos - z * sin;
 		dest.z = y * sin + z * cos;
@@ -331,7 +331,7 @@ namespace Pressure {
 
 	Vector3f& Vector3f::rotateY(float angle) {
 		float sin = std::sinf(angle * 0.5f);
-		float cos = Math::cosFromSin(sin, angle * 0.5f);
+		float cos = std::cosf(angle * 0.5f);
 		this->x = x * cos + z * sin;
 		this->z = -x * sin + z * cos;
 		return *this;
@@ -339,7 +339,7 @@ namespace Pressure {
 
 	Vector3f& Vector3f::rotateY(float angle, Vector3f& dest) const {
 		float sin = std::sinf(angle * 0.5f);
-		float cos = Math::cosFromSin(sin, angle * 0.5f);
+		float cos = std::cosf(angle * 0.5f);
 		dest.x = x * cos + z * sin;
 		dest.y = y;
 		dest.z = -x * sin + z * cos;
@@ -348,7 +348,7 @@ namespace Pressure {
 
 	Vector3f& Vector3f::rotateZ(float angle) {
 		float sin = std::sinf(angle * 0.5f);
-		float cos = Math::cosFromSin(sin, angle * 0.5f);
+		float cos = std::cosf(angle * 0.5f);
 		this->x = x * cos - y * sin;
 		this->y = x * sin + y * cos;
 		return *this;
@@ -356,7 +356,7 @@ namespace Pressure {
 
 	Vector3f& Vector3f::rotateZ(float angle, Vector3f& dest) const {
 		float sin = std::sinf(angle * 0.5f);
-		float cos = Math::cosFromSin(sin, angle * 0.5f);
+		float cos = std::cosf(angle * 0.5f);
 		dest.x = x * cos - y * sin;
 		dest.y = x * sin + y * cos;
 		dest.z = z;

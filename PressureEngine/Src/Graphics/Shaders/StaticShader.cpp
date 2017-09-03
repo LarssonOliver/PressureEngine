@@ -14,6 +14,7 @@ namespace Pressure {
 	void StaticShader::getAllUniformLocations() {
 		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
 		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
+		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");
 	}
 
 	void StaticShader::loadTransformationMatrix(Matrix4f& matrix) {
@@ -24,5 +25,8 @@ namespace Pressure {
 		ShaderProgram::loadMatrix(location_projectionMatrix, matrix);
 	}
 
-}
+	void StaticShader::loadViewMatrix(Camera& camera) {
+		ShaderProgram::loadMatrix(location_viewMatrix, Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll()));
+	}
 
+}

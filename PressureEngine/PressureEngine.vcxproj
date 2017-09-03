@@ -125,6 +125,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="Src\Callbacks.cpp" />
+    <ClCompile Include="Src\Graphics\Entities\Camera.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
     <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Src\Constants.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
+    <ClInclude Include="Src\Graphics\Entities\Camera.h" />
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
     <ClInclude Include="Src\Graphics\Models\TexturedModel.h" />

@@ -5,8 +5,8 @@
 
 namespace Pressure {
 
-	Engine::Engine() {		
-		init();	
+	Engine::Engine() {
+		init();
 		loop();
 		terminate();
 	}
@@ -18,26 +18,82 @@ namespace Pressure {
 		}
 
 		glfwSetErrorCallback(Callbacks::error_callback);
-		
-		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);		
+
+		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
 
 		std::vector<float> vertices = {
-			-0.5f, 0.5f, 0.f,
-			-0.5f, -0.5f, 0.f,
-			0.5f, -0.5f, 0.f,
-			0.5f, 0.5f, 0.f
-		};
-		std::vector<int> indices = {  
-			0, 1, 3,
-			3, 1, 2
-		};
-		std::vector<float> textureCoords = {
-			0.f, 0.f,
-			0.f, 1.f,
-			1.f, 1.f,
-			1.f, 0.f
+			-0.5f,0.5f,-0.5f,
+			-0.5f,-0.5f,-0.5f,
+			0.5f,-0.5f,-0.5f,
+			0.5f,0.5f,-0.5f,
+
+			-0.5f,0.5f,0.5f,
+			-0.5f,-0.5f,0.5f,
+			0.5f,-0.5f,0.5f,
+			0.5f,0.5f,0.5f,
+
+			0.5f,0.5f,-0.5f,
+			0.5f,-0.5f,-0.5f,
+			0.5f,-0.5f,0.5f,
+			0.5f,0.5f,0.5f,
+
+			-0.5f,0.5f,-0.5f,
+			-0.5f,-0.5f,-0.5f,
+			-0.5f,-0.5f,0.5f,
+			-0.5f,0.5f,0.5f,
+
+			-0.5f,0.5f,0.5f,
+			-0.5f,0.5f,-0.5f,
+			0.5f,0.5f,-0.5f,
+			0.5f,0.5f,0.5f,
+
+			-0.5f,-0.5f,0.5f,
+			-0.5f,-0.5f,-0.5f,
+			0.5f,-0.5f,-0.5f,
+			0.5f,-0.5f,0.5f
 		};
 
+		std::vector<float> textureCoords = {
+			0,0,
+			0,1,
+			1,1,
+			1,0,
+			0,0,
+			0,1,
+			1,1,
+			1,0,
+			0,0,
+			0,1,
+			1,1,
+			1,0,
+			0,0,
+			0,1,
+			1,1,
+			1,0,
+			0,0,
+			0,1,
+			1,1,
+			1,0,
+			0,0,
+			0,1,
+			1,1,
+			1,0
+		};
+
+		std::vector<int> indices = {
+			0,1,3,
+			3,1,2,
+			4,5,7,
+			7,5,6,
+			8,9,11,
+			11,9,10,
+			12,13,15,
+			15,13,14,
+			16,17,19,
+			19,17,18,
+			20,21,23,
+			23,21,22
+		};
 
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
@@ -47,21 +103,23 @@ namespace Pressure {
 
 		loader = new Loader();
 		shader = new StaticShader();
-		renderer = new Renderer(*shader);
+		renderer = new Renderer(*shader, window->getWindow());
 
 		RawModel* model = loader->loadToVao(vertices, textureCoords, indices);
-		ModelTexture* texture = new ModelTexture(loader->loadTexture("2017-08-28.png"));
+		ModelTexture* texture = new ModelTexture(loader->loadTexture("test.png"));
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(0, 0, -5), Vector3f(0, 0, 0), 1.f);
+		entity->setRotationSpeed(1, 1, 0);
+		camera = new Camera();
 
 	}
 
 	void Engine::loop() {
 
-#define PRESSURE_ENGINE_AMMOUNT_OF_TICKS 60.0;
+#define PRESSURE_AMMOUNT_OF_TICKS 60.0;
 
 		long lastTime = Math::getTimeNano();
-		double ns = 1000000000 / PRESSURE_ENGINE_AMMOUNT_OF_TICKS;
+		double ns = 1000000000 / PRESSURE_AMMOUNT_OF_TICKS;
 		double delta = 0;
 		long timer = Math::getTimeMillis();
 		int frames = 0;
@@ -90,14 +148,19 @@ namespace Pressure {
 	}
 
 	void Engine::tick() {
-		glfwPollEvents();		
+		glfwPollEvents();
+		if (window->resized) {
+			renderer->updateProjectionMatrix(*shader, window->getWindow());
+			window->resized = false;
+		}
+
 		entity->tick();
-		entity->move(0, 0, -.1);
 	}
 
 	void Engine::render() {
 		renderer->prepare();
 		shader->start();
+		shader->loadViewMatrix(*camera);
 		renderer->render(*entity, *shader);
 		shader->stop();
 		glfwSwapBuffers(window->getWindow());
@@ -112,6 +175,7 @@ namespace Pressure {
 		delete shader;
 		delete renderer;
 		delete entity;
+		delete camera;
 
 		glfwTerminate();
 	}

@@ -196,19 +196,33 @@ namespace Pressure {
 		return *this;
 	}
 
-	Matrix4f& Matrix4f::createProjectionMatrix() {
-		//TODO: change to dynamic loading.
-		float aspectRatio = 16 / 9;
+	Matrix4f& Matrix4f::createProjectionMatrix(GLFWwindow* window) {
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		float aspectRatio = (float) width / (float) height;
 		float y_scale = (1.f / tanf(Math::toRadians(PRESSRE_FOV / 2.f)) * aspectRatio);
 		float x_scale = y_scale / aspectRatio;
 		float frustum_length = PRESSRE_FAR_PLANE - PRESSRE_NEAR_PLANE;
 
+		identity();
 		set(0, 0, x_scale);
 		set(1, 1, y_scale);
 		set(2, 2, -((PRESSRE_FAR_PLANE + PRESSRE_NEAR_PLANE) / frustum_length));
 		set(2, 3, -1.f);
 		set(3, 2, -((2 * PRESSRE_FAR_PLANE * PRESSRE_NEAR_PLANE) / frustum_length));
 		set(3, 3, 0.f);
+		return *this;
+	}
+
+	Matrix4f& Matrix4f::createViewMatrix(Vector3f& position, float pitch, float yaw, float roll) {
+		identity();
+		rotate(Math::toRadians(pitch), Vector3f(1, 0, 0));
+		rotate(Math::toRadians(yaw), Vector3f(0, 1, 0));
+		rotate(Math::toRadians(roll), Vector3f(0, 0, 1));
+		Vector3f cameraPos(position);
+		Vector3f negativeCameraPos;
+		cameraPos.negate(negativeCameraPos);
+		translate(negativeCameraPos);		
 		return *this;
 	}
 
@@ -224,12 +238,38 @@ namespace Pressure {
 		return translate(offset, *this);
 	}
 
+	//Matrix4f& Matrix4f::rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const {
+	//	dest.identity();
+	//	float r = Math::toRadians(angle);
+	//	float c = cos(r);
+	//	float s = sin(r);
+	//	float omc = 1.f - c;
+
+	//	float x = axis.getX();
+	//	float y = axis.getY();
+	//	float z = axis.getZ();
+
+	//	dest.set(0 + 0 * 4, x * x * omc + c);
+	//	dest.set(0 + 1 * 4, y * x * omc + z * s);
+	//	dest.set(0 + 2 * 4, x * z * omc - y * s);
+
+	//	dest.set(1 + 0 * 4, x * y * omc - z * s);
+	//	dest.set(1 + 1 * 4, y * y * omc + c);
+	//	dest.set(1 + 2 * 4, y * z * omc + x * s);
+
+	//	dest.set(2 + 0 * 4, x * z * omc + y * s);
+	//	dest.set(2 + 1 * 4, y * z * omc - x * s);
+	//	dest.set(2 + 2 * 4, z * z * omc + c);
+
+	//	return dest;
+	//}
+
 	Matrix4f& Matrix4f::rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const {
 		float x = axis.getX();
 		float y = axis.getY();
 		float z = axis.getZ();
 		float s = std::sinf(angle);
-		float c = Math::cosFromSin(s, angle);
+		float c = std::cosf(angle);
 		float C = 1.f - c;
 		float xx = x * x, xy = x * y, xz = x * z;
 		float yy = y * y, yz = y * z;

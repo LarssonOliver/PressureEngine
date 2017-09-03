@@ -40,8 +40,11 @@ namespace Pressure {
 		return true;
 	}
 
+	bool Window::resized = false;
+
 	void Window::window_resize_callback(GLFWwindow* window, int width, int height) {
 		glViewport(0, 0, width, height);
+		resized = true;
 	}
 
 	void Window::tick() {
@@ -53,11 +56,13 @@ namespace Pressure {
 		glfwSetWindowTitle(window, title);
 	}
 
-	int Window::getWidth() const {
+	int Window::getWidth() {
+		glfwGetWindowSize(window, &width, &height);
 		return width;
 	}
 
-	int Window::getHeight() const {
+	int Window::getHeight() {
+		glfwGetWindowSize(window, &width, &height);
 		return height;
 	}
 

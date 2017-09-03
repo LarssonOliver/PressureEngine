@@ -2,15 +2,13 @@
 
 namespace Pressure {
 	
-	Renderer::Renderer(StaticShader& shader) {
-		projectionMatrix.createProjectionMatrix();
-		shader.start();
-		shader.loadProjectionmatrix(projectionMatrix);
-		shader.stop();
+	Renderer::Renderer(StaticShader& shader, GLFWwindow* window) {
+		updateProjectionMatrix(shader, window);
 	}
 
 	void Renderer::prepare() const {
-		glClear(GL_COLOR_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.5, 0.5, 0.5, 1);
 	}
 
@@ -30,6 +28,13 @@ namespace Pressure {
 		glDisableVertexAttribArray(0); 
 		glDisableVertexAttribArray(1);
 		model.getVao()->unbind();
+	}
+
+	void Renderer::updateProjectionMatrix(StaticShader& shader, GLFWwindow* window) {
+		projectionMatrix.createProjectionMatrix(window);
+		shader.start();
+		shader.loadProjectionmatrix(projectionMatrix);
+		shader.stop();
 	}
 
 	void Renderer::setTexParams() const {

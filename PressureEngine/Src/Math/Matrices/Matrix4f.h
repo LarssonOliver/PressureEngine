@@ -1,5 +1,6 @@
 #pragma once
 #include "../Vectors/Vector4f.h"
+#include <GLFW\glfw3.h>
 
 namespace Pressure {
 
@@ -39,7 +40,8 @@ namespace Pressure {
 
 		/* MATRIX SPECIFIC FUNCTIONS */
 		Matrix4f& createTransformationMatrix(const Vector3f& translation, const Vector3f& rotation, const float scale);
-		Matrix4f& createProjectionMatrix();
+		Matrix4f& createProjectionMatrix(GLFWwindow* window);
+		Matrix4f& createViewMatrix(Vector3f& position, float pitch, float yaw, float roll);
 		Matrix4f& translate(const Vector3f& offset, Matrix4f& dest) const;
 		Matrix4f& translate(const Vector3f& offset);
 		Matrix4f& rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const;

@@ -11,9 +11,11 @@ namespace Pressure {
 		Matrix4f projectionMatrix;
 
 	public:
-		Renderer(StaticShader& shader);
+		Renderer(StaticShader& shader, GLFWwindow* window);
 		void prepare() const;
 		void render(const Entity& entity, StaticShader& shader) const;
+
+		void updateProjectionMatrix(StaticShader& shader, GLFWwindow* window);
 
 	private:
 		void setTexParams() const;
