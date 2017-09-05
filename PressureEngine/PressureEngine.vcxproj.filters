@@ -160,4 +160,15 @@
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
     <Text Include="Src\Graphics\Shaders\VertexShader.glsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\2017-08-28.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\stallTexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\test.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

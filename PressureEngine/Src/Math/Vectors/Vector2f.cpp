@@ -4,19 +4,11 @@
 namespace Pressure {
 
 	/* CONSTRUCTORS */
-	Vector2f::Vector2f() {
-		this->x = 0.f;
-		this->y = 0.f;
-	}
+	Vector2f::Vector2f() : x(0.f), y(0.f) { }
 
-	Vector2f::Vector2f(float x, float y) {
-		this->x = x;
-		this->y = y;
-	}
+	Vector2f::Vector2f(float x, float y) : x(x), y(y) { }
 
-	Vector2f::Vector2f(float d) {
-		this->x = this->y = d;
-	}
+	Vector2f::Vector2f(float d) : x(d), y(d) { }
 
 	/* GETTERS */
 	float Vector2f::getX() const {

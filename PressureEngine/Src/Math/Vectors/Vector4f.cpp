@@ -5,40 +5,15 @@
 namespace Pressure {
 
 	/* CONSTRUCTORS */
-	Vector4f::Vector4f() {
-		this->x = 0.f;
-		this->y = 0.f;
-		this->z = 0.f;
-		this->w = 1.f;
-	}
+	Vector4f::Vector4f() : x(0.f), y(0.f), z(0.f), w(0.f) { }
 
-	Vector4f::Vector4f(float d) {
-		this->x = d;
-		this->y = d;
-		this->z = d;
-		this->w = d;
-	}
+	Vector4f::Vector4f(float d) : x(d), y(d), z(d), w(d) { }
 
-	Vector4f::Vector4f(float x, float y, float z, float w) {
-		this->x = x;
-		this->y = y;
-		this->z = z;
-		this->w = w;
-	}
+	Vector4f::Vector4f(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) { }
 
-	Vector4f::Vector4f(const Vector2f& v, float z, float w) {
-		this->x = v.getX();
-		this->y = v.getY();
-		this->z = z;
-		this->w = w;
-	}
+	Vector4f::Vector4f(const Vector2f& v, float z, float w) : x(v.getX()), y(v.getY()), z(z), w(w) { }
 
-	Vector4f::Vector4f(const Vector3f& v, float w) {
-		this->x = v.getX();
-		this->y = v.getY();
-		this->z = v.getZ();
-		this->w = w;
-	}
+	Vector4f::Vector4f(const Vector3f& v, float w) : x(v.getX()), y(v.getY()), z(v.getZ()), w(w) { }
 
 	/* GETTERS */
 	float Vector4f::getX() const {

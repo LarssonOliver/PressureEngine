@@ -22,80 +22,6 @@ namespace Pressure {
 
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
 
-	/*	std::vector<float> vertices = {
-			-0.5f,0.5f,-0.5f,
-			-0.5f,-0.5f,-0.5f,
-			0.5f,-0.5f,-0.5f,
-			0.5f,0.5f,-0.5f,
-
-			-0.5f,0.5f,0.5f,
-			-0.5f,-0.5f,0.5f,
-			0.5f,-0.5f,0.5f,
-			0.5f,0.5f,0.5f,
-
-			0.5f,0.5f,-0.5f,
-			0.5f,-0.5f,-0.5f,
-			0.5f,-0.5f,0.5f,
-			0.5f,0.5f,0.5f,
-
-			-0.5f,0.5f,-0.5f,
-			-0.5f,-0.5f,-0.5f,
-			-0.5f,-0.5f,0.5f,
-			-0.5f,0.5f,0.5f,
-
-			-0.5f,0.5f,0.5f,
-			-0.5f,0.5f,-0.5f,
-			0.5f,0.5f,-0.5f,
-			0.5f,0.5f,0.5f,
-
-			-0.5f,-0.5f,0.5f,
-			-0.5f,-0.5f,-0.5f,
-			0.5f,-0.5f,-0.5f,
-			0.5f,-0.5f,0.5f
-		};
-
-		std::vector<float> textureCoords = {
-			0,0,
-			0,1,
-			1,1,
-			1,0,
-			0,0,
-			0,1,
-			1,1,
-			1,0,
-			0,0,
-			0,1,
-			1,1,
-			1,0,
-			0,0,
-			0,1,
-			1,1,
-			1,0,
-			0,0,
-			0,1,
-			1,1,
-			1,0,
-			0,0,
-			0,1,
-			1,1,
-			1,0
-		};
-
-		std::vector<int> indices = {
-			0,1,3,
-			3,1,2,
-			4,5,7,
-			7,5,6,
-			8,9,11,
-			11,9,10,
-			12,13,15,
-			15,13,14,
-			16,17,19,
-			19,17,18,
-			20,21,23,
-			23,21,22
-		};*/
-
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
 			std::cout << "GLEW Failed to initialize!" << std::endl;
@@ -106,10 +32,10 @@ namespace Pressure {
 		shader = new StaticShader();
 		renderer = new Renderer(*shader, window->getWindow());
 
-		RawModel* model = OBJLoader::loadObjModel("stall", *loader);
-		ModelTexture* texture = new ModelTexture(loader->loadTexture("stallTexture.png"));
+		RawModel* model = OBJLoader::loadObjModel("dragon", *loader);
+		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, -3, -20), Vector3f(0, 0, 0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(0, -5, -20), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 

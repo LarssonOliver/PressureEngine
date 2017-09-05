@@ -5,29 +5,13 @@
 namespace Pressure {
 
 	/* CONSTRUCTORS */
-	Vector3f::Vector3f() {
-		this->x = 0.f;
-		this->y = 0.f;
-		this->z = 0.f;
-	}
+	Vector3f::Vector3f() : x(0.f), y(0.f), z(0.f) { }
 
-	Vector3f::Vector3f(float d) {
-		this->x = d;
-		this->y = d;
-		this->z = d;
-	}
+	Vector3f::Vector3f(float d) : x(d), y(d), z(d) { }
 
-	Vector3f::Vector3f(float x, float y, float z) {
-		this->x = x;
-		this->y = y;
-		this->z = z;
-	}
+	Vector3f::Vector3f(float x, float y, float z) : x(x), y(y), z(z) { }
 
-	Vector3f::Vector3f(const Vector2f& v, float z) {
-		this->x = v.getX();
-		this->y = v.getY();
-		this->z = z;
-	}
+	Vector3f::Vector3f(const Vector2f& v, float z) : x(v.getX()), y(v.getY()), z(z) { }
 
 	/* GETTERS */
 	float Vector3f::getX() const {
