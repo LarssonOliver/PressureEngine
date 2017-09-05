@@ -55,6 +55,21 @@ namespace Pressure {
 		return *this;
 	}
 
+	Vector3f& Vector3f::setX(float x) {
+		this->x = x;
+		return *this;
+	}
+
+	Vector3f& Vector3f::setY(float y) {
+		this->y = y;
+		return *this;
+	}
+
+	Vector3f& Vector3f::setZ(float z) {
+		this->z = z;
+		return *this;
+	}
+
 	/* ADDITION */
 	Vector3f& Vector3f::add(float x, float y, float z) {
 		this->x += x;

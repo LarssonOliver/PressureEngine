@@ -37,6 +37,16 @@ namespace Pressure {
 		return *this;
 	}
 
+	Vector2f& Vector2f::setX(float x) {
+		this->x = x;
+		return *this;
+	}
+
+	Vector2f& Vector2f::setY(float y) {
+		this->y = y;
+		return *this;
+	}
+
 	/* ADDITION */
 	Vector2f& Vector2f::add(float x, float y) {
 		this->x += x;

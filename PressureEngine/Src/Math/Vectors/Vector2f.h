@@ -22,6 +22,8 @@ namespace Pressure {
 		Vector2f& set(float d);
 		Vector2f& set(float x, float y);
 		Vector2f& set(const Vector2f& v);
+		Vector2f& setX(float x);
+		Vector2f& setY(float y);
 
 		/* ADDITION */
 		Vector2f& add(float x, float y);

@@ -28,6 +28,9 @@ namespace Pressure {
 		Vector3f& set(float x, float y, float z);
 		Vector3f& set(const Vector2f& v, float z);
 		Vector3f& set(const Vector3f& v);
+		Vector3f& setX(float x);
+		Vector3f& setY(float y);
+		Vector3f& setZ(float z);
 
 		/* ADDITION */
 		Vector3f& add(float x, float y, float z);

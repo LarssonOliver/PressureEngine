@@ -73,6 +73,26 @@ namespace Pressure {
 		return *this;
 	}
 
+	Vector4f& Vector4f::setX(float x) {
+		this->x = x;
+		return *this;
+	}
+
+	Vector4f& Vector4f::setY(float y) {
+		this->y = y;
+		return *this;
+	}
+
+	Vector4f& Vector4f::setZ(float z) {
+		this->z = z;
+		return *this;
+	}
+
+	Vector4f& Vector4f::setW(float w) {
+		this->w = w;
+		return *this;
+	}
+
 	/* ADDITION */
 	Vector4f& Vector4f::add(float x, float y, float z, float w) {
 		this->x += x;

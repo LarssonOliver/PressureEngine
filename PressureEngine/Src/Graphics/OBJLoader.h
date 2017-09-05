@@ -13,14 +13,8 @@ namespace Pressure {
 		static RawModel* loadObjModel(const char* fileName, Loader& loader);
 
 	private:
-		static void handleLine(std::string& line);
-
-
-		//static void processVertex(std::vector<std::string>& vertexData, std::vector<int>& indices, std::vector<Vector2f>& textures,
-		//	std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray);
-
-
-
+		static void processFaces(std::string& data, unsigned int lineStart, std::vector<int>& indices, std::vector<Vector2f>& uvs,
+			std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray);
 	};
 
 }

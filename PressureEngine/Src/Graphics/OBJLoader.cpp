@@ -19,8 +19,9 @@ namespace Pressure {
 		stringstream sstr;
 		sstr << file.rdbuf();
 		string data = sstr.str();
+		file.close();
 
-		vector<Vector3f> vertices;
+		vector<float> vertices;
 		vector<Vector2f> uvs;
 		vector<Vector3f> normals;
 		vector<int> indices;
@@ -37,112 +38,84 @@ namespace Pressure {
 			if (c == '\n') {
 				lineLength = i - lineStart;
 
-				string line(&data[lineStart], lineLength);
-				lineStart = i + 1;
+				if (data[lineStart] == 'v' && data[lineStart + 1] == ' ') {
+					char* next;
+					vertices.emplace_back(strtof(&data[lineStart + 2], &next));
+					vertices.emplace_back(strtof(next, &next));
+					vertices.emplace_back(strtof(next, NULL));
+				}
 
-				if (line[0] == 'v' && line[1] == ' ') {	
-					bool negative1, negative2, negative3;
-					line[2] == '-' ? negative1 = true : negative1 = false;
-					line[11 + negative1] == '-' ? negative2 = true : negative2 = false;
-					line[20 + negative1 + negative2] == '-' ? negative3 = true : negative3 = false;	
-					vertices.emplace_back(Vector3f(stof(line.substr(2, 8 + negative1)), stof(line.substr(11 + negative1, 8 + negative2)), stof(line.substr(20 + negative1 + negative2, 8 + negative3))));
+				else if (data[lineStart] == 'v' && data[lineStart + 1] == 't' && data[lineStart + 2] == ' ') {
+					char* next = &data[lineStart + 3];
+					Vector2f uv(strtof(next, &next));
+					uvs.emplace_back(uv.setY(strtof(next, NULL)));
 				}
-				else if (Math::strStartsWith(line, "vt ")) {
-					uvs.emplace_back(Vector2f(stof(line.substr(3, 8)), stof(line.substr(12, 8))));
+
+				else if (data[lineStart] == 'v' && data[lineStart + 1] == 'n' && data[lineStart + 2] == ' ') {
+					char* next = &data[lineStart + 3];
+					Vector3f normal(strtof(next, &next));
+					normal.setY(strtof(next, &next));
+					normals.emplace_back(normal.setZ(strtof(next, NULL)));
 				}
-				else if (line[0] == 'v' && line[1] == 'n' && line[2] == ' ') {
-					bool negative1, negative2, negative3;
-					line[3] == '-' ? negative1 = true : negative1 = false;
-					line[12 + negative1] == '-' ? negative2 = true : negative2 = false;
-					line[21 + negative1 + negative2] == '-' ? negative3 = true : negative3 = false;
-					normals.emplace_back(Vector3f(stof(line.substr(3, 8 + negative1)), stof(line.substr(12 + negative1, 8 + negative2)), stof(line.substr(21 + negative1 + negative2, 8 + negative3))));
-				}
-				else if (Math::strStartsWith(line, "f ")) {
+
+				else if (data[lineStart] == 'f' && data[lineStart + 1] == ' ') {
 					textureArray = vector<float>(vertices.size() * 2);
 					normalsArray = vector<float>(vertices.size() * 3);
-					system("PAUSE");
+
+					//Adds some texture coords if none are present.
+					if (uvs.size() == 0) {
+						uvs.emplace_back(Vector2f(0.f));
+						uvs.emplace_back(Vector2f(1.f, 0.f));
+						uvs.emplace_back(Vector2f(1.f));
+					}
+
+					processFaces(data, lineStart, indices, uvs, normals, textureArray, normalsArray);
 					break;
 				}
 
-
-
-
-
-
+				lineStart = i + 1;
 			}
 		}
 
-		return nullptr;
-
-	}
-
-	void OBJLoader::handleLine(string& line) {
-
-
+		return loader.loadToVao(vertices, textureArray, indices);
 
 	}
 
 
-//
-//	//REWRITE BELOW
-//
-//
-//	while (getline(file, line)) {
-//
-//	}
-//	//std::cout << Math::getTimeMillis() - time << std::endl;
-//	//time = Math::getTimeMillis()
-//
-//	while (getline(file, line)) {
-//		//std::cout << Math::getTimeNano() - time << std::endl;
-//		//time = Math::getTimeNano();
-//		if (!Math::strStartsWith(line, "f ")) {
-//			continue;
-//		}
-//		vector<string> currentLine{ Math::strSplit(line, ' ') };
-//		vector<string> vertex1 = Math::strSplit(currentLine[1], '/');
-//		vector<string> vertex2 = Math::strSplit(currentLine[2], '/');
-//		vector<string> vertex3 = Math::strSplit(currentLine[3], '/');
-//
-//		processVertex(vertex1, indices, uvs, normals, textureArray, normalsArray);
-//		processVertex(vertex2, indices, uvs, normals, textureArray, normalsArray);
-//		processVertex(vertex3, indices, uvs, normals, textureArray, normalsArray);
-//		//std::cout << Math::getTimeNano() - time << std::endl;
-//		//time = Math::getTimeNano();
-//	}
-//
-//	//std::cout << Math::getTimeMillis() - time << std::endl;
-//
-//	file.close();
-//
-//	vector<float> verticesArray(vertices.size() * 3);
-//	vector<int> indicesArray(indices.size());
-//
-//	int vertexPointer = 0;
-//	for (auto vertex : vertices) {
-//		verticesArray[vertexPointer++] = vertex.getX();
-//		verticesArray[vertexPointer++] = vertex.getY();
-//		verticesArray[vertexPointer++] = vertex.getZ();
-//	}
-//
-//	for (unsigned int i = 0; i < indices.size(); i++) {
-//		indicesArray[i] = indices[i];
-//	}
-//
-//	return loader.loadToVao(verticesArray, textureArray, indicesArray);
-//}
-//
-//void OBJLoader::processVertex(std::vector<std::string>& vertexData, std::vector<int>& indices, std::vector<Vector2f>& textures,
-//	std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray) {
-//	int currentVertexPointer = stoi(vertexData[0]) - 1;
-//	indices.emplace_back(currentVertexPointer);
-//	Vector2f currentTex = textures[stoi(vertexData[1]) - 1];
-//	textureArray[currentVertexPointer * 2] = currentTex.getX();
-//	textureArray[currentVertexPointer * 2 + 1] = 1 - currentTex.getY();
-//	Vector3f currentNorm = normals[stoi(vertexData[2]) - 1];
-//	normalsArray[currentVertexPointer * 3] = currentNorm.getX();
-//	normalsArray[currentVertexPointer * 3 + 1] = currentNorm.getY();
-//	normalsArray[currentVertexPointer * 3 + 2] = currentNorm.getZ();
-//}
+	void OBJLoader::processFaces(std::string& data, unsigned int lineStart, vector<int>& indices, vector<Vector2f>& uvs,
+		std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray) {
+
+		unsigned short lineLength;
+		for (int i = lineStart; i < data.length(); i++) {
+			char c = data[i];
+	
+			if (c == '\n') {
+				lineLength = i - lineStart;
+
+				// Skip this line if it is not a face. (starts with f)
+				if (data[lineStart] != 'f') {
+					lineStart = i + 1;
+					continue;
+				}
+
+				char* next;
+				for (int i = 0; i < 3; i++) {								
+					int currentVertexPointer = i == 0 ? strtol(&data[lineStart + 2], &next, 10) - 1 : strtol(next, &next, 10) - 1;
+					indices.emplace_back(currentVertexPointer);
+
+					Vector2f currentUV = uvs[strtol(++next, &next, 10) - 1];
+					textureArray[currentVertexPointer * 2] = currentUV.getX();
+					textureArray[currentVertexPointer * 2 + 1] = 1 - currentUV.getY();
+
+					Vector3f currentNorm = normals[strtol(++next, &next, 10) - 1];
+					normalsArray[currentVertexPointer * 3] = currentNorm.getX();
+					normalsArray[currentVertexPointer * 3 + 1] = currentNorm.getY();
+					normalsArray[currentVertexPointer * 3 + 2] = currentNorm.getZ();
+				}
+
+				lineStart = i + 1;
+			}
+		}
+	}
 
 }
