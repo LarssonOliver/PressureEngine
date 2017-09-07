@@ -87,6 +87,9 @@
     <ClCompile Include="Src\Graphics\MasterRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Input\Keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -165,6 +168,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\MasterRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Input\Keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Input\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

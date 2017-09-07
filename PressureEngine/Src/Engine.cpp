@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Callbacks.h"
 #include "Graphics\OBJLoader.h"
+#include "Input\Input.h"
 
 namespace Pressure {
 
@@ -20,7 +21,7 @@ namespace Pressure {
 
 		glfwSetErrorCallback(Callbacks::error_callback);
 
-		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, true, false);
+		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
 
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
@@ -78,6 +79,10 @@ namespace Pressure {
 
 	void Engine::tick() {
 		glfwPollEvents();
+
+		if (Keyboard::isPressed(GLFW_KEY_ESCAPE))
+			glfwSetWindowShouldClose(window->getWindow(), GLFW_TRUE);
+
 		if (window->resized) {
 			renderer->updateProjectionMatrix();
 			window->resized = false;

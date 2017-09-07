@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "../Callbacks.h"
+#include "../Input/Input.h"
 
 namespace Pressure {
 
@@ -38,7 +38,7 @@ namespace Pressure {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glfwSetWindowSizeCallback(window, window_resize_callback);
-		glfwSetKeyCallback(window, Callbacks::key_callback);
+		glfwSetKeyCallback(window, Keyboard::key_callback);
 
 		glfwShowWindow(window);
 
