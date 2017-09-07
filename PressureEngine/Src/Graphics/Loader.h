@@ -15,7 +15,7 @@ namespace Pressure {
 		std::vector<unsigned int> textures;
 
 	public:
-		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<int>& indices);
+		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<int>& indices);
 		unsigned int loadTexture(const char* filePath);
 		void cleanUp();
 

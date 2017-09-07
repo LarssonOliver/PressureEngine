@@ -1,6 +1,7 @@
 #pragma once
 #include "ShaderProgram.h"
 #include "../Entities/Camera.h"
+#include "../Entities/Light.h"
 
 namespace Pressure {
 
@@ -21,12 +22,15 @@ namespace Pressure {
 		void loadTransformationMatrix(Matrix4f& matrix);
 		void loadProjectionmatrix(Matrix4f& matrix);
 		void loadViewMatrix(Camera& camera);
+		void loadLight(Light& light);
 
 	private:
 		//uniform locations.
 		int location_transformationMatrix;
 		int location_projectionMatrix;
 		int location_viewMatrix;
+		int location_lightPosition;
+		int location_lightColor;
 
 	};
 

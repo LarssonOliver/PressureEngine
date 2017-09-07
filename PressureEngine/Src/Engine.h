@@ -21,6 +21,7 @@ namespace Pressure {
 
 		StaticShader* shader;
 		Entity* entity;
+		Light* light;
 		Camera* camera;
 
 	public:

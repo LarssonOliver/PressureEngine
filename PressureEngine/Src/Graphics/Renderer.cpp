@@ -7,6 +7,8 @@ namespace Pressure {
 	}
 
 	void Renderer::prepare() const {
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 		glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.5, 0.5, 0.5, 1);
@@ -18,6 +20,7 @@ namespace Pressure {
 		model.getVao()->bind();
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
 		Matrix4f transformationMatrix;
 		transformationMatrix.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
 		shader.loadTransformationMatrix(transformationMatrix);
@@ -27,6 +30,7 @@ namespace Pressure {
 		glDrawElements(GL_TRIANGLES, model.getVertexCount(), GL_UNSIGNED_INT, 0);
 		glDisableVertexAttribArray(0); 
 		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
 		model.getVao()->unbind();
 	}
 

@@ -20,6 +20,7 @@ namespace Pressure {
 		
 		void tick();
 		void setTitle(const char* title);
+		void setSize(int width, int height);
 
 		static bool resized;
 

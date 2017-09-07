@@ -33,9 +33,7 @@ namespace Pressure {
 		unsigned int lineStart = 0;
 
 		for (int i = 0; i < data.length(); i++) {
-			char c = data[i];
-
-			if (c == '\n') {
+			if (data[i] == '\n') {
 				lineLength = i - lineStart;
 
 				if (data[lineStart] == 'v' && data[lineStart + 1] == ' ') {
@@ -77,7 +75,7 @@ namespace Pressure {
 			}
 		}
 
-		return loader.loadToVao(vertices, textureArray, indices);
+		return loader.loadToVao(vertices, textureArray, normalsArray, indices);
 
 	}
 
@@ -87,9 +85,7 @@ namespace Pressure {
 
 		unsigned short lineLength;
 		for (int i = lineStart; i < data.length(); i++) {
-			char c = data[i];
-	
-			if (c == '\n') {
+			if (data[i] == '\n') {
 				lineLength = i - lineStart;
 
 				// Skip this line if it is not a face. (starts with f)

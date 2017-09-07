@@ -3,11 +3,12 @@
 
 namespace Pressure {
 
-	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<int>& indices) {
+	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<int>& indices) {
 		VertexArrayObject* vao = createVAO();
 		bindIndicesBuffer(indices);
 		storeDataInAttributeList(0, 3, positions);
 		storeDataInAttributeList(1, 2, textureCoords);
+		storeDataInAttributeList(2, 3, normals);
 		vao->unbind();
 		RawModel* model = new RawModel(vao, indices.size());
 		rawModels.emplace_back(model);

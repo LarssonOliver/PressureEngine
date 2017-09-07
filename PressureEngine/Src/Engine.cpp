@@ -38,6 +38,7 @@ namespace Pressure {
 		entity = new Entity(*texturedModel, Vector3f(0, -5, -20), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
+		light = new Light(Vector3f(3, 10, 0), Vector3f(1));
 
 	}
 
@@ -66,11 +67,13 @@ namespace Pressure {
 				render();
 			frames++;
 
+#if 1
 			if (Math::getTimeMillis() - timer > 1000) {
 				timer += 1000;
 				std::cout << "FPS: " << frames << std::endl;
 				frames = 0;
 			}
+#endif
 		}
 	}
 
@@ -88,6 +91,7 @@ namespace Pressure {
 		renderer->prepare();
 		shader->start();
 		shader->loadViewMatrix(*camera);
+		shader->loadLight(*light);
 		renderer->render(*entity, *shader);
 		shader->stop();
 		glfwSwapBuffers(window->getWindow());
@@ -103,6 +107,7 @@ namespace Pressure {
 		delete renderer;
 		delete entity;
 		delete camera;
+		delete light;
 
 		glfwTerminate();
 	}

@@ -8,3 +8,4 @@
 #include "Models\TexturedModel.h"
 #include "Entities\Entity.h"
 #include "Entities\Camera.h"
+#include "Entities\Light.h"
