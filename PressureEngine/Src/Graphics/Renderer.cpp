@@ -1,9 +1,12 @@
 #include "Renderer.h"
+#include "Textures\TextureManager.h"
 
 namespace Pressure {
 	
-	Renderer::Renderer(StaticShader& shader, GLFWwindow* window) {
-		updateProjectionMatrix(shader, window);
+	Renderer::Renderer(StaticShader& shader, GLFWwindow* window)
+		: shader(shader), window(window)
+	{
+		updateProjectionMatrix(shader);
 	}
 
 	void Renderer::prepare() const {
@@ -14,31 +17,45 @@ namespace Pressure {
 		glClearColor(0.5, 0.5, 0.5, 1);
 	}
 
-	void Renderer::render(const Entity& entity, StaticShader& shader) const {
-		TexturedModel& texturedModel = entity.getTexturedModel();
-		RawModel model = *texturedModel.getRawModel();
+	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities) {
+		for (auto const& model : entities) {
+			prepareTexturedModel(model.first);
+			std::vector<Entity>& batch = entities.at(model.first);
+			for (Entity& entity : batch) {
+				prepareInstance(entity);
+				glDrawElements(GL_TRIANGLES, model.first.getRawModel()->getVertexCount(), GL_UNSIGNED_INT, 0);
+			}
+			unbindTexturedModel(*model.first.getRawModel());
+		}
+	}
+
+	void Renderer::updateProjectionMatrix(StaticShader& shader) {
+		projectionMatrix.createProjectionMatrix(window);
+		shader.start();
+		shader.loadProjectionmatrix(projectionMatrix);
+		shader.stop();
+	}
+
+	void Renderer::prepareTexturedModel(const TexturedModel& texturedModel) {
+		RawModel& model = *texturedModel.getRawModel();
 		model.getVao()->bind();
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
-		Matrix4f transformationMatrix;
-		transformationMatrix.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
-		shader.loadTransformationMatrix(transformationMatrix);
 		glActiveTexture(GL_TEXTURE0);
 		TextureManager::Inst()->BindTexture(texturedModel.getTexture()->getID());
 		setTexParams();
-		glDrawElements(GL_TRIANGLES, model.getVertexCount(), GL_UNSIGNED_INT, 0);
-		glDisableVertexAttribArray(0); 
+	}
+
+	void Renderer::unbindTexturedModel(const RawModel& model) {
+		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 		model.getVao()->unbind();
 	}
 
-	void Renderer::updateProjectionMatrix(StaticShader& shader, GLFWwindow* window) {
-		projectionMatrix.createProjectionMatrix(window);
-		shader.start();
-		shader.loadProjectionmatrix(projectionMatrix);
-		shader.stop();
+	void Renderer::prepareInstance(Entity& entity) {
+		shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
 	}
 
 	void Renderer::setTexParams() const {

@@ -9,3 +9,4 @@
 #include "Entities\Entity.h"
 #include "Entities\Camera.h"
 #include "Entities\Light.h"
+#include "MasterRenderer.h"

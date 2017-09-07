@@ -1,7 +1,12 @@
 #pragma once
-#include "../Common.h"
-#include "GraphicsCommon.h"
+#include <map>
+#include <vector>
+
 #include "Shaders\StaticShader.h"
+#include "../Math/Math.h"
+#include "Entities\Entity.h"
+#include "Models\RawModel.h"
+#include "Models\TexturedModel.h"
 
 namespace Pressure {
 
@@ -9,15 +14,21 @@ namespace Pressure {
 
 	private:
 		Matrix4f projectionMatrix;
+		StaticShader shader;
+		GLFWwindow* window;
 
 	public:
 		Renderer(StaticShader& shader, GLFWwindow* window);
 		void prepare() const;
-		void render(const Entity& entity, StaticShader& shader) const;
+		void render(std::map<TexturedModel, std::vector<Entity>>& entities);
 
-		void updateProjectionMatrix(StaticShader& shader, GLFWwindow* window);
+		void updateProjectionMatrix(StaticShader& shader);
 
 	private:
+		void prepareTexturedModel(const TexturedModel& texturedModel);
+		void unbindTexturedModel(const RawModel& model);
+		void prepareInstance(Entity& entity);
+
 		void setTexParams() const;
 
 	};

@@ -20,7 +20,7 @@ namespace Pressure {
 
 		glfwSetErrorCallback(Callbacks::error_callback);
 
-		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
+		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, true, false);
 
 		GLenum err = glewInit();
 		if (GLEW_OK != err) {
@@ -29,8 +29,7 @@ namespace Pressure {
 		}
 
 		loader = new Loader();
-		shader = new StaticShader();
-		renderer = new Renderer(*shader, window->getWindow());
+		renderer = new MasterRenderer(window->getWindow());
 
 		RawModel* model = OBJLoader::loadObjModel("dragon", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
@@ -80,7 +79,7 @@ namespace Pressure {
 	void Engine::tick() {
 		glfwPollEvents();
 		if (window->resized) {
-			renderer->updateProjectionMatrix(*shader, window->getWindow());
+			renderer->updateProjectionMatrix();
 			window->resized = false;
 		}
 
@@ -88,22 +87,18 @@ namespace Pressure {
 	}
 
 	void Engine::render() {
-		renderer->prepare();
-		shader->start();
-		shader->loadViewMatrix(*camera);
-		shader->loadLight(*light);
-		renderer->render(*entity, *shader);
-		shader->stop();
+		renderer->processEntity(*entity);
+
+		renderer->render(*light, *camera);
 		glfwSwapBuffers(window->getWindow());
 	}
 
 	void Engine::terminate() {
 		loader->cleanUp();
-		shader->cleanUp();
+		renderer->cleanUp();
 
 		delete window;
 		delete loader;
-		delete shader;
 		delete renderer;
 		delete entity;
 		delete camera;

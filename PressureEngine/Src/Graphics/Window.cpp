@@ -18,14 +18,17 @@ namespace Pressure {
 	bool Window::Init() {
 		glfwDefaultWindowHints();
 
-		window = glfwCreateWindow(width, height, title, fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+		window = glfwCreateWindow(width, height, title, NULL, NULL);
 		if (!window) {
 			return false;
 		}
 
 		const GLFWvidmode* vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-		if (fullscreen)
-			setSize(vidmode->width, vidmode->height);
+		if (fullscreen) {
+			glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, vidmode->width, vidmode->height, vidmode->refreshRate);
+			width = vidmode->width;
+			height = vidmode->height;
+		}
 		glfwSetWindowPos(window, vidmode->width / 2 - width / 2, vidmode->height / 2 - height / 2);
 
 		glfwMakeContextCurrent(window);

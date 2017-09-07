@@ -6,10 +6,7 @@ namespace Pressure {
 		: rawModel(model), texture(texture) {
 	}
 
-	TexturedModel::~TexturedModel() {
-		//delete rawModel;
-		//delete texture;
-	}
+	TexturedModel::~TexturedModel() { }
 
 	RawModel* TexturedModel::getRawModel() const {
 		return rawModel;
@@ -17,6 +14,10 @@ namespace Pressure {
 
 	ModelTexture* TexturedModel::getTexture() const {
 		return texture;
+	}
+
+	bool TexturedModel::operator<(const TexturedModel& right) const {
+		return rawModel->getVaoID() < right.getRawModel()->getVaoID();
 	}
 
 }

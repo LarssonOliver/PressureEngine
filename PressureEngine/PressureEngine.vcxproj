@@ -129,6 +129,7 @@
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Light.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
+    <ClCompile Include="Src\Graphics\MasterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
     <ClCompile Include="Src\Graphics\OBJLoader.cpp" />
     <ClCompile Include="Src\Graphics\Renderer.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />
     <ClInclude Include="Src\Graphics\Entities\Light.h" />
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
+    <ClInclude Include="Src\Graphics\MasterRenderer.h" />
     <ClInclude Include="Src\Graphics\Models\TexturedModel.h" />
     <ClInclude Include="Src\Graphics\OBJLoader.h" />
     <ClInclude Include="Src\Graphics\Renderer.h" />

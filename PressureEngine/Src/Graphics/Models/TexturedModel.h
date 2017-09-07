@@ -16,6 +16,9 @@ namespace Pressure {
 		RawModel* getRawModel() const;
 		ModelTexture* getTexture() const;
 
+		// Needs to be implemented to be used as key in map;
+		bool operator<(const TexturedModel& right) const;
+
 	};
 
 }

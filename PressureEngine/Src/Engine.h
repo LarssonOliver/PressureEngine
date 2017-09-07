@@ -17,9 +17,8 @@ namespace Pressure {
 	private:
 		Window* window;
 		Loader* loader;
-		Renderer* renderer;
 
-		StaticShader* shader;
+		MasterRenderer* renderer;
 		Entity* entity;
 		Light* light;
 		Camera* camera;
