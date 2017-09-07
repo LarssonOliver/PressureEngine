@@ -18,6 +18,11 @@ void main(void) {
 	float brightness = max(nDot1, 0.1);
 	vec3 diffuse = brightness * lightColor;
 
-	out_Color = vec4(diffuse, 1.0) * texture(textureSampler, pass_textureCoords);
+	vec4 textureColor = texture(textureSampler, pass_textureCoords);
+	if (textureColor.a < 0.5) {
+		discard;
+	}
+
+	out_Color = vec4(diffuse, 1.0) * textureColor;
 
 } 

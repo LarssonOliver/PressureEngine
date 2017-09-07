@@ -23,6 +23,7 @@ namespace Pressure {
 		void loadProjectionmatrix(Matrix4f& matrix);
 		void loadViewMatrix(Camera& camera);
 		void loadLight(Light& light);
+		void loadFakeLighting(bool useFakeLighting);
 
 	private:
 		//uniform locations.
@@ -31,6 +32,7 @@ namespace Pressure {
 		int location_viewMatrix;
 		int location_lightPosition;
 		int location_lightColor;
+		int location_fakeLighting;
 
 	};
 

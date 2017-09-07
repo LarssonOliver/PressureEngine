@@ -26,6 +26,9 @@ namespace Pressure {
 		void processEntity(Entity& entity);
 		void updateProjectionMatrix();
 
+		static void enableCulling();
+		static void disableCulling();
+
 		Renderer& getRenderer();
 		void cleanUp();
 
