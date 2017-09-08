@@ -139,7 +139,7 @@ namespace Pressure {
 		return result;
 	}
 
-	bool TextureManager::loadCubeMap(std::vector<std::string> files, const unsigned int texID, GLenum image_format, GLint internal_format, GLint level, GLint border)
+	bool TextureManager::LoadCubeMap(std::vector<std::string> files, const unsigned int texID, GLenum image_format, GLint internal_format, GLint level, GLint border)
 	{
 		//image format
 		FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
@@ -164,7 +164,7 @@ namespace Pressure {
 		//bind to the new texture ID
 		glBindTexture(PRESSURE_CUBE_MAP, gl_texID);
 
-		for (int i = 0; i < files.size(); i++) {
+		for (unsigned int i = 0; i < files.size(); i++) {
 			const char* file = files[i].c_str();
 			//check the file signature and deduce its format
 			fif = FreeImage_GetFileType(file, 0);

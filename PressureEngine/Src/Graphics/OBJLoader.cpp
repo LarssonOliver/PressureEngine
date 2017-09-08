@@ -32,7 +32,7 @@ namespace Pressure {
 		unsigned short lineLength;
 		unsigned int lineStart = 0;
 
-		for (int i = 0; i < data.length(); i++) {
+		for (unsigned int i = 0; i < data.length(); i++) {
 			if (data[i] == '\n') {
 				lineLength = i - lineStart;
 
@@ -84,7 +84,7 @@ namespace Pressure {
 		std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray) {
 
 		unsigned short lineLength;
-		for (int i = lineStart; i < data.length(); i++) {
+		for (unsigned int i = lineStart; i < data.length(); i++) {
 			if (data[i] == '\n') {
 				lineLength = i - lineStart;
 

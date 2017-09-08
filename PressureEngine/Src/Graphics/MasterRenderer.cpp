@@ -2,8 +2,8 @@
 
 namespace Pressure {
 
-	MasterRenderer::MasterRenderer(GLFWwindow* window)
-		: shader(), renderer(shader, window), entities() {
+	MasterRenderer::MasterRenderer(GLFWwindow* window, Loader& loader)
+		: shader(), renderer(shader, window), skyboxRenderer(loader, window), entities() {
 		enableCulling();
 	}
 
@@ -14,6 +14,7 @@ namespace Pressure {
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();
+		skyboxRenderer.render(camera);
 		entities.clear();
 	}
 
@@ -25,6 +26,7 @@ namespace Pressure {
 
 	void MasterRenderer::updateProjectionMatrix() {
 		renderer.updateProjectionMatrix(shader);
+		skyboxRenderer.updateProjectionMatrix();
 	}
 
 	void MasterRenderer::enableCulling() {

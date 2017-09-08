@@ -135,7 +135,9 @@
     <ClCompile Include="Src\Graphics\Renderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
+    <ClCompile Include="Src\Graphics\Skybox\SkyboxRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\StaticShader.cpp" />
+    <ClCompile Include="Src\Graphics\Skybox\SkyboxShader.cpp" />
     <ClCompile Include="Src\Graphics\Textures\ModelTexture.cpp" />
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp" />
@@ -165,6 +167,8 @@
     <ClInclude Include="Src\Graphics\Models\RawModel.h" />
     <ClInclude Include="Src\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Src\Graphics\Shaders\StaticShader.h" />
+    <ClInclude Include="Src\Graphics\Skybox\SkyboxRenderer.h" />
+    <ClInclude Include="Src\Graphics\Skybox\SkyboxShader.h" />
     <ClInclude Include="Src\Graphics\Textures\ModelTexture.h" />
     <ClInclude Include="Src\Graphics\Textures\TextureManager.h" />
     <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h" />
@@ -186,6 +190,10 @@
     <Image Include="Res\2017-08-28.png" />
     <Image Include="Res\stallTexture.png" />
     <Image Include="Res\test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Graphics\Skybox\SkyboxFragmentShader.glsl" />
+    <None Include="Src\Graphics\Skybox\SkyboxVertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

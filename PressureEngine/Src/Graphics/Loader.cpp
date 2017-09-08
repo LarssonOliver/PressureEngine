@@ -1,5 +1,6 @@
 #include "Loader.h"
 #include <string>
+#include "Textures\TextureManager.h"
 
 namespace Pressure {
 
@@ -15,9 +16,32 @@ namespace Pressure {
 		return model;
 	}
 
+	RawModel* Loader::loadToVao(const std::vector<float>& positions, const int dimensions) {
+		VertexArrayObject* vao = createVAO();
+		storeDataInAttributeList(0, dimensions, positions);
+		vao->unbind();
+		RawModel* model = new RawModel(vao, positions.size() / dimensions);
+		rawModels.emplace_back(model);
+		return model;
+	}
+
 	unsigned int Loader::loadTexture(const char* filePath) {
 		unsigned int newTextureID = textures.size();
 		if (!TextureManager::Inst()->LoadTexture((std::string("Res/") + filePath).c_str(), newTextureID)) {
+			return NULL;
+		}
+		textures.emplace_back(newTextureID);
+		return newTextureID;
+	}
+
+	unsigned int Loader::loadCubeMap(const char* filePath) {
+		unsigned int newTextureID = textures.size();
+		std::vector<std::string> fileNames(6);
+
+		for (int i = 0; i < 6; i++)
+			fileNames[i] = (std::string("Res/") + filePath + '_' + (char)(48 + i) + ".png");
+
+		if (!TextureManager::Inst()->LoadCubeMap(fileNames, newTextureID)) {
 			return NULL;
 		}
 		textures.emplace_back(newTextureID);

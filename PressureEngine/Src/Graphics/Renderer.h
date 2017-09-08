@@ -15,7 +15,7 @@ namespace Pressure {
 	private:
 		Matrix4f projectionMatrix;
 		StaticShader shader;
-		GLFWwindow* window;
+		GLFWwindow* const window;
 
 	public:
 		Renderer(StaticShader& shader, GLFWwindow* window);

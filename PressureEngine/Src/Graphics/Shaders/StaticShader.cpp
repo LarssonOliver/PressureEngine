@@ -21,8 +21,6 @@ namespace Pressure {
 		location_fakeLighting = ShaderProgram::getUniformLocation("fakeLighting");
 	}
 
-
-
 	void StaticShader::loadTransformationMatrix(Matrix4f& matrix) {
 		ShaderProgram::loadMatrix(location_transformationMatrix, matrix);
 	}

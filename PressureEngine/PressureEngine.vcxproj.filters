@@ -90,6 +90,12 @@
     <ClCompile Include="Src\Input\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics\Skybox\SkyboxShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Skybox\SkyboxRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -176,6 +182,12 @@
     <ClInclude Include="Src\Input\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Graphics\Skybox\SkyboxShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Skybox\SkyboxRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
@@ -191,5 +203,9 @@
     <Image Include="Res\test.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Graphics\Skybox\SkyboxVertexShader.glsl" />
+    <None Include="Src\Graphics\Skybox\SkyboxFragmentShader.glsl" />
   </ItemGroup>
 </Project>

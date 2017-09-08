@@ -30,7 +30,7 @@ namespace Pressure {
 		}
 
 		loader = new Loader();
-		renderer = new MasterRenderer(window->getWindow());
+		renderer = new MasterRenderer(window->getWindow(), *loader);
 
 		RawModel* model = OBJLoader::loadObjModel("test", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
@@ -67,7 +67,7 @@ namespace Pressure {
 				render();
 			frames++;
 
-#if 1
+#if 0
 			if (Math::getTimeMillis() - timer > 1000) {
 				timer += 1000;
 				std::cout << "FPS: " << frames << std::endl;
@@ -87,7 +87,6 @@ namespace Pressure {
 			renderer->updateProjectionMatrix();
 			window->resized = false;
 		}
-
 		entity->tick();
 	}
 

@@ -1,6 +1,8 @@
 #pragma once
-#include "../Common.h"
-#include "GraphicsCommon.h"
+#include <vector>
+#include "VertexObjects\VertexArrayObject.h"
+#include "VertexObjects\VertexBufferObject.h"
+#include "Models\RawModel.h"
 
 namespace Pressure {
 
@@ -16,7 +18,9 @@ namespace Pressure {
 
 	public:
 		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<int>& indices);
+		RawModel* loadToVao(const std::vector<float>& positions, const int dimensions);
 		unsigned int loadTexture(const char* filePath);
+		unsigned int loadCubeMap(const char* filePath);
 		void cleanUp();
 
 	private:

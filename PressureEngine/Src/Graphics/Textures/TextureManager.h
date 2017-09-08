@@ -37,7 +37,7 @@ namespace Pressure {
 			GLint border = 0);					//border size
 
 
-		bool loadCubeMap(std::vector<std::string> files,
+		bool LoadCubeMap(std::vector<std::string> files,
 			const unsigned int texID,
 			
 			GLenum image_format = GL_BGR_EXT,	//format the image is in

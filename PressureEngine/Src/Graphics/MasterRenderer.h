@@ -8,6 +8,9 @@
 #include "Entities\Entity.h"
 #include "Entities\Light.h"
 #include "Entities\Camera.h"
+#include "Skybox\SkyboxRenderer.h"
+#include "Loader.h"
+
 
 namespace Pressure {
 
@@ -17,10 +20,12 @@ namespace Pressure {
 		StaticShader shader;
 		Renderer renderer;
 
+		SkyboxRenderer skyboxRenderer;
+
 		std::map<TexturedModel, std::vector<Entity>> entities;
 
 	public:
-		MasterRenderer(GLFWwindow* window);
+		MasterRenderer(GLFWwindow* window, Loader& loader);
 		void render(Light& light, Camera& camera);
 
 		void processEntity(Entity& entity);
