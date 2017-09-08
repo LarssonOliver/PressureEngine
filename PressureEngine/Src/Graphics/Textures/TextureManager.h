@@ -11,6 +11,8 @@
 #ifndef TextureManager_H
 #define TextureManager_H
 
+#include <vector>
+#include <string>
 #include <windows.h>
 #include <gl/gl.h>
 #include "FreeImage.h"
@@ -29,10 +31,20 @@ namespace Pressure {
 		bool LoadTexture(const char* filename,//where to load the file from
 			const unsigned int texID,			//arbitrary id you will reference the texture by
 												//does not have to be generated with glGenTextures
-			GLenum image_format = GL_BGR_EXT,		//format the image is in
+			GLenum image_format = GL_BGR_EXT,	//format the image is in
 			GLint internal_format = GL_RGB,		//format to store the image in
 			GLint level = 0,					//mipmapping level
 			GLint border = 0);					//border size
+
+
+		bool loadCubeMap(std::vector<std::string> files,
+			const unsigned int texID,
+			
+			GLenum image_format = GL_BGR_EXT,	//format the image is in
+			GLint internal_format = GL_RGB,		//format to store the image in
+			GLint level = 0,					//mipmapping level
+			GLint border = 0);					//border size
+
 
 												//free the memory for a texture
 		bool UnloadTexture(const unsigned int texID);
