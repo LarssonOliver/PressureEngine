@@ -50,7 +50,7 @@ namespace Pressure {
 		bool UnloadTexture(const unsigned int texID);
 
 		//set the current texture
-		bool BindTexture(const unsigned int texID);
+		bool BindTexture(const unsigned int texID, GLint target = GL_TEXTURE_2D);
 		void UnbindTexture();
 
 		//free all texture memory

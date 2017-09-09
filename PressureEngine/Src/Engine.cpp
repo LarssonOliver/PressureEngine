@@ -67,7 +67,7 @@ namespace Pressure {
 				render();
 			frames++;
 
-#if 0
+#if 1
 			if (Math::getTimeMillis() - timer > 1000) {
 				timer += 1000;
 				std::cout << "FPS: " << frames << std::endl;
@@ -79,6 +79,8 @@ namespace Pressure {
 
 	void Engine::tick() {
 		glfwPollEvents();
+
+		camera->move(0, 0, 1);
 
 		if (Keyboard::isPressed(GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(window->getWindow(), GLFW_TRUE);

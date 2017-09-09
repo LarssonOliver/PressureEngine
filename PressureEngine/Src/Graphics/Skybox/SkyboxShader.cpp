@@ -20,7 +20,11 @@ namespace Pressure {
 	}
 
 	void SkyboxShader::loadViewMatrix(Camera& camera) {
-		ShaderProgram::loadMatrix(location_viewMatrix, Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll()));
+		Matrix4f matrix = Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll());
+		matrix.set(3, 0, 0);
+		matrix.set(3, 1, 0);
+		matrix.set(3, 2, 0);
+		ShaderProgram::loadMatrix(location_viewMatrix, matrix);
 	}
 
 }
