@@ -38,7 +38,12 @@ namespace Pressure {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glfwSetWindowSizeCallback(window, window_resize_callback);
+
 		glfwSetKeyCallback(window, Keyboard::key_callback);
+		glfwSetMouseButtonCallback(window, Mouse::mouse_button_callback);
+		glfwSetScrollCallback(window, Mouse::mouse_scroll_callback);
+		glfwSetCursorPosCallback(window, Mouse::mouse_pos_callback); 
+
 
 		glfwShowWindow(window);
 

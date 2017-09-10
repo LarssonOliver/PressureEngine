@@ -144,6 +144,7 @@
     <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp" />
     <ClCompile Include="Src\Graphics\Window.cpp" />
     <ClCompile Include="Src\Input\Keyboard.cpp" />
+    <ClCompile Include="Src\Input\Mouse.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
     <ClCompile Include="Src\Math\Matrices\Matrix4f.cpp" />
     <ClCompile Include="Src\Math\Vectors\Vector2f.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Src\Graphics\Window.h" />
     <ClInclude Include="Src\Input\Input.h" />
     <ClInclude Include="Src\Input\Keyboard.h" />
+    <ClInclude Include="Src\Input\Mouse.h" />
     <ClInclude Include="Src\Math\Math.h" />
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h" />
     <ClInclude Include="Src\Math\Vectors\Vector2f.h" />

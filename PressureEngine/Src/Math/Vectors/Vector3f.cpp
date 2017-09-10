@@ -387,4 +387,9 @@ namespace Pressure {
 		return !equals(other);
 	}
 
+	std::ostream& operator<<(std::ostream& os, const Vector3f& vec) {
+		os << vec.x << ", " << vec.y << ", " << vec.z;
+		return os;
+	}
+
 }

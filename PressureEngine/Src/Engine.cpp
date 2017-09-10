@@ -35,10 +35,10 @@ namespace Pressure {
 		RawModel* model = OBJLoader::loadObjModel("test", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, 0, -5), Vector3f(0, 0, 0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
-		light = new Light(Vector3f(3, 10, 0), Vector3f(1));
+		light = new Light(Vector3f(100, 170, 200), Vector3f(1));
 
 	}
 
@@ -80,7 +80,7 @@ namespace Pressure {
 	void Engine::tick() {
 		glfwPollEvents();
 
-		camera->move(0, 0, 1);
+		camera->tick();
 
 		if (Keyboard::isPressed(GLFW_KEY_ESCAPE))
 			glfwSetWindowShouldClose(window->getWindow(), GLFW_TRUE);

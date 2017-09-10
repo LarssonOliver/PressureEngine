@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 namespace Pressure {
 
 	struct Vector2f {
@@ -79,6 +81,7 @@ namespace Pressure {
 		/* OPERATOR OVERLOADING */
 		bool operator==(const Vector2f& other) const;
 		bool operator!=(const Vector2f& other) const;
+		friend std::ostream& operator<<(std::ostream& os, const Vector2f& vec);
 
 	};
 

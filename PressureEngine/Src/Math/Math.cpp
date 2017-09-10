@@ -36,4 +36,17 @@ namespace Pressure {
 		return (s.substr(0, strlen(c)) == c);
 	}
 
+	float Math::fmax(float& f, float max) {		
+		return f = f < max ? f : max;
+	}
+
+	float Math::fmin(float& f, float min) {
+		return f = f > min ? f : min;
+	}
+
+	float Math::frange(float& f, float min, float max) {		
+		fmin(f, min);
+		return fmax(f, max);
+	}
+
 }
