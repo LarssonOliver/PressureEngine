@@ -2,12 +2,28 @@
 
 namespace Pressure {
 
-	ModelTexture::ModelTexture(unsigned int id) 
-		: textureID(id), hasTransparency(false) {
+	ModelTexture::ModelTexture(unsigned int id)
+		: textureID(id), shineDamper(1), reflectivity(0), hasTransparency(false), useFakeLighting(false) {
 	}
 
 	unsigned int ModelTexture::getID() const {
 		return textureID;
+	}
+
+	float ModelTexture::getShineDamper() const {
+		return shineDamper;
+	}
+
+	void ModelTexture::setShineDamper(const float shineDamper) {
+		this->shineDamper = shineDamper;
+	}
+
+	float ModelTexture::getReflectivity() const {
+		return reflectivity;
+	}
+
+	void ModelTexture::setReflectivity(const float reflectivity) {
+		this->reflectivity = reflectivity;
 	}
 
 	bool ModelTexture::isHasTransparency() const {

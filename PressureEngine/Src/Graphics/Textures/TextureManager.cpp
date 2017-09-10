@@ -111,6 +111,7 @@ namespace Pressure {
 		//store the texture data for OpenGL use
 		glTexImage2D(GL_TEXTURE_2D, level, internal_format, width, height,
 			border, image_format, GL_UNSIGNED_BYTE, (GLvoid*)bits);
+
 		//unbind the texture.
 		glBindTexture(GL_TEXTURE_2D, NULL);
 

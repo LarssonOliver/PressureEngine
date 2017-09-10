@@ -18,6 +18,8 @@ namespace Pressure {
 		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");
 		location_lightPosition = ShaderProgram::getUniformLocation("lightPosition");
 		location_lightColor = ShaderProgram::getUniformLocation("lightColor");
+		location_shineDamper = ShaderProgram::getUniformLocation("shineDamper");
+		location_reflectivity = ShaderProgram::getUniformLocation("reflectivity");
 		location_fakeLighting = ShaderProgram::getUniformLocation("fakeLighting");
 	}
 
@@ -36,6 +38,11 @@ namespace Pressure {
 	void StaticShader::loadLight(Light& light) {
 		ShaderProgram::loadVector(location_lightPosition, light.getPosition());
 		ShaderProgram::loadVector(location_lightColor, light.getColor());
+	}
+
+	void StaticShader::loadShineVariables(float damper, float reflectivity) {
+		ShaderProgram::loadFloat(location_shineDamper, damper);
+		ShaderProgram::loadFloat(location_reflectivity, reflectivity);
 	}
 
 	void StaticShader::loadFakeLighting(bool useFakeLighting) {

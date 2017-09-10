@@ -6,7 +6,8 @@
 namespace Pressure {
 
 	Camera::Camera()
-		: position(0), pitch(0), yaw(0), roll(0), anchor(0), distanceFromAnchor(5), angleAroundAnchor(0), speed(0.5f)
+		: position(0), pitch(0), yaw(0), roll(0), anchor(0), distanceFromAnchor(5),
+		angleAroundAnchor(0), max_speed(0.5f), speed(0), acceleration(0)
 	{ }
 
 	Vector3f& Camera::getPosition() {
@@ -18,23 +19,43 @@ namespace Pressure {
 	}
 
 	void Camera::tick() {
+
+		static const float acc = 0.05f;
+
+		if (Keyboard::isPressed(GLFW_KEY_W))
+			acceleration.setZ(-acc);
+		else if (Keyboard::isPressed(GLFW_KEY_S))
+			acceleration.setZ(acc);
+		else {
+			acceleration.z = 0;
+			speed.z = 0;
+		} if (Keyboard::isPressed(GLFW_KEY_W) && Keyboard::isPressed(GLFW_KEY_S))
+			acceleration.setZ(0);
+		//if (acceleration.z > 0 - acc && acceleration.z < 0 + acc)
+		//	acceleration.setZ(0);
+
+		if (Keyboard::isPressed(GLFW_KEY_A))
+			acceleration.setX(-acc);
+		else if (Keyboard::isPressed(GLFW_KEY_D))
+			acceleration.setX(acc);
+		else {
+			acceleration.x = 0;
+			speed.x = 0;
+		} if (Keyboard::isPressed(GLFW_KEY_A) && Keyboard::isPressed(GLFW_KEY_D))
+			acceleration.setX(0);
+		//if (acceleration.x > 0 - acc && acceleration.x < 0 + acc)
+		//	acceleration.setX(0);
+
+		speed.add(acceleration);
+		Math::frange(speed.x, -max_speed, max_speed);
+		//Math::frange(speed.y, -max_speed, max_speed);
+		Math::frange(speed.z, -max_speed, max_speed);
+		moveAnchor(speed);
+
 		calculateZoom();
 		calculatePitch();
 		calculateAngleAroundAnchor();
-		calculateCameraPosition();		
-
-		if (Keyboard::isPressed(GLFW_KEY_W))
-			moveAnchor(0, 0, -speed);
-		if (Keyboard::isPressed(GLFW_KEY_S))
-			moveAnchor(0, 0, speed);
-		if (Keyboard::isPressed(GLFW_KEY_A))
-			moveAnchor(-speed, 0, 0);
-		if (Keyboard::isPressed(GLFW_KEY_D))
-			moveAnchor(speed, 0, 0);
-		//if (Keyboard::isPressed(GLFW_KEY_SPACE))
-			//anchor.add(0, speed, 0);
-		//if (Keyboard::isPressed(GLFW_KEY_Z))
-			//anchor.add(0, -speed, 0);
+		calculateCameraPosition();
 	}
 
 	float Camera::getPitch() const {
@@ -50,11 +71,11 @@ namespace Pressure {
 	}
 
 	void Camera::setSpeed(const float speed) {
-		this->speed = speed;
+		this->max_speed = speed;
 	}
 
 	float Camera::getSpeed() const {
-		return speed;
+		return max_speed;
 	}
 
 	float Camera::calculateHorizontalDistance() {
@@ -68,11 +89,8 @@ namespace Pressure {
 	void Camera::calculateCameraPosition() {
 		float horizontalDistance = calculateHorizontalDistance();
 		float verticalDistance = calculateVerticalDistance();
-
-		float xoffset = horizontalDistance * std::sinf(Math::toRadians(angleAroundAnchor));
-		float zoffset = horizontalDistance * std::cosf(Math::toRadians(angleAroundAnchor));
-		position.x = anchor.x + xoffset;
-		position.z = anchor.z + zoffset;
+		position.x = anchor.x + horizontalDistance * std::sinf(Math::toRadians(angleAroundAnchor));
+		position.z = anchor.z + horizontalDistance * std::cosf(Math::toRadians(angleAroundAnchor));
 		position.y = anchor.y + verticalDistance;
 	}
 
@@ -91,18 +109,25 @@ namespace Pressure {
 	void Camera::calculateAngleAroundAnchor() {
 		if (Mouse::isPressed(GLFW_MOUSE_BUTTON_LEFT)) {
 			angleAroundAnchor -= Mouse::getDX() * 0.3f;
+
+			// Makes sure that the angle always is 0 >= x >= 360
+			if (angleAroundAnchor > 360)
+				angleAroundAnchor -= 360;
+			else if (angleAroundAnchor < 0)
+				angleAroundAnchor += 360;
+
 			yaw = -angleAroundAnchor;
 		}
 	}
 
-	void Camera::moveAnchor(float x, float y, float z) {
-		anchor.x += x * std::sinf(Math::toRadians(90 + angleAroundAnchor));
-		anchor.z += x * std::cosf(Math::toRadians(90 + angleAroundAnchor));
+	void Camera::moveAnchor(const Vector3f& speed) {
+		anchor.x += speed.x * std::sinf(Math::toRadians(90 + angleAroundAnchor));
+		anchor.z += speed.x * std::cosf(Math::toRadians(90 + angleAroundAnchor));
 
-		anchor.x += z * std::sinf(Math::toRadians(angleAroundAnchor));
-		anchor.z += z * std::cosf(Math::toRadians(angleAroundAnchor));
+		anchor.x += speed.z * std::sinf(Math::toRadians(angleAroundAnchor));
+		anchor.z += speed.z * std::cosf(Math::toRadians(angleAroundAnchor));
 
-		anchor.y += y;
+		anchor.y += speed.y;
 	}
 
 }

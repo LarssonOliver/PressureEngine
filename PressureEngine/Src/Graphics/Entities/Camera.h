@@ -21,9 +21,9 @@ namespace Pressure {
 
 		// Movement Variables.
 		// Cameras movement speed.
-		float speed;
-		//TODO: Implement smooth starts and stops to movement.
-		//float acceleration;
+		float max_speed;
+		Vector3f speed;
+		Vector3f acceleration;
 
 	public:
 		Camera();
@@ -49,7 +49,7 @@ namespace Pressure {
 		void calculateAngleAroundAnchor();
 
 		// Moves the anchor relative to the camera, not the world.
-		void moveAnchor(float x, float y, float z);
+		void moveAnchor(const Vector3f& speed);
 
 	};
 

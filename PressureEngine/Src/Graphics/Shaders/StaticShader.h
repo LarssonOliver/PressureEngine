@@ -23,6 +23,7 @@ namespace Pressure {
 		void loadProjectionmatrix(Matrix4f& matrix);
 		void loadViewMatrix(Camera& camera);
 		void loadLight(Light& light);
+		void loadShineVariables(float damper, float reflectivity);
 		void loadFakeLighting(bool useFakeLighting);
 
 	private:
@@ -32,6 +33,8 @@ namespace Pressure {
 		int location_viewMatrix;
 		int location_lightPosition;
 		int location_lightColor;
+		int location_shineDamper;
+		int location_reflectivity;
 		int location_fakeLighting;
 
 	};

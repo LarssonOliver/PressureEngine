@@ -44,6 +44,7 @@ namespace Pressure {
 		glActiveTexture(GL_TEXTURE0);
 		if (texturedModel.getTexture()->isHasTransparency()) 
 			MasterRenderer::disableCulling();
+		shader.loadShineVariables(texturedModel.getTexture()->getShineDamper(), texturedModel.getTexture()->getReflectivity());
 		shader.loadFakeLighting(texturedModel.getTexture()->isUseFakeLighting());
 		TextureManager::Inst()->BindTexture(texturedModel.getTexture()->getID());
 		setTexParams();
