@@ -34,11 +34,15 @@ namespace Pressure {
 
 		RawModel* model = OBJLoader::loadObjModel("test", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
+		texture->setShineDamper(10);
+		texture->setReflectivity(1);
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
 		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 		light = new Light(Vector3f(100, 170, 200), Vector3f(1));
+		
+		water = new Water(Vector3f(0), *loader);
 
 	}
 
@@ -94,7 +98,7 @@ namespace Pressure {
 
 	void Engine::render() {
 		renderer->processEntity(*entity);
-
+		renderer->processWater(*water);
 		renderer->render(*light, *camera);
 		glfwSwapBuffers(window->getWindow());
 	}
@@ -109,6 +113,7 @@ namespace Pressure {
 		delete entity;
 		delete camera;
 		delete light;
+		delete water;
 
 		glfwTerminate();
 	}

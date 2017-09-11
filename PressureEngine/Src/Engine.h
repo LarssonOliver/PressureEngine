@@ -2,9 +2,10 @@
 #include "Common.h"
 #include "Graphics\Window.h"
 #include "Graphics\Loader.h"
-#include "Graphics\Renderer.h"
-#include "Graphics\Shaders\StaticShader.h"
+#include "Graphics\Shaders\Renderer.h"
+#include "Graphics\Shaders\EntityShader.h"
 #include "Graphics\GraphicsCommon.h"
+#include "Graphics\Water\Water.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -22,6 +23,8 @@ namespace Pressure {
 		Entity* entity;
 		Light* light;
 		Camera* camera;
+
+		Water* water;
 
 	public:
 		Engine();

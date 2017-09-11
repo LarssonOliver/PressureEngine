@@ -25,6 +25,13 @@ namespace Pressure {
 		static float fmin(float& f, float min);
 		static float frange(float&f, float min, float max);
 
+
+		//**************** EASING SOURCE: http://gizma.com/easing/ ****************//
+		// Acceleration.
+		static float easeInQuad(float time, float value, float change, float duration);
+		// Deceleration to 0 velocity.
+		static float easeOutQuad(float time, float value, float change, float duration);
+
 	};
 
 }

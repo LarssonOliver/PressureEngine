@@ -6,7 +6,7 @@
 namespace Pressure {
 
 	Camera::Camera()
-		: position(0), pitch(0), yaw(0), roll(0), anchor(0), distanceFromAnchor(5),
+		: position(0), pitch(50), yaw(0), roll(0), anchor(0), distanceFromAnchor(5),
 		angleAroundAnchor(0), max_speed(0.5f), speed(0), acceleration(0)
 	{ }
 
@@ -26,31 +26,28 @@ namespace Pressure {
 			acceleration.setZ(-acc);
 		else if (Keyboard::isPressed(GLFW_KEY_S))
 			acceleration.setZ(acc);
-		else {
-			acceleration.z = 0;
-			speed.z = 0;
-		} if (Keyboard::isPressed(GLFW_KEY_W) && Keyboard::isPressed(GLFW_KEY_S))
+		else 
 			acceleration.setZ(0);
-		//if (acceleration.z > 0 - acc && acceleration.z < 0 + acc)
-		//	acceleration.setZ(0);
+		if (Keyboard::isPressed(GLFW_KEY_W) && Keyboard::isPressed(GLFW_KEY_S))
+			acceleration.setZ(0);
 
 		if (Keyboard::isPressed(GLFW_KEY_A))
 			acceleration.setX(-acc);
 		else if (Keyboard::isPressed(GLFW_KEY_D))
 			acceleration.setX(acc);
-		else {
-			acceleration.x = 0;
-			speed.x = 0;
-		} if (Keyboard::isPressed(GLFW_KEY_A) && Keyboard::isPressed(GLFW_KEY_D))
+		else 
 			acceleration.setX(0);
-		//if (acceleration.x > 0 - acc && acceleration.x < 0 + acc)
-		//	acceleration.setX(0);
+		if (Keyboard::isPressed(GLFW_KEY_A) && Keyboard::isPressed(GLFW_KEY_D))
+			acceleration.setX(0);
 
 		speed.add(acceleration);
 		Math::frange(speed.x, -max_speed, max_speed);
-		//Math::frange(speed.y, -max_speed, max_speed);
+		Math::frange(speed.y, -max_speed, max_speed);
 		Math::frange(speed.z, -max_speed, max_speed);
 		moveAnchor(speed);
+
+		// Deceleration.
+		speed.mul(0.8f);
 
 		calculateZoom();
 		calculatePitch();

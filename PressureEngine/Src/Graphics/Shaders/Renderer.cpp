@@ -1,19 +1,13 @@
 #include "Renderer.h"
-#include "Textures\TextureManager.h"
-#include "MasterRenderer.h"
+#include "../Textures\TextureManager.h"
+#include "../MasterRenderer.h"
 
 namespace Pressure {
 	
-	Renderer::Renderer(StaticShader& shader, GLFWwindow* window)
+	Renderer::Renderer(EntityShader& shader, GLFWwindow* window)
 		: shader(shader), window(window)
 	{
 		updateProjectionMatrix(shader);
-	}
-
-	void Renderer::prepare() const {
-		glEnable(GL_DEPTH_TEST);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.5, 0.5, 0.5, 1);
 	}
 
 	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities) {
@@ -28,7 +22,7 @@ namespace Pressure {
 		}
 	}
 
-	void Renderer::updateProjectionMatrix(StaticShader& shader) {
+	void Renderer::updateProjectionMatrix(EntityShader& shader) {
 		projectionMatrix.createProjectionMatrix(window);
 		shader.start();
 		shader.loadProjectionmatrix(projectionMatrix);

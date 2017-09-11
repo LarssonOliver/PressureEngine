@@ -16,6 +16,16 @@ namespace Pressure {
 		return model;
 	}
 
+	RawModel* Loader::loadToVao(const std::vector<float>& positions, const std::vector<int>& indices) {
+		VertexArrayObject* vao = createVAO();
+		bindIndicesBuffer(indices);
+		storeDataInAttributeList(0, 3, positions);
+		vao->unbind();
+		RawModel* model = new RawModel(vao, indices.size());
+		rawModels.emplace_back(model);
+		return model;
+	}
+
 	RawModel* Loader::loadToVao(const std::vector<float>& positions, const int dimensions) {
 		VertexArrayObject* vao = createVAO();
 		storeDataInAttributeList(0, dimensions, positions);
@@ -39,10 +49,10 @@ namespace Pressure {
 
 	unsigned int Loader::loadCubeMap(const char* filePath) {
 		unsigned int newTextureID = textures.size();
-		std::vector<std::string> fileNames(6);
+		std::vector<std::string> fileNames;
 
 		for (int i = 0; i < 6; i++)
-			fileNames[i] = (std::string("Res/") + filePath + '_' + (char)(48 + i) + ".png");
+			fileNames.emplace_back(std::string("Res/") + filePath + '_' + (char)(48 + i) + ".png");
 
 		if (!TextureManager::Inst()->LoadCubeMap(fileNames, newTextureID)) {
 			return NULL;

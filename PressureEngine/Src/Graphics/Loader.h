@@ -18,6 +18,7 @@ namespace Pressure {
 
 	public:
 		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<int>& indices);
+		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<int>& indices);
 		RawModel* loadToVao(const std::vector<float>& positions, const int dimensions);
 		unsigned int loadTexture(const char* filePath);
 		unsigned int loadCubeMap(const char* filePath);

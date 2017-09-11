@@ -51,13 +51,7 @@
     <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Graphics\Shaders\StaticShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp">
@@ -97,6 +91,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\Input\Mouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Water\WaterShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Water\WaterRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Water\Water.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Shaders\EntityShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -140,13 +149,7 @@
     <ClInclude Include="Src\Graphics\GraphicsCommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Graphics\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Graphics\Shaders\ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Graphics\Shaders\StaticShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\Textures\TextureManager.h">
@@ -194,6 +197,21 @@
     <ClInclude Include="Src\Input\Mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Graphics\Water\WaterShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Water\WaterRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Water\Water.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Shaders\EntityShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Shaders\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
@@ -213,5 +231,7 @@
   <ItemGroup>
     <None Include="Src\Graphics\Skybox\SkyboxVertexShader.glsl" />
     <None Include="Src\Graphics\Skybox\SkyboxFragmentShader.glsl" />
+    <None Include="Src\Graphics\Water\WaterVertexShader.glsl" />
+    <None Include="Src\Graphics\Water\WaterFragmentShader.glsl" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #include "ShaderProgram.h"
-#include "StaticShader.h"
+#include "EntityShader.h"
 
 namespace Pressure {
 

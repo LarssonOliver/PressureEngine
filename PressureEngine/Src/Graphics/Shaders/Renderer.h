@@ -2,11 +2,11 @@
 #include <map>
 #include <vector>
 
-#include "Shaders\StaticShader.h"
-#include "../Math/Math.h"
-#include "Entities\Entity.h"
-#include "Models\RawModel.h"
-#include "Models\TexturedModel.h"
+#include "EntityShader.h"
+#include "../../Math/Math.h"
+#include "../Entities\Entity.h"
+#include "../Models\RawModel.h"
+#include "../Models\TexturedModel.h"
 
 namespace Pressure {
 
@@ -14,15 +14,14 @@ namespace Pressure {
 
 	private:
 		Matrix4f projectionMatrix;
-		StaticShader shader;
+		EntityShader shader;
 		GLFWwindow* const window;
 
 	public:
-		Renderer(StaticShader& shader, GLFWwindow* window);
-		void prepare() const;
+		Renderer(EntityShader& shader, GLFWwindow* window);
 		void render(std::map<TexturedModel, std::vector<Entity>>& entities);
 
-		void updateProjectionMatrix(StaticShader& shader);
+		void updateProjectionMatrix(EntityShader& shader);
 
 	private:
 		void prepareTexturedModel(const TexturedModel& texturedModel);

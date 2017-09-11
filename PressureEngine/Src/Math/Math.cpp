@@ -49,4 +49,14 @@ namespace Pressure {
 		return fmax(f, max);
 	}
 
+	float Math::easeInQuad(float time, float value, float change, float duration) {
+		time /= duration;
+		return change * time * time + value;
+	}
+
+	float Math::easeOutQuad(float time, float value, float change, float duration) {
+		time /= duration;
+		return -change * time * (time - 2) + value;
+	}
+
 }
