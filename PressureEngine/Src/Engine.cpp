@@ -83,7 +83,6 @@ namespace Pressure {
 
 	void Engine::tick() {
 		glfwPollEvents();
-
 		camera->tick();
 
 		if (Keyboard::isPressed(GLFW_KEY_ESCAPE))
@@ -94,6 +93,7 @@ namespace Pressure {
 			window->resized = false;
 		}
 		entity->tick();
+		renderer->tick();
 	}
 
 	void Engine::render() {

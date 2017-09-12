@@ -20,11 +20,13 @@ namespace Pressure{
 		void loadTransformationMatrix(Matrix4f& matrix);
 		void loadProjectionMatrix(Matrix4f& matrix);
 		void loadViewMatrix(Camera& camera);
+		void loadWaveModifier(float angle);
 
 	private:
 		int location_transformationMatrix;
 		int location_projectionMatrix;
 		int location_viewMatrix;
+		int location_waveModifier;
 
 	};
 

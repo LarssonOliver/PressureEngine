@@ -30,6 +30,7 @@ namespace Pressure {
 	public:
 		MasterRenderer(GLFWwindow* window, Loader& loader);
 		void render(Light& light, Camera& camera);
+		void tick();
 
 		void processEntity(Entity& entity);
 		void processWater(Water& water);

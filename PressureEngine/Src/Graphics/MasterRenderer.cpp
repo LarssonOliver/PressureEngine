@@ -21,6 +21,10 @@ namespace Pressure {
 		water.clear();
 	}
 
+	void MasterRenderer::tick() {
+		waterRenderer.tick();
+	}
+
 	void MasterRenderer::processEntity(Entity& entity) {
 		TexturedModel& entityModel = entity.getTexturedModel();
 		std::vector<Entity>& batch = entities[entityModel];

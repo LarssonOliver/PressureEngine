@@ -14,6 +14,7 @@ namespace Pressure {
 		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
 		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
 		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");
+		location_waveModifier = ShaderProgram::getUniformLocation("waveModifier");
 	}
 
 	void WaterShader::loadTransformationMatrix(Matrix4f& matrix) {
@@ -26,6 +27,10 @@ namespace Pressure {
 
 	void WaterShader::loadViewMatrix(Camera& camera) {
 		ShaderProgram::loadMatrix(location_viewMatrix, Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll()));
+	}
+
+	void WaterShader::loadWaveModifier(float angle) {
+		ShaderProgram::loadFloat(location_waveModifier, angle);
 	}
 
 }

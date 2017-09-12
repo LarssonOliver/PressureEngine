@@ -2,7 +2,7 @@
 
 namespace Pressure {
 
-	WaterRenderer::WaterRenderer(GLFWwindow* window) : window(window) {
+	WaterRenderer::WaterRenderer(GLFWwindow* window) : window(window), waveModifier(0) {
 		updateProjectionmatrix();
 	}
 
@@ -12,9 +12,16 @@ namespace Pressure {
 		shader.stop();
 	}
 
+	void WaterRenderer::tick() {
+		waveModifier++;
+		if (waveModifier > 360)
+			waveModifier -= 360;
+	}
+
 	void WaterRenderer::render(std::vector<Water>& water, Camera& camera) {
 		shader.start();
 		shader.loadViewMatrix(camera);
+		shader.loadWaveModifier(Math::toRadians(waveModifier));
 		water[0].getModel()->getVao()->bind();
 		glEnableVertexAttribArray(0);
 		for (Water& w : water) {
