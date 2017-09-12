@@ -5,7 +5,7 @@ namespace Pressure {
 
 	using namespace std;
 
-	const int Water::SIZE = 64;
+	const int Water::SIZE = 16;
 	const int Water::VERTEX_COUNT = 32;
 
 	Water::Water(Vector3f& position, Loader& loader)

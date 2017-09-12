@@ -19,7 +19,7 @@ namespace Pressure {
 
 		// Used to time the waves.
 		void tick();
-		void render(std::vector<Water>& water, Camera& camera);
+		void render(std::vector<Water>& water, Light& sun, Camera& camera);
 
 	};
 

@@ -16,7 +16,7 @@ namespace Pressure {
 		shader.stop();
 		skyboxRenderer.render(camera);
 		if (water.size() > 0)
-			waterRenderer.render(water, camera);
+			waterRenderer.render(water, light, camera);
 		entities.clear();
 		water.clear();
 	}
