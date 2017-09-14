@@ -40,9 +40,10 @@ namespace Pressure {
 		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
-		light = new Light(Vector3f(100, 170, 200), Vector3f(1));
+		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 		
-		water = new Water(Vector3f(0), *loader);
+		water = new Water(Vector3f(-16, 0, -16), *loader);
+		water2 = new Water(Vector3f(-48, 0, -16), *loader);
 
 	}
 
@@ -97,8 +98,9 @@ namespace Pressure {
 	}
 
 	void Engine::render() {
-		renderer->processEntity(*entity);
+		//renderer->processEntity(*entity);
 		renderer->processWater(*water);
+		//renderer->processWater(*water2);s
 		renderer->render(*light, *camera);
 		glfwSwapBuffers(window->getWindow());
 	}

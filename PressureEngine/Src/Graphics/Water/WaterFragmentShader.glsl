@@ -1,5 +1,5 @@
 #version 400
-#line 1 "WaterFragmentShader.glsl"
+//#line 1 "WaterFragmentShader.glsl"
 
 in vec3 surfaceNormal;
 in vec3 toLightVector;
