@@ -1,5 +1,5 @@
 #pragma once
-//#include "../../Math/Math.h"
+#include <memory>
 #include "../Models/RawModel.h"
 #include "../Loader.h"
 
@@ -12,7 +12,7 @@ namespace Pressure {
 		static const int VERTEX_COUNT;
 
 		Vector3f position;
-		RawModel* model;
+		static RawModel* model;
 
 	public:
 		Water(Vector3f& position, Loader& loader);

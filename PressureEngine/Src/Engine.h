@@ -25,6 +25,7 @@ namespace Pressure {
 		Camera* camera;
 
 		Water* water;
+		Water* water2;
 
 	public:
 		Engine();

@@ -1,5 +1,5 @@
 #version 400
-#line 1 "WaterVertexShader.glsl"
+//#line 1 "WaterVertexShader.glsl"
 
 in vec3 position;
 
@@ -106,7 +106,7 @@ float snoise(vec4 v){
 }
 
 float waveHeight(float x, float z) {
-	//return sin(degrees(x) + waveModifier) + sin(degrees(z) + waveModifier);
+	//return sin(degrees(x * 4) + waveModifier) + sin(degrees(z * 4) + waveModifier);
 	//return perlin(vec2(x, z) + waveModifier, 0.2, 1) / 2;
 	return snoise(vec4(x / 4, z / 4, sin(waveModifier), cos(waveModifier))) / 6;
 }
@@ -117,13 +117,15 @@ float waveHeight(vec3 position) {
 
 void main(void) {
 
-	vec3 wavePos = vec3(position.x, waveHeight(position), position.z);
+	vec3 wavePos = (transformationMatrix * vec4(position.x, 0.0, position.z, 1.0)).xyz;
 
-	vec3 normal_0 = cross(vec3(position.x, waveHeight(position.x, position.z + 1), position.z + 1), vec3(wavePos.x + 1, waveHeight(position.x + 1, position.z), position.z));
-	vec3 normal_1 = cross(vec3(position.x, waveHeight(position.x, position.z - 1), position.z - 1), vec3(wavePos.x - 1, waveHeight(position.x - 1, position.z), position.z));
+	wavePos.y = waveHeight(wavePos);
+
+	vec3 normal_0 = cross(vec3(wavePos.x, waveHeight(wavePos.x, wavePos.z + 1), wavePos.z + 1), vec3(wavePos.x + 1, waveHeight(wavePos.x + 1, wavePos.z), wavePos.z));
+	vec3 normal_1 = cross(vec3(wavePos.x, waveHeight(wavePos.x, wavePos.z - 1), wavePos.z - 1), vec3(wavePos.x - 1, waveHeight(wavePos.x - 1, wavePos.z), wavePos.z));
 	
-	vec3 normal_2 = cross(vec3(position.x + 1, waveHeight(position.x + 1, position.z), position.z), vec3(position.x, waveHeight(position.x, position.z - 1), position.z - 1));
-	vec3 normal_3 = cross(vec3(position.x - 1, waveHeight(position.x - 1, position.z), position.z), vec3(position.x, waveHeight(position.x, position.z + 1), position.z + 1));
+	vec3 normal_2 = cross(vec3(wavePos.x + 1, waveHeight(wavePos.x + 1, wavePos.z), wavePos.z), vec3(wavePos.x, waveHeight(wavePos.x, wavePos.z - 1), wavePos.z - 1));
+	vec3 normal_3 = cross(vec3(wavePos.x - 1, waveHeight(wavePos.x - 1, wavePos.z), wavePos.z), vec3(wavePos.x, waveHeight(wavePos.x, wavePos.z + 1), wavePos.z + 1));
 
 	vec3 normal = normalize(normal_0 + normal_1 + normal_2 + normal_3);
 	
@@ -135,6 +137,6 @@ void main(void) {
 	toLightVector = normalize(lightPosition - wavePos.xyz);
 	toCameraVector = normalize((inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - wavePos.xyz);
 	
-	gl_Position = projectionMatrix * viewMatrix * transformationMatrix * vec4(wavePos, 1.0);
+	gl_Position = projectionMatrix * viewMatrix * vec4(wavePos, 1.0);
 
 }
