@@ -21,6 +21,7 @@ namespace Pressure {
 		location_shineDamper = ShaderProgram::getUniformLocation("shineDamper");
 		location_reflectivity = ShaderProgram::getUniformLocation("reflectivity");
 		location_fakeLighting = ShaderProgram::getUniformLocation("fakeLighting");
+		location_plane = ShaderProgram::getUniformLocation("plane");
 	}
 
 	void EntityShader::loadTransformationMatrix(Matrix4f& matrix) {
@@ -47,6 +48,10 @@ namespace Pressure {
 
 	void EntityShader::loadFakeLighting(bool useFakeLighting) {
 		ShaderProgram::loadBool(location_fakeLighting, useFakeLighting);
+	}
+
+	void EntityShader::loadClipPlane(const Vector4f& plane) {
+		ShaderProgram::loadVector(location_plane, plane);
 	}
 
 }

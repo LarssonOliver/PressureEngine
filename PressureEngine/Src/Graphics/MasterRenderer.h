@@ -11,6 +11,7 @@
 #include "Skybox\SkyboxRenderer.h"
 #include "Loader.h"
 #include "Water\WaterRenderer.h"
+#include "Water\WaterFrameBuffers.h"
 
 
 namespace Pressure {
@@ -23,6 +24,7 @@ namespace Pressure {
 
 		SkyboxRenderer skyboxRenderer;
 		WaterRenderer waterRenderer;
+		WaterFrameBuffers waterBuffers;
 
 		std::map<TexturedModel, std::vector<Entity>> entities;
 		std::vector<Water> water;
@@ -44,6 +46,7 @@ namespace Pressure {
 
 	private:
 		void prepare();
+		void renderWaterFrameBuffers(Light& light, Camera& camera);
 
 	};
 

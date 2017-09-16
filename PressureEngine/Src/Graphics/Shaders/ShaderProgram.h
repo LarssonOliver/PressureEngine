@@ -31,6 +31,7 @@ namespace Pressure {
 
 		void loadFloat(const int location, const float value);
 		void loadVector(const int location, const Vector3f& value);
+		void loadVector(const int location, const Vector4f& value);
 		void loadBool(const int location, const bool value);
 		void loadMatrix(const int location, Matrix4f& value);
 

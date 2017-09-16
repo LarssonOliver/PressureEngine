@@ -143,6 +143,7 @@
     <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp" />
     <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp" />
     <ClCompile Include="Src\Graphics\Water\Water.cpp" />
+    <ClCompile Include="Src\Graphics\Water\WaterFrameBuffers.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterShader.cpp" />
     <ClCompile Include="Src\Graphics\Window.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h" />
     <ClInclude Include="Src\Graphics\VertexObjects\VertexBufferObject.h" />
     <ClInclude Include="Src\Graphics\Water\Water.h" />
+    <ClInclude Include="Src\Graphics\Water\WaterFrameBuffers.h" />
     <ClInclude Include="Src\Graphics\Water\WaterRenderer.h" />
     <ClInclude Include="Src\Graphics\Water\WaterShader.h" />
     <ClInclude Include="Src\Graphics\Window.h" />

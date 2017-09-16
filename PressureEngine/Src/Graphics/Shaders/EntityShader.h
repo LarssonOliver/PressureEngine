@@ -25,6 +25,7 @@ namespace Pressure {
 		void loadLight(Light& light);
 		void loadShineVariables(float damper, float reflectivity);
 		void loadFakeLighting(bool useFakeLighting);
+		void loadClipPlane(const Vector4f& plane);
 
 	private:
 		//uniform locations.
@@ -36,6 +37,7 @@ namespace Pressure {
 		int location_shineDamper;
 		int location_reflectivity;
 		int location_fakeLighting;
+		int location_plane;
 
 	};
 

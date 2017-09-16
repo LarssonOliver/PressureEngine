@@ -67,6 +67,10 @@ namespace Pressure {
 		return roll;
 	}
 
+	void Camera::invertPitch() {
+		pitch = -pitch;
+	}
+
 	void Camera::setSpeed(const float speed) {
 		this->max_speed = speed;
 	}

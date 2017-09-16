@@ -35,6 +35,7 @@ namespace Pressure {
 		float getPitch() const;
 		float getYaw() const;
 		float getRoll() const;
+		void invertPitch(); // Used when rendering reflection textures.
 
 		void setSpeed(const float speed);
 		float getSpeed() const;
