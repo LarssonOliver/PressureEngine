@@ -3,6 +3,7 @@
 #include "../Models/RawModel.h"
 #include "WaterShader.h"
 #include "Water.h"
+#include "WaterFrameBuffers.h"
 
 namespace Pressure {
 
@@ -13,8 +14,10 @@ namespace Pressure {
 		GLFWwindow* window;
 		float waveModifier;
 
+		WaterFrameBuffers& fbos;
+
 	public:
-		WaterRenderer(GLFWwindow* window);
+		WaterRenderer(GLFWwindow* window, WaterFrameBuffers& fbos);
 		void updateProjectionmatrix();
 
 		// Used to time the waves.

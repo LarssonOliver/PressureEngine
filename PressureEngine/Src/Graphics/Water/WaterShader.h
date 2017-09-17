@@ -23,6 +23,7 @@ namespace Pressure{
 		void loadViewMatrix(Camera& camera);
 		void loadWaveModifier(float angle);
 		void loadLight(Light& light);
+		void connectTextureUnits();
 
 	private:
 		int location_transformationMatrix;
@@ -31,6 +32,9 @@ namespace Pressure{
 		int location_waveModifier;
 		int location_lightPosition;
 		int location_lightColor;
+		int location_reflectionTexture;
+		int location_refractionTexture;
+		int location_depthMap;
 
 	};
 

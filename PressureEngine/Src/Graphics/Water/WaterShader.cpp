@@ -17,6 +17,9 @@ namespace Pressure {
 		location_waveModifier = ShaderProgram::getUniformLocation("waveModifier");
 		location_lightColor = ShaderProgram::getUniformLocation("lightColor");
 		location_lightPosition = ShaderProgram::getUniformLocation("lightPosition");
+		location_reflectionTexture = ShaderProgram::getUniformLocation("reflectionTexture");
+		location_refractionTexture = ShaderProgram::getUniformLocation("refractionTexture");
+		location_depthMap = ShaderProgram::getUniformLocation("depthMap");
 	}
 
 	void WaterShader::loadTransformationMatrix(Matrix4f& matrix) {
@@ -38,6 +41,12 @@ namespace Pressure {
 	void WaterShader::loadLight(Light& light) {
 		ShaderProgram::loadVector(location_lightPosition, light.getPosition());
 		ShaderProgram::loadVector(location_lightColor, light.getColor());
+	}
+
+	void WaterShader::connectTextureUnits() {
+		ShaderProgram::loadInt(location_reflectionTexture, 0);
+		ShaderProgram::loadInt(location_refractionTexture, 1);
+		ShaderProgram::loadInt(location_depthMap, 2);
 	}
 
 }

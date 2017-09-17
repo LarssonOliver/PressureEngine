@@ -3,13 +3,11 @@
 namespace Pressure {
 
 	MasterRenderer::MasterRenderer(GLFWwindow* window, Loader& loader)
-		: shader(), renderer(shader, window), skyboxRenderer(loader, window), waterRenderer(window), waterBuffers(window), entities() {
+		: shader(), renderer(shader, window), skyboxRenderer(loader, window), waterRenderer(window, waterBuffers), waterBuffers(window), entities() {
 		enableCulling();
 	}
 
 	void MasterRenderer::render(Light& light, Camera& camera) {
-		if (water.size() > 0)  // We now want to render reflection and refraction.
-			renderWaterFrameBuffers(light, camera);
 		prepare();
 		shader.start();
 		glDisable(GL_CLIP_DISTANCE0);
@@ -19,8 +17,10 @@ namespace Pressure {
 		renderer.render(entities);
 		shader.stop();
 		skyboxRenderer.render(camera);
-		if (water.size() > 0)
+		if (water.size() > 0) {
+			renderWaterFrameBuffers(light, camera);
 			waterRenderer.render(water, light, camera);
+		}
 		entities.clear();
 		water.clear();
 	}
@@ -77,7 +77,7 @@ namespace Pressure {
 		camera.invertPitch();
 		prepare();
 		shader.start();
-		shader.loadClipPlane(Vector4f(0, 1, 0, water[0].getPosition().getY())); // Bit of a hack, as some drivers do not support disabling clip distance.
+		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.2)); 
 		shader.loadLight(light);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
@@ -90,7 +90,7 @@ namespace Pressure {
 		waterBuffers.bindRefractionFrameBuffer();
 		prepare();
 		shader.start();
-		shader.loadClipPlane(Vector4f(0, 1, 0, water[0].getPosition().getY())); // Bit of a hack, as some drivers do not support disabling clip distance.
+		shader.loadClipPlane(Vector4f(0, -1, 0, water[0].getPosition().getY() + 0.2));
 		shader.loadLight(light);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);

@@ -3,7 +3,9 @@
 
 namespace Pressure {
 
-	WaterRenderer::WaterRenderer( GLFWwindow* window) : window(window), waveModifier(90) {
+	WaterRenderer::WaterRenderer(GLFWwindow* window, WaterFrameBuffers& fbos) : window(window), fbos(fbos)  {
+		shader.start();
+		shader.connectTextureUnits();
 		updateProjectionmatrix();
 	}
 
@@ -27,6 +29,14 @@ namespace Pressure {
 		shader.loadLight(sun);
 		water[0].getModel()->getVao()->bind();
 		glEnableVertexAttribArray(0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, fbos.getReflectionTexture());
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionTexture());
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionDepthTexture());
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		for (Water& w : water) {
 			shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(w.getPosition(), Vector3f(0), 1));
 			glDrawElements(GL_TRIANGLES, w.getModel()->getVertexCount(), GL_UNSIGNED_INT, 0);
@@ -34,6 +44,7 @@ namespace Pressure {
 		glDisableVertexAttribArray(0);
 		water[0].getModel()->getVao()->unbind();
 		shader.stop();
+		glDisable(GL_BLEND);
 	}
 
 }

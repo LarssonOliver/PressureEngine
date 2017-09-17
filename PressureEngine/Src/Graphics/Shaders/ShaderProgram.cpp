@@ -80,6 +80,10 @@ namespace Pressure {
 		glUniformMatrix4fv(location, 1, GL_FALSE, value.getArray());
 	}
 
+	void ShaderProgram::loadInt(const int location, const int value) {
+		glUniform1i(location, value);
+	}
+
 	unsigned int ShaderProgram::loadShader(const char* filePath, GLenum type) {
 		unsigned int shaderID = glCreateShader(type);
 

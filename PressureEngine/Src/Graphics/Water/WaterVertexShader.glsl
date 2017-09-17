@@ -6,6 +6,7 @@ in vec3 position;
 out vec3 surfaceNormal;
 out vec3 toLightVector;
 out vec3 toCameraVector;
+out vec4 clipSpace;
 
 uniform mat4 transformationMatrix;
 uniform mat4 projectionMatrix;
@@ -137,6 +138,7 @@ void main(void) {
 	toLightVector = normalize(lightPosition - wavePos.xyz);
 	toCameraVector = normalize((inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - wavePos.xyz);
 	
-	gl_Position = projectionMatrix * viewMatrix * vec4(wavePos, 1.0);
+	clipSpace = projectionMatrix * viewMatrix * vec4(wavePos, 1.0);
+	gl_Position = clipSpace;
 
 }
