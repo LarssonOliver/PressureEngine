@@ -37,13 +37,13 @@ namespace Pressure {
 		texture->setShineDamper(10);
 		texture->setReflectivity(1);
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 5.f);
+		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
-		water2 = new Water(Vector3f(-48, 0, -16), *loader);
+		water2 = new Water(Vector3f(-48, 10, -16), *loader);
 
 	}
 
@@ -116,6 +116,7 @@ namespace Pressure {
 		delete camera;
 		delete light;
 		delete water;
+		delete water2;
 
 		glfwTerminate();
 	}

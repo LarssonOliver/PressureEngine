@@ -24,6 +24,10 @@ namespace Pressure {
 		void tick();
 		void render(std::vector<Water>& water, Light& sun, Camera& camera);
 
+	private:
+		void prepare(std::vector<Water>& water, Light& sun, Camera& camera);
+		void finish(std::vector<Water>& water);
+
 	};
 
 }

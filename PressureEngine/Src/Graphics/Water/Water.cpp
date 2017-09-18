@@ -41,15 +41,15 @@ namespace Pressure {
 		for (int gz = 0; gz < VERTEX_COUNT - 1; gz++) {
 			for (int gx = 0; gx < VERTEX_COUNT - 1; gx++) {
 				int topLeft = (gz * VERTEX_COUNT) + gx;
-				int topRight = topLeft + 1;
+				//int topRight = topLeft + 1;
 				int bottomLeft = ((gz + 1) * VERTEX_COUNT) + gx;
-				int bottomRight = bottomLeft + 1;
+				//int bottomRight = bottomLeft + 1;
 				indices[pointer++] = topLeft;
 				indices[pointer++] = bottomLeft;
-				indices[pointer++] = topRight;
-				indices[pointer++] = topRight;
+				indices[pointer++] = topLeft + 1;
+				indices[pointer++] = topLeft + 1;
 				indices[pointer++] = bottomLeft;
-				indices[pointer++] = bottomRight;
+				indices[pointer++] = bottomLeft + 1;
 			}
 		}
 		return loader.loadToVao(vertices, indices);

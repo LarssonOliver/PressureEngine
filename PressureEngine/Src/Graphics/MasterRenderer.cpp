@@ -77,7 +77,7 @@ namespace Pressure {
 		camera.invertPitch();
 		prepare();
 		shader.start();
-		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.2)); 
+		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.5)); 
 		shader.loadLight(light);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);

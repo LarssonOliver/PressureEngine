@@ -76,9 +76,6 @@ float snoise(vec4 v){
            + i.z + vec4(i1.z, i2.z, i3.z, 1.0 ))
            + i.y + vec4(i1.y, i2.y, i3.y, 1.0 ))
            + i.x + vec4(i1.x, i2.x, i3.x, 1.0 ));
-// Gradients
-// ( 7*7*6 points uniformly over a cube, mapped onto a 4-octahedron.)
-// 7*7*6 = 294, which is close to the ring size 17*17 = 289.
 
   vec4 ip = vec4(1.0/294.0, 1.0/49.0, 1.0/7.0, 0.0);
 
@@ -107,20 +104,14 @@ float snoise(vec4 v){
 }
 
 float waveHeight(float x, float z) {
-	//return sin(degrees(x * 4) + waveModifier) + sin(degrees(z * 4) + waveModifier);
-	//return perlin(vec2(x, z) + waveModifier, 0.2, 1) / 2;
 	return snoise(vec4(x / 4, z / 4, sin(waveModifier), cos(waveModifier))) / 6;
-}
-
-float waveHeight(vec3 position) {
-	return waveHeight(position.x, position.z);
 }
 
 void main(void) {
 
-	vec3 wavePos = (transformationMatrix * vec4(position.x, 0.0, position.z, 1.0)).xyz;
+	vec3 wavePos = (transformationMatrix * vec4(position, 1.0)).xyz;
 
-	wavePos.y = waveHeight(wavePos);
+	wavePos.y += waveHeight(wavePos.x, wavePos.z);
 
 	vec3 normal_0 = cross(vec3(wavePos.x, waveHeight(wavePos.x, wavePos.z + 1), wavePos.z + 1), vec3(wavePos.x + 1, waveHeight(wavePos.x + 1, wavePos.z), wavePos.z));
 	vec3 normal_1 = cross(vec3(wavePos.x, waveHeight(wavePos.x, wavePos.z - 1), wavePos.z - 1), vec3(wavePos.x - 1, waveHeight(wavePos.x - 1, wavePos.z), wavePos.z));
