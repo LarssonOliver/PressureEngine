@@ -111,10 +111,22 @@
     <ClCompile Include="Src\Graphics\Water\WaterFrameBuffers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\Particles\ParticleFragmentShader.glsl">
+    <ClCompile Include="Src\Graphics\Particles\ParticleShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\Particles\ParticleShader.cpp">
+    <ClCompile Include="Src\Graphics\Particles\Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Particles\ParticleRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Particles\ParticleMaster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Particles\ParticleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Math\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -230,6 +242,18 @@
     <ClInclude Include="Src\Graphics\Particles\ParticleShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Graphics\Particles\ParticleRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Particles\ParticleMaster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Particles\ParticleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Math\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
@@ -252,5 +276,6 @@
     <None Include="Src\Graphics\Water\WaterVertexShader.glsl" />
     <None Include="Src\Graphics\Water\WaterFragmentShader.glsl" />
     <None Include="Src\Graphics\Particles\ParticleVertexShader.glsl" />
+    <None Include="Src\Graphics\Particles\ParticleFragmentShader.glsl" />
   </ItemGroup>
 </Project>

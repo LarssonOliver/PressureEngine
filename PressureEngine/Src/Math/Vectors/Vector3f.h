@@ -67,6 +67,8 @@ namespace Pressure {
 		float length() const;
 		float distance(float x, float y, float z) const;
 		float distance(const Vector3f& v) const;
+		Vector3f& scale(const float scalar);
+		Vector3f& scale(const float scalar, Vector3f& dest) const;
 
 		/* VECTOR MATH */
 		float dot(float x, float y, float z) const;

@@ -6,6 +6,8 @@
 
 #include "Matrices\Matrix4f.h"
 
+#include "Random.h"
+
 #include <vector>
 #include <string>
 
@@ -24,7 +26,6 @@ namespace Pressure {
 		static float fmax(float& f, float max);
 		static float fmin(float& f, float min);
 		static float frange(float&f, float min, float max);
-
 
 		//**************** EASING SOURCE: http://gizma.com/easing/ ****************//
 		// Acceleration.

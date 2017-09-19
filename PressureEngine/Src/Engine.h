@@ -6,6 +6,7 @@
 #include "Graphics\Shaders\EntityShader.h"
 #include "Graphics\GraphicsCommon.h"
 #include "Graphics\Water\Water.h"
+#include "Graphics\Particles\ParticleSystem.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -23,6 +24,8 @@ namespace Pressure {
 		Entity* entity;
 		Light* light;
 		Camera* camera;
+
+		ParticleSystem* particleSystem;
 
 		Water* water;
 		Water* water2;

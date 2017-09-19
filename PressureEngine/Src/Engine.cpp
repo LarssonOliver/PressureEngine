@@ -4,6 +4,7 @@
 #include "Callbacks.h"
 #include "Graphics\OBJLoader.h"
 #include "Input\Input.h"
+#include "Graphics\Particles\ParticleMaster.h"
 
 namespace Pressure {
 
@@ -31,6 +32,7 @@ namespace Pressure {
 
 		loader = new Loader();
 		renderer = new MasterRenderer(window->getWindow(), *loader);
+		ParticleMaster::init(*loader, window->getWindow());
 
 		RawModel* model = OBJLoader::loadObjModel("test", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
@@ -41,6 +43,8 @@ namespace Pressure {
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
+
+		particleSystem = new ParticleSystem(40, 5, 1, 3);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
@@ -93,8 +97,12 @@ namespace Pressure {
 			renderer->updateProjectionMatrix();
 			window->resized = false;
 		}
+
+		particleSystem->generateParticles(Vector3f());
+
 		entity->tick();
 		renderer->tick();
+		ParticleMaster::tick();
 	}
 
 	void Engine::render() {
@@ -102,12 +110,16 @@ namespace Pressure {
 		renderer->processWater(*water);
 		//renderer->processWater(*water2);
 		renderer->render(*light, *camera);
+
+		ParticleMaster::renderParticles(*camera);
+
 		glfwSwapBuffers(window->getWindow());
 	}
 
 	void Engine::terminate() {
 		loader->cleanUp();
 		renderer->cleanUp();
+		ParticleMaster::cleanUp();
 
 		delete window;
 		delete loader;

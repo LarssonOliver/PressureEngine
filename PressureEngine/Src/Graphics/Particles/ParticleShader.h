@@ -1,5 +1,6 @@
 #pragma once
 #include "../Shaders/ShaderProgram.h"
+#include "../Entities/Camera.h"
 
 namespace Pressure {
 
@@ -14,11 +15,11 @@ namespace Pressure {
 		virtual void bindAttributes() override;
 
 	public:
-		void loadTransformationMatrix(Matrix4f& matrix);
-		//void loadViewMatrix(Camera& camera);
+		void loadProjectionMatrix(Matrix4f& matrix);
+		void loadViewMatrix(Matrix4f& matrix);
 
 	private:
-		int location_transformationMatrix;
+		int location_projectionMatrix;
 		int location_viewMatrix;
 
 	};

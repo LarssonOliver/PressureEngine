@@ -237,6 +237,14 @@ namespace Pressure {
 		return distance(v.getX(), v.getY(), v.getZ());
 	}
 
+	Vector3f& Vector3f::scale(const float scalar) {
+		return this->mul(scalar);
+	}
+
+	Vector3f& Vector3f::scale(const float scalar, Vector3f& dest) const {
+		return this->mul(scalar, dest);
+	}
+
 	/* VECTOR MATH */
 	float Vector3f::dot(float x, float y, float z) const {
 		return this->x * x + this->y * y + this->z * x;

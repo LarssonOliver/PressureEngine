@@ -6,7 +6,7 @@ namespace Pressure {
 	const char* ParticleShader::FRAGMENT_FILE = "src/Graphics/Particles/ParticleFragmentShader.glsl";
 
 	void ParticleShader::getAllUniformLocations() {
-		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
+		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
 		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");
 	}
 
@@ -14,8 +14,12 @@ namespace Pressure {
 		ShaderProgram::bindAttribute(0, "position");
 	}
 
-	void ParticleShader::loadTransformationMatrix(Matrix4f& matrix) {
-		ShaderProgram::loadMatrix(location_transformationMatrix, matrix);
+	void ParticleShader::loadProjectionMatrix(Matrix4f& matrix) {
+		ShaderProgram::loadMatrix(location_projectionMatrix, matrix);
+	}
+
+	void ParticleShader::loadViewMatrix(Matrix4f& matrix) {
+		ShaderProgram::loadMatrix(location_viewMatrix, matrix);
 	}
 
 }
