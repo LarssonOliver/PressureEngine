@@ -132,6 +132,8 @@
     <ClCompile Include="Src\Graphics\MasterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
     <ClCompile Include="Src\Graphics\OBJLoader.cpp" />
+    <ClCompile Include="Src\Graphics\Particles\ParticleFragmentShader.glsl" />
+    <ClCompile Include="Src\Graphics\Particles\ParticleShader.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
@@ -167,6 +169,8 @@
     <ClInclude Include="Src\Graphics\MasterRenderer.h" />
     <ClInclude Include="Src\Graphics\Models\TexturedModel.h" />
     <ClInclude Include="Src\Graphics\OBJLoader.h" />
+    <ClInclude Include="Src\Graphics\Particles\Particle.h" />
+    <ClInclude Include="Src\Graphics\Particles\ParticleShader.h" />
     <ClInclude Include="Src\Graphics\Shaders\Renderer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />
     <ClInclude Include="Src\Graphics\Models\RawModel.h" />
@@ -202,6 +206,7 @@
     <Image Include="Res\test.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Src\Graphics\Particles\ParticleVertexShader.glsl" />
     <None Include="Src\Graphics\Skybox\SkyboxFragmentShader.glsl" />
     <None Include="Src\Graphics\Skybox\SkyboxVertexShader.glsl" />
     <None Include="Src\Graphics\Water\WaterFragmentShader.glsl" />
