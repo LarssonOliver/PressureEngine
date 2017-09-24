@@ -156,7 +156,6 @@
     <ClCompile Include="Src\Input\Mouse.cpp" />
     <ClCompile Include="Src\Math\Math.cpp" />
     <ClCompile Include="Src\Math\Matrices\Matrix4f.cpp" />
-    <ClCompile Include="Src\Math\Random.cpp" />
     <ClCompile Include="Src\Math\Vectors\Vector2f.cpp" />
     <ClCompile Include="Src\Math\Vectors\Vector3f.cpp" />
     <ClCompile Include="Src\Math\Vectors\Vector4f.cpp" />

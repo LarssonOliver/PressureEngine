@@ -1,6 +1,6 @@
-#include "../../Math/Math.h"
 #include "ParticleSystem.h"
 #include "Particle.h"
+#include "../../Math/Random.h"
 #include "../../Constants.h"
 
 namespace Pressure {
@@ -15,7 +15,9 @@ namespace Pressure {
 		for (int i = 0; i < (int)ppt; i++) {
 			emitParticle(center);
 		}
-		if (r.next() < fmod(ppt, 1));
+		if (r.next() < fmod(ppt, 1)) {
+			emitParticle(center);
+		}
 	}
 
 	void ParticleSystem::emitParticle(Vector3f& center) {

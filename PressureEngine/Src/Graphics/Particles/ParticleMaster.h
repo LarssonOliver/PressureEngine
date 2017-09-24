@@ -1,7 +1,8 @@
 #pragma once
 #include <list>
-#include "Particle.h"
+#include <memory>
 #include "ParticleRenderer.h"
+#include "Particle.h"
 
 namespace Pressure {
 
@@ -9,7 +10,7 @@ namespace Pressure {
 
 	private:
 		static std::list<Particle> particles;
-		static ParticleRenderer renderer;
+		static std::unique_ptr<ParticleRenderer> renderer;
 
 	public:
 		static void init(Loader& loader, GLFWwindow* window);

@@ -46,14 +46,14 @@ namespace Pressure {
 				else if (data[lineStart] == 'v' && data[lineStart + 1] == 't' && data[lineStart + 2] == ' ') {
 					char* next = &data[lineStart + 3];
 					Vector2f uv(strtof(next, &next));
-					uvs.emplace_back(uv.setY(strtof(next, NULL)));
+					uvs.push_back(uv.setY(strtof(next, NULL)));
 				}
 
 				else if (data[lineStart] == 'v' && data[lineStart + 1] == 'n' && data[lineStart + 2] == ' ') {
 					char* next = &data[lineStart + 3];
 					Vector3f normal(strtof(next, &next));
 					normal.setY(strtof(next, &next));
-					normals.emplace_back(normal.setZ(strtof(next, NULL)));
+					normals.push_back(normal.setZ(strtof(next, NULL)));
 				}
 
 				else if (data[lineStart] == 'f' && data[lineStart + 1] == ' ') {
@@ -62,9 +62,9 @@ namespace Pressure {
 
 					//Adds some texture coords if none are present.
 					if (uvs.size() == 0) {
-						uvs.emplace_back(Vector2f(0.f));
-						uvs.emplace_back(Vector2f(1.f, 0.f));
-						uvs.emplace_back(Vector2f(1.f));
+						uvs.emplace_back(0.f);
+						uvs.emplace_back(1.f, 0.f);
+						uvs.emplace_back(1.f);
 					}
 
 					processFaces(data, lineStart, indices, uvs, normals, textureArray, normalsArray);
@@ -97,7 +97,7 @@ namespace Pressure {
 				char* next;
 				for (int i = 0; i < 3; i++) {								
 					int currentVertexPointer = i == 0 ? strtol(&data[lineStart + 2], &next, 10) - 1 : strtol(next, &next, 10) - 1;
-					indices.emplace_back(currentVertexPointer);
+					indices.push_back(currentVertexPointer);
 
 					Vector2f currentUV = uvs[strtol(++next, &next, 10) - 1];
 					textureArray[currentVertexPointer * 2] = currentUV.getX();

@@ -2,30 +2,33 @@
 
 namespace Pressure {
 
+	std::list<Particle> ParticleMaster::particles;
+	std::unique_ptr<ParticleRenderer> ParticleMaster::renderer = nullptr;
+
 	void ParticleMaster::init(Loader& loader, GLFWwindow* window) {
-		renderer = ParticleRenderer(loader, Matrix4f().createProjectionMatrix(window));
+		renderer = std::make_unique<ParticleRenderer>(loader, Matrix4f().createProjectionMatrix(window));
 	}
 
 	void ParticleMaster::tick() {
-		std::list<Particle>::iterator it = particles.begin;
-		while (it != particles.end) {
-			Particle& p = *it;
-			if (!p.isAlive())
-				particles.erase(it);
-			it++;
+		std::list<Particle>::iterator it = particles.begin();
+		while (it != particles.end()) {
+			if (!(*it).isAlive())
+				it = particles.erase(it);
+			else
+				it++;
 		}
 	}
 
 	void ParticleMaster::renderParticles(Camera& camera) {
-		renderer.render(particles, camera);
+		renderer.get()->render(particles, camera);
 	}
 
 	void ParticleMaster::cleanUp() {
-		renderer.cleanUp();
+		renderer.get()->cleanUp();
 	}
 
 	void ParticleMaster::addParticle(Particle& particle) { 
-		particles.emplace_back(particle);
+		particles.push_back(particle);
 	}
 
 }

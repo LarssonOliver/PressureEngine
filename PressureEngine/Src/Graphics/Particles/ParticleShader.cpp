@@ -5,6 +5,10 @@ namespace Pressure {
 	const char* ParticleShader::VERTEX_FILE = "src/Graphics/Particles/ParticleVertexShader.glsl";
 	const char* ParticleShader::FRAGMENT_FILE = "src/Graphics/Particles/ParticleFragmentShader.glsl";
 
+	ParticleShader::ParticleShader() {
+		ShaderProgram::loadShaders(VERTEX_FILE, FRAGMENT_FILE);
+	}
+
 	void ParticleShader::getAllUniformLocations() {
 		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
 		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");

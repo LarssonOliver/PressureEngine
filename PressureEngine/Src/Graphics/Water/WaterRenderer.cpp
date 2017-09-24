@@ -36,7 +36,7 @@ namespace Pressure {
 		shader.loadViewMatrix(camera);
 		shader.loadWaveModifier(Math::toRadians(waveModifier));
 		shader.loadLight(sun);
-		water[0].getModel()->getVao()->bind();
+		Water::getModel()->getVao()->bind();
 		glEnableVertexAttribArray(0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, fbos.getReflectionTexture());

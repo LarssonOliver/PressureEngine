@@ -32,11 +32,11 @@ namespace Pressure {
 	void MasterRenderer::processEntity(Entity& entity) {
 		TexturedModel& entityModel = entity.getTexturedModel();
 		std::vector<Entity>& batch = entities[entityModel];
-		batch.emplace_back(entity);
+		batch.push_back(entity);
 	}
 
 	void MasterRenderer::processWater(Water& water) {
-		this->water.emplace_back(water);
+		this->water.push_back(water);
 	}
 
 	void MasterRenderer::updateProjectionMatrix() {

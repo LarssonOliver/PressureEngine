@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 #include <list>
-#include "Particle.h"
-#include "ParticleShader.h"
 #include "../Loader.h"
+#include "ParticleShader.h"
+#include "Particle.h"
 #include "../Models/RawModel.h"
 
 namespace Pressure {

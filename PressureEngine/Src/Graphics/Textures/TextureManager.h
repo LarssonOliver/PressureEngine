@@ -14,7 +14,7 @@
 #include <vector>
 #include <string>
 #include <windows.h>
-#include <gl/gl.h>
+#include <gl/glew.h>
 #include "FreeImage.h"
 #include <map>
 

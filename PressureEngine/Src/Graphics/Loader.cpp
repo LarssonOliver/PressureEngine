@@ -12,7 +12,7 @@ namespace Pressure {
 		storeDataInAttributeList(2, 3, normals);
 		vao->unbind();
 		RawModel* model = new RawModel(vao, indices.size());
-		rawModels.emplace_back(model);
+		rawModels.push_back(model);
 		return model;
 	}
 
@@ -22,7 +22,7 @@ namespace Pressure {
 		storeDataInAttributeList(0, 3, positions);
 		vao->unbind();
 		RawModel* model = new RawModel(vao, indices.size());
-		rawModels.emplace_back(model);
+		rawModels.push_back(model);
 		return model;
 	}
 
@@ -31,7 +31,7 @@ namespace Pressure {
 		storeDataInAttributeList(0, dimensions, positions);
 		vao->unbind();
 		RawModel* model = new RawModel(vao, positions.size() / dimensions);
-		rawModels.emplace_back(model);
+		rawModels.push_back(model);
 		return model;
 	}
 
@@ -43,7 +43,7 @@ namespace Pressure {
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -1);
-		textures.emplace_back(newTextureID);
+		textures.push_back(newTextureID);
 		return newTextureID;
 	}
 
@@ -57,14 +57,14 @@ namespace Pressure {
 		if (!TextureManager::Inst()->LoadCubeMap(fileNames, newTextureID)) {
 			return NULL;
 		}
-		textures.emplace_back(newTextureID);
+		textures.push_back(newTextureID);
 		return newTextureID;
 	}
 
 	VertexArrayObject* Loader::createVAO() {
 		VertexArrayObject* vao = new VertexArrayObject();
 		vao->generate();
-		vaos.emplace_back(vao);
+		vaos.push_back(vao);
 		vao->bind();
 		return vao;
 	}
@@ -72,7 +72,7 @@ namespace Pressure {
 	void Loader::storeDataInAttributeList(const int attributeNumber, const int coordinateSize, const std::vector<float>& data) {
 		VertexBufferObject* vbo = new VertexBufferObject(GL_ARRAY_BUFFER);
 		vbo->generate();
-		vbos.emplace_back(vbo);
+		vbos.push_back(vbo);
 		vbo->bind();
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * data.size(), &data.front(), GL_STATIC_DRAW);
 		glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, false, 0, 0);
@@ -82,7 +82,7 @@ namespace Pressure {
 	void Loader::bindIndicesBuffer(const std::vector<int>& indices) {
 		VertexBufferObject* vbo = new VertexBufferObject(GL_ELEMENT_ARRAY_BUFFER);
 		vbo->generate();
-		vbos.emplace_back(vbo);
+		vbos.push_back(vbo);
 		vbo->bind();
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * indices.size(), &indices.front(), GL_STATIC_DRAW);
 	}

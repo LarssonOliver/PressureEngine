@@ -5,8 +5,7 @@
 namespace Pressure {
 	
 	Renderer::Renderer(EntityShader& shader, GLFWwindow* window)
-		: shader(shader), window(window)
-	{
+		: shader(shader), window(window) {
 		updateProjectionMatrix(shader);
 	}
 

@@ -2,6 +2,8 @@
 
 namespace Pressure {
 
+	const std::vector<float> ParticleRenderer::VERTICES = { -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f };
+
 	ParticleRenderer::ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix)
 		: quad(loader.loadToVao(VERTICES, 2)) {
 		shader.start();
@@ -35,9 +37,15 @@ namespace Pressure {
 	void ParticleRenderer::updateViewMatrix(Vector3f& position, float rotation, float scale, Matrix4f& viewMatrix) {
 		Matrix4f modelMatrix;
 		modelMatrix.translate(position);
-		modelMatrix.setColumn(0, Vector4f(viewMatrix.get(0, 0), viewMatrix.get(1, 0), viewMatrix.get(2, 0), modelMatrix.get(0, 3)));
-		modelMatrix.setColumn(1, Vector4f(viewMatrix.get(0, 1), viewMatrix.get(1, 1), viewMatrix.get(2, 1), modelMatrix.get(1, 3)));
-		modelMatrix.setColumn(2, Vector4f(viewMatrix.get(0, 2), viewMatrix.get(1, 2), viewMatrix.get(2, 2), modelMatrix.get(2, 3)));
+		modelMatrix.set(0, 0, viewMatrix.get(0, 0));
+		modelMatrix.set(0, 1, viewMatrix.get(1, 0));
+		modelMatrix.set(0, 2, viewMatrix.get(2, 0));
+		modelMatrix.set(1, 0, viewMatrix.get(0, 1));
+		modelMatrix.set(1, 1, viewMatrix.get(1, 1));
+		modelMatrix.set(1, 2, viewMatrix.get(2, 1));
+		modelMatrix.set(2, 0, viewMatrix.get(0, 2));
+		modelMatrix.set(2, 1, viewMatrix.get(1, 2));
+		modelMatrix.set(2, 2, viewMatrix.get(2, 2));
 		modelMatrix.rotate(Math::toRadians(rotation), Vector3f(0, 0, 1));
 		modelMatrix.scale(scale);
 		modelMatrix.mul(viewMatrix);

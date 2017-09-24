@@ -17,7 +17,7 @@ namespace Pressure {
 	public:
 		Water(Vector3f& position, Loader& loader);
 
-		RawModel* getModel();
+		static RawModel* getModel();
 		Vector3f& getPosition();
 
 	private:

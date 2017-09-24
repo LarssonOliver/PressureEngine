@@ -189,9 +189,9 @@ namespace Pressure {
 	Matrix4f& Matrix4f::createTransformationMatrix(const Vector3f& translation, const Vector3f& rotation, const float scale) {
 		identity();
 		translate(translation);
-		rotate(Math::toRadians(rotation.getX()), Vector3f(1, 0, 0));
-		rotate(Math::toRadians(rotation.getY()), Vector3f(0, 1, 0));
-		rotate(Math::toRadians(rotation.getZ()), Vector3f(0, 0, 1));
+		rotate((float)Math::toRadians(rotation.getX()), Vector3f(1, 0, 0));
+		rotate((float)Math::toRadians(rotation.getY()), Vector3f(0, 1, 0));
+		rotate((float)Math::toRadians(rotation.getZ()), Vector3f(0, 0, 1));
 		this->scale(scale);
 		return *this;
 	}
@@ -199,8 +199,8 @@ namespace Pressure {
 	Matrix4f& Matrix4f::createProjectionMatrix(GLFWwindow* window) {
 		int width, height;
 		glfwGetWindowSize(window, &width, &height);
-		float aspectRatio = (float) width / (float) height;
-		float y_scale = (1.f / tanf(Math::toRadians(PRESSRE_FOV / 2.f)) * aspectRatio);
+		float aspectRatio = (float)width / (float)height;
+		float y_scale = (1.f / tanf((float)Math::toRadians(PRESSRE_FOV / 2.f)) * aspectRatio);
 		float x_scale = y_scale / aspectRatio;
 		float frustum_length = PRESSRE_FAR_PLANE - PRESSRE_NEAR_PLANE;
 
@@ -216,13 +216,13 @@ namespace Pressure {
 
 	Matrix4f& Matrix4f::createViewMatrix(Vector3f& position, float pitch, float yaw, float roll) {
 		identity();
-		rotate(Math::toRadians(pitch), Vector3f(1, 0, 0));
-		rotate(Math::toRadians(yaw), Vector3f(0, 1, 0));
-		rotate(Math::toRadians(roll), Vector3f(0, 0, 1));
+		rotate((float)Math::toRadians(pitch), Vector3f(1, 0, 0));
+		rotate((float)Math::toRadians(yaw), Vector3f(0, 1, 0));
+		rotate((float)Math::toRadians(roll), Vector3f(0, 0, 1));
 		Vector3f cameraPos(position);
 		Vector3f negativeCameraPos;
 		cameraPos.negate(negativeCameraPos);
-		translate(negativeCameraPos);		
+		translate(negativeCameraPos);
 		return *this;
 	}
 

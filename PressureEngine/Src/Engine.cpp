@@ -44,7 +44,7 @@ namespace Pressure {
 		camera = new Camera();
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 
-		particleSystem = new ParticleSystem(40, 5, 1, 3);
+		particleSystem = new ParticleSystem(40, 5, 0, 3);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
@@ -98,15 +98,15 @@ namespace Pressure {
 			window->resized = false;
 		}
 
-		particleSystem->generateParticles(Vector3f());
-
 		entity->tick();
 		renderer->tick();
+
+		particleSystem->generateParticles(Vector3f(0));
 		ParticleMaster::tick();
 	}
 
 	void Engine::render() {
-		renderer->processEntity(*entity);
+		//renderer->processEntity(*entity);
 		renderer->processWater(*water);
 		//renderer->processWater(*water2);
 		renderer->render(*light, *camera);
