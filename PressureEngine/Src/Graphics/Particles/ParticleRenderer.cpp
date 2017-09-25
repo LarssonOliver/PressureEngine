@@ -37,18 +37,18 @@ namespace Pressure {
 	void ParticleRenderer::updateViewMatrix(Vector3f& position, float rotation, float scale, Matrix4f& viewMatrix) {
 		Matrix4f modelMatrix;
 		modelMatrix.translate(position);
-		modelMatrix.set(0, 0, viewMatrix.get(0, 0));
-		modelMatrix.set(0, 1, viewMatrix.get(1, 0));
-		modelMatrix.set(0, 2, viewMatrix.get(2, 0));
-		modelMatrix.set(1, 0, viewMatrix.get(0, 1));
-		modelMatrix.set(1, 1, viewMatrix.get(1, 1));
-		modelMatrix.set(1, 2, viewMatrix.get(2, 1));
-		modelMatrix.set(2, 0, viewMatrix.get(0, 2));
-		modelMatrix.set(2, 1, viewMatrix.get(1, 2));
-		modelMatrix.set(2, 2, viewMatrix.get(2, 2));
 		modelMatrix.rotate(Math::toRadians(rotation), Vector3f(0, 0, 1));
 		modelMatrix.scale(scale);
 		modelMatrix.mul(viewMatrix);
+		modelMatrix.set(0, 0, 1);
+		modelMatrix.set(0, 1, 0);
+		modelMatrix.set(0, 2, 0);
+		modelMatrix.set(1, 0, 0);
+		modelMatrix.set(1, 1, 1);
+		modelMatrix.set(1, 2, 0);
+		modelMatrix.set(2, 0, 0);
+		modelMatrix.set(2, 1, 0);
+		modelMatrix.set(2, 2, 1);
 		shader.loadViewMatrix(modelMatrix);
 	}
 

@@ -10,7 +10,8 @@ namespace Pressure {
 	}
 
 	bool Particle::isAlive() {
-		speed.y += PRESSURE_GRAVITY * gravityEffect;
+		speed.y -= PRESSURE_GRAVITY * gravityEffect * elapsedTicks * PRESSURE_TICKTIME;
+		position.add(speed);
 		elapsedTicks++;
 		return elapsedTicks < lifeLength;
 	}
