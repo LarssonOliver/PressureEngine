@@ -64,6 +64,10 @@ namespace Pressure {
 		glUniform1f(location, value);
 	}
 
+	void ShaderProgram::loadVector(const int location, const Vector2f& value) {
+		glUniform2f(location, value.getX(), value.getY());
+	}
+
 	void ShaderProgram::loadVector(const int location, const Vector3f& value) {
 		glUniform3f(location, value.getX(), value.getY(), value.getZ());
 	}

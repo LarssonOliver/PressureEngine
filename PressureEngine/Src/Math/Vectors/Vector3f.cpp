@@ -226,6 +226,10 @@ namespace Pressure {
 		return std::sqrtf(x * x + y * y + z * z);
 	}
 
+	float Vector3f::lengthSquared() const {
+		return x * x + y * y + z * z;
+	}
+
 	float Vector3f::distance(float x, float y, float z) const {
 		float dx = this->x - x;
 		float dy = this->y - y;

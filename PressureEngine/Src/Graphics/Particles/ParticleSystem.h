@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Math/Vectors/Vector3f.h"
+#include "ParticleTexture.h"
 
 namespace Pressure {
 
@@ -11,8 +12,10 @@ namespace Pressure {
 		float gravityComplient;
 		float lifeLength;
 
+		ParticleTexture texture;
+
 	public:
-		ParticleSystem(float pps, float speed, float gravityComplient, float lifeLength);
+		ParticleSystem(ParticleTexture& texture, float pps, float speed, float gravityComplient, float lifeLength);
 		void generateParticles(Vector3f& center);
 
 	private:

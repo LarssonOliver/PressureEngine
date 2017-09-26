@@ -5,8 +5,8 @@
 
 namespace Pressure {
 
-	ParticleSystem::ParticleSystem(float pps, float speed, float gravityComplient, float lifeLength) 
-		: ppt(pps), speed(speed), gravityComplient(gravityComplient), lifeLength(lifeLength) {
+	ParticleSystem::ParticleSystem(ParticleTexture& texture, float pps, float speed, float gravityComplient, float lifeLength)
+		: ppt(pps), speed(speed), gravityComplient(gravityComplient), lifeLength(lifeLength), texture(texture) {
 		ppt *= PRESSURE_TICKTIME;
 	}
 
@@ -25,7 +25,7 @@ namespace Pressure {
 		Vector3f vel(r.next(), 1, r.next());
 		vel.normalize();
 		vel.scale(speed);
-		Particle(Vector3f(center), vel, gravityComplient, lifeLength, 0, 1);
+		Particle(texture, Vector3f(center), vel, gravityComplient, lifeLength, 0, 1);
 	}
 
 }

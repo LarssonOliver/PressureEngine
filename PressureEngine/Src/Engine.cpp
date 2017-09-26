@@ -5,6 +5,7 @@
 #include "Graphics\OBJLoader.h"
 #include "Input\Input.h"
 #include "Graphics\Particles\ParticleMaster.h"
+#include "Graphics\Particles\ParticleTexture.h"
 
 namespace Pressure {
 
@@ -44,7 +45,8 @@ namespace Pressure {
 		camera = new Camera();
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 
-		particleSystem = new ParticleSystem(40, 0.2, 0.02, 1 * 60);
+		ParticleTexture particleTexture(loader->loadTexture("particle.png"), 1);
+		particleSystem = new ParticleSystem(particleTexture, 40, 0.2f, 0.02f, 1 * 60);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
@@ -98,12 +100,12 @@ namespace Pressure {
 		entity->tick();
 		renderer->tick();
 
-		ParticleMaster::tick();
-		particleSystem->generateParticles(Vector3f(5));
+		ParticleMaster::tick(*camera);
+		particleSystem->generateParticles(Vector3f(0));
 	}
 
 	void Engine::render() {
-		renderer->processEntity(*entity);
+		//renderer->processEntity(*entity);
 		//renderer->processWater(*water);
 		//renderer->processWater(*water2);
 		renderer->render(*light, *camera);

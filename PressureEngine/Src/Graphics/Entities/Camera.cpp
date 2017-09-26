@@ -6,7 +6,7 @@
 namespace Pressure {
 
 	Camera::Camera()
-		: position(0), pitch(50), yaw(0), roll(0), anchor(0), distanceFromAnchor(5),
+		: position(0), pitch(50), yaw(0), roll(0), anchor(0), distanceFromAnchor(10),
 		angleAroundAnchor(0), max_speed(0.5f), speed(0), acceleration(0)
 	{ }
 

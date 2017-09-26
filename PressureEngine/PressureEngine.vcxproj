@@ -137,6 +137,7 @@
     <ClCompile Include="Src\Graphics\Particles\ParticleRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleShader.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleSystem.cpp" />
+    <ClCompile Include="Src\Graphics\Particles\ParticleTexture.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Src\Graphics\Particles\ParticleRenderer.h" />
     <ClInclude Include="Src\Graphics\Particles\ParticleShader.h" />
     <ClInclude Include="Src\Graphics\Particles\ParticleSystem.h" />
+    <ClInclude Include="Src\Graphics\Particles\ParticleTexture.h" />
     <ClInclude Include="Src\Graphics\Shaders\Renderer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />
     <ClInclude Include="Src\Graphics\Models\RawModel.h" />

@@ -65,6 +65,7 @@ namespace Pressure {
 
 		/* TRIGONOMETRY */
 		float length() const;
+		float lengthSquared() const;
 		float distance(float x, float y, float z) const;
 		float distance(const Vector3f& v) const;
 		Vector3f& scale(const float scalar);

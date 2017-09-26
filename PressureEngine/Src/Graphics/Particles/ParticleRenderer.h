@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <list>
+#include <map>
 #include "../Loader.h"
 #include "ParticleShader.h"
 #include "Particle.h"
@@ -18,7 +19,7 @@ namespace Pressure {
 
 	public:
 		ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix);
-		void render(std::list<Particle>& particles, Camera& camera);
+		void render(std::map<ParticleTexture, std::list<Particle>>& particles, Camera& camera);
 		void cleanUp();
 		
 	private:

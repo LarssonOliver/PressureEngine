@@ -1,6 +1,5 @@
 #pragma once
 #include "../Shaders/ShaderProgram.h"
-#include "../Entities/Camera.h"
 
 namespace Pressure {
 
@@ -20,10 +19,14 @@ namespace Pressure {
 	public:
 		void loadProjectionMatrix(Matrix4f& matrix);
 		void loadViewMatrix(Matrix4f& matrix);
+		void loadTextureCoordInfo(Vector2f& offset1, Vector2f& offset2, float numRows, float blend);
 		
 	private:
 		int location_projectionMatrix;
 		int location_viewMatrix;
+		int location_texOffset1;
+		int location_texOffset2;
+		int location_texCoordInfo;
 
 	};
 
