@@ -34,7 +34,7 @@ namespace Pressure {
 		renderer = new MasterRenderer(window->getWindow(), *loader);
 		ParticleMaster::init(*loader, window->getWindow());
 
-		RawModel* model = OBJLoader::loadObjModel("test", *loader);
+		RawModel* model = OBJLoader::loadObjModel("dragon", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
 		texture->setShineDamper(10);
 		texture->setReflectivity(1);
@@ -99,11 +99,11 @@ namespace Pressure {
 		renderer->tick();
 
 		ParticleMaster::tick();
-		particleSystem->generateParticles(Vector3f(0));
+		particleSystem->generateParticles(Vector3f(5));
 	}
 
 	void Engine::render() {
-		//renderer->processEntity(*entity);
+		renderer->processEntity(*entity);
 		//renderer->processWater(*water);
 		//renderer->processWater(*water2);
 		renderer->render(*light, *camera);

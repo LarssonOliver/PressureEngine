@@ -21,10 +21,10 @@ namespace Pressure {
 		string data = sstr.str();
 		file.close();
 
-		vector<float> vertices;
-		vector<Vector2f> uvs;
+		list<float> vertices;
+		list<Vector2f> uvs;
 		vector<Vector3f> normals;
-		vector<int> indices;
+		list<int> indices;
 
 		vector<float> textureArray;
 		vector<float> normalsArray;
@@ -57,8 +57,8 @@ namespace Pressure {
 				}
 
 				else if (data[lineStart] == 'f' && data[lineStart + 1] == ' ') {
-					textureArray = vector<float>(vertices.size() * 2);
-					normalsArray = vector<float>(vertices.size() * 3);
+					textureArray.resize(vertices.size() * 2);
+					normalsArray.resize(vertices.size() * 2);
 
 					//Adds some texture coords if none are present.
 					if (uvs.size() == 0) {
@@ -67,7 +67,7 @@ namespace Pressure {
 						uvs.emplace_back(1.f);
 					}
 
-					processFaces(data, lineStart, indices, uvs, normals, textureArray, normalsArray);
+					processFaces(data, lineStart, indices, vector<Vector2f>{make_move_iterator(begin(uvs)), make_move_iterator(end(uvs))}, normals, textureArray, normalsArray);
 					break;
 				}
 
@@ -75,12 +75,12 @@ namespace Pressure {
 			}
 		}
 
-		return loader.loadToVao(vertices, textureArray, normalsArray, indices);
+		return loader.loadToVao(vector<float>{make_move_iterator(begin(vertices)), make_move_iterator(end(vertices))}, textureArray, normalsArray, vector<int>{make_move_iterator(begin(indices)), make_move_iterator(end(indices))});
 
 	}
 
 
-	void OBJLoader::processFaces(std::string& data, unsigned int lineStart, vector<int>& indices, vector<Vector2f>& uvs,
+	void OBJLoader::processFaces(std::string& data, unsigned int lineStart, list<int>& indices, vector<Vector2f>& uvs,
 		std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray) {
 
 		unsigned short lineLength;
@@ -99,11 +99,11 @@ namespace Pressure {
 					int currentVertexPointer = i == 0 ? strtol(&data[lineStart + 2], &next, 10) - 1 : strtol(next, &next, 10) - 1;
 					indices.push_back(currentVertexPointer);
 
-					Vector2f currentUV = uvs[strtol(++next, &next, 10) - 1];
+					Vector2f& currentUV = uvs[strtol(++next, &next, 10) - 1];
 					textureArray[currentVertexPointer * 2] = currentUV.getX();
 					textureArray[currentVertexPointer * 2 + 1] = 1 - currentUV.getY();
 
-					Vector3f currentNorm = normals[strtol(++next, &next, 10) - 1];
+					Vector3f& currentNorm = normals[strtol(++next, &next, 10) - 1];
 					normalsArray[currentVertexPointer * 3] = currentNorm.getX();
 					normalsArray[currentVertexPointer * 3 + 1] = currentNorm.getY();
 					normalsArray[currentVertexPointer * 3 + 2] = currentNorm.getZ();
