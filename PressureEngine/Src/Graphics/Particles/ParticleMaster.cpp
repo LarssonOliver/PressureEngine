@@ -11,17 +11,28 @@ namespace Pressure {
 
 	void ParticleMaster::tick(Camera& camera) {
 		// Creates a loop that loop through all elements in all the lists in the map.
-		for (auto it = particles.begin(); it != particles.end(); it++) {
-			auto& list = it->second;
-			for (auto pit = list.begin(); pit != list.end(); pit++) {
-				if (!pit->isAlive(camera)) {
-					pit = list.erase(pit);
-					if (list.size() == 0)
-						particles.erase(it);
+		auto map = particles.begin();
+		while (map != particles.end()) {
+			bool empty = false;
+			auto& list = map->second;
+			auto particle = list.begin();
+			while (particle != list.end()) {
+				if (!particle->isAlive(camera)) {
+					particle = list.erase(particle);
+					empty = list.size() == 0;
 				}
+				else
+					particle++;
 			}
-			// Sort the list.
+
+			if (!map->first.isUseAdditiveBlending())
+				list.sort(sort_particles);
+
+			if (empty)
+				map = particles.erase(map);
+			else map++;
 		}
+
 	}
 
 	void ParticleMaster::renderParticles(Camera& camera) {
@@ -36,13 +47,13 @@ namespace Pressure {
 		// Creates new list if it does not exist, else grabs existing one.
 		auto it = particles.find(particle.getTexture());
 		if (it == particles.end())
-			particles.emplace(particle.getTexture(), std::list<Particle>({particle}));
-		else 		
-			it->second.emplace_back(particle);		
+			particles.emplace(particle.getTexture(), std::list<Particle>({ particle }));
+		else
+			it->second.emplace_front(particle);
 	}
 
-	void ParticleMaster::sort(std::list<Particle>& list) {
-
+	bool ParticleMaster::sort_particles(const Particle& left, const Particle& right) {
+		return left.getDistance() > right.getDistance();
 	}
 
 }

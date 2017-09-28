@@ -60,8 +60,12 @@ namespace Pressure {
 	}
 
 	void Particle::setTextureOffset(Vector2f& offset, int index) {
-		offset.setX((index % texture.getNumberOfRows()) / texture.getNumberOfRows());
-		offset.setY((index / texture.getNumberOfRows()) / texture.getNumberOfRows());
+		offset.setX((index % texture.getNumberOfRows()) / (float)texture.getNumberOfRows());
+		offset.setY((index / texture.getNumberOfRows()) / (float)texture.getNumberOfRows());
+	}
+
+	bool operator<(const Particle& first, const Particle& second) {
+		return first.getDistance() < second.getDistance();
 	}
 
 }

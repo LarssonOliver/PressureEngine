@@ -22,7 +22,11 @@ namespace Pressure {
 		RawModel* loadToVao(const std::vector<float>& positions, const int dimensions);
 		unsigned int loadTexture(const char* filePath);
 		unsigned int loadCubeMap(const char* filePath);
+		unsigned int createEmptyVbo(int floatCount);
 		void cleanUp();
+
+		void addInstancedAttribute(const unsigned int vao, const unsigned int vbo, int attribute, int dataSize, int instancedDataLength, int offset);
+		void updateVbo(int vbo, std::vector<float>& data);
 
 	private:
 		VertexArrayObject* createVAO();

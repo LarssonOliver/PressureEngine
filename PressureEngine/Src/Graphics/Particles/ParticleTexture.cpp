@@ -2,8 +2,8 @@
 
 namespace Pressure {
 
-	ParticleTexture::ParticleTexture(const int textureID, const int numberOfRows) 
-		: textureID(textureID), numberOfRows(numberOfRows) {
+	ParticleTexture::ParticleTexture(const int textureID, const int numberOfRows, const bool additiveBlending)
+		: textureID(textureID), numberOfRows(numberOfRows), useAdditiveBlending(additiveBlending) {
 	}
 
 	int ParticleTexture::getTextureID() const {
@@ -12,6 +12,10 @@ namespace Pressure {
 
 	int ParticleTexture::getNumberOfRows() const {
 		return numberOfRows;
+	}
+
+	bool ParticleTexture::isUseAdditiveBlending() const {
+		return useAdditiveBlending;
 	}
 
 	bool operator<(const ParticleTexture& left, const ParticleTexture& right) {

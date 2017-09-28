@@ -13,9 +13,17 @@ namespace Pressure {
 		
 	private:
 		const static std::vector<float> VERTICES;
+		const static int MAX_INSTANCES;
+		const static int INSTANCE_DATA_LENGTH;
 		
+		static std::vector<float> buffer;
+		int pointer;
+
 		RawModel* quad;
 		ParticleShader shader;
+		Loader& loader;
+
+		unsigned int vbo;
 
 	public:
 		ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix);
@@ -24,7 +32,10 @@ namespace Pressure {
 		
 	private:
 		void prepare();
+		void bindTexture(const ParticleTexture& texture);
 		void updateViewMatrix(Vector3f& position, float rotation, float scale, Matrix4f& viewMatrix);
+		void storeMatrixData(Matrix4f& matrix);
+		void updateTexCoordInfo(Particle& particle);
 		void finish();
 
 	};

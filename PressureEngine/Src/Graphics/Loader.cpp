@@ -61,6 +61,16 @@ namespace Pressure {
 		return newTextureID;
 	}
 
+	unsigned int Loader::createEmptyVbo(int floatCount) {
+		VertexBufferObject* vbo = new VertexBufferObject(GL_ARRAY_BUFFER);
+		vbo->generate();
+		vbos.push_back(vbo);
+		vbo->bind();
+		glBufferData(GL_ARRAY_BUFFER, floatCount * sizeof(float), NULL, GL_STREAM_DRAW);
+		vbo->unbind();
+		return vbo->getID();
+	}
+
 	VertexArrayObject* Loader::createVAO() {
 		VertexArrayObject* vao = new VertexArrayObject();
 		vao->generate();
@@ -100,6 +110,22 @@ namespace Pressure {
 			delete rawModels[i];
 		}
 		TextureManager::Inst()->UnloadAllTextures();
+	}
+
+	void Loader::addInstancedAttribute(const unsigned int vao, const unsigned int vbo, int attribute, int dataSize, int instancedDataLength, int offset) {
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBindVertexArray(vao);
+		glVertexAttribPointer(attribute, dataSize, GL_FLOAT, false, instancedDataLength * sizeof(float), (void*)(offset * sizeof(float)));
+		glVertexAttribDivisor(attribute, 1);
+		glBindBuffer(GL_ARRAY_BUFFER, NULL);
+		glBindVertexArray(NULL);
+	}
+
+	void Loader::updateVbo(int vbo, std::vector<float>& data) {
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float), NULL, GL_STREAM_DRAW);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, data.size() * sizeof(float), &data.front());
+		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 	}
 
 }

@@ -35,18 +35,18 @@ namespace Pressure {
 		renderer = new MasterRenderer(window->getWindow(), *loader);
 		ParticleMaster::init(*loader, window->getWindow());
 
-		RawModel* model = OBJLoader::loadObjModel("dragon", *loader);
+		RawModel* model = OBJLoader::loadObjModel("test", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
 		texture->setShineDamper(10);
 		texture->setReflectivity(1);
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0, 0, 0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(-5, 0, 0), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 
-		ParticleTexture particleTexture(loader->loadTexture("particle.png"), 1);
-		particleSystem = new ParticleSystem(particleTexture, 40, 0.2f, 0.02f, 1 * 60);
+		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
+		particleSystem = new ParticleSystem(particleTexture, 10, 0.03f, 0.00f, 2 * 60);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
@@ -101,12 +101,12 @@ namespace Pressure {
 		renderer->tick();
 
 		ParticleMaster::tick(*camera);
-		particleSystem->generateParticles(Vector3f(0));
+		particleSystem->generateParticles(Vector3f(5, 0, 0));
 	}
 
 	void Engine::render() {
-		//renderer->processEntity(*entity);
-		//renderer->processWater(*water);
+		renderer->processEntity(*entity);
+		renderer->processWater(*water);
 		//renderer->processWater(*water2);
 		renderer->render(*light, *camera);
 

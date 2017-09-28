@@ -22,9 +22,9 @@ namespace Pressure {
 		static void cleanUp();
 
 		static void addParticle(Particle& particle);
-		
+
 	private:
-		void sort(std::list<Particle>& list);
+		static bool sort_particles(const Particle& left, const Particle& right);
 
 	};
 
