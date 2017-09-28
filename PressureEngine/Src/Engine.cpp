@@ -46,7 +46,7 @@ namespace Pressure {
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 
 		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
-		particleSystem = new ParticleSystem(particleTexture, 10, 0.03f, 0.00f, 2 * 60);
+		particleSystem = new ParticleSystem(particleTexture, 50, 0.03f, 0.00f, 2 * 60);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);

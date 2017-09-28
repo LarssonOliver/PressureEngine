@@ -56,10 +56,11 @@ namespace Pressure {
 		int index = (int)atlasProgression;
 		blend = std::fmod(atlasProgression, 1);
 		setTextureOffset(currentUV, index);
-		setTextureOffset(blendUV, index < stageCount ? index + 1 : index);
+		setTextureOffset(blendUV, index + 1);
 	}
 
 	void Particle::setTextureOffset(Vector2f& offset, int index) {
+		index = index > 15 ? 15 : index;
 		offset.setX((index % texture.getNumberOfRows()) / (float)texture.getNumberOfRows());
 		offset.setY((index / texture.getNumberOfRows()) / (float)texture.getNumberOfRows());
 	}
