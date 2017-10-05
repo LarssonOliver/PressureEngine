@@ -1,4 +1,6 @@
 #include "MasterRenderer.h"
+#include "Water\WaterRenderer.h"
+#include "Particles\ParticleMaster.h"
 
 namespace Pressure {
 
@@ -21,6 +23,7 @@ namespace Pressure {
 			renderWaterFrameBuffers(light, camera);
 			waterRenderer.render(water, light, camera);
 		}
+		ParticleMaster::renderParticles(camera);
 		entities.clear();
 		water.clear();
 	}
@@ -83,6 +86,7 @@ namespace Pressure {
 		renderer.render(entities);
 		shader.stop();
 		skyboxRenderer.render(camera);
+		ParticleMaster::renderParticles(camera); // Refractionrendering too, clipplane?
 		camera.getPosition().y += distance;
 		camera.invertPitch();
 

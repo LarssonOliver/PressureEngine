@@ -46,7 +46,7 @@ namespace Pressure {
 		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
 
 		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
-		particleSystem = new ParticleSystem(particleTexture, 50, 0.03f, 0.00f, 2 * 60);
+		particleSystem = new ParticleSystem(particleTexture, 2, 0.03f, 0.00f, 2 * 60);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
@@ -101,7 +101,7 @@ namespace Pressure {
 		renderer->tick();
 
 		ParticleMaster::tick(*camera);
-		particleSystem->generateParticles(Vector3f(5, 0, 0));
+		particleSystem->generateParticles(Vector3f(5, .5f, 0));
 	}
 
 	void Engine::render() {
@@ -110,7 +110,7 @@ namespace Pressure {
 		//renderer->processWater(*water2);
 		renderer->render(*light, *camera);
 
-		ParticleMaster::renderParticles(*camera);
+		//ParticleMaster::renderParticles(*camera);
 
 		glfwSwapBuffers(window->getWindow());
 	}
