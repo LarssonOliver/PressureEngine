@@ -22,7 +22,7 @@ namespace Pressure{
 		void loadProjectionMatrix(Matrix4f& matrix);
 		void loadViewMatrix(Camera& camera);
 		void loadWaveModifier(float angle);
-		void loadLight(Light& light);
+		void loadLights(std::vector<Light>& lights);
 		void connectTextureUnits();
 
 	private:
@@ -30,12 +30,12 @@ namespace Pressure{
 		int location_projectionMatrix;
 		int location_viewMatrix;
 		int location_waveModifier;
-		int location_lightPosition;
-		int location_lightColor;
 		int location_reflectionTexture;
 		int location_refractionTexture;
 		int location_depthMap;
 
+		int location_lightPosition[4];
+		int location_lightColor[4];
 	};
 
 }

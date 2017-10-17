@@ -22,8 +22,8 @@ namespace Pressure {
 			waveModifier -= 360;
 	}
 
-	void WaterRenderer::render(std::vector<Water>& water, Light& sun, Camera& camera) {
-		prepare(water, sun, camera);
+	void WaterRenderer::render(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera) {
+		prepare(water, lights, camera);
 		for (Water& w : water) {
 			shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(w.getPosition(), Vector3f(0), 1));
 			glDrawElements(GL_TRIANGLES, w.getModel()->getVertexCount(), GL_UNSIGNED_INT, 0);
@@ -31,11 +31,11 @@ namespace Pressure {
 		finish(water);
 	}
 
-	void WaterRenderer::prepare(std::vector<Water>& water, Light& sun, Camera& camera) {
+	void WaterRenderer::prepare(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera) {
 		shader.start();
 		shader.loadViewMatrix(camera);
 		shader.loadWaveModifier(Math::toRadians(waveModifier));
-		shader.loadLight(sun);
+		shader.loadLights(lights);
 		Water::getModel()->getVao()->bind();
 		glEnableVertexAttribArray(0);
 		glActiveTexture(GL_TEXTURE0);

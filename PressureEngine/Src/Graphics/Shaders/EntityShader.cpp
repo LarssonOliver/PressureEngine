@@ -16,12 +16,15 @@ namespace Pressure {
 		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
 		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
 		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");
-		location_lightPosition = ShaderProgram::getUniformLocation("lightPosition");
-		location_lightColor = ShaderProgram::getUniformLocation("lightColor");
 		location_shineDamper = ShaderProgram::getUniformLocation("shineDamper");
 		location_reflectivity = ShaderProgram::getUniformLocation("reflectivity");
 		location_fakeLighting = ShaderProgram::getUniformLocation("fakeLighting");
 		location_plane = ShaderProgram::getUniformLocation("plane");
+
+		for (int i = 0; i < 4; i++) {
+			location_lightPosition[i] = ShaderProgram::getUniformLocation((std::string("lightPosition[" + i) + "]").c_str());
+			location_lightColor[i] = ShaderProgram::getUniformLocation((std::string("lightColor[" + i) + "]").c_str());
+		}
 	}
 
 	void EntityShader::loadTransformationMatrix(Matrix4f& matrix) {
@@ -36,9 +39,16 @@ namespace Pressure {
 		ShaderProgram::loadMatrix(location_viewMatrix, Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll()));
 	}
 
-	void EntityShader::loadLight(Light& light) {
-		ShaderProgram::loadVector(location_lightPosition, light.getPosition());
-		ShaderProgram::loadVector(location_lightColor, light.getColor());
+	void EntityShader::loadLights(std::vector<Light>& lights) {
+		for (int i = 0; i < 4; i++) {
+			if (i < lights.size()) {
+				ShaderProgram::loadVector(location_lightPosition[i], lights[i].getPosition());
+				ShaderProgram::loadVector(location_lightColor[i], lights[i].getColor());
+			} else {
+				ShaderProgram::loadVector(location_lightPosition[i], Vector3f(0));
+				ShaderProgram::loadVector(location_lightColor[i], Vector3f(0));
+			}
+		}
 	}
 
 	void EntityShader::loadShineVariables(float damper, float reflectivity) {

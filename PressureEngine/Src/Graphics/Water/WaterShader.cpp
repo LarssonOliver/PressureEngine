@@ -15,11 +15,14 @@ namespace Pressure {
 		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
 		location_viewMatrix = ShaderProgram::getUniformLocation("viewMatrix");
 		location_waveModifier = ShaderProgram::getUniformLocation("waveModifier");
-		location_lightColor = ShaderProgram::getUniformLocation("lightColor");
-		location_lightPosition = ShaderProgram::getUniformLocation("lightPosition");
 		location_reflectionTexture = ShaderProgram::getUniformLocation("reflectionTexture");
 		location_refractionTexture = ShaderProgram::getUniformLocation("refractionTexture");
 		location_depthMap = ShaderProgram::getUniformLocation("depthMap");
+
+		for (int i = 0; i < 4; i++) {
+			location_lightColor[i] = ShaderProgram::getUniformLocation((std::string("lightColor" + i) + "]").c_str());
+			location_lightPosition[i] = ShaderProgram::getUniformLocation((std::string("lightPosition" + i) + "]").c_str());
+		}
 	}
 
 	void WaterShader::loadTransformationMatrix(Matrix4f& matrix) {
@@ -38,9 +41,17 @@ namespace Pressure {
 		ShaderProgram::loadFloat(location_waveModifier, angle);
 	}
 
-	void WaterShader::loadLight(Light& light) {
-		ShaderProgram::loadVector(location_lightPosition, light.getPosition());
-		ShaderProgram::loadVector(location_lightColor, light.getColor());
+	void WaterShader::loadLights(std::vector<Light>& lights) {
+		for (int i = 0; i < 4; i++) {
+			if (i < lights.size()) {
+				ShaderProgram::loadVector(location_lightPosition[i], lights[i].getPosition());
+				ShaderProgram::loadVector(location_lightColor[i], lights[i].getColor());
+			}
+			else {
+				ShaderProgram::loadVector(location_lightPosition[i], Vector3f(0));
+				ShaderProgram::loadVector(location_lightColor[i], Vector3f(0));
+			}
+		}
 	}
 
 	void WaterShader::connectTextureUnits() {

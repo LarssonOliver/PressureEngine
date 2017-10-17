@@ -31,7 +31,7 @@ namespace Pressure {
 
 	public:
 		MasterRenderer(GLFWwindow* window, Loader& loader);
-		void render(Light& light, Camera& camera);
+		void render(std::vector<Light>& lights, Camera& camera);
 		void tick();
 
 		void processEntity(Entity& entity);
@@ -46,7 +46,7 @@ namespace Pressure {
 
 	private:
 		void prepare();
-		void renderWaterFrameBuffers(Light& light, Camera& camera);
+		void renderWaterFrameBuffers(std::vector<Light>& lights, Camera& camera);
 
 	};
 

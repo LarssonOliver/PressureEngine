@@ -9,19 +9,19 @@ namespace Pressure {
 		enableCulling();
 	}
 
-	void MasterRenderer::render(Light& light, Camera& camera) {
+	void MasterRenderer::render(std::vector<Light>& lights, Camera& camera) {
 		prepare();
 		shader.start();
 		glDisable(GL_CLIP_DISTANCE0);
 		shader.loadClipPlane(Vector4f(0, -1, 0, 1000000)); // Bit of a hack, as some drivers do not support disabling clip distance.
-		shader.loadLight(light);
+		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();
 		skyboxRenderer.render(camera);
 		if (water.size() > 0) {
-			renderWaterFrameBuffers(light, camera);
-			waterRenderer.render(water, light, camera);
+			renderWaterFrameBuffers(lights, camera);
+			waterRenderer.render(water, lights, camera);
 		}
 		ParticleMaster::renderParticles(camera);
 		entities.clear();
@@ -72,7 +72,7 @@ namespace Pressure {
 		glClearColor(0.5, 0.5, 0.5, 1);
 	}
 
-	void MasterRenderer::renderWaterFrameBuffers(Light& light, Camera& camera) {
+	void MasterRenderer::renderWaterFrameBuffers(std::vector<Light>& lights, Camera& camera) {
 		// Reflection rendering.
 		waterBuffers.bindReflectionFrameBuffer();
 		float distance = 2 * (camera.getPosition().getY() - water[0].getPosition().getY()); // Set up checking for which water is in frame.
@@ -81,7 +81,7 @@ namespace Pressure {
 		prepare();
 		shader.start();
 		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.5)); 
-		shader.loadLight(light);
+		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();
@@ -95,7 +95,7 @@ namespace Pressure {
 		prepare();
 		shader.start();
 		shader.loadClipPlane(Vector4f(0, -1, 0, water[0].getPosition().getY() + 0.2));
-		shader.loadLight(light);
+		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();

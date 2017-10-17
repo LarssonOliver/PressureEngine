@@ -22,7 +22,7 @@ namespace Pressure {
 
 		MasterRenderer* renderer;
 		Entity* entity;
-		Light* light;
+		std::vector<Light>* light;
 		Camera* camera;
 
 		ParticleSystem* particleSystem;

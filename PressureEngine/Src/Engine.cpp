@@ -43,7 +43,8 @@ namespace Pressure {
 		entity = new Entity(*texturedModel, Vector3f(-5, 0, 0), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
-		light = new Light(Vector3f(150, 170, 200), Vector3f(1));
+		light = new std::vector<Light>;
+		light->emplace_back(Vector3f(150, 170, 200), Vector3f(1));
 
 		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
 		particleSystem = new ParticleSystem(particleTexture, 2, 0.03f, 0.00f, 2 * 60);

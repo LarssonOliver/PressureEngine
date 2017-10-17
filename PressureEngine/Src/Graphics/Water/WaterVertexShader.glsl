@@ -4,14 +4,14 @@
 in vec3 position;
 
 out vec3 surfaceNormal;
-out vec3 toLightVector;
+out vec3 toLightVector[4];
 out vec3 toCameraVector;
 out vec4 clipSpace;
 
 uniform mat4 transformationMatrix;
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
-uniform vec3 lightPosition;
+uniform vec3 lightPosition[4];
 
 uniform float waveModifier;
 
@@ -126,7 +126,9 @@ void main(void) {
 
 	surfaceNormal = (transformationMatrix * vec4(normal, 0.0)).xyz;
 
-	toLightVector = normalize(lightPosition - wavePos.xyz);
+	for(int i = 0; i < 4; i++) {
+		toLightVector[i] = normalize(lightPosition[i] - wavePos.xyz);
+	}
 	toCameraVector = normalize((inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - wavePos.xyz);
 	
 	clipSpace = projectionMatrix * viewMatrix * vec4(wavePos, 1.0);
