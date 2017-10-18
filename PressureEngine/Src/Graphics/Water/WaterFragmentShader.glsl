@@ -9,6 +9,7 @@ in vec4 clipSpace;
 out vec4 out_Color;
 
 uniform vec3 lightColor[4];
+uniform vec3 attenuation[4];
 
 uniform sampler2D reflectionTexture;
 uniform sampler2D refractionTexture;
@@ -40,6 +41,8 @@ void main(void) {
 	vec3 totalSpecular = vec3(0.0);
 
 	for (int i = 0; i < 4; i++) {
+		float distance = length(toLightVector[i]);
+		float attFactor = attenuation[i].x + (attenuation[i].y * distance) + (attenuation[i].z * distance * distance);		
 		float nDot1 = dot(surfaceNormal, toLightVector[i]);
 		float brightness = max(nDot1, 0.0);
 		vec3 lightDirection = -toLightVector[i];
@@ -47,8 +50,8 @@ void main(void) {
 		float specularFactor = dot(reflectedLightDirection, toCameraVector);
 		specularFactor = max(specularFactor, 0.0);
 		float dampedFactor = pow(specularFactor, shineDamper);
-		totalDiffuse += brightness * lightColor[i];
-		totalSpecular += dampedFactor * reflectivity * lightColor[i];
+		totalDiffuse += (brightness * lightColor[i]) / attFactor;
+		totalSpecular += (dampedFactor * reflectivity * lightColor[i]) / attFactor;
 	}
 	totalDiffuse = max(totalDiffuse, 0.1);
 	float refractiveFactor = dot(toCameraVector, surfaceNormal);

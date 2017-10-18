@@ -22,6 +22,7 @@ namespace Pressure {
 		for (int i = 0; i < 4; i++) {
 			location_lightColor[i] = ShaderProgram::getUniformLocation(("lightColor[" + std::to_string(i) + "]").c_str());
 			location_lightPosition[i] = ShaderProgram::getUniformLocation(("lightPosition[" + std::to_string(i) + "]").c_str());
+			location_attenuation[i] = ShaderProgram::getUniformLocation(("attenuation[" + std::to_string(i) + "]").c_str());
 		}
 	}
 
@@ -46,10 +47,12 @@ namespace Pressure {
 			if (i < lights.size()) {
 				ShaderProgram::loadVector(location_lightPosition[i], lights[i].getPosition());
 				ShaderProgram::loadVector(location_lightColor[i], lights[i].getColor());
+				ShaderProgram::loadVector(location_attenuation[i], lights[i].getAttenuation());
 			}
 			else {
 				ShaderProgram::loadVector(location_lightPosition[i], Vector3f(0));
 				ShaderProgram::loadVector(location_lightColor[i], Vector3f(0));
+				ShaderProgram::loadVector(location_attenuation[i], Vector3f(1, 0, 0));
 			}
 		}
 	}

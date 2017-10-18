@@ -34,6 +34,7 @@ namespace Pressure {
 		int location_viewMatrix;
 		int location_lightPosition[4];
 		int location_lightColor[4];
+		int location_attenuation[4];
 		int location_shineDamper;
 		int location_reflectivity;
 		int location_fakeLighting;

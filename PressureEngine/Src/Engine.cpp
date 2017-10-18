@@ -45,7 +45,7 @@ namespace Pressure {
 		camera = new Camera();
 		lights = new std::vector<Light>;
 		lights->emplace_back(Vector3f(150, 170, 200), Vector3f(1));
-		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0));
+		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0), Vector3f(0.4, 0.4, 0.4));
 
 		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
 		particleSystem = new ParticleSystem(particleTexture, 2, 0.03f, 0.00f, 2 * 60);

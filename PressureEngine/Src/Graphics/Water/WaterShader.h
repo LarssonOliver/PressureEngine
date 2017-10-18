@@ -36,6 +36,7 @@ namespace Pressure{
 
 		int location_lightPosition[4];
 		int location_lightColor[4];
+		int location_attenuation[4];
 	};
 
 }
