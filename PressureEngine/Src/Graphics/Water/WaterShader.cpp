@@ -20,8 +20,8 @@ namespace Pressure {
 		location_depthMap = ShaderProgram::getUniformLocation("depthMap");
 
 		for (int i = 0; i < 4; i++) {
-			location_lightColor[i] = ShaderProgram::getUniformLocation((std::string("lightColor" + i) + "]").c_str());
-			location_lightPosition[i] = ShaderProgram::getUniformLocation((std::string("lightPosition" + i) + "]").c_str());
+			location_lightColor[i] = ShaderProgram::getUniformLocation(("lightColor[" + std::to_string(i) + "]").c_str());
+			location_lightPosition[i] = ShaderProgram::getUniformLocation(("lightPosition[" + std::to_string(i) + "]").c_str());
 		}
 	}
 

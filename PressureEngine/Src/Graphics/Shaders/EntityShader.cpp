@@ -22,8 +22,8 @@ namespace Pressure {
 		location_plane = ShaderProgram::getUniformLocation("plane");
 
 		for (int i = 0; i < 4; i++) {
-			location_lightPosition[i] = ShaderProgram::getUniformLocation((std::string("lightPosition[" + i) + "]").c_str());
-			location_lightColor[i] = ShaderProgram::getUniformLocation((std::string("lightColor[" + i) + "]").c_str());
+			location_lightColor[i] = ShaderProgram::getUniformLocation(("lightColor[" + std::to_string(i) + "]").c_str());
+			location_lightPosition[i] = ShaderProgram::getUniformLocation(("lightPosition[" + std::to_string(i) + "]").c_str());
 		}
 	}
 
