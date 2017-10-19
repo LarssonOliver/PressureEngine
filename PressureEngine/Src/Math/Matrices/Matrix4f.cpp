@@ -1,5 +1,4 @@
 #include "Matrix4f.h"
-#include "../Math.h"
 #include <cmath>
 #include "../../Constants.h"
 
@@ -236,6 +235,19 @@ namespace Pressure {
 
 	Matrix4f& Matrix4f::translate(const Vector3f& offset) {
 		return translate(offset, *this);
+	}
+
+	Vector4f& Matrix4f::transform(const Vector4f& v, Vector4f& dest) const {
+		return dest.set(
+			get(0, 0) * v.getX() + get(1, 0) * v.getY() + get(2, 0) * v.getZ() + get(3, 0) * v.getW(),
+			get(0, 1) * v.getX() + get(1, 1) * v.getY() + get(2, 1) * v.getZ() + get(3, 1) * v.getW(),
+			get(0, 2) * v.getX() + get(1, 2) * v.getY() + get(2, 2) * v.getZ() + get(3, 2) * v.getW(),
+			get(0, 3) * v.getX() + get(1, 3) * v.getY() + get(2, 3) * v.getZ() + get(3, 3) * v.getW()
+		);
+	}
+
+	Vector4f& Matrix4f::transform(const Vector4f& v) {
+		return transform(v, Vector4f());
 	}
 
 	//Matrix4f& Matrix4f::rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const {

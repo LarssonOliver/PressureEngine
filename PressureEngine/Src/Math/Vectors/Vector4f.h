@@ -27,6 +27,8 @@ namespace Pressure {
 		float getY() const;
 		float getZ() const;
 		float getW() const;
+		Vector2f& getXY();
+		Vector3f& getXYZ();
 
 		/* SETTERS */
 		Vector4f& set(float d);

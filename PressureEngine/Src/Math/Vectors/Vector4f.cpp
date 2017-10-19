@@ -32,6 +32,14 @@ namespace Pressure {
 		return w;
 	}
 
+	Vector2f& Vector4f::getXY() {
+		return Vector2f(x, y);
+	}
+
+	Vector3f& Vector4f::getXYZ() {
+		return Vector3f(x, y, z);
+	}
+
 	/* SETTERS */
 	Vector4f& Vector4f::set(float d) {
 		this->x = d;

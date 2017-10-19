@@ -1,5 +1,5 @@
 #pragma once
-#include "../Vectors/Vector4f.h"
+#include "../Math.h"
 #include <GLFW\glfw3.h>
 
 namespace Pressure {
@@ -44,6 +44,8 @@ namespace Pressure {
 		Matrix4f& createViewMatrix(Vector3f& position, float pitch, float yaw, float roll);
 		Matrix4f& translate(const Vector3f& offset, Matrix4f& dest) const;
 		Matrix4f& translate(const Vector3f& offset);
+		Vector4f& transform(const Vector4f& v, Vector4f& dest) const;
+		Vector4f& transform(const Vector4f& v);
 		Matrix4f& rotate(const float angle, const Vector3f& axis, Matrix4f& dest) const;
 		Matrix4f& rotate(const float angle, const Vector3f& axis);
 		Matrix4f& scale(const float xyz, Matrix4f& dest) const;

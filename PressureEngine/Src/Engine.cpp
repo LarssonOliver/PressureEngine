@@ -35,16 +35,16 @@ namespace Pressure {
 		renderer = new MasterRenderer(window->getWindow(), *loader);
 		ParticleMaster::init(*loader, window->getWindow());
 
-		RawModel* model = OBJLoader::loadObjModel("test", *loader);
+		RawModel* model = OBJLoader::loadObjModel("ball", *loader);
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
 		texture->setShineDamper(10);
 		texture->setReflectivity(1);
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(-5, 0, 0), Vector3f(0, 0, 0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(-25, -50, 0), Vector3f(0, 0, 0), 50.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
 		camera = new Camera();
 		lights = new std::vector<Light>;
-		lights->emplace_back(Vector3f(150, 170, 200), Vector3f(1));
+		lights->emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0), Vector3f(0.4, 0.4, 0.4));
 
 		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
