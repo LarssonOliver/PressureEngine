@@ -50,6 +50,8 @@ namespace Pressure {
 		Matrix4f& rotate(const float angle, const Vector3f& axis);
 		Matrix4f& scale(const float xyz, Matrix4f& dest) const;
 		Matrix4f& scale(const float xyz);
+		Matrix4f& invert();
+		Matrix4f& invert(Matrix4f& dest) const;
 
 		/* EQUALITY CHECK */
 		bool equals(const Matrix4f& m) const;

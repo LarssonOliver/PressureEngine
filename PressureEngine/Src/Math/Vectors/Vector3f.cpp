@@ -322,6 +322,18 @@ namespace Pressure {
 		return dest;
 	}
 
+	Vector3f& Vector3f::cross(const Vector3f& v) {
+		return cross(v, *this);
+	}
+
+	Vector3f& Vector3f::cross(const Vector3f& v, Vector3f& dest) const {
+		return dest.set(
+			y * v.getZ() - z * v.getY(),
+			z * v.getX() - x * v.getZ(),
+			x * v.getY() - y * v.getX()
+		);
+	}
+
 	/* ROTATION */
 	Vector3f& Vector3f::rotateX(float angle) {
 		float sin = std::sinf(angle * 0.5f);

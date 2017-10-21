@@ -82,6 +82,8 @@ namespace Pressure {
 		Vector3f& reflect(float x, float y, float z, Vector3f& dest) const;
 		Vector3f& reflect(const Vector3f& normal);
 		Vector3f& reflect(const Vector3f& normal, Vector3f& dest) const;
+		Vector3f& cross(const Vector3f& v);
+		Vector3f& cross(const Vector3f& v, Vector3f& dest) const;
 
 		/* ROTATION */
 		Vector3f& rotateX(float angle);

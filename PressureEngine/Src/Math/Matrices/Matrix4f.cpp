@@ -350,6 +350,60 @@ namespace Pressure {
 		return scale(xyz, *this);
 	}
 
+	Matrix4f& Matrix4f::invert() {
+		return invert(*this);
+	}
+
+	Matrix4f& Matrix4f::invert(Matrix4f& dest) const {
+		float a = get(0, 0) * get(1, 1) - get(0, 1) * get(1, 0);
+		float b = get(0, 0) * get(1, 2) - get(0, 2) * get(1, 0);
+		float c = get(0, 0) * get(1, 3) - get(0, 3) * get(1, 0);
+		float d = get(0, 1) * get(1, 2) - get(0, 2) * get(1, 1);
+		float e = get(0, 1) * get(1, 3) - get(0, 3) * get(1, 1);
+		float f = get(0, 2) * get(1, 3) - get(0, 3) * get(1, 2);
+		float g = get(2, 0) * get(3, 1) - get(2, 1) * get(3, 0);
+		float h = get(2, 0) * get(3, 2) - get(2, 2) * get(3, 0);
+		float i = get(2, 0) * get(3, 3) - get(2, 3) * get(3, 0);
+		float j = get(2, 1) * get(3, 2) - get(2, 2) * get(3, 1);
+		float k = get(2, 2) * get(3, 3) - get(2, 3) * get(3, 1);
+		float l = get(2, 3) * get(3, 3) - get(2, 3) * get(3, 2);
+		float det = a * l - b * k + c * j + d * i - e * h + f * g;
+		det = 1.0f / det;
+		float nm00 = (get(1, 1) * l - get(1, 2) * k + get(1, 3) * j) * det;
+		float nm01 = (-get(0, 1) * l + get(0, 2) * k - get(0, 3) * j) * det;
+		float nm02 = (get(3, 1) * f - get(3, 2) * e + get(3, 3) * d) * det;
+		float nm03 = (-get(2, 1) * f + get(2, 2) * e - get(2, 3) * d) * det;
+		float nm10 = (-get(1, 0) * l + get(1, 2) * i - get(1, 3) * h) * det;
+		float nm11 = (get(0, 0) * l - get(0, 2) * i + get(0, 3) * h) * det;
+		float nm12 = (-get(3, 0) * f + get(3, 2) * c - get(3, 3) * b) * det;
+		float nm13 = (get(2, 0) * f - get(2, 2) * c + get(2, 3) * b) * det;
+		float nm20 = (get(1, 0) * k - get(1, 1) * i + get(1, 3) * g) * det;
+		float nm21 = (-get(0, 0) * k + get(0, 1) * i - get(0, 3) * g) * det;
+		float nm22 = (get(3, 0) * e - get(3, 1) * c + get(3, 3) * a) * det;
+		float nm23 = (-get(2, 0) * e + get(2, 1) * c - get(2, 3) * a) * det;
+		float nm30 = (-get(1, 0) * j + get(1, 1) * h - get(1, 2) * g) * det;
+		float nm31 = (get(0, 0) * j - get(0, 1) * h + get(0, 2) * g) * det;
+		float nm32 = (-get(3, 0) * d + get(3, 1) * b - get(3, 2) * a) * det;
+		float nm33 = (get(2, 0) * d - get(2, 1) * b + get(2, 2) * a) * det;
+		dest.set(0, 0, nm00);
+		dest.set(0, 1, nm01);
+		dest.set(0, 2, nm02);
+		dest.set(0, 3, nm03);
+		dest.set(1, 0, nm10);
+		dest.set(1, 1, nm11);
+		dest.set(1, 2, nm12);
+		dest.set(1, 3, nm13);
+		dest.set(2, 0, nm20);
+		dest.set(2, 1, nm21);
+		dest.set(2, 2, nm22);
+		dest.set(2, 3, nm23);
+		dest.set(3, 0, nm30);
+		dest.set(3, 1, nm31);
+		dest.set(3, 2, nm32);
+		dest.set(3, 3, nm33);
+		return dest;
+	}
+
 	/* EQUALITY  CHECK */
 	bool Matrix4f::equals(const Matrix4f& m) const {
 		bool result = true;
