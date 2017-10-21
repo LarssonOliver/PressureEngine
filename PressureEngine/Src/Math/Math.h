@@ -19,6 +19,7 @@ namespace Pressure {
 		static long getTimeNano();
 
 		static double toRadians(const double v);
+		static double toDegrees(const double r);
 
 		static std::vector<std::string> strSplit(const std::string& s, const char& c);
 		static bool strStartsWith(const std::string& s, const char* c);

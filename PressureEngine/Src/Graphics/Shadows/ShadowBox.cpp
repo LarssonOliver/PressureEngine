@@ -14,7 +14,8 @@ namespace Pressure {
 	}
 
 	void ShadowBox::tick() {
-		Matrix4f rotation = calculateCameraRotationMatrix();
+		Matrix4f rotation;
+		calculateCameraRotationMatrix(rotation);
 		Vector3f forwardVector(rotation.transform(FORWARD).getXYZ());
 
 		Vector3f toFar(forwardVector);
@@ -26,7 +27,8 @@ namespace Pressure {
 		Vector3f centerFar;
 		toFar.add(cam.getPosition(), centerFar);
 
-		std::vector<Vector4f> points = calculateFrustumVertices(rotation, forwardVector, centerNear, centerFar);
+		std::vector<Vector4f> points;
+		calculateFrustumVertices(points, rotation, forwardVector, centerNear, centerFar);
 
 		bool first = true;
 		for (auto point : points) {
@@ -75,7 +77,7 @@ namespace Pressure {
 		return maxZ - minZ;
 	}
 
-	std::vector<Vector4f>& ShadowBox::calculateFrustumVertices(Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar) {
+	void ShadowBox::calculateFrustumVertices(std::vector<Vector4f>& points, Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar) {
 		Vector3f upVector(rotation.transform(UP, Vector4f()).getXYZ());
 		Vector3f rightVector(forwardVector.cross(upVector, Vector3f()));
 		Vector3f downVector(upVector.negate(Vector3f()));
@@ -88,12 +90,36 @@ namespace Pressure {
 			upVector.y * nearHeight, upVector.z * nearHeight).add(centerNear));
 		Vector3f nearBottom(Vector3f(downVector.x * nearHeight,
 			downVector.y * nearHeight, downVector.z * nearHeight).add(centerNear));
-
+		points.reserve(8);
+		calculateLightSpaceFrustumCorner(points[0], farTop, rightVector, farWidth);
+		calculateLightSpaceFrustumCorner(points[1], farTop, leftVector, farWidth);
+		calculateLightSpaceFrustumCorner(points[2], farBottom, rightVector, farWidth);
+		calculateLightSpaceFrustumCorner(points[3], farBottom, leftVector, farWidth);
+		calculateLightSpaceFrustumCorner(points[4], nearTop, rightVector, nearWidth);
+		calculateLightSpaceFrustumCorner(points[5], nearTop, leftVector, nearWidth);
+		calculateLightSpaceFrustumCorner(points[6], nearBottom, rightVector, nearWidth);
+		calculateLightSpaceFrustumCorner(points[7], nearBottom, leftVector, nearWidth);
 	}
 
+	void ShadowBox::calculateLightSpaceFrustumCorner(Vector4f& point, Vector3f& startPoint, Vector3f& direction, float width) {
+		point = (startPoint.add(direction.x * width, direction.y * width, direction.z * width, Vector3f()), 1.f);
+		lightViewMatrix.transform(point, point);
+	}
 
+	void ShadowBox::calculateCameraRotationMatrix(Matrix4f& matrix) {		
+		matrix.rotate((float) Math::toRadians(-cam.getYaw()), Vector3f(0, 1, 0));
+		matrix.rotate((float) Math::toRadians(-cam.getPitch()), Vector3f(1, 0, 0));
+	}
 
-	// https://www.dropbox.com/sh/g9vnfiubdglojuh/AACpq1KDpdmB8ZInYxhsKj2Ma/shadows?dl=0&preview=ShadowBox.java
+	void ShadowBox::calculateWidthsAndHeights() {
+		farWidth = (float) (SHADOW_DISTANCE * std::tan(Math::toRadians(PRESSRE_FOV)));
+		nearWidth = (float) (PRESSRE_NEAR_PLANE * std::tan(Math::toRadians(PRESSRE_FOV)));
+		farHeight = farWidth / getAspectRatio();
+		nearHeight = nearWidth / getAspectRatio();
+	}
+
+	float ShadowBox::getAspectRatio() {
+		return (float) window.getWidth() / (float) window.getHeight();
+	}
 
 }
-

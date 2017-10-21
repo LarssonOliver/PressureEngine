@@ -19,6 +19,10 @@ namespace Pressure {
 		return v * (M_PI / 180.0);
 	}
 
+	double Math::toDegrees(const double r) {
+		return r * 180.0 / M_PI;
+	}
+
 	std::vector<std::string> Math::strSplit(const std::string& s, const char& c) {
 		std::string buff{ "" };
 		std::vector<std::string> v;

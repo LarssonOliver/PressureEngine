@@ -32,9 +32,9 @@ namespace Pressure {
 		float getLength() const;
 
 	private:
-		std::vector<Vector4f>& calculateFrustumVertices(Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar);
-		Vector4f& calculateLightSpaceFrustumCorner(Vector3f& startPoint, Vector3f& direction, float width);
-		Matrix4f& calculateCameraRotationMatrix();
+		void calculateFrustumVertices(std::vector<Vector4f>& points, Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar);
+		void calculateLightSpaceFrustumCorner(Vector4f& point, Vector3f& startPoint, Vector3f& direction, float width);
+		void calculateCameraRotationMatrix(Matrix4f& matrix);
 		void calculateWidthsAndHeights();
 		float getAspectRatio();
 
