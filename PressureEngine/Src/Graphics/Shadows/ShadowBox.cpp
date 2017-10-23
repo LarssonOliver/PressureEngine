@@ -55,6 +55,7 @@ namespace Pressure {
 			else if (point.z < minZ) 
 				minZ = point.z;
 		}
+
 		maxZ += OFFSET;
 	}
 
