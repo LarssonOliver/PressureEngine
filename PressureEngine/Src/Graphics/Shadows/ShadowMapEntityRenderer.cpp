@@ -15,7 +15,7 @@ namespace Pressure {
 			}
 		}
 		glDisableVertexAttribArray(0);
-		glBindVertexArray(NULL);
+		glBindVertexArray(0);
 	}
 
 	void ShadowMapEntityRenderer::bindModel(const RawModel& rawModel) {

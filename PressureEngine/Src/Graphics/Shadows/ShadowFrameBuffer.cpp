@@ -34,19 +34,20 @@ namespace Pressure {
 
 	void ShadowFrameBuffer::bind(int buffer, int width, int height) {
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindFramebuffer(GL_DRAW_BUFFER, buffer);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, buffer);
 		glViewport(0, 0, width, height);
 	}
 
-	int ShadowFrameBuffer::createFrameBuffer() {
+	unsigned int ShadowFrameBuffer::createFrameBuffer() {
 		GLuint fbo;
-		glGenBuffers(1, &fbo);
+		glGenFramebuffers(1, &fbo);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 		glDrawBuffer(GL_NONE);
 		glReadBuffer(GL_NONE);
 		return fbo;
 	}
 
-	int ShadowFrameBuffer::createDepthBufferAttachment(int width, int height) {
+	unsigned int ShadowFrameBuffer::createDepthBufferAttachment(int width, int height) {
 		GLuint texture;
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);

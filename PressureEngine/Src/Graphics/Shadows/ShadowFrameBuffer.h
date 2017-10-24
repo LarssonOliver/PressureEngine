@@ -22,8 +22,8 @@ namespace Pressure {
 
 	private:
 		static void bind(int buffer, int width, int height);
-		static int createFrameBuffer();
-		static int createDepthBufferAttachment(int width, int height);
+		static unsigned int createFrameBuffer();
+		static unsigned int createDepthBufferAttachment(int width, int height);
 	
 	};
 
