@@ -43,6 +43,7 @@ namespace Pressure {
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
 		entity = new Entity(*texturedModel, Vector3f(-25, -50, 0), Vector3f(0, 0, 0), 50.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
+		entity2 = new Entity(*texturedModel, Vector3f(-23, 2, 0), Vector3f(0), 1.f);
 		lights = new std::vector<Light>;
 		lights->emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0), Vector3f(0.4, 0.4, 0.4));
@@ -108,6 +109,7 @@ namespace Pressure {
 
 	void Engine::render() {
 		renderer->processEntity(*entity);
+		renderer->processEntity(*entity2);
 		renderer->processWater(*water);
 		//renderer->processWater(*water2);
 

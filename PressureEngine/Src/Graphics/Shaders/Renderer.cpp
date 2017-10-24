@@ -9,7 +9,8 @@ namespace Pressure {
 		updateProjectionMatrix(shader);
 	}
 
-	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities) {
+	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace) {
+		shader.loadToShadowMapSpace(toShadowSpace);
 		for (auto const& model : entities) {
 			prepareTexturedModel(model.first);
 			std::vector<Entity>& batch = entities.at(model.first);

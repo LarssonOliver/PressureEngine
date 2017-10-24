@@ -8,6 +8,7 @@ out vec2 pass_textureCoords;
 out vec3 surfaceNormal;
 out vec3 toLightVector[4];
 out vec3 toCameraVector;
+out vec4 shadowCoords;
 
 uniform mat4 transformationMatrix;
 uniform mat4 projectionMatrix;
@@ -16,10 +17,15 @@ uniform vec3 lightPosition[4];
 uniform float useFakeLighting;
 uniform vec4 plane;
 
+uniform mat4 toShadowMapSpace;
+
+const float shadowDistance = 150.0;
+const float transitionDistance = 10.0;
 
 void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
+	shadowCoords = toShadowMapSpace * worldPosition;
 
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 
@@ -36,5 +42,10 @@ void main(void) {
 		toLightVector[i] = lightPosition[i] - worldPosition.xyz;	
 	}
 	toCameraVector = (inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - worldPosition.xyz;
+
+	float distance = length((viewMatrix * worldPosition).xyz);
+	distance = distance - (shadowDistance - transitionDistance);
+	distance = distance / transitionDistance;
+	shadowCoords.w = clamp(1.0-distance, 0.0, 1.0);
 
 }

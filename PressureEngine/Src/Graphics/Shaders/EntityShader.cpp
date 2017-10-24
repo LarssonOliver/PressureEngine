@@ -20,6 +20,9 @@ namespace Pressure {
 		location_reflectivity = ShaderProgram::getUniformLocation("reflectivity");
 		location_fakeLighting = ShaderProgram::getUniformLocation("fakeLighting");
 		location_plane = ShaderProgram::getUniformLocation("plane");
+		location_toShadowMapSpace = ShaderProgram::getUniformLocation("toShadowMapSpace");
+		location_shadowMap = ShaderProgram::getUniformLocation("shadowMap");
+		location_textureSampler = ShaderProgram::getUniformLocation("textureSampler");
 
 		for (int i = 0; i < 4; i++) {
 			location_lightColor[i] = ShaderProgram::getUniformLocation(("lightColor[" + std::to_string(i) + "]").c_str());
@@ -65,6 +68,15 @@ namespace Pressure {
 
 	void EntityShader::loadClipPlane(const Vector4f& plane) {
 		ShaderProgram::loadVector(location_plane, plane);
+	}
+
+	void EntityShader::loadToShadowMapSpace(Matrix4f& matrix) {
+		ShaderProgram::loadMatrix(location_toShadowMapSpace, matrix);
+	}
+
+	void EntityShader::connectTextureUnits() {
+		ShaderProgram::loadInt(location_textureSampler, 0);
+		ShaderProgram::loadInt(location_shadowMap, 1);
 	}
 
 }

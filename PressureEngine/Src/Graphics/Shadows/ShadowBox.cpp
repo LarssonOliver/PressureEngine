@@ -6,7 +6,7 @@ namespace Pressure {
 	const float ShadowBox::OFFSET = 10;
 	const Vector4f ShadowBox::UP(0, 1, 0, 0);
 	const Vector4f ShadowBox::FORWARD(0, 0, -1, 0);
-	const float ShadowBox::SHADOW_DISTANCE = 100;
+	const float ShadowBox::SHADOW_DISTANCE = 150;
 
 	ShadowBox::ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window)
 		: lightViewMatrix(lightViewMatrix), cam(camera), window(window) {
