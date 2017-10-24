@@ -12,7 +12,7 @@
 #include "Loader.h"
 #include "Water\WaterRenderer.h"
 #include "Water\WaterFrameBuffers.h"
-
+#include "Shadows\ShadowMapMasterRenderer.h"
 
 namespace Pressure {
 
@@ -23,6 +23,8 @@ namespace Pressure {
 		Renderer renderer;
 
 		SkyboxRenderer skyboxRenderer;
+		ShadowMapMasterRenderer shadowMapRenderer;
+		
 		WaterRenderer waterRenderer;
 		WaterFrameBuffers waterBuffers;
 
@@ -30,9 +32,12 @@ namespace Pressure {
 		std::vector<Water> water;
 
 	public:
-		MasterRenderer(GLFWwindow* window, Loader& loader);
+		MasterRenderer(Window& window, Loader& loader, Camera& camera);
 		void render(std::vector<Light>& lights, Camera& camera);
 		void tick();
+		
+		// IMPORTANT! Has to be called before render();
+		void renderShadowMap(Light& sun);
 
 		void processEntity(Entity& entity);
 		void processWater(Water& water);

@@ -80,18 +80,18 @@ namespace Pressure {
 	}
 
 	float Camera::calculateHorizontalDistance() {
-		return distanceFromAnchor * std::cosf(Math::toRadians(pitch));
+		return distanceFromAnchor * std::cosf((float) Math::toRadians(pitch));
 	}
 
 	float Camera::calculateVerticalDistance() {
-		return distanceFromAnchor * std::sinf(Math::toRadians(pitch));
+		return distanceFromAnchor * std::sinf((float) Math::toRadians(pitch));
 	}
 
 	void Camera::calculateCameraPosition() {
 		float horizontalDistance = calculateHorizontalDistance();
 		float verticalDistance = calculateVerticalDistance();
-		position.x = anchor.x + horizontalDistance * std::sinf(Math::toRadians(angleAroundAnchor));
-		position.z = anchor.z + horizontalDistance * std::cosf(Math::toRadians(angleAroundAnchor));
+		position.x = anchor.x + horizontalDistance * std::sinf((float) Math::toRadians(angleAroundAnchor));
+		position.z = anchor.z + horizontalDistance * std::cosf((float) Math::toRadians(angleAroundAnchor));
 		position.y = anchor.y + verticalDistance;
 	}
 
@@ -122,11 +122,11 @@ namespace Pressure {
 	}
 
 	void Camera::moveAnchor(const Vector3f& speed) {
-		anchor.x += speed.x * std::sinf(Math::toRadians(90 + angleAroundAnchor));
-		anchor.z += speed.x * std::cosf(Math::toRadians(90 + angleAroundAnchor));
+		anchor.x += speed.x * std::sinf((float) Math::toRadians(90 + angleAroundAnchor));
+		anchor.z += speed.x * std::cosf((float) Math::toRadians(90 + angleAroundAnchor));
 
-		anchor.x += speed.z * std::sinf(Math::toRadians(angleAroundAnchor));
-		anchor.z += speed.z * std::cosf(Math::toRadians(angleAroundAnchor));
+		anchor.x += speed.z * std::sinf((float) Math::toRadians(angleAroundAnchor));
+		anchor.z += speed.z * std::cosf((float) Math::toRadians(angleAroundAnchor));
 
 		anchor.y += speed.y;
 	}

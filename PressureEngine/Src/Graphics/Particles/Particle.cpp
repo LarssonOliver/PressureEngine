@@ -54,7 +54,7 @@ namespace Pressure {
 		int stageCount = texture.getNumberOfRows() * texture.getNumberOfRows();
 		float atlasProgression = elapsedTicks / lifeLength * stageCount;
 		int index = (int)atlasProgression;
-		blend = std::fmod(atlasProgression, 1);
+		blend = std::fmodf(atlasProgression, 1);
 		setTextureOffset(currentUV, index);
 		setTextureOffset(blendUV, index < stageCount - 1 ? index + 1 : index);
 	}

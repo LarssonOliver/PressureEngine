@@ -25,10 +25,10 @@ namespace Pressure {
 
 		static Mouse* inst;
 		std::vector<bool> buttons;
-		int scroll;
+		float scroll;
 
-		int dx, dy;
-		int last_xpos, last_ypos;
+		float dx, dy;
+		float last_xpos, last_ypos;
 
 	};
 

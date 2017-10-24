@@ -38,14 +38,14 @@ namespace Pressure {
 	}
 
 	void Mouse::mouse_scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-		Inst()->scroll += yoffset;
+		Inst()->scroll += (float) yoffset;
 	}
 
 	void Mouse::mouse_pos_callback(GLFWwindow* window, double xpos, double ypos) {
-		Inst()->dx = 0 + xpos - Inst()->last_xpos;
-		Inst()->last_xpos = xpos;
-		Inst()->dy = 0 + ypos - Inst()->last_ypos;
-		Inst()->last_ypos = ypos;
+		Inst()->dx = 0 + (float) xpos - Inst()->last_xpos;
+		Inst()->last_xpos = (float) xpos;
+		Inst()->dy = 0 + (float) ypos - Inst()->last_ypos;
+		Inst()->last_ypos = (float) ypos;
 	}
 
 	Mouse::Mouse()

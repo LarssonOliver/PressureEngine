@@ -34,7 +34,7 @@ namespace Pressure {
 	void WaterRenderer::prepare(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera) {
 		shader.start();
 		shader.loadViewMatrix(camera);
-		shader.loadWaveModifier(Math::toRadians(waveModifier));
+		shader.loadWaveModifier((float) Math::toRadians(waveModifier));
 		shader.loadLights(lights);
 		Water::getModel()->getVao()->bind();
 		glEnableVertexAttribArray(0);

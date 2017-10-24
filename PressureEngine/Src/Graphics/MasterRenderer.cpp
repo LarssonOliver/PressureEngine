@@ -4,8 +4,8 @@
 
 namespace Pressure {
 
-	MasterRenderer::MasterRenderer(GLFWwindow* window, Loader& loader)
-		: shader(), renderer(shader, window), skyboxRenderer(loader, window), waterRenderer(window, waterBuffers), waterBuffers(window), entities() {
+	MasterRenderer::MasterRenderer(Window& window, Loader& loader, Camera& camera)
+		: shader(), renderer(shader, window.getWindow()), skyboxRenderer(loader, window.getWindow()), shadowMapRenderer(camera, window), waterRenderer(window.getWindow(), waterBuffers), waterBuffers(window.getWindow()), entities() {
 		enableCulling();
 	}
 
@@ -30,6 +30,10 @@ namespace Pressure {
 
 	void MasterRenderer::tick() {
 		waterRenderer.tick();
+	}
+
+	void MasterRenderer::renderShadowMap(Light& sun) {
+		shadowMapRenderer.render(entities, sun);
 	}
 
 	void MasterRenderer::processEntity(Entity& entity) {
@@ -80,7 +84,7 @@ namespace Pressure {
 		camera.invertPitch();
 		prepare();
 		shader.start();
-		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.5)); 
+		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.5f)); 
 		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
@@ -94,7 +98,7 @@ namespace Pressure {
 		waterBuffers.bindRefractionFrameBuffer();
 		prepare();
 		shader.start();
-		shader.loadClipPlane(Vector4f(0, -1, 0, water[0].getPosition().getY() + 0.2));
+		shader.loadClipPlane(Vector4f(0, -1, 0, water[0].getPosition().getY() + 0.2f));
 		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);

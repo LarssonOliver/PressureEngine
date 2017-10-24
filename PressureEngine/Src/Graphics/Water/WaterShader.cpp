@@ -43,7 +43,7 @@ namespace Pressure {
 	}
 
 	void WaterShader::loadLights(std::vector<Light>& lights) {
-		for (int i = 0; i < 4; i++) {
+		for (unsigned int i = 0; i < 4; i++) {
 			if (i < lights.size()) {
 				ShaderProgram::loadVector(location_lightPosition[i], lights[i].getPosition());
 				ShaderProgram::loadVector(location_lightColor[i], lights[i].getColor());

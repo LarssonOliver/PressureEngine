@@ -91,7 +91,7 @@ namespace Pressure {
 			upVector.y * nearHeight, upVector.z * nearHeight).add(centerNear));
 		Vector3f nearBottom(Vector3f(downVector.x * nearHeight,
 			downVector.y * nearHeight, downVector.z * nearHeight).add(centerNear));
-		points.reserve(8);
+		points.resize(8);
 		calculateLightSpaceFrustumCorner(points[0], farTop, rightVector, farWidth);
 		calculateLightSpaceFrustumCorner(points[1], farTop, leftVector, farWidth);
 		calculateLightSpaceFrustumCorner(points[2], farBottom, rightVector, farWidth);
@@ -121,6 +121,7 @@ namespace Pressure {
 
 	float ShadowBox::getAspectRatio() {
 		return (float) window.getWidth() / (float) window.getHeight();
+		return 16 / 9;
 	}
 
 }

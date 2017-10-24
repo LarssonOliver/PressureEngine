@@ -32,11 +32,11 @@ namespace Pressure {
 		return w;
 	}
 
-	Vector2f& Vector4f::getXY() {
+	Vector2f Vector4f::getXY() {
 		return Vector2f(x, y);
 	}
 
-	Vector3f& Vector4f::getXYZ() {
+	Vector3f Vector4f::getXYZ() {
 		return Vector3f(x, y, z);
 	}
 

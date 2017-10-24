@@ -32,7 +32,8 @@ namespace Pressure {
 		}
 
 		loader = new Loader();
-		renderer = new MasterRenderer(window->getWindow(), *loader);
+		camera = new Camera();
+		renderer = new MasterRenderer(*window, *loader, *camera);
 		ParticleMaster::init(*loader, window->getWindow());
 
 		RawModel* model = OBJLoader::loadObjModel("ball", *loader);
@@ -42,7 +43,6 @@ namespace Pressure {
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
 		entity = new Entity(*texturedModel, Vector3f(-25, -50, 0), Vector3f(0, 0, 0), 50.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
-		camera = new Camera();
 		lights = new std::vector<Light>;
 		lights->emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0), Vector3f(0.4, 0.4, 0.4));
@@ -110,6 +110,8 @@ namespace Pressure {
 		renderer->processEntity(*entity);
 		renderer->processWater(*water);
 		//renderer->processWater(*water2);
+
+		renderer->renderShadowMap((*lights)[0]);
 		renderer->render(*lights, *camera);
 
 		//ParticleMaster::renderParticles(*camera);

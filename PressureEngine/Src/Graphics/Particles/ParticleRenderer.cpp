@@ -67,7 +67,7 @@ namespace Pressure {
 		TextureManager::Inst()->BindTexture(texture.getTextureID());
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		shader.loadNumberOfRows(texture.getNumberOfRows());
+		shader.loadNumberOfRows((float) texture.getNumberOfRows());
 	}
 
 	void ParticleRenderer::updateViewMatrix(Vector3f& position, float rotation, float scale, Matrix4f& viewMatrix) {
