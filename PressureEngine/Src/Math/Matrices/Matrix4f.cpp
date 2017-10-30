@@ -184,6 +184,13 @@ namespace Pressure {
 		return dest;
 	}
 
+	Matrix4f& Matrix4f::createTransformationMatrix(const Vector2f& translation, const Vector2f& scale) {
+		identity();
+		translate(Vector3f(translation, 0.f));
+		this->scale(Vector3f(scale, 1.f));
+		return *this;
+	}
+
 	/* MATRIX SPECIFIC FUNCTIONS */
 	Matrix4f& Matrix4f::createTransformationMatrix(const Vector3f& translation, const Vector3f& rotation, const float scale) {
 		identity();
@@ -326,24 +333,32 @@ namespace Pressure {
 		return rotate(angle, axis, *this);
 	}
 
-	Matrix4f& Matrix4f::scale(const float xyz, Matrix4f& dest) const {
-		dest.set(0, 0, get(0, 0) * xyz);
-		dest.set(0, 1, get(0, 1) * xyz);
-		dest.set(0, 2, get(0, 2) * xyz);
-		dest.set(0, 3, get(0, 3) * xyz);
-		dest.set(1, 0, get(1, 0) * xyz);
-		dest.set(1, 1, get(1, 1) * xyz);
-		dest.set(1, 2, get(1, 2) * xyz);
-		dest.set(1, 3, get(1, 3) * xyz);
-		dest.set(2, 0, get(2, 0) * xyz);
-		dest.set(2, 1, get(2, 1) * xyz);
-		dest.set(2, 2, get(2, 2) * xyz);
-		dest.set(2, 3, get(2, 3) * xyz);
+	Matrix4f & Matrix4f::scale(const Vector3f& scale, Matrix4f& dest) const {
+		dest.set(0, 0, get(0, 0) * scale.x);
+		dest.set(0, 1, get(0, 1) * scale.x);
+		dest.set(0, 2, get(0, 2) * scale.x);
+		dest.set(0, 3, get(0, 3) * scale.x);
+		dest.set(1, 0, get(1, 0) * scale.y);
+		dest.set(1, 1, get(1, 1) * scale.y);
+		dest.set(1, 2, get(1, 2) * scale.y);
+		dest.set(1, 3, get(1, 3) * scale.y);
+		dest.set(2, 0, get(2, 0) * scale.z);
+		dest.set(2, 1, get(2, 1) * scale.z);
+		dest.set(2, 2, get(2, 2) * scale.z);
+		dest.set(2, 3, get(2, 3) * scale.z);
 		dest.set(3, 0, get(3, 0));
 		dest.set(3, 1, get(3, 1));
 		dest.set(3, 2, get(3, 2));
 		dest.set(3, 3, get(3, 3));
 		return dest;
+	}
+
+	Matrix4f& Matrix4f::scale(const Vector3f& scale) {
+		return this->scale(scale, *this);
+	}
+
+	Matrix4f& Matrix4f::scale(const float xyz, Matrix4f& dest) const {
+		return scale(Vector3f(xyz), dest);
 	}
 
 	Matrix4f& Matrix4f::scale(const float xyz) {

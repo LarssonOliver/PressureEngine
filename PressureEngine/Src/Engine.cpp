@@ -54,6 +54,10 @@ namespace Pressure {
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
 
+		guis = new std::list<GuiTexture>;
+		guiRenderer = new GuiRenderer(*loader);
+		guis->emplace_back(loader->loadTexture("test.png"), Vector2f(0.5), Vector2f(0.25));
+
 	}
 
 	void Engine::loop() {
@@ -116,7 +120,7 @@ namespace Pressure {
 		renderer->renderShadowMap((*lights)[0]);
 		renderer->render(*lights, *camera);
 
-		//ParticleMaster::renderParticles(*camera);
+		guiRenderer->render(*guis);
 
 		glfwSwapBuffers(window->getWindow());
 	}
@@ -134,6 +138,8 @@ namespace Pressure {
 		delete lights;
 		delete water;
 		delete water2;
+		delete guis;
+		delete guiRenderer;
 
 		glfwTerminate();
 	}

@@ -144,6 +144,15 @@
     <ClCompile Include="Src\Graphics\Shadows\ShadowMapMasterRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics\Guis\GuiTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Guis\GuiRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Guis\GuiShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -287,6 +296,15 @@
     <ClInclude Include="Src\Graphics\Shadows\ShadowMapMasterRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Src\Graphics\Guis\GuiTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Guis\GuiRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Guis\GuiShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
@@ -312,5 +330,7 @@
     <None Include="Src\Graphics\Particles\ParticleFragmentShader.glsl" />
     <None Include="Src\Graphics\Shadows\ShadowVertexShader.glsl" />
     <None Include="Src\Graphics\Shadows\ShadowFragmentShader.glsl" />
+    <None Include="Src\Graphics\Guis\GuiVertexShader.glsl" />
+    <None Include="Src\Graphics\Guis\GuiFragmentShader.glsl" />
   </ItemGroup>
 </Project>

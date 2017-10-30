@@ -7,6 +7,7 @@
 #include "Graphics\GraphicsCommon.h"
 #include "Graphics\Water\Water.h"
 #include "Graphics\Particles\ParticleSystem.h"
+#include "Graphics\Guis\GuiRenderer.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
@@ -30,6 +31,9 @@ namespace Pressure {
 
 		Water* water;
 		Water* water2;
+
+		std::list<GuiTexture>* guis;
+		GuiRenderer* guiRenderer;
 
 	public:
 		Engine();
