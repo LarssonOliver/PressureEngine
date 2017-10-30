@@ -206,7 +206,7 @@ namespace Pressure {
 		int width, height;
 		glfwGetWindowSize(window, &width, &height);
 		float aspectRatio = (float)width / (float)height;
-		float y_scale = (1.f / tanf((float)Math::toRadians(PRESSRE_FOV / 2.f)) * aspectRatio);
+		float y_scale = 1.f / tanf((float)Math::toRadians(PRESSRE_FOV / 2.f));
 		float x_scale = y_scale / aspectRatio;
 		float frustum_length = PRESSRE_FAR_PLANE - PRESSRE_NEAR_PLANE;
 

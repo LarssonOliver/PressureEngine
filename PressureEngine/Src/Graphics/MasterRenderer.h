@@ -46,6 +46,9 @@ namespace Pressure {
 		static void enableCulling();
 		static void disableCulling();
 
+		//for debugging.
+		unsigned int getShadowMapTexture();
+
 		Renderer& getRenderer();
 		void cleanUp();
 

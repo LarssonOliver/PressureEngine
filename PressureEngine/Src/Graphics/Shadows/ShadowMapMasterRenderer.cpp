@@ -47,7 +47,7 @@ namespace Pressure {
 		shadowFbo.unbind();
 	}
 
-	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f & center) {
+	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f& center) {
 		direction.normalize();
 		center.negate();
 		lightViewMatrix.identity();

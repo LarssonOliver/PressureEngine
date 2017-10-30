@@ -43,7 +43,6 @@ namespace Pressure {
 		glGenFramebuffers(1, &fbo);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
 		glDrawBuffer(GL_NONE);
-		glReadBuffer(GL_NONE);
 		return fbo;
 	}
 

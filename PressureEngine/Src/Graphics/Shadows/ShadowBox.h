@@ -16,7 +16,7 @@ namespace Pressure {
 		float minX, maxX;
 		float minY, maxY;
 		float minZ, maxZ;
-		const Matrix4f& lightViewMatrix;
+		Matrix4f& const lightViewMatrix;
 		Camera& const cam;
 		Window& const window;
 		float farHeight, farWidth, nearHeight, nearWidth;

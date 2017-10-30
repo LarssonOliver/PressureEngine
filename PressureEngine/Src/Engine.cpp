@@ -56,7 +56,7 @@ namespace Pressure {
 
 		guis = new std::list<GuiTexture>;
 		guiRenderer = new GuiRenderer(*loader);
-		guis->emplace_back(loader->loadTexture("test.png"), Vector2f(0.5), Vector2f(0.25));
+		guis->emplace_back(renderer->getShadowMapTexture(), Vector2f(0.75), Vector2f(0.25), false);
 
 	}
 

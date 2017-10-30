@@ -21,7 +21,10 @@ namespace Pressure {
 		glDisable(GL_DEPTH_TEST);
 		for (auto& gui : guis) {
 			glActiveTexture(GL_TEXTURE0);
-			TextureManager::Inst()->BindTexture(gui.getTexture());
+			if(gui.isTextureManaged())
+				TextureManager::Inst()->BindTexture(gui.getTexture());
+			else 
+				glBindTexture(GL_TEXTURE_2D, gui.getTexture());
 			shader.loadTransformation(Matrix4f().createTransformationMatrix(gui.getPosition(), gui.getScale()));
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, quad.getVertexCount());
 		}

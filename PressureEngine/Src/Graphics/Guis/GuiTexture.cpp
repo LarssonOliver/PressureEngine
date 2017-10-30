@@ -2,8 +2,8 @@
 
 namespace Pressure {
 
-	GuiTexture::GuiTexture(unsigned int texture, Vector2f& position, Vector2f& scale)
-		: texture(texture), position(position), scale(scale) {
+	GuiTexture::GuiTexture(unsigned int texture, Vector2f& position, Vector2f& scale, bool isTexture)
+		: texture(texture), position(position), scale(scale), isTexture(isTexture) {
 	}
 
 	unsigned int GuiTexture::getTexture() const {
@@ -16,6 +16,10 @@ namespace Pressure {
 
 	Vector2f& GuiTexture::getScale() {
 		return scale;
+	}
+
+	bool GuiTexture::isTextureManaged() const {
+		return isTexture;
 	}
 
 }

@@ -32,6 +32,7 @@ namespace Pressure {
 		Matrix4f modelMatrix;
 		modelMatrix.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
 		shader.loadMvpMatrix(modelMatrix.mul(projectionViewMatrix));
+		//shader.loadMvpMatrix(Matrix4f());
 	}
 
 }

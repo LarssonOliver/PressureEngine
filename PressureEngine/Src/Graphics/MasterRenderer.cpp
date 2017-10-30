@@ -62,6 +62,10 @@ namespace Pressure {
 		glDisable(GL_CULL_FACE);
 	}
 
+	unsigned int MasterRenderer::getShadowMapTexture() {
+		return shadowMapRenderer.getShadowMap();
+	}
+
 	Renderer& MasterRenderer::getRenderer() {
 		return renderer;
 	}

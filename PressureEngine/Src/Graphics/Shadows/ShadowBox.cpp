@@ -16,7 +16,7 @@ namespace Pressure {
 	void ShadowBox::tick() {
 		Matrix4f rotation;
 		calculateCameraRotationMatrix(rotation);
-		Vector3f forwardVector(rotation.transform(FORWARD).getXYZ());
+		Vector3f forwardVector(rotation.transform(FORWARD, Vector4f()).getXYZ());
 
 		Vector3f toFar(forwardVector);
 		toFar.scale(SHADOW_DISTANCE);
@@ -31,7 +31,7 @@ namespace Pressure {
 		calculateFrustumVertices(points, rotation, forwardVector, centerNear, centerFar);
 
 		bool first = true;
-		for (auto point : points) {
+		for (auto& point : points) {
 			if (first) {
 				minX = point.x;
 				maxX = point.x;
@@ -103,7 +103,7 @@ namespace Pressure {
 	}
 
 	void ShadowBox::calculateLightSpaceFrustumCorner(Vector4f& point, Vector3f& startPoint, Vector3f& direction, float width) {
-		point = (startPoint.add(direction.x * width, direction.y * width, direction.z * width, Vector3f()), 1.f);
+		point.set(startPoint.add(direction.x * width, direction.y * width, direction.z * width, Vector3f()), 1.f);
 		lightViewMatrix.transform(point, point);
 	}
 
@@ -121,7 +121,7 @@ namespace Pressure {
 
 	float ShadowBox::getAspectRatio() {
 		return (float) window.getWidth() / (float) window.getHeight();
-		return 16 / 9;
+		//return 16 / 9;
 	}
 
 }
