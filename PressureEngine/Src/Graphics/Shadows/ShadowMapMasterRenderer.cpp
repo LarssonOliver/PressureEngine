@@ -2,7 +2,7 @@
 
 namespace Pressure {
 
-	const int ShadowMapMasterRenderer::SHADOW_MAP_SIZE = 2048;
+	const int ShadowMapMasterRenderer::SHADOW_MAP_SIZE = 4096;
 
 	ShadowMapMasterRenderer::ShadowMapMasterRenderer(Camera& camera, Window& window)
 		: shadowFbo(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, window), shadowBox(lightViewMatrix, camera, window), entityRenderer(shader, projectionViewMatrix) {
@@ -51,11 +51,11 @@ namespace Pressure {
 		direction.normalize();
 		center.negate();
 		lightViewMatrix.identity();
-		float pitch = std::acosf(Vector2f(direction.getX(), direction.getY()).length());
+ 		float pitch = std::acosf(Vector2f(direction.getX(), direction.getY()).length());
 		lightViewMatrix.rotate(pitch, Vector3f(1, 0, 0));
-		float yaw = (float) Math::toDegrees(std::atanf(direction.getX() / direction.getZ()));
-		yaw = direction.getZ() > 0 ? yaw - 180 : yaw;
-		lightViewMatrix.rotate((float)-Math::toRadians(yaw), Vector3f(0, 1, 0));
+		float yaw = std::atanf(direction.getX() / direction.getZ());
+		yaw = direction.getZ() > 0 ? yaw - (float)std::_Pi : yaw;
+		lightViewMatrix.rotate(-yaw, Vector3f(0, 1, 0));
 		lightViewMatrix.translate(center);
 	}
 
@@ -64,7 +64,6 @@ namespace Pressure {
 		projectionMatrix.set(0, 0, 2.f / width);
 		projectionMatrix.set(1, 1, 2.f / height);
 		projectionMatrix.set(2, 2, -2.f / length);
-		projectionMatrix.set(3, 3, 1);
 	}
 
 	void ShadowMapMasterRenderer::createOffset() {

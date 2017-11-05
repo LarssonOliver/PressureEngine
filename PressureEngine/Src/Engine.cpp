@@ -40,15 +40,15 @@ namespace Pressure {
 		texture->setShineDamper(10);
 		texture->setReflectivity(1);
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(-25, -50, 0), Vector3f(0, 0, 0), 2.f);
-		//entity->setRotationSpeed(0, 0.5f, 0);
-		entity2 = new Entity(*texturedModel, Vector3f(-23, 2, 0), Vector3f(0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(0, 6, 2), Vector3f(0, 0, 0), 1.f);
+		entity->setRotationSpeed(0, 0.5f, 0);
+		entity2 = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0), 5.f);
 		lights = new std::vector<Light>;
 		lights->emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0), Vector3f(0.4, 0.4, 0.4));
 
 		ParticleTexture particleTexture(loader->loadTexture("particleAtlas.png"), 4);
-		particleSystem = new ParticleSystem(particleTexture, 2, 0.03f, 0.00f, 2 * 60);
+		particleSystem = new ParticleSystem(particleTexture, 0, 0.03f, 0.00f, 2 * 60);
 		
 		water = new Water(Vector3f(-16, 0, -16), *loader);
 		water2 = new Water(Vector3f(-48, 10, -16), *loader);
@@ -111,12 +111,9 @@ namespace Pressure {
 	}
 
 	void Engine::render() {
-		for (int i = 0; i < 50; i++) {
-			entity->setPosition(2*i, i, -2*i);
-			renderer->processEntity((*entity));
-		}
-		//renderer->processEntity(*entity2);
-		renderer->processWater(*water);
+		renderer->processEntity((*entity));
+		renderer->processEntity(*entity2);
+		//renderer->processWater(*water);
 		//renderer->processWater(*water2);
 
 		renderer->renderShadowMap((*lights)[0]);

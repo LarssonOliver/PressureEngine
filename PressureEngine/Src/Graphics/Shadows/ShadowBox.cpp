@@ -6,7 +6,7 @@ namespace Pressure {
 	const float ShadowBox::OFFSET = 10;
 	const Vector4f ShadowBox::UP(0, 1, 0, 0);
 	const Vector4f ShadowBox::FORWARD(0, 0, -1, 0);
-	const float ShadowBox::SHADOW_DISTANCE = 50;
+	const float ShadowBox::SHADOW_DISTANCE = 150; // also in shaders
 
 	ShadowBox::ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window)
 		: lightViewMatrix(lightViewMatrix), cam(camera), window(window) {
@@ -81,8 +81,10 @@ namespace Pressure {
 	void ShadowBox::calculateFrustumVertices(std::vector<Vector4f>& points, Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar) {
 		Vector3f upVector(rotation.transform(UP, Vector4f()).getXYZ());
 		Vector3f rightVector(forwardVector.cross(upVector, Vector3f()));
-		Vector3f downVector(upVector.negate(Vector3f()));
-		Vector3f leftVector(rightVector.negate(Vector3f()));
+		Vector3f downVector;
+		upVector.negate(downVector);
+		Vector3f leftVector;
+		rightVector.negate(leftVector);
 		Vector3f farTop(Vector3f(upVector.x * farHeight,
 			upVector.y * farHeight, upVector.z * farHeight).add(centerFar));
 		Vector3f farBottom(Vector3f(downVector.x * farHeight,

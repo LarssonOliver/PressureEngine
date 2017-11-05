@@ -1,6 +1,5 @@
 #include "ShadowMapEntityRenderer.h"
 #include "../MasterRenderer.h"
-#include <iostream>
 
 namespace Pressure {
 
@@ -30,11 +29,8 @@ namespace Pressure {
 	}
 
 	void ShadowMapEntityRenderer::prepareInstance(const Entity& entity) {
-		Matrix4f modelMatrix;
-		modelMatrix.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
-		shader.loadMvpMatrix(modelMatrix.mul(projectionViewMatrix));	
-		//shader.loadMvpMatrix(Matrix4f().createTransformationMatrix(Vector3f(0, 0, 0), entity.getRotation(), 1));
-		
+		Matrix4f modelMatrix = Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
+		shader.loadMvpMatrix(projectionViewMatrix.mul(modelMatrix, Matrix4f()));	
 	}
 
 }
