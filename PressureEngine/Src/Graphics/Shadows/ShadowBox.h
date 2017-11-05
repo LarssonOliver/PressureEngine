@@ -16,15 +16,15 @@ namespace Pressure {
 		float minX, maxX;
 		float minY, maxY;
 		float minZ, maxZ;
-		Matrix4f& const lightViewMatrix;
-		Camera& const cam;
-		Window& const window;
+		Matrix4f& lightViewMatrix;
+		Camera& cam;
+		Window& window;
 		float farHeight, farWidth, nearHeight, nearWidth;
 
 	public:
 		ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window);
 		void tick();
-		Vector3f& getCenter();
+		Vector3f getCenter();
 
 		float getWidth() const;
 		float getHeight() const;

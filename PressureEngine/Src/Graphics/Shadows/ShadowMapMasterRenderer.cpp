@@ -47,7 +47,7 @@ namespace Pressure {
 		shadowFbo.unbind();
 	}
 
-	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f& center) {
+	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f center) {
 		direction.normalize();
 		center.negate();
 		lightViewMatrix.identity();
@@ -62,7 +62,7 @@ namespace Pressure {
 	void ShadowMapMasterRenderer::updateOrthoProjectionMatrix(float width, float height, float length) {
 		projectionMatrix.identity();
 		projectionMatrix.set(0, 0, 2.f / width);
-		projectionMatrix.set(1, 2, 2.f / height);
+		projectionMatrix.set(1, 1, 2.f / height);
 		projectionMatrix.set(2, 2, -2.f / length);
 		projectionMatrix.set(3, 3, 1);
 	}

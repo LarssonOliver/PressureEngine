@@ -6,7 +6,7 @@ namespace Pressure {
 	const float ShadowBox::OFFSET = 10;
 	const Vector4f ShadowBox::UP(0, 1, 0, 0);
 	const Vector4f ShadowBox::FORWARD(0, 0, -1, 0);
-	const float ShadowBox::SHADOW_DISTANCE = 150;
+	const float ShadowBox::SHADOW_DISTANCE = 50;
 
 	ShadowBox::ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window)
 		: lightViewMatrix(lightViewMatrix), cam(camera), window(window) {
@@ -59,7 +59,7 @@ namespace Pressure {
 		maxZ += OFFSET;
 	}
 
-	Vector3f& ShadowBox::getCenter() {
+	Vector3f ShadowBox::getCenter() {
 		Vector4f cen((minX + maxX) / 2, (minY + maxY) / 2, (minZ + maxZ) / 2, 1);
 		Matrix4f invertedLight;
 		lightViewMatrix.invert(invertedLight);
