@@ -34,7 +34,7 @@ namespace Pressure {
 	private:
 		void prepare(Vector3f& lightDirection, ShadowBox& box);
 		void finish();
-		void updateLightViewMatrix(Vector3f& direction, Vector3f center);
+		void updateLightViewMatrix(Vector3f& direction, Vector3f& center);
 		void updateOrthoProjectionMatrix(float width, float height, float length);
 		void createOffset();
 

@@ -26,6 +26,7 @@ void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
 	shadowCoords = toShadowMapSpace * worldPosition;
+	shadowCoords.z -= 0.001; // Hack to stop shadows clipping the shadowmap.
 
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 
@@ -46,6 +47,6 @@ void main(void) {
 	float distance = length((viewMatrix * worldPosition).xyz);
 	distance = distance - (shadowDistance - transitionDistance);
 	distance = distance / transitionDistance;
-	shadowCoords.w = clamp(1.0-distance, 0.0, 1.0);
+	shadowCoords.w = clamp(1.0 - distance, 0.0, 1.0);
 
 }

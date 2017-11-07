@@ -2,7 +2,7 @@
 
 namespace Pressure {
 
-	const int ShadowMapMasterRenderer::SHADOW_MAP_SIZE = 4096;
+	const int ShadowMapMasterRenderer::SHADOW_MAP_SIZE = 8192; // Change in frag shader if changed here.
 
 	ShadowMapMasterRenderer::ShadowMapMasterRenderer(Camera& camera, Window& window)
 		: shadowFbo(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, window), shadowBox(lightViewMatrix, camera, window), entityRenderer(shader, projectionViewMatrix) {
@@ -47,11 +47,11 @@ namespace Pressure {
 		shadowFbo.unbind();
 	}
 
-	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f center) {
+	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f& center) {		
 		direction.normalize();
 		center.negate();
 		lightViewMatrix.identity();
- 		float pitch = std::acosf(Vector2f(direction.getX(), direction.getY()).length());
+ 		float pitch = std::acosf(Vector2f(direction.getX(), direction.getZ()).length());
 		lightViewMatrix.rotate(pitch, Vector3f(1, 0, 0));
 		float yaw = std::atanf(direction.getX() / direction.getZ());
 		yaw = direction.getZ() > 0 ? yaw - (float)std::_Pi : yaw;

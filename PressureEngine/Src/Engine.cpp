@@ -35,14 +35,14 @@ namespace Pressure {
 		renderer = new MasterRenderer(*window, *loader, *camera);
 		ParticleMaster::init(*loader, window->getWindow());
 
-		RawModel* model = OBJLoader::loadObjModel("ball", *loader);
+		RawModel* model = OBJLoader::loadObjModel("ball", *loader);		
 		ModelTexture* texture = new ModelTexture(loader->loadTexture("default.png"));
 		texture->setShineDamper(10);
 		texture->setReflectivity(1);
 		TexturedModel* texturedModel = new TexturedModel(model, texture);
-		entity = new Entity(*texturedModel, Vector3f(0, 6, 2), Vector3f(0, 0, 0), 1.f);
+		entity = new Entity(*texturedModel, Vector3f(-4, 6, 5), Vector3f(0, 0, 0), 1.f);
 		entity->setRotationSpeed(0, 0.5f, 0);
-		entity2 = new Entity(*texturedModel, Vector3f(0, 0, 0), Vector3f(0), 5.f);
+		entity2 = new Entity(*texturedModel, Vector3f(-5, 0, 0), Vector3f(0), 5.f);
 		lights = new std::vector<Light>;
 		lights->emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 		//lights->emplace_back(Vector3f(-10, 10, -10), Vector3f(1, 0, 0), Vector3f(0.4, 0.4, 0.4));
@@ -55,7 +55,7 @@ namespace Pressure {
 
 		guis = new std::list<GuiTexture>;
 		guiRenderer = new GuiRenderer(*loader);
-		guis->emplace_back(renderer->getShadowMapTexture(), Vector2f(0.75), Vector2f(0.25), false);
+		//guis->emplace_back(renderer->getShadowMapTexture(), Vector2f(0.75), Vector2f(0.25), false);
 
 	}
 
@@ -113,7 +113,7 @@ namespace Pressure {
 	void Engine::render() {
 		renderer->processEntity((*entity));
 		renderer->processEntity(*entity2);
-		//renderer->processWater(*water);
+		renderer->processWater(*water);
 		//renderer->processWater(*water2);
 
 		renderer->renderShadowMap((*lights)[0]);

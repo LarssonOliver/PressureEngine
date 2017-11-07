@@ -23,7 +23,7 @@ namespace Pressure {
 		glBindVertexArray(0);
 	}
 
-	void ShadowMapEntityRenderer::bindModel(const RawModel& rawModel) {
+	void ShadowMapEntityRenderer::bindModel(const RawModel& rawModel) const {
 		glBindVertexArray(rawModel.getVaoID());
 		glEnableVertexAttribArray(0);
 	}

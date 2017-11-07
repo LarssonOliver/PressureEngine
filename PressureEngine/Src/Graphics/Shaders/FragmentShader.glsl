@@ -16,13 +16,27 @@ uniform vec3 attenuation[4];
 uniform float shineDamper;
 uniform float reflectivity;
 
+const int pcfCount = 2;
+const float totalTexels = (pcfCount * 2.2 + 1.0) * (pcfCount * 2.2 + 1.0);
+
 void main(void) {
 
-	float objectNearestLight = texture(shadowMap, shadowCoords.xy).r;
-	float lightFactor = 1.0;
-	if (shadowCoords.z > objectNearestLight) {
-		lightFactor = 1.0 - (shadowCoords.w * 0.4);
+	float shadowMapSize = 8192;
+	float texelSize = 1.0 / shadowMapSize;
+	float total = 0.0;
+
+	for(int x = -pcfCount; x <= pcfCount; x++) {	
+		for(int y = -pcfCount; y <= pcfCount; y++) {
+			float objectNearestLight = texture(shadowMap, shadowCoords.xy + vec2(x, y) * texelSize).r;
+			if(shadowCoords.z > objectNearestLight) {
+				total += 1.0;
+			}
+		}	
 	}
+
+	total /= totalTexels;
+	float lightFactor = 1.0 - (total * shadowCoords.w);
+
 
 	vec3 unitNormal = normalize(surfaceNormal);
 	vec3 unitVectorToCamera = normalize(toCameraVector);
@@ -44,13 +58,14 @@ void main(void) {
 		totalDiffuse += (brightness * lightColor[i]) / attFactor;
 		totalSpecular += (dampedFactor * reflectivity * lightColor[i]) / attFactor;
 	}
-	totalDiffuse = max(totalDiffuse, 0.1) * lightFactor;
+	totalDiffuse = max(totalDiffuse * lightFactor, 0.1);
 
 	vec4 textureColor = texture(textureSampler, pass_textureCoords);
 	if (textureColor.a < 0.5) {
 		discard;
 	}
 
-	out_Color = vec4(totalDiffuse, 1.0) * textureColor + vec4(totalSpecular, 1.0);
+	out_Color = vec4(totalDiffuse, 1.0) * textureColor + vec4(totalSpecular * lightFactor, 1.0);
+	//out_Color = vec4(lightFactor);
 
 } 

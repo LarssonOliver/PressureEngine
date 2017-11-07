@@ -19,7 +19,7 @@ namespace Pressure {
 		void render(const std::map<TexturedModel, std::vector<Entity>>& entities);
 		
 	private:
-		void bindModel(const RawModel& rawModel);
+		void bindModel(const RawModel& rawModel) const;
 		void prepareInstance(const Entity& entity);
 
 	};
