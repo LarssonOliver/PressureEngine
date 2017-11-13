@@ -21,7 +21,7 @@ namespace Pressure {
 
 		if (!fileStream.is_open()) {
 			std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
-			return "";
+			return std::string();
 		}
 
 		std::string line = "";
