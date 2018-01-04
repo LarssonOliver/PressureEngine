@@ -20,15 +20,32 @@ namespace Pressure {
 			// TODO: Handle this error.
 		}
 
-		glfwSetErrorCallback(Callbacks::error_callback);
+
+// Enable GLFW debugging callback.
+#ifdef _DEBUG
+		glfwSetErrorCallback(Callbacks::glfw_error_callback);
+#endif
 
 		window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE, false, false);
 
-		GLenum err = glewInit();
+		unsigned int err = glewInit();
 		if (GLEW_OK != err) {
 			std::cout << "GLEW Failed to initialize!" << std::endl;
 			// TODO: Handle this error.
 		}
+
+// Enable OpenGL debugging callback.
+#ifdef _DEBUG
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+		if (glDebugMessageCallback) {
+			glEnable(GL_DEBUG_OUTPUT);
+			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+			glDebugMessageCallback(opengl_error_callback, nullptr);
+			unsigned int unusedIds = 0;
+			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
+		} else
+			std::cout << "glDebugMessageCallback Not Available! Disabling OpenGL Error Handling." << std::endl;		
+#endif
 
 		loader = new Loader();
 		camera = new Camera();
