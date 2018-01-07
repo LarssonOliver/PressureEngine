@@ -26,7 +26,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math\_Math.cpp">
+    <ClCompile Include="Src\Math\_Math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Math\_Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Math\_Vector2f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

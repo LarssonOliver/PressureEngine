@@ -1,10 +1,11 @@
 #pragma once
 
+#include "../../DllExport.h"
 #include <ostream>
 
 namespace Pressure {
 
-	struct Vector2f {
+	struct PRESSURE_API Vector2f {
 
 		// Vectors x component.
 		float x;

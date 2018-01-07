@@ -16,7 +16,6 @@ namespace Pressure {
 		Random(T min, T max);
 
 		T next();
-
 	};
 
 	template<typename T>
