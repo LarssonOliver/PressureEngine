@@ -7,9 +7,6 @@ namespace Pressure {
 
 	class EntityShader : public ShaderProgram {
 
-#define PRESSURE_ENGINE_STATIC_VERTEX_FILE "Src/Graphics/Shaders/VertexShader.glsl"
-#define PRESSURE_ENGINE_STATIC_FRAGMENT_FILE "Src/Graphics/Shaders/FragmentShader.glsl"
-
 	public:
 		EntityShader();
 

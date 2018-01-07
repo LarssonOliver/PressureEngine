@@ -1,12 +1,10 @@
 #include "GuiShader.h"
+#include "GuiShaderSource.h"
 
 namespace Pressure {
 
-	const char* GuiShader::VERTEX_FILE = "Src/Graphics/Guis/GuiVertexShader.glsl";
-	const char* GuiShader::FRAGMENT_FILE = "Src/Graphics/Guis/GuiFragmentShader.glsl";
-
 	GuiShader::GuiShader() {
-		ShaderProgram::loadShaders(VERTEX_FILE, FRAGMENT_FILE);
+		ShaderProgram::loadShaders(GuiShaderSource::vertexShader, GuiShaderSource::fragmentShader);
 	}
 
 	void GuiShader::loadTransformation(Matrix4f& matrix) {

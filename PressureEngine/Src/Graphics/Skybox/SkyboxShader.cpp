@@ -1,9 +1,10 @@
 #include "SkyboxShader.h"
+#include "SkyboxShaderSource.h"
 
 namespace Pressure {
 
 	SkyboxShader::SkyboxShader() {
-		ShaderProgram::loadShaders(PRESSURE_ENGINE_SKYBOX_VERTEX_FILE, PRESSURE_ENGINE_SKYBOX_FRAGMENT_FILE);
+		ShaderProgram::loadShaders(SkyboxShaderSource::vertexShader, SkyboxShaderSource::fragmentShader);
 	}
 
 	void SkyboxShader::bindAttributes() {

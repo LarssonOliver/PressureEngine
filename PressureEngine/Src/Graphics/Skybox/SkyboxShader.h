@@ -6,9 +6,6 @@ namespace Pressure {
 
 	class SkyboxShader : public ShaderProgram {
 
-#define PRESSURE_ENGINE_SKYBOX_VERTEX_FILE "Src/Graphics/Skybox/SkyboxVertexShader.glsl"
-#define PRESSURE_ENGINE_SKYBOX_FRAGMENT_FILE "Src/Graphics/Skybox/SkyboxFragmentShader.glsl"
-
 	public:
 		SkyboxShader();
 

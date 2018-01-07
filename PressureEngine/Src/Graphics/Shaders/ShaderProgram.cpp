@@ -3,6 +3,18 @@
 
 namespace Pressure {
 
+	void ShaderProgram::loadShaders(const std::string& vertexShader, const std::string& fragmentShader) {
+		vertexShaderID = loadShader(vertexShader, GL_VERTEX_SHADER);
+		fragmentShaderID = loadShader(fragmentShader, GL_FRAGMENT_SHADER);
+		programID = glCreateProgram();
+		glAttachShader(programID, vertexShaderID);
+		glAttachShader(programID, fragmentShaderID);
+		bindAttributes();
+		glLinkProgram(programID);
+		glValidateProgram(programID);
+		getAllUniformLocations();
+	}
+
 	void ShaderProgram::loadShaders(const char* vertexPath, const char* fragmentPath) {
 		vertexShaderID = loadShader(vertexPath, GL_VERTEX_SHADER);
 		fragmentShaderID = loadShader(fragmentPath, GL_FRAGMENT_SHADER);
@@ -86,6 +98,30 @@ namespace Pressure {
 
 	void ShaderProgram::loadInt(const int location, const int value) {
 		glUniform1i(location, value);
+	}
+
+	unsigned int ShaderProgram::loadShader(const std::string& shader, GLenum type) {
+		unsigned int shaderID = glCreateShader(type);
+
+		const char* shaderSrc = shader.c_str();
+
+		int result = GL_FALSE;
+		int logLength;
+
+		// Compile Shader
+		glShaderSource(shaderID, 1, &shaderSrc, NULL);
+		glCompileShader(shaderID);
+
+		//Check Shader
+		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
+		if (!result) {
+			glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &logLength);
+			std::vector<GLchar> shaderError((logLength > 1) ? logLength : 1);
+			glGetShaderInfoLog(shaderID, logLength, NULL, &shaderError[0]);
+			std::cout << &shaderError[0] << std::endl;
+		}
+
+		return shaderID;
 	}
 
 	unsigned int ShaderProgram::loadShader(const char* filePath, GLenum type) {

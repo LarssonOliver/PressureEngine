@@ -5,10 +5,6 @@ namespace Pressure {
 
 	class ParticleShader : public ShaderProgram {
 
-	private:
-		static const char* VERTEX_FILE;
-		static const char* FRAGMENT_FILE;
-
 	public:
 		ParticleShader();
 

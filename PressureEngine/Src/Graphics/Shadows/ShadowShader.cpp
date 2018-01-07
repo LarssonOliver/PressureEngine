@@ -1,12 +1,10 @@
 #include "ShadowShader.h"
+#include "ShadowShaderSource.h"
 
 namespace Pressure {
 
-	const char* ShadowShader::VERTEX_FILE = "Src/Graphics/Shadows/ShadowVertexShader.glsl";
-	const char* ShadowShader::FRAGMENT_FILE = "Src/Graphics/Shadows/ShadowFragmentShader.glsl";
-
 	ShadowShader::ShadowShader() {
-		ShaderProgram::loadShaders(VERTEX_FILE, FRAGMENT_FILE);
+		ShaderProgram::loadShaders(ShadowShaderSource::vertexShader, ShadowShaderSource::fragmentShader);
 	}
 
 	void ShadowShader::getAllUniformLocations() {

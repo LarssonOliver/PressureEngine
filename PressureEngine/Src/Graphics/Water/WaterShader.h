@@ -7,9 +7,6 @@ namespace Pressure{
 
 	class WaterShader : public ShaderProgram {
 
-#define PRESSURE_ENGINE_WATER_VERTEX_FILE "Src/Graphics/Water/WaterVertexShader.glsl"
-#define PRESSURE_ENGINE_WATER_FRAGMENT_FILE "Src/Graphics/Water/WaterFragmentShader.glsl"
-
 	public:
 		WaterShader();
 

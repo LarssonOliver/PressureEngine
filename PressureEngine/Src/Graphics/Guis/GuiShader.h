@@ -6,9 +6,6 @@ namespace Pressure {
 	class GuiShader : public ShaderProgram {
 
 	private:
-		static const char* VERTEX_FILE;
-		static const char* FRAGMENT_FILE;
-
 		int location_transformationMatrix;
 
 	public:

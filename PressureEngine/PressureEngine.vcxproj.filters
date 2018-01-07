@@ -153,6 +153,24 @@
     <ClCompile Include="Src\Graphics\Guis\GuiShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics\Shaders\Shaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Guis\GuiShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Particles\ParticleShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Shadows\ShadowShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Skybox\SkyboxShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Water\WaterShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -305,10 +323,30 @@
     <ClInclude Include="Src\Graphics\Guis\GuiShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
-    <Text Include="Src\Graphics\Shaders\VertexShader.glsl" />
+    <ClInclude Include="Src\PressureEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\DllExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Shaders\Shaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Guis\GuiShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Particles\ParticleShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Shadows\ShadowShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Skybox\SkyboxShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Water\WaterShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Res\2017-08-28.png">
@@ -320,17 +358,5 @@
     <Image Include="Res\test.png">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Src\Graphics\Skybox\SkyboxVertexShader.glsl" />
-    <None Include="Src\Graphics\Skybox\SkyboxFragmentShader.glsl" />
-    <None Include="Src\Graphics\Water\WaterVertexShader.glsl" />
-    <None Include="Src\Graphics\Water\WaterFragmentShader.glsl" />
-    <None Include="Src\Graphics\Particles\ParticleVertexShader.glsl" />
-    <None Include="Src\Graphics\Particles\ParticleFragmentShader.glsl" />
-    <None Include="Src\Graphics\Shadows\ShadowVertexShader.glsl" />
-    <None Include="Src\Graphics\Shadows\ShadowFragmentShader.glsl" />
-    <None Include="Src\Graphics\Guis\GuiVertexShader.glsl" />
-    <None Include="Src\Graphics\Guis\GuiFragmentShader.glsl" />
   </ItemGroup>
 </Project>

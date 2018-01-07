@@ -1,4 +1,5 @@
 #pragma once
+#include "DllExport.h"
 #include "Common.h"
 #include "Graphics\Window.h"
 #include "Graphics\Loader.h"
@@ -15,7 +16,7 @@
 
 namespace Pressure {
 
-	class Engine {
+	class PRESSURE_API Engine {
 
 	private:
 		Window* window;

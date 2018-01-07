@@ -26,26 +26,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -82,7 +82,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PRESSURE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;FreeImage.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -93,6 +93,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>PRESSURE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,6 +103,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>PRESSURE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -116,6 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>PRESSURE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -131,11 +134,13 @@
     <ClCompile Include="Src\Graphics\Entities\Light.cpp" />
     <ClCompile Include="Src\Graphics\Guis\GuiRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Guis\GuiShader.cpp" />
+    <ClCompile Include="Src\Graphics\Guis\GuiShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Guis\GuiTexture.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
     <ClCompile Include="Src\Graphics\MasterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
     <ClCompile Include="Src\Graphics\OBJLoader.cpp" />
+    <ClCompile Include="Src\Graphics\Particles\ParticleShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Particles\Particle.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleMaster.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleRenderer.cpp" />
@@ -145,11 +150,14 @@
     <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp" />
     <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
+    <ClCompile Include="Src\Graphics\Shaders\Shaders.cpp" />
+    <ClCompile Include="Src\Graphics\Shadows\ShadowShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowBox.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowFrameBuffer.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowMapEntityRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowMapMasterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowShader.cpp" />
+    <ClCompile Include="Src\Graphics\Skybox\SkyboxShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Skybox\SkyboxRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\EntityShader.cpp" />
     <ClCompile Include="Src\Graphics\Skybox\SkyboxShader.cpp" />
@@ -157,6 +165,7 @@
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp" />
     <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp" />
+    <ClCompile Include="Src\Graphics\Water\WaterShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Water\Water.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterFrameBuffers.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterRenderer.cpp" />
@@ -173,6 +182,7 @@
   <ItemGroup>
     <ClInclude Include="Src\Common.h" />
     <ClInclude Include="Src\Constants.h" />
+    <ClInclude Include="Src\DllExport.h" />
     <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
     <ClInclude Include="Src\Graphics\Entities\Camera.h" />
@@ -181,10 +191,12 @@
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
     <ClInclude Include="Src\Graphics\Guis\GuiRenderer.h" />
     <ClInclude Include="Src\Graphics\Guis\GuiShader.h" />
+    <ClInclude Include="Src\Graphics\Guis\GuiShaderSource.h" />
     <ClInclude Include="Src\Graphics\Guis\GuiTexture.h" />
     <ClInclude Include="Src\Graphics\MasterRenderer.h" />
     <ClInclude Include="Src\Graphics\Models\TexturedModel.h" />
     <ClInclude Include="Src\Graphics\OBJLoader.h" />
+    <ClInclude Include="Src\Graphics\Particles\ParticleShaderSource.h" />
     <ClInclude Include="Src\Graphics\Particles\Particle.h" />
     <ClInclude Include="Src\Graphics\Particles\ParticleMaster.h" />
     <ClInclude Include="Src\Graphics\Particles\ParticleRenderer.h" />
@@ -196,17 +208,21 @@
     <ClInclude Include="Src\Graphics\Models\RawModel.h" />
     <ClInclude Include="Src\Graphics\Shaders\ShaderProgram.h" />
     <ClInclude Include="Src\Graphics\Shaders\EntityShader.h" />
+    <ClInclude Include="Src\Graphics\Shaders\Shaders.h" />
+    <ClInclude Include="Src\Graphics\Shadows\ShadowShaderSource.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowBox.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowFrameBuffer.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowMapEntityRenderer.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowMapMasterRenderer.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowShader.h" />
+    <ClInclude Include="Src\Graphics\Skybox\SkyboxShaderSource.h" />
     <ClInclude Include="Src\Graphics\Skybox\SkyboxRenderer.h" />
     <ClInclude Include="Src\Graphics\Skybox\SkyboxShader.h" />
     <ClInclude Include="Src\Graphics\Textures\ModelTexture.h" />
     <ClInclude Include="Src\Graphics\Textures\TextureManager.h" />
     <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h" />
     <ClInclude Include="Src\Graphics\VertexObjects\VertexBufferObject.h" />
+    <ClInclude Include="Src\Graphics\Water\WaterShaderSource.h" />
     <ClInclude Include="Src\Graphics\Water\Water.h" />
     <ClInclude Include="Src\Graphics\Water\WaterFrameBuffers.h" />
     <ClInclude Include="Src\Graphics\Water\WaterRenderer.h" />
@@ -221,27 +237,12 @@
     <ClInclude Include="Src\Math\Vectors\Vector2f.h" />
     <ClInclude Include="Src\Math\Vectors\Vector3f.h" />
     <ClInclude Include="Src\Math\Vectors\Vector4f.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Src\Graphics\Shaders\FragmentShader.glsl" />
-    <Text Include="Src\Graphics\Shaders\VertexShader.glsl" />
+    <ClInclude Include="Src\PressureEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Res\2017-08-28.png" />
     <Image Include="Res\stallTexture.png" />
     <Image Include="Res\test.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Src\Graphics\Guis\GuiFragmentShader.glsl" />
-    <None Include="Src\Graphics\Particles\ParticleFragmentShader.glsl" />
-    <None Include="Src\Graphics\Particles\ParticleVertexShader.glsl" />
-    <None Include="Src\Graphics\Guis\GuiVertexShader.glsl" />
-    <None Include="Src\Graphics\Shadows\ShadowFragmentShader.glsl" />
-    <None Include="Src\Graphics\Shadows\ShadowVertexShader.glsl" />
-    <None Include="Src\Graphics\Skybox\SkyboxFragmentShader.glsl" />
-    <None Include="Src\Graphics\Skybox\SkyboxVertexShader.glsl" />
-    <None Include="Src\Graphics\Water\WaterFragmentShader.glsl" />
-    <None Include="Src\Graphics\Water\WaterVertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

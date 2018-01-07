@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../DllExport.h"
+
 #include "Vectors\Vector2f.h"
 #include "Vectors\Vector3f.h"
 #include "Vectors\Vector4f.h"
@@ -13,8 +15,9 @@
 
 namespace Pressure {
 
-	struct Math {
+	class PRESSURE_API Math {
 
+	public:
 		static long getTimeMillis();
 		static long getTimeNano();
 

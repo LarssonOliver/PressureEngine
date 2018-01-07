@@ -1,9 +1,10 @@
 #include "EntityShader.h"
+#include "Shaders.h"
 
 namespace Pressure {
 
 	EntityShader::EntityShader() {
-		ShaderProgram::loadShaders(PRESSURE_ENGINE_STATIC_VERTEX_FILE, PRESSURE_ENGINE_STATIC_FRAGMENT_FILE);
+		ShaderProgram::loadShaders(Shaders::vertexShader, Shaders::fragmentShader);
 	}
 
 	void EntityShader::bindAttributes() {

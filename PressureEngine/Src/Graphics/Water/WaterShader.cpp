@@ -1,9 +1,10 @@
 #include "WaterShader.h"
+#include "WaterShaderSource.h"
 
 namespace Pressure {
 
 	WaterShader::WaterShader() {
-		ShaderProgram::loadShaders(PRESSURE_ENGINE_WATER_VERTEX_FILE, PRESSURE_ENGINE_WATER_FRAGMENT_FILE);
+		ShaderProgram::loadShaders(WaterShaderSource::vertexShader, WaterShaderSource::fragmentShader);
 	}
 
 	void WaterShader::bindAttributes() {

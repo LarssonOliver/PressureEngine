@@ -11,9 +11,11 @@ namespace Pressure {
 		int fragmentShaderID;
 
 	public:
+		void loadShaders(const std::string& vertexShader, const std::string& fragmentShader);
 		void loadShaders(const char* vertexPath, const char* fragmentPath);
 
 	private:
+		unsigned int loadShader(const std::string& shader, GLenum type);
 		unsigned int loadShader(const char* filePath, GLenum type);
 		std::string readFile(const char* filePath); // Req by loadShader()
 

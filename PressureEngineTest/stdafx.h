@@ -10,4 +10,7 @@
 // Headers for CppUnitTest
 #include "CppUnitTest.h"
 
+// CppUnitTest Namespace.
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
 // TODO: reference additional headers your program requires here
