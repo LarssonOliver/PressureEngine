@@ -19,4 +19,45 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\stallTexture.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox\skybox_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox\skybox_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox\skybox_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox\skybox_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox\skybox_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox\skybox_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\particleAtlas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\skybox.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Res\test.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Res\ball.obj" />
+    <Object Include="Res\cube.obj" />
+    <Object Include="Res\dragon.obj" />
+    <Object Include="Res\stall.obj" />
+  </ItemGroup>
 </Project>

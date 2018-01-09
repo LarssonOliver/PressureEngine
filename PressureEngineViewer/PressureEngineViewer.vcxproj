@@ -147,6 +147,25 @@
       <Project>{a42e4712-430c-4321-8dc1-bda92a0830b0}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Res\default.png" />
+    <Image Include="Res\particleAtlas.png" />
+    <Image Include="Res\skybox.png" />
+    <Image Include="Res\skybox\skybox_0.png" />
+    <Image Include="Res\skybox\skybox_1.png" />
+    <Image Include="Res\skybox\skybox_2.png" />
+    <Image Include="Res\skybox\skybox_3.png" />
+    <Image Include="Res\skybox\skybox_4.png" />
+    <Image Include="Res\skybox\skybox_5.png" />
+    <Image Include="Res\stallTexture.png" />
+    <Image Include="Res\test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Res\ball.obj" />
+    <Object Include="Res\cube.obj" />
+    <Object Include="Res\dragon.obj" />
+    <Object Include="Res\stall.obj" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
