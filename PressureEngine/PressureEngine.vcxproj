@@ -126,8 +126,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="Src\Callbacks.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Camera.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp" />
@@ -184,7 +182,6 @@
     <ClInclude Include="Src\Common.h" />
     <ClInclude Include="Src\Constants.h" />
     <ClInclude Include="Src\DllExport.h" />
-    <ClInclude Include="Src\Engine.h" />
     <ClInclude Include="Src\Callbacks.h" />
     <ClInclude Include="Src\Graphics\Entities\Camera.h" />
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />

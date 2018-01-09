@@ -54,10 +54,4 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
-  <ItemGroup>
-    <Object Include="Res\ball.obj" />
-    <Object Include="Res\cube.obj" />
-    <Object Include="Res\dragon.obj" />
-    <Object Include="Res\stall.obj" />
-  </ItemGroup>
 </Project>

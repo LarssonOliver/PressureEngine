@@ -11,7 +11,7 @@ namespace Pressure {
 	// Is required to be a C function by OpenGL.
 	void APIENTRY opengl_error_callback(GLenum soruce, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
 		using namespace std;
-		
+
 		// Not interested in notifications.
 		if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
 			return;
@@ -56,7 +56,7 @@ namespace Pressure {
 		}
 		cout << endl;
 		cout << "**** [OpengGL Error END] ****" << endl;
-		
+
 		if (severity == GL_DEBUG_SEVERITY_MEDIUM || severity == GL_DEBUG_SEVERITY_HIGH)
 			__debugbreak();
 	}
