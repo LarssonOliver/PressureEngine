@@ -93,15 +93,15 @@ namespace Pressure {
 	}
 
 	RawModel* PressureEngine::loadObjModel(const char* fileName) {
-		return OBJLoader::loadObjModel(fileName, *loader);
+		return OBJLoader::loadObjModel(fileName, *loader);	
 	}
 
 	ModelTexture PressureEngine::loadTexture(const char* filePath) {
-		return ModelTexture(loader->loadTexture(filePath));
+		return ModelTexture(loader->loadTexture(filePath));		
 	}
 
-	Water* PressureEngine::generateWater(const Vector3f& position) const {
-		return new Water(position, *loader);
+	Water PressureEngine::generateWater(const Vector3f& position) const {
+		return Water(position, *loader);		
 	}
 
 	void PressureEngine::enableErrorCallbacks() {

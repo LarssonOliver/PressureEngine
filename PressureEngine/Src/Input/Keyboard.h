@@ -18,8 +18,9 @@ namespace Pressure {
 	protected:
 		Keyboard();
 		Keyboard(const Keyboard& tm) = delete;
-
 		static Keyboard* inst;
+
+	private:
 		std::vector<bool> keys;
 		
 	};
