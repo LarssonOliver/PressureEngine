@@ -2,7 +2,7 @@
 
 namespace Pressure {
 
-	Light::Light(Vector3f& position, Vector3f& color, Vector3f& attenuation)
+	Light::Light(const Vector3f& position, const Vector3f& color, const Vector3f& attenuation)
 		: position(position), color(color), attenuation(attenuation)
 	{ }
 

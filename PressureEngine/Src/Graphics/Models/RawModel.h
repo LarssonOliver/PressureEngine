@@ -1,9 +1,10 @@
 #pragma once
 #include "..\VertexObjects\VertexArrayObject.h"
+#include "../../DllExport.h"
 
 namespace Pressure {
 
-	class RawModel {
+	class PRESSURE_API RawModel {
 
 	private:
 		VertexArrayObject* vao;

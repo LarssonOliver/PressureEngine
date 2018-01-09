@@ -15,7 +15,7 @@ namespace Pressure {
 		static RawModel* model;
 
 	public:
-		Water(Vector3f& position, Loader& loader);
+		Water(const Vector3f& position, Loader& loader);
 
 		static RawModel* getModel();
 		Vector3f& getPosition();

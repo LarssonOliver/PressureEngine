@@ -2,11 +2,12 @@
 
 #include <vector>
 #include <GLFW\glfw3.h>
+#include "../DllExport.h"
 
 namespace Pressure {
 
 	// Singleton class for mouse input.
-	class Mouse {
+	class PRESSURE_API Mouse {
 
 	public:
 		static Mouse* Inst();

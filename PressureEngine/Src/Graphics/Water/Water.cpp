@@ -10,7 +10,7 @@ namespace Pressure {
 
 	RawModel* Water::model;
 
-	Water::Water(Vector3f& position, Loader& loader)
+	Water::Water(const Vector3f& position, Loader& loader)
 		: position(position) {
 		if (!model)
 			model = generateWater(loader);

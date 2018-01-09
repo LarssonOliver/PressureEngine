@@ -1,10 +1,11 @@
 #pragma once
 #include "../Math.h"
 #include <GLFW\glfw3.h>
+#include "../../DllExport.h"
 
 namespace Pressure {
 
-	struct Matrix4f {
+	struct PRESSURE_API Matrix4f {
 
 		/* COMPONENTS */
 		// Formatted val[row + column * 4]

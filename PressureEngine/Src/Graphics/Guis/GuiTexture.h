@@ -6,7 +6,7 @@ namespace Pressure {
 	class GuiTexture {
 
 	private:
-		const unsigned int texture;
+		unsigned int texture;
 		Vector2f position;
 		Vector2f scale;
 		bool isTexture;

@@ -2,11 +2,12 @@
 
 #include <vector>
 #include <GLFW\glfw3.h>
+#include "../DllExport.h"
 
 namespace Pressure {
 
 	// Singleton class for keyboard input.
-	class Keyboard {
+	class PRESSURE_API Keyboard {
 
 	public:
 		static Keyboard* Inst();

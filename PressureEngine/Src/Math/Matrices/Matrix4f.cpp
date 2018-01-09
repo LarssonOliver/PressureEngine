@@ -491,7 +491,7 @@ namespace Pressure {
 		if (det == 0)
 			return dest.identity();
 
-		det = 1.0 / det;
+		det = 1.0f / det;
 
 		for (int i = 0; i < 16; i++)
 			dest.val[i] = inv[i] * det;

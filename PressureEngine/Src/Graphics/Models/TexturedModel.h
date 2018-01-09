@@ -1,10 +1,11 @@
 #pragma once
 #include "../Models/RawModel.h"
 #include "../Textures/ModelTexture.h"
+#include "../../DllExport.h"
 
 namespace Pressure {
 
-	class TexturedModel {
+	class PRESSURE_API TexturedModel {
 
 	private:
 		RawModel* rawModel;

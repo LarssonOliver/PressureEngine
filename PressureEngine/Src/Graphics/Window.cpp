@@ -57,9 +57,13 @@ namespace Pressure {
 		resized = true;
 	}
 
-	void Window::tick() {
-		// Implement key callbacks here?
+	void Window::swapBuffers() const {
+		glfwSwapBuffers(window);
 	}
+
+	//void Window::tick() {
+	//	// Implement key callbacks here?
+	//}
 
 	void Window::setTitle(const char* title) {
 		this->title = title;
@@ -70,6 +74,14 @@ namespace Pressure {
 		glfwSetWindowSize(window, width, height);
 		this->width = width;
 		this->height = height;
+	}
+
+	bool Window::isClosing() const {
+		return glfwWindowShouldClose(window);
+	}
+
+	void Window::close() const {
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
 
 	int Window::getWidth() {

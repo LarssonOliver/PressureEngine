@@ -12,7 +12,7 @@ namespace Pressure {
 		shader.cleanUp();
 	}
 
-	void GuiRenderer::render(std::list<GuiTexture>& guis) {
+	void GuiRenderer::render(std::vector<GuiTexture>& guis) {
 		shader.start();
 		glBindVertexArray(quad.getVaoID());
 		glEnableVertexAttribArray(0);

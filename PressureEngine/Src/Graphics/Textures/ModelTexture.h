@@ -1,8 +1,9 @@
 #pragma once
+#include "../../DllExport.h"
 
 namespace Pressure {
 
-	class ModelTexture {
+	class PRESSURE_API ModelTexture {
 
 	private:
 		unsigned int textureID;
