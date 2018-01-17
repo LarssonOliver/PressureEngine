@@ -18,7 +18,7 @@ namespace Pressure {
 	}
 
 	void ShadowFrameBuffer::unbind() {
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, NULL);
 		glViewport(0, 0, window.getWidth(), window.getHeight());
 	}
 

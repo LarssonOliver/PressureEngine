@@ -177,6 +177,8 @@
     <ClCompile Include="Src\Math\Vectors\Vector3f.cpp" />
     <ClCompile Include="Src\Math\Vectors\Vector4f.cpp" />
     <ClCompile Include="Src\PressureEngine.cpp" />
+    <ClCompile Include="Src\Services\FileStream.cpp" />
+    <ClCompile Include="Src\Services\Properties.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Common.h" />
@@ -236,6 +238,8 @@
     <ClInclude Include="Src\Math\Vectors\Vector3f.h" />
     <ClInclude Include="Src\Math\Vectors\Vector4f.h" />
     <ClInclude Include="Src\PressureEngine.h" />
+    <ClInclude Include="Src\Services\FileStream.h" />
+    <ClInclude Include="Src\Services\Properties.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Res\2017-08-28.png" />

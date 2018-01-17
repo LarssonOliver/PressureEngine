@@ -7,6 +7,7 @@
 #include "Math\Math.h"
 #include "Input\Input.h"
 #include "Graphics\GraphicsCommon.h"
+#include "Services\Properties.h"
 
 namespace Pressure {
 

@@ -1,6 +1,5 @@
 #include "PressureEngine.h"
 
-
 namespace Pressure {
 
 	void PressureEngine::init() {
@@ -28,8 +27,8 @@ namespace Pressure {
 		camera = std::make_unique<Camera>();
 		renderer = std::make_unique<MasterRenderer>(*window, *loader, *camera);
 		guiRenderer = std::make_unique<GuiRenderer>(*loader);
-		ParticleMaster::init(*loader, window->getWindow());
-
+		ParticleMaster::init(*loader, window->getWindow());		
+		const char* f = Properties::Inst()->get("f").c_str();
 		initialized = true;
 	}
 
