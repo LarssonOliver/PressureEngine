@@ -1,5 +1,6 @@
 #include "ShadowBox.h"
 #include "../../Constants.h"
+#include "../../Services/Properties.h"
 
 namespace Pressure {
 
@@ -115,8 +116,8 @@ namespace Pressure {
 	}
 
 	void ShadowBox::calculateWidthsAndHeights() {
-		farWidth = (float) (SHADOW_DISTANCE * std::tan(Math::toRadians(PRESSRE_FOV)));
-		nearWidth = (float) (PRESSRE_NEAR_PLANE * std::tan(Math::toRadians(PRESSRE_FOV)));
+		farWidth = (float) (SHADOW_DISTANCE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
+		nearWidth = (float) (PRESSRE_NEAR_PLANE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
 		farHeight = farWidth / getAspectRatio();
 		nearHeight = nearWidth / getAspectRatio();
 	}

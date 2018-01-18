@@ -9,7 +9,7 @@ namespace Pressure {
 			__debugbreak();
 		}
 
-		window = std::make_unique<Window>(PRESSURE_WINDOW_WIDTH, PRESSURE_WINDOW_HEIGHT, PRESSURE_WINDOW_TITLE, PRESSURE_WINDOW_FULLSCREEN, PRESSURE_WINDOW_VSYNC);
+		window = std::make_unique<Window>(std::stoi(Properties::Inst()->get("windowWidth")), std::stoi(Properties::Inst()->get("windowHeight")), Properties::Inst()->get("windowTitle").c_str(), std::stoi(Properties::Inst()->get("windowFullscreen")), std::stoi(Properties::Inst()->get("windowVsync")));
 		
 		// Initialize GLEW.
 		unsigned int err = glewInit();
@@ -22,13 +22,15 @@ namespace Pressure {
 		// Enable OpenGL debugging callback.
 		enableErrorCallbacks();
 #endif
+		// Hide console if specified in properties file.
+		if (std::stoi(Properties::Inst()->get("hideConsole")))
+			::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
 		loader = std::make_unique<Loader>();
 		camera = std::make_unique<Camera>();
 		renderer = std::make_unique<MasterRenderer>(*window, *loader, *camera);
 		guiRenderer = std::make_unique<GuiRenderer>(*loader);
 		ParticleMaster::init(*loader, window->getWindow());		
-		const char* f = Properties::Inst()->get("f").c_str();
 		initialized = true;
 	}
 

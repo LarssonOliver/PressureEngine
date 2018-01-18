@@ -8,6 +8,7 @@
 #include "Input\Input.h"
 #include "Graphics\GraphicsCommon.h"
 #include "Services\Properties.h"
+#include <Windows.h>
 
 namespace Pressure {
 

@@ -60,8 +60,14 @@ namespace Pressure {
 	}
 
 	const std::unordered_map<std::string, std::string> Properties::defaults = {
-		{"s", "s"},
-		{"f", "f"}
+		{ "windowWidth", "1280" },
+		{ "windowHeight", "720" },
+		{ "windowTitle", "PressureEngine" },
+		{ "windowFullscreen", "0" },
+		{ "windowVsync", "0" },
+
+		{ "fov", "70" },
+		{ "hideConsole", "1" }
 	};
 
 }
