@@ -39,12 +39,6 @@
     <ClCompile Include="Src\Graphics\Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -174,6 +168,18 @@
     <ClCompile Include="Src\Services\FileStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics\GLObjects\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\GLObjects\IndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -201,12 +207,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Graphics\VertexObjects\VertexBufferObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\GraphicsCommon.h">
@@ -351,6 +351,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Services\FileStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\GLObjects\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\VertexObjects\VertexBufferObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\GLObjects\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

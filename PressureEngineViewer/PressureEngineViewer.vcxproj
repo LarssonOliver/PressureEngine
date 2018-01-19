@@ -160,6 +160,9 @@
     <Image Include="Res\stallTexture.png" />
     <Image Include="Res\test.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="pressure.properties" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -9,7 +9,9 @@ namespace Pressure {
 			__debugbreak();
 		}
 
-		window = std::make_unique<Window>(std::stoi(Properties::Inst()->get("windowWidth")), std::stoi(Properties::Inst()->get("windowHeight")), Properties::Inst()->get("windowTitle").c_str(), std::stoi(Properties::Inst()->get("windowFullscreen")), std::stoi(Properties::Inst()->get("windowVsync")));
+		window = std::make_unique<Window>(std::stoi(Properties::Inst()->get("windowWidth")),
+			std::stoi(Properties::Inst()->get("windowHeight")), Properties::Inst()->get("windowTitle").c_str(),
+			std::stoi(Properties::Inst()->get("windowFullscreen")), std::stoi(Properties::Inst()->get("windowVsync")));
 		
 		// Initialize GLEW.
 		unsigned int err = glewInit();
