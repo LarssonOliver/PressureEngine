@@ -131,6 +131,7 @@
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Light.cpp" />
     <ClCompile Include="Src\Graphics\GLObjects\IndexBuffer.cpp" />
+    <ClCompile Include="Src\Graphics\GLObjects\VertexArray.cpp" />
     <ClCompile Include="Src\Graphics\GLObjects\VertexBuffer.cpp" />
     <ClCompile Include="Src\Graphics\Guis\GuiRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Guis\GuiShader.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />
     <ClInclude Include="Src\Graphics\Entities\Light.h" />
     <ClInclude Include="Src\Graphics\GLObjects\IndexBuffer.h" />
+    <ClInclude Include="Src\Graphics\GLObjects\VertexArray.h" />
     <ClInclude Include="Src\Graphics\GLObjects\VertexBuffer.h" />
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
     <ClInclude Include="Src\Graphics\Guis\GuiRenderer.h" />
