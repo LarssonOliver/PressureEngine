@@ -7,7 +7,7 @@ namespace Pressure {
 		: shader(shader), projectionViewMatrix(projectionViewMatrix) {		
 	}
 
-	void ShadowMapEntityRenderer::render(const std::unordered_map<TexturedModel, std::vector<Entity>>& entities) {
+	void ShadowMapEntityRenderer::render(const std::map<TexturedModel, std::vector<Entity>>& entities) {
 		for (const auto& model : entities) {
 			model.first.getRawModel().getVertexArray().bind();
 			glEnableVertexAttribArray(0);

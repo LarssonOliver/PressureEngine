@@ -21,8 +21,7 @@ namespace Pressure {
 
 	public:
 		VertexBufferLayout()
-			: m_Stride(0) {
-		}
+			: m_Stride(0) { }
 
 		template<typename T>
 		void push(const unsigned int count, const VertexBuffer& buffer) {
@@ -31,11 +30,11 @@ namespace Pressure {
 
 		template<>
 		void push<float>(const unsigned int count, const VertexBuffer& buffer) {
-			m_Elements.emplace_back(buffer, GL_FLOAT, count, false);
+			m_Elements.push_back({ buffer, GL_FLOAT, count, false });
 			m_Stride += count * sizeof(float);
 		}
 
-		inline std::vector<VertexBufferElement> getElements() const { return m_Elements; }
+		inline std::vector<VertexBufferElement>& getElements() { return m_Elements; }
 		inline unsigned int getStride() const { return m_Stride; }		
 
 	};

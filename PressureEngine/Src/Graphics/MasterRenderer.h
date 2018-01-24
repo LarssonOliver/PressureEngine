@@ -1,5 +1,5 @@
 #pragma once
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 #include "Shaders\EntityShader.h"
@@ -28,7 +28,7 @@ namespace Pressure {
 		WaterRenderer waterRenderer;
 		WaterFrameBuffers waterBuffers;
 
-		std::unordered_map<TexturedModel, std::vector<Entity>> entities;
+		std::map<TexturedModel, std::vector<Entity>> entities;
 		std::vector<Water> water;
 
 	public:

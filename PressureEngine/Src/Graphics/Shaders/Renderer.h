@@ -1,5 +1,5 @@
 #pragma once
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 #include "EntityShader.h"
@@ -19,7 +19,7 @@ namespace Pressure {
 
 	public:
 		Renderer(EntityShader& shader, GLFWwindow* window);
-		void render(std::unordered_map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace);
+		void render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace);
 
 		void updateProjectionMatrix(EntityShader& shader);
 

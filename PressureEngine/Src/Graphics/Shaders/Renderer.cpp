@@ -9,11 +9,11 @@ namespace Pressure {
 		updateProjectionMatrix(shader);
 	}
 
-	void Renderer::render(std::unordered_map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace) {
+	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace) {
 		shader.loadToShadowMapSpace(toShadowSpace);
 		for (auto const& model : entities) {
 			prepareTexturedModel(model.first);
-			std::vector<Entity>& batch = entities.at(model.first);
+			std::vector<Entity>& batch = entities[model.first];
 			for (Entity& entity : batch) {
 				prepareInstance(entity);
 				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
