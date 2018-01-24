@@ -11,10 +11,10 @@ namespace Pressure {
 	class OBJLoader {
 
 	public:
-		static RawModel* loadObjModel(const char* fileName, Loader& loader);
+		static RawModel load(const char* fileName, Loader& loader);
 
 	private:
-		static void processFaces(std::string& data, unsigned int lineStart, std::list<int>& indices, std::vector<Vector2f>& uvs,
+		static void processFaces(std::string& data, unsigned int lineStart, std::vector<unsigned int>& indices, std::vector<Vector2f>& uvs,
 			std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray);
 	};
 

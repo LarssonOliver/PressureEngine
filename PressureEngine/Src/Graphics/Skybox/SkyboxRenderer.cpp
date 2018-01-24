@@ -47,8 +47,8 @@ namespace Pressure {
 		PRESSURE_SKYBOX_SIZE, -PRESSURE_SKYBOX_SIZE, PRESSURE_SKYBOX_SIZE
 	};
 
-	SkyboxRenderer::SkyboxRenderer(Loader& loader, GLFWwindow* window) : window(window) {
-		cube = loader.loadToVao(VERTICES, 3);
+	SkyboxRenderer::SkyboxRenderer(Loader& loader, GLFWwindow* window)
+		: window(window), cube(loader.loadToVao(VERTICES, 3)) {
 		texture = loader.loadCubeMap(PRESSURE_SKYBOX_FILE);
 		updateProjectionMatrix();
 	}
@@ -62,7 +62,7 @@ namespace Pressure {
 	void SkyboxRenderer::render(Camera& camera) {
 		shader.start();
 		shader.loadViewMatrix(camera);
-		glBindVertexArray(cube->getVaoID());
+		cube.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glActiveTexture(GL_TEXTURE0);
 		TextureManager::Inst()->BindTexture(texture, GL_TEXTURE_CUBE_MAP);
@@ -71,9 +71,9 @@ namespace Pressure {
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glDrawArrays(GL_TRIANGLES, 0, cube->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, cube.getVertexCount());
 		glDisableVertexAttribArray(0);
-		glBindVertexArray(0);
+		cube.getVertexArray().unbind();
 		shader.stop();
 	}
 

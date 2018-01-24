@@ -5,7 +5,7 @@
 namespace Pressure {
 
 	GuiRenderer::GuiRenderer(Loader& loader) 
-		: quad(*loader.loadToVao({ -1, 1, -1, -1, 1, 1, 1, -1 }, 2)) {
+		: quad(loader.loadToVao({ -1, 1, -1, -1, 1, 1, 1, -1 }, 2)) {
 	}
 
 	GuiRenderer::~GuiRenderer() {
@@ -14,7 +14,7 @@ namespace Pressure {
 
 	void GuiRenderer::render(std::vector<GuiTexture>& guis) {
 		shader.start();
-		glBindVertexArray(quad.getVaoID());
+		quad.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -31,7 +31,7 @@ namespace Pressure {
 		glDisable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);
 		glDisableVertexAttribArray(0);
-		glBindVertexArray(NULL);
+		quad.getVertexArray().unbind();
 		shader.stop();
 	}
 

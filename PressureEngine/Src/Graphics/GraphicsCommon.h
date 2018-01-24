@@ -7,3 +7,4 @@
 #include "Particles\ParticleMaster.h"
 #include "Particles\ParticleSystem.h"
 #include "Guis\GuiRenderer.h"
+#include "GLObjects\GLObjects.h"

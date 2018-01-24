@@ -139,7 +139,6 @@
     <ClCompile Include="Src\Graphics\Guis\GuiTexture.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
     <ClCompile Include="Src\Graphics\MasterRenderer.cpp" />
-    <ClCompile Include="Src\Graphics\Models\TexturedModel.cpp" />
     <ClCompile Include="Src\Graphics\OBJLoader.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Particles\Particle.cpp" />
@@ -149,7 +148,6 @@
     <ClCompile Include="Src\Graphics\Particles\ParticleSystem.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleTexture.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp" />
-    <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\Shaders.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowShaderSource.cpp" />
@@ -164,8 +162,6 @@
     <ClCompile Include="Src\Graphics\Skybox\SkyboxShader.cpp" />
     <ClCompile Include="Src\Graphics\Textures\ModelTexture.cpp" />
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp" />
-    <ClCompile Include="Src\Graphics\VertexObjects\VertexArrayObject.cpp" />
-    <ClCompile Include="Src\Graphics\VertexObjects\VertexBufferObject.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Water\Water.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterFrameBuffers.cpp" />
@@ -191,9 +187,11 @@
     <ClInclude Include="Src\Graphics\Entities\Camera.h" />
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />
     <ClInclude Include="Src\Graphics\Entities\Light.h" />
+    <ClInclude Include="Src\Graphics\GLObjects\GLObjects.h" />
     <ClInclude Include="Src\Graphics\GLObjects\IndexBuffer.h" />
     <ClInclude Include="Src\Graphics\GLObjects\VertexArray.h" />
     <ClInclude Include="Src\Graphics\GLObjects\VertexBuffer.h" />
+    <ClInclude Include="Src\Graphics\GLObjects\VertexBufferLayout.h" />
     <ClInclude Include="Src\Graphics\GraphicsCommon.h" />
     <ClInclude Include="Src\Graphics\Guis\GuiRenderer.h" />
     <ClInclude Include="Src\Graphics\Guis\GuiShader.h" />
@@ -226,8 +224,6 @@
     <ClInclude Include="Src\Graphics\Skybox\SkyboxShader.h" />
     <ClInclude Include="Src\Graphics\Textures\ModelTexture.h" />
     <ClInclude Include="Src\Graphics\Textures\TextureManager.h" />
-    <ClInclude Include="Src\Graphics\VertexObjects\VertexArrayObject.h" />
-    <ClInclude Include="Src\Graphics\VertexObjects\VertexBufferObject.h" />
     <ClInclude Include="Src\Graphics\Water\WaterShaderSource.h" />
     <ClInclude Include="Src\Graphics\Water\Water.h" />
     <ClInclude Include="Src\Graphics\Water\WaterFrameBuffers.h" />

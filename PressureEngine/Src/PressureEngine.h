@@ -50,7 +50,7 @@ namespace Pressure {
 		void render();
 
 		// Loads model.
-		RawModel* loadObjModel(const char* fileNmae);
+		RawModel loadObjModel(const char* fileNmae);
 		ModelTexture loadTexture(const char* filePath);
 
 		Water generateWater(const Vector3f& position) const;

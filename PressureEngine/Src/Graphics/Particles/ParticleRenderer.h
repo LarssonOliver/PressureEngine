@@ -19,11 +19,9 @@ namespace Pressure {
 		static std::vector<float> buffer;
 		int pointer;
 
-		RawModel* quad;
+		RawModel quad;
 		ParticleShader shader;
-		Loader& loader;
-
-		unsigned int vbo;
+		VertexBuffer vbo;
 
 	public:
 		ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix);

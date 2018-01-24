@@ -10,13 +10,13 @@ namespace Pressure {
 	std::vector<float> ParticleRenderer::buffer;
 
 	ParticleRenderer::ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix)
-		: quad(loader.loadToVao(VERTICES, 2)), loader(loader), vbo(loader.createEmptyVbo(INSTANCE_DATA_LENGTH)) {
-		loader.addInstancedAttribute(quad->getVaoID(), vbo, 1, 4, INSTANCE_DATA_LENGTH, 0);
-		loader.addInstancedAttribute(quad->getVaoID(), vbo, 2, 4, INSTANCE_DATA_LENGTH, 4);
-		loader.addInstancedAttribute(quad->getVaoID(), vbo, 3, 4, INSTANCE_DATA_LENGTH, 8);
-		loader.addInstancedAttribute(quad->getVaoID(), vbo, 4, 4, INSTANCE_DATA_LENGTH, 12);
-		loader.addInstancedAttribute(quad->getVaoID(), vbo, 5, 4, INSTANCE_DATA_LENGTH, 16);
-		loader.addInstancedAttribute(quad->getVaoID(), vbo, 6, 1, INSTANCE_DATA_LENGTH, 20);
+		: quad(loader.loadToVao(VERTICES, 2)), vbo(nullptr, INSTANCE_DATA_LENGTH) {
+		vbo.addInstancedAttribute(quad.getVertexArray(), 1, 4, INSTANCE_DATA_LENGTH, 0);
+		vbo.addInstancedAttribute(quad.getVertexArray(), 2, 4, INSTANCE_DATA_LENGTH, 4);
+		vbo.addInstancedAttribute(quad.getVertexArray(), 3, 4, INSTANCE_DATA_LENGTH, 8);
+		vbo.addInstancedAttribute(quad.getVertexArray(), 4, 4, INSTANCE_DATA_LENGTH, 12);
+		vbo.addInstancedAttribute(quad.getVertexArray(), 5, 4, INSTANCE_DATA_LENGTH, 16);
+		vbo.addInstancedAttribute(quad.getVertexArray(), 6, 1, INSTANCE_DATA_LENGTH, 20);
 		shader.start();
 		shader.loadProjectionMatrix(projectionMatrix);
 	}
@@ -34,8 +34,8 @@ namespace Pressure {
 				updateViewMatrix(particle.getPosition(), particle.getRotation(), particle.getScale(), viewMatrix);
 				updateTexCoordInfo(particle);
 			}
-			loader.updateVbo(vbo, buffer);
-			glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, quad->getVertexCount(), it->second.size());
+			vbo.update(&buffer[0], buffer.size() * sizeof(float));
+			glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, quad.getVertexCount(), it->second.size());
 		}
 		finish();
 	}
@@ -46,7 +46,7 @@ namespace Pressure {
 
 	void ParticleRenderer::prepare() {
 		shader.start();
-		quad->getVao()->bind();
+		quad.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);

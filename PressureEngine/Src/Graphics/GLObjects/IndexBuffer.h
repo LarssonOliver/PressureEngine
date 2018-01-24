@@ -9,7 +9,7 @@ namespace Pressure {
 		unsigned int m_Count;
 
 	public:
-		IndexBuffer(const unsigned int* data, unsigned int count);
+		IndexBuffer(const unsigned int* data, const unsigned int count);
 		~IndexBuffer();
 
 		void bind() const;

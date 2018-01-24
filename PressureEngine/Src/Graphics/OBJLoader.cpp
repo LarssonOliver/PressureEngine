@@ -7,12 +7,9 @@ using namespace std;
 
 namespace Pressure {
 
-	RawModel* OBJLoader::loadObjModel(const char* fileName, Loader& loader) {
+	RawModel OBJLoader::load(const char* fileName, Loader& loader) {
 
 		ifstream file("res/" + string(fileName) + ".obj");
-
-		if (!file.is_open())
-			return nullptr;
 
 		//TODO: handle files larger than memory.
 
@@ -21,10 +18,10 @@ namespace Pressure {
 		string data = sstr.str();
 		file.close();
 
-		list<float> vertices;
-		list<Vector2f> uvs;
+		vector<float> vertices;
+		vector<Vector2f> uvs;
 		vector<Vector3f> normals;
-		list<int> indices;
+		vector<unsigned int> indices;
 
 		vector<float> textureArray;
 		vector<float> normalsArray;
@@ -67,7 +64,7 @@ namespace Pressure {
 						uvs.emplace_back(1.f);
 					}
 
-					processFaces(data, lineStart, indices, vector<Vector2f>{make_move_iterator(begin(uvs)), make_move_iterator(end(uvs))}, normals, textureArray, normalsArray);
+					processFaces(data, lineStart, indices, uvs, normals, textureArray, normalsArray);
 					break;
 				}
 
@@ -75,12 +72,12 @@ namespace Pressure {
 			}
 		}
 
-		return loader.loadToVao(vector<float>{make_move_iterator(begin(vertices)), make_move_iterator(end(vertices))}, textureArray, normalsArray, vector<int>{make_move_iterator(begin(indices)), make_move_iterator(end(indices))});
+		return loader.loadToVao(VertexBuffer(&vertices[0], vertices.size() * sizeof(float)), VertexBuffer(&textureArray[0], textureArray.size() * sizeof(float)), VertexBuffer(&normalsArray[0], normalsArray.size() * sizeof(float)), indices);
 
 	}
+	
 
-
-	void OBJLoader::processFaces(std::string& data, unsigned int lineStart, list<int>& indices, vector<Vector2f>& uvs,
+	void OBJLoader::processFaces(std::string& data, unsigned int lineStart, vector<unsigned int>& indices, vector<Vector2f>& uvs,
 		std::vector<Vector3f>& normals, std::vector<float>& textureArray, std::vector<float>& normalsArray) {
 
 		unsigned short lineLength;

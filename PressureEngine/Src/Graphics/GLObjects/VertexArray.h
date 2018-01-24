@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\GraphicsCommon.h"
+#include "VertexBufferLayout.h"
 
 namespace Pressure {
 
@@ -8,6 +8,7 @@ namespace Pressure {
 
 	private:
 		unsigned int m_ID;
+		VertexBufferLayout m_Layout;
 
 	public:
 		VertexArray(); 
@@ -16,6 +17,8 @@ namespace Pressure {
 		void bind() const;
 		void unbind() const;
 
+		void bindLayout(const VertexBufferLayout& layout);
+		
 	};
 
 }

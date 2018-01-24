@@ -8,15 +8,15 @@ namespace Pressure {
 	const int Water::SIZE = 32;
 	const int Water::VERTEX_COUNT = 64;
 
-	RawModel* Water::model;
+	RawModel Water::model;
 
 	Water::Water(const Vector3f& position, Loader& loader)
 		: position(position) {
-		if (!model)
+		if (model.getVertexCount() == 0)
 			model = generateWater(loader);
 	}
 
-	RawModel* Water::getModel() {
+	RawModel Water::getModel() {
 		return Water::model;
 	}
 
@@ -24,7 +24,7 @@ namespace Pressure {
 		return position;
 	}
 
-	RawModel* Water::generateWater(Loader& loader) {
+	RawModel Water::generateWater(Loader& loader) {
 		int count = VERTEX_COUNT * VERTEX_COUNT;
 		vector<float> vertices(count * 3);
 		int vertexPointer = 0;
@@ -36,7 +36,7 @@ namespace Pressure {
 				vertexPointer++;
 			}
 		}
-		vector<int> indices(6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1));
+		vector<unsigned int> indices(6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1));
 		int pointer = 0;
 		for (int gz = 0; gz < VERTEX_COUNT - 1; gz++) {
 			for (int gx = 0; gx < VERTEX_COUNT - 1; gx++) {
@@ -52,7 +52,7 @@ namespace Pressure {
 				indices[pointer++] = bottomLeft + 1;
 			}
 		}
-		return loader.loadToVao(vertices, indices);
+		return loader.loadToVao(VertexBuffer(&vertices[0], vertices.size() * sizeof(float)), indices);
 	}
 
 }

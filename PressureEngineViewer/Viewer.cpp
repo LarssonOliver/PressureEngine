@@ -23,7 +23,7 @@ namespace PressureEngineViewer {
 		}
 
 		void init() {
-			RawModel* model = engine.loadObjModel("ball");
+			RawModel model = engine.loadObjModel("ball");
 			ModelTexture* texture = new ModelTexture(engine.loadTexture("default.png"));
 			texture->setShineDamper(10);
 			texture->setReflectivity(1);

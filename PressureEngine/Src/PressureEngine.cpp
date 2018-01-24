@@ -95,8 +95,8 @@ namespace Pressure {
 		guis.clear();
 	}
 
-	RawModel* PressureEngine::loadObjModel(const char* fileName) {
-		return OBJLoader::loadObjModel(fileName, *loader);	
+	RawModel PressureEngine::loadObjModel(const char* fileName) {
+		return OBJLoader::load(fileName, *loader);	
 	}
 
 	ModelTexture PressureEngine::loadTexture(const char* filePath) {
@@ -125,7 +125,6 @@ namespace Pressure {
 	}
 
 	void PressureEngine::terminate() {
-		loader->cleanUp();
 		renderer->cleanUp();
 		ParticleMaster::cleanUp();
 		glfwTerminate();

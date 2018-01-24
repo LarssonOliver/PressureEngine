@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
-#include "VertexObjects\VertexArrayObject.h"
-#include "VertexObjects\VertexBufferObject.h"
+#include <array>
 #include "Models\RawModel.h"
 
 namespace Pressure {
@@ -9,30 +8,22 @@ namespace Pressure {
 	class Loader {
 
 	private:
-		std::vector<VertexArrayObject*> vaos;
-		std::vector<VertexBufferObject*> vbos;
-		std::vector<RawModel*> rawModels;
+		//std::vector<VertexArrayObject*> vaos;
+		//std::vector<VertexBufferObject*> vbos;
+		//std::vector<RawModel*> rawModels;
 
 		// Do i even need this?
 		std::vector<unsigned int> textures;
 
 	public:
-		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<int>& indices);
-		RawModel* loadToVao(const std::vector<float>& positions, const std::vector<int>& indices);
-		RawModel* loadToVao(const std::vector<float>& positions, const int dimensions);
+		~Loader();
+
+		RawModel loadToVao(const VertexBuffer& positions, const VertexBuffer& textureCoords, const VertexBuffer& normals, const std::vector<unsigned int>& indices);
+		RawModel loadToVao(const VertexBuffer& positions, const std::vector<unsigned int>& indices);
+		RawModel loadToVao(const std::vector<float>& positions, const unsigned int dimensions);
 		unsigned int loadTexture(const char* filePath);
 		unsigned int loadCubeMap(const char* filePath);
-		unsigned int createEmptyVbo(int floatCount);
-		void cleanUp();
-
-		void addInstancedAttribute(const unsigned int vao, const unsigned int vbo, int attribute, int dataSize, int instancedDataLength, int offset);
-		void updateVbo(int vbo, std::vector<float>& data);
-
-	private:
-		VertexArrayObject* createVAO();
-		void storeDataInAttributeList(const int attributeNumber, const int coordinateSize, const std::vector<float>& data);
-		void bindIndicesBuffer(const std::vector<int>& indices);
-
+		
 	};
 
 }

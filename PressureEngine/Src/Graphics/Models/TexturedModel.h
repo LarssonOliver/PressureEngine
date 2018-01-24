@@ -8,17 +8,15 @@ namespace Pressure {
 	class PRESSURE_API TexturedModel {
 
 	private:
-		RawModel* rawModel;
-		ModelTexture* texture;
+		RawModel m_RawModel;
+		ModelTexture* m_Texture;
 
 	public:
-		TexturedModel(RawModel* model, ModelTexture* texture);
-		~TexturedModel();
-		RawModel* getRawModel() const;
-		ModelTexture* getTexture() const;
+		TexturedModel(RawModel model, ModelTexture* texture)
+			: m_RawModel(model), m_Texture(texture) { }
 
-		// Needs to be implemented to be used as key in map;
-		bool operator<(const TexturedModel& right) const;
+		inline RawModel getRawModel() const { return m_RawModel; }
+		inline ModelTexture* getTexture() const { return m_Texture; }
 
 	};
 
