@@ -1,10 +1,11 @@
 #pragma once
 
+#include "../../DllExport.h"
 #include "VertexBufferLayout.h"
 
 namespace Pressure {
 
-	class VertexArray {
+	class PRESSURE_API VertexArray {
 
 	private:
 		unsigned int m_ID;

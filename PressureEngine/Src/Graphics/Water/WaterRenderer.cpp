@@ -26,7 +26,7 @@ namespace Pressure {
 		prepare(water, lights, camera);
 		for (Water& w : water) {
 			shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(w.getPosition(), Vector3f(0), 1));
-			glDrawElements(GL_TRIANGLES, w.getModel()->getVertexCount(), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, w.getModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 		}
 		finish(water);
 	}
@@ -36,7 +36,7 @@ namespace Pressure {
 		shader.loadViewMatrix(camera);
 		shader.loadWaveModifier((float) Math::toRadians(waveModifier));
 		shader.loadLights(lights);
-		Water::getModel()->getVao()->bind();
+		Water::getModel().getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, fbos.getReflectionTexture());
@@ -50,7 +50,7 @@ namespace Pressure {
 
 	void WaterRenderer::finish(std::vector<Water>& water) {
 		glDisableVertexAttribArray(0);
-		water[0].getModel()->getVao()->unbind();
+		Water::getModel().getVertexArray().unbind();
 		shader.stop();
 		glDisable(GL_BLEND);
 	}

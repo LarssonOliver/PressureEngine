@@ -1,6 +1,6 @@
 #include "IndexBuffer.h"
 
-#include "../../Common.h"
+#include "../GraphicsCommon.h"
 
 namespace Pressure {
 

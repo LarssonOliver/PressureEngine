@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "VertexArray.h"
+#include "../../Common.h"
 
 namespace Pressure {
 
@@ -18,7 +18,7 @@ namespace Pressure {
 		void unbind() const;
 
 		void update(const void* data, const unsigned int size) const;
-		//void addInstancedAttribute(const VertexArray& va, const unsigned int attribute, const unsigned int size, const unsigned int count, const unsigned int offset) const;		
+		void addInstancedAttribute(const unsigned int attribute, const unsigned int size, const unsigned int count, const unsigned int offset) const;		
 
 	};
 

@@ -9,16 +9,16 @@ namespace Pressure {
 		updateProjectionMatrix(shader);
 	}
 
-	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace) {
+	void Renderer::render(std::unordered_map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace) {
 		shader.loadToShadowMapSpace(toShadowSpace);
 		for (auto const& model : entities) {
 			prepareTexturedModel(model.first);
 			std::vector<Entity>& batch = entities.at(model.first);
 			for (Entity& entity : batch) {
 				prepareInstance(entity);
-				glDrawElements(GL_TRIANGLES, model.first.getRawModel()->getVertexCount(), GL_UNSIGNED_INT, 0);
+				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 			}
-			unbindTexturedModel(*model.first.getRawModel());
+			unbindTexturedModel(model.first.getRawModel());
 		}
 	}
 
@@ -30,8 +30,8 @@ namespace Pressure {
 	}
 
 	void Renderer::prepareTexturedModel(const TexturedModel& texturedModel) {
-		RawModel& model = *texturedModel.getRawModel();
-		model.getVao()->bind();
+		RawModel& model = texturedModel.getRawModel();
+		model.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
@@ -49,7 +49,7 @@ namespace Pressure {
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
-		model.getVao()->unbind();
+		model.getVertexArray().unbind();
 	}
 
 	void Renderer::prepareInstance(Entity& entity) {

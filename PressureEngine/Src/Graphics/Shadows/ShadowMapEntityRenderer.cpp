@@ -7,25 +7,21 @@ namespace Pressure {
 		: shader(shader), projectionViewMatrix(projectionViewMatrix) {		
 	}
 
-	void ShadowMapEntityRenderer::render(const std::map<TexturedModel, std::vector<Entity>>& entities) {
+	void ShadowMapEntityRenderer::render(const std::unordered_map<TexturedModel, std::vector<Entity>>& entities) {
 		for (const auto& model : entities) {
-			bindModel(*model.first.getRawModel());
+			model.first.getRawModel().getVertexArray().bind();
+			glEnableVertexAttribArray(0);
 			if (model.first.getTexture()->isHasTransparency())
 				MasterRenderer::disableCulling();
 			for (const auto& entity : model.second) {
 				prepareInstance(entity);
-				glDrawElements(GL_TRIANGLES, model.first.getRawModel()->getVertexCount(), GL_UNSIGNED_INT, 0);
+				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 			}
 			if (model.first.getTexture()->isHasTransparency())
 				MasterRenderer::enableCulling();
 		}
 		glDisableVertexAttribArray(0);
 		glBindVertexArray(0);
-	}
-
-	void ShadowMapEntityRenderer::bindModel(const RawModel& rawModel) const {
-		glBindVertexArray(rawModel.getVaoID());
-		glEnableVertexAttribArray(0);
 	}
 
 	void ShadowMapEntityRenderer::prepareInstance(const Entity& entity) {

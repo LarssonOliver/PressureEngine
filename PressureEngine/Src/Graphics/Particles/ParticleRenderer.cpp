@@ -11,12 +11,14 @@ namespace Pressure {
 
 	ParticleRenderer::ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix)
 		: quad(loader.loadToVao(VERTICES, 2)), vbo(nullptr, INSTANCE_DATA_LENGTH) {
-		vbo.addInstancedAttribute(quad.getVertexArray(), 1, 4, INSTANCE_DATA_LENGTH, 0);
-		vbo.addInstancedAttribute(quad.getVertexArray(), 2, 4, INSTANCE_DATA_LENGTH, 4);
-		vbo.addInstancedAttribute(quad.getVertexArray(), 3, 4, INSTANCE_DATA_LENGTH, 8);
-		vbo.addInstancedAttribute(quad.getVertexArray(), 4, 4, INSTANCE_DATA_LENGTH, 12);
-		vbo.addInstancedAttribute(quad.getVertexArray(), 5, 4, INSTANCE_DATA_LENGTH, 16);
-		vbo.addInstancedAttribute(quad.getVertexArray(), 6, 1, INSTANCE_DATA_LENGTH, 20);
+		quad.getVertexArray().bind();
+		vbo.addInstancedAttribute(1, 4, INSTANCE_DATA_LENGTH, 0);
+		vbo.addInstancedAttribute(2, 4, INSTANCE_DATA_LENGTH, 4);
+		vbo.addInstancedAttribute(3, 4, INSTANCE_DATA_LENGTH, 8);
+		vbo.addInstancedAttribute(4, 4, INSTANCE_DATA_LENGTH, 12);
+		vbo.addInstancedAttribute(5, 4, INSTANCE_DATA_LENGTH, 16);
+		vbo.addInstancedAttribute(6, 1, INSTANCE_DATA_LENGTH, 20);
+		quad.getVertexArray().unbind();
 		shader.start();
 		shader.loadProjectionMatrix(projectionMatrix);
 	}

@@ -2,6 +2,7 @@
 #include <memory>
 #include "../Models/RawModel.h"
 #include "../Loader.h"
+#include "../../Math/Vectors/Vector3f.h"
 
 namespace Pressure {
 

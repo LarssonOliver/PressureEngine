@@ -1,10 +1,8 @@
 #include "VertexBuffer.h"
 
-#include "../../Common.h"
-
 namespace Pressure {
 
-	VertexBuffer::VertexBuffer(const void* data, const unsigned int size, const unsigned int type = GL_FLOAT)
+	VertexBuffer::VertexBuffer(const void* data, const unsigned int size, const unsigned int type)
 		: m_Type(type) {
 		glGenBuffers(1, &m_ID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_ID);
@@ -33,13 +31,11 @@ namespace Pressure {
 		unbind();
 	}
 
-	void VertexBuffer::addInstancedAttribute(const VertexArray& va, const unsigned int attribute, const unsigned int size, const unsigned int count, const unsigned int offset) const {
-		va.bind();
+	void VertexBuffer::addInstancedAttribute(const unsigned int attribute, const unsigned int size, const unsigned int count, const unsigned int offset) const {
 		bind();
 		glVertexAttribPointer(attribute, size, m_Type, false, count * sizeof(float), (const void*)(offset * sizeof(float)));
 		glVertexAttribDivisor(attribute, 1);
 		unbind();
-		va.unbind();
 	}
 
 }

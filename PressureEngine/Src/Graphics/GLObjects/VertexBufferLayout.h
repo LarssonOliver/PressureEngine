@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "VertexBuffer.h"
+#include "../../DllExport.h"
 
 namespace Pressure {
 
@@ -12,7 +13,7 @@ namespace Pressure {
 		bool normalized;
 	};
 
-	class VertexBufferLayout {
+	class PRESSURE_API VertexBufferLayout {
 
 	private:
 		std::vector<VertexBufferElement> m_Elements;
