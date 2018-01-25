@@ -13,10 +13,10 @@ namespace Pressure {
 
 	public:
 		VertexArray(); 
-		~VertexArray();
 
 		void bind() const;
 		void unbind() const;
+		void del() const;
 
 		void bindLayout(const VertexBufferLayout& layout);
 		

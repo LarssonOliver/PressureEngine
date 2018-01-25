@@ -11,16 +11,16 @@ namespace Pressure {
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(int), data, GL_STATIC_DRAW);
 	}
 
-	IndexBuffer::~IndexBuffer() {
-		glDeleteBuffers(1, &m_ID);
-	}
-
 	void IndexBuffer::bind() const {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 	}
 
 	void IndexBuffer::unbind() const {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+	}
+
+	void IndexBuffer::del() const {
+		glDeleteBuffers(1, &m_ID);
 	}
 
 }

@@ -9,16 +9,16 @@ namespace Pressure {
 		glBindVertexArray(m_ID);
 	}
 
-	VertexArray::~VertexArray() {
-		glDeleteVertexArrays(1, &m_ID);
-	}
-
 	void VertexArray::bind() const {
 		glBindVertexArray(m_ID);
 	}
-
+	
 	void VertexArray::unbind() const {
 		glBindVertexArray(NULL);
+	}
+
+	void VertexArray::del() const {
+		glDeleteVertexArrays(1, &m_ID);
 	}
 
 	void VertexArray::bindLayout(const VertexBufferLayout& layout) {

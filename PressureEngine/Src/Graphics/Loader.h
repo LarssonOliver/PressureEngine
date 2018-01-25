@@ -8,12 +8,12 @@ namespace Pressure {
 	class Loader {
 
 	private:
-		//std::vector<VertexArrayObject*> vaos;
-		//std::vector<VertexBufferObject*> vbos;
-		//std::vector<RawModel*> rawModels;
+		std::vector<VertexArray> m_VertexArrays;
+		std::vector<VertexBufferLayout> m_VertexBufferLayouts;
+		std::vector<IndexBuffer> m_IndexBuffers;
 
 		// Do i even need this?
-		std::vector<unsigned int> textures;
+		std::vector<unsigned int> m_Textures;
 
 	public:
 		~Loader();

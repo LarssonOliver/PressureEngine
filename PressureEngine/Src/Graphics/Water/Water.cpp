@@ -8,16 +8,16 @@ namespace Pressure {
 	const int Water::SIZE = 32;
 	const int Water::VERTEX_COUNT = 64;
 
-	RawModel Water::model = RawModel(VertexArray(), 0);
+	RawModel* Water::model;
 
 	Water::Water(const Vector3f& position, Loader& loader)
 		: position(position) {
-		if (model.getVertexCount() == 0)
-			model = generateWater(loader);
+		if (model->getVertexCount() == 0)
+			model = new RawModel(generateWater(loader));
 	}
 
 	RawModel Water::getModel() {
-		return Water::model;
+		return *Water::model;
 	}
 
 	Vector3f& Water::getPosition() {

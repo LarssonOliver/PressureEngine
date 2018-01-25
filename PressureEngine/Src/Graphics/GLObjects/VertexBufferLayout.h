@@ -34,7 +34,7 @@ namespace Pressure {
 			m_Stride += count * sizeof(float);
 		}
 
-		inline std::vector<VertexBufferElement>& getElements() { return m_Elements; }
+		inline std::vector<VertexBufferElement>& getElements() const { return (std::vector<VertexBufferElement>&)m_Elements; }
 		inline unsigned int getStride() const { return m_Stride; }		
 
 	};

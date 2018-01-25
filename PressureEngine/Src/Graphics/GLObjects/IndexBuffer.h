@@ -10,10 +10,10 @@ namespace Pressure {
 
 	public:
 		IndexBuffer(const unsigned int* data, const unsigned int count);
-		~IndexBuffer();
 
 		void bind() const;
 		void unbind() const;
+		void del() const;
 
 		inline unsigned int count() const { return m_Count; }
 

@@ -139,6 +139,7 @@
     <ClCompile Include="Src\Graphics\Guis\GuiTexture.cpp" />
     <ClCompile Include="Src\Graphics\Loader.cpp" />
     <ClCompile Include="Src\Graphics\MasterRenderer.cpp" />
+    <ClCompile Include="Src\Graphics\Models\RawModel.cpp" />
     <ClCompile Include="Src\Graphics\OBJLoader.cpp" />
     <ClCompile Include="Src\Graphics\Particles\ParticleShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Particles\Particle.cpp" />

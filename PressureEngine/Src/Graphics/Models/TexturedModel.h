@@ -18,6 +18,10 @@ namespace Pressure {
 		inline RawModel getRawModel() const { return m_RawModel; }
 		inline ModelTexture* getTexture() const { return m_Texture; }
 
+		inline bool operator<(const TexturedModel& model) const {
+			return m_Texture->getID() < model.getTexture()->getID();
+		}
+
 	};
 
 }

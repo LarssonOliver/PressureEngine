@@ -12,16 +12,16 @@ namespace Pressure {
 			glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_STREAM_DRAW);
 	}
 
-	VertexBuffer::~VertexBuffer() {
-		glDeleteBuffers(1, &m_ID);
-	}
-
 	void VertexBuffer::bind() const {
 		glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 	}
 
 	void VertexBuffer::unbind() const {
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
+	}
+
+	void VertexBuffer::del() const {
+		glDeleteBuffers(1, &m_ID);
 	}
 
 	void VertexBuffer::update(const void* data, const unsigned int size) const {
