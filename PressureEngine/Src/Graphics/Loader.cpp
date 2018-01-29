@@ -47,7 +47,7 @@ namespace Pressure {
 
 	RawModel Loader::loadToVao(const std::vector<float>& positions, const unsigned int dimensions) {
 		VertexBufferLayout layout;
-		layout.push<float>(dimensions, VertexBuffer(&positions[0], positions.size()));
+		layout.push<float>(dimensions, VertexBuffer(&positions[0], positions.size() * sizeof(float)));
 		VertexArray va;
 		va.bindLayout(layout);
 		m_VertexBufferLayouts.push_back(layout);
