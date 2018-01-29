@@ -12,7 +12,7 @@ namespace Pressure {
 
 	Water::Water(const Vector3f& position, Loader& loader)
 		: position(position) {
-		if (model->getVertexCount() == 0)
+		if (!model)
 			model = new RawModel(generateWater(loader));
 	}
 

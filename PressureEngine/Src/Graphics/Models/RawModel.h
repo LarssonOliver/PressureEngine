@@ -12,7 +12,7 @@ namespace Pressure {
 
 	public:
 		RawModel(const VertexArray& va, const unsigned int vertexCount)
-			: m_VertexArray(va), m_VertexCount(m_VertexCount) { }
+			: m_VertexArray(va), m_VertexCount(vertexCount) { }
 						
 		VertexArray& getVertexArray() const;
 		unsigned int getVertexCount() const;
