@@ -5,6 +5,7 @@ namespace Pressure {
 
 	void ShaderProgram::loadShaders(const std::string& vertexShader, const std::string& fragmentShader) {
 		vertexShaderID = loadShader(vertexShader, GL_VERTEX_SHADER);
+		geometryShaderID = 0;
 		fragmentShaderID = loadShader(fragmentShader, GL_FRAGMENT_SHADER);
 		programID = glCreateProgram();
 		glAttachShader(programID, vertexShaderID);
@@ -15,36 +16,18 @@ namespace Pressure {
 		getAllUniformLocations();
 	}
 
-	void ShaderProgram::loadShaders(const char* vertexPath, const char* fragmentPath) {
-		vertexShaderID = loadShader(vertexPath, GL_VERTEX_SHADER);
-		fragmentShaderID = loadShader(fragmentPath, GL_FRAGMENT_SHADER);
+	void ShaderProgram::loadShaders(const std::string& vertexShader, const std::string& geometryShader, const std::string& fragmentShader) {
+		vertexShaderID = loadShader(vertexShader, GL_VERTEX_SHADER);
+		geometryShaderID = loadShader(geometryShader, GL_GEOMETRY_SHADER);
+		fragmentShaderID = loadShader(fragmentShader, GL_FRAGMENT_SHADER);
 		programID = glCreateProgram();
 		glAttachShader(programID, vertexShaderID);
+		glAttachShader(programID, geometryShaderID);
 		glAttachShader(programID, fragmentShaderID);
 		bindAttributes();
 		glLinkProgram(programID);
 		glValidateProgram(programID);
 		getAllUniformLocations();
-	}
-
-	std::string ShaderProgram::readFile(const char* filePath) {
-		std::string content;
-		std::ifstream fileStream(filePath, std::ios::in);
-
-		if (!fileStream.is_open()) {
-			std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
-			return std::string();
-		}
-
-		std::string line = "";
-		while (!fileStream.eof()) {
-			std::getline(fileStream, line);
-			content.append(line + "\n");
-		}
-
-		fileStream.close();
-		return content;
-
 	}
 
 	void ShaderProgram::start() {
@@ -104,31 +87,6 @@ namespace Pressure {
 		unsigned int shaderID = glCreateShader(type);
 
 		const char* shaderSrc = shader.c_str();
-
-		int result = GL_FALSE;
-		int logLength;
-
-		// Compile Shader
-		glShaderSource(shaderID, 1, &shaderSrc, NULL);
-		glCompileShader(shaderID);
-
-		//Check Shader
-		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
-		if (!result) {
-			glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &logLength);
-			std::vector<GLchar> shaderError((logLength > 1) ? logLength : 1);
-			glGetShaderInfoLog(shaderID, logLength, NULL, &shaderError[0]);
-			std::cout << &shaderError[0] << std::endl;
-		}
-
-		return shaderID;
-	}
-
-	unsigned int ShaderProgram::loadShader(const char* filePath, GLenum type) {
-		unsigned int shaderID = glCreateShader(type);
-
-		std::string shaderStr = readFile(filePath);
-		const char* shaderSrc = shaderStr.c_str();
 
 		int result = GL_FALSE;
 		int logLength;

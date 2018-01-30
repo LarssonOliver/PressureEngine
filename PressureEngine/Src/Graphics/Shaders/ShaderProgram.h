@@ -8,16 +8,15 @@ namespace Pressure {
 	private:
 		int programID;
 		int vertexShaderID;
+		int geometryShaderID;
 		int fragmentShaderID;
 
 	public:
 		void loadShaders(const std::string& vertexShader, const std::string& fragmentShader);
-		void loadShaders(const char* vertexPath, const char* fragmentPath);
+		void loadShaders(const std::string& vertexShader, const std::string& geometryShader, const std::string& fragmentShader);		
 
 	private:
 		unsigned int loadShader(const std::string& shader, GLenum type);
-		unsigned int loadShader(const char* filePath, GLenum type);
-		std::string readFile(const char* filePath); // Req by loadShader()
 
 	public:
 		void start();

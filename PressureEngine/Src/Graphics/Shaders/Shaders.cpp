@@ -9,11 +9,11 @@ in vec3 position;
 in vec2 textureCoords;
 in vec3 normal;
 
-out vec2 pass_textureCoords;
-out vec3 surfaceNormal;
-out vec3 toLightVector[4];
-out vec3 toCameraVector;
-out vec4 shadowCoords;
+out vec2 g_textureCoords;
+out vec3 g_surfaceNormal;
+out vec3 g_toLightVector[4];
+out vec3 g_toCameraVector;
+out vec4 g_shadowCoords;
 
 uniform mat4 transformationMatrix;
 uniform mat4 projectionMatrix;
@@ -30,36 +30,67 @@ const float transitionDistance = 10.0;
 void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
-	shadowCoords = toShadowMapSpace * worldPosition;
-	shadowCoords.z -= 0.001; // Hack to stop shadows clipping the shadowmap.
+	g_shadowCoords = toShadowMapSpace * worldPosition;
+	g_shadowCoords.z -= 0.001; // Hack to stop shadows clipping the shadowmap.
 
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 
 	gl_Position = projectionMatrix * viewMatrix * worldPosition;
-	pass_textureCoords = textureCoords;
+	g_textureCoords = textureCoords;
 
 	vec3 actualNormal = normal;
 	if (useFakeLighting > 0.5) {
 		actualNormal = vec3(0.0, 1.0, 0.0);
 	}
 
-	surfaceNormal = (transformationMatrix * vec4(actualNormal, 0.0)).xyz;
+	g_surfaceNormal = (transformationMatrix * vec4(actualNormal, 0.0)).xyz;
 	for(int i = 0; i < 4; i++) {
-		toLightVector[i] = lightPosition[i] - worldPosition.xyz;	
+		g_toLightVector[i] = lightPosition[i] - worldPosition.xyz;	
 	}
-	toCameraVector = (inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - worldPosition.xyz;
+	g_toCameraVector = (inverse(viewMatrix) * vec4(0.0, 0.0, 0.0, 1.0)).xyz - worldPosition.xyz;
 
 	float distance = length((viewMatrix * worldPosition).xyz);
 	distance = distance - (shadowDistance - transitionDistance);
 	distance = distance / transitionDistance;
-	shadowCoords.w = clamp(1.0 - distance, 0.0, 1.0);
+	g_shadowCoords.w = clamp(1.0 - distance, 0.0, 1.0);
 
+})";
+
+	const std::string Shaders::geometryShader = 
+R"(#version 450
+
+layout (triangles) in;
+layout (triangle_strip, max_vertices = 3) out;
+
+in vec2 g_textureCoords[];
+in vec3 g_surfaceNormal[];
+in vec3 g_toLightVector[][4];
+in vec3 g_toCameraVector[];
+in vec4 g_shadowCoords[];
+
+out vec2 textureCoords;
+out vec3 surfaceNormal;
+out vec3 toLightVector[4];
+out vec3 toCameraVector;
+out vec4 shadowCoords;
+
+void main(void) {
+	for (int i = 0; i < 3; i++) {
+		textureCoords = g_textureCoords[i];
+		toLightVector = g_toLightVector[i];
+		toCameraVector = g_toCameraVector[i];
+		shadowCoords = g_shadowCoords[i];
+		surfaceNormal = (g_surfaceNormal[0] + g_surfaceNormal[1] + g_surfaceNormal[2]) / 3;
+		gl_Position = gl_in[i].gl_Position;
+		EmitVertex();
+	}
+	EndPrimitive();
 })";
 
 	const std::string Shaders::fragmentShader = 
 R"(#version 400
 
-in vec2 pass_textureCoords;
+in vec2 textureCoords;
 in vec3 surfaceNormal;
 in vec3 toLightVector[4];
 in vec3 toCameraVector;
@@ -80,7 +111,7 @@ const float totalTexels = (pcfCount * 2.2 + 1.0) * (pcfCount * 2.2 + 1.0);
 
 void main(void) {
 
-	float shadowMapSize = 8192;
+	const float shadowMapSize = 8192;
 	float texelSize = 1.0 / shadowMapSize;
 	float total = 0.0;
 
@@ -119,7 +150,7 @@ void main(void) {
 	}
 	totalDiffuse = max(totalDiffuse * lightFactor, 0.1);
 
-	vec4 textureColor = texture(textureSampler, pass_textureCoords);
+	vec4 textureColor = texture(textureSampler, textureCoords);
 	if (textureColor.a < 0.5) {
 		discard;
 	}

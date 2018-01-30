@@ -23,14 +23,14 @@ namespace PressureEngineViewer {
 		}
 
 		void init() {
-			RawModel model = engine.loadObjModel("Jetty");
-			ModelTexture* texture = new ModelTexture(engine.loadTexture("Jetty.png"));
+			RawModel model = engine.loadObjModel("Tombstone");
+			ModelTexture* texture = new ModelTexture(engine.loadTexture("default.png"));
 			texture->setShineDamper(10);
 			texture->setReflectivity(1);
 			TexturedModel texturedModel(model, texture);
 			entity = new Entity(texturedModel, Vector3f(-4, 6, 5), Vector3f(0, 0, 0), 1.f);
-			entity->setRotationSpeed(0, 0.5f, 0);
-			entity2 = new Entity(texturedModel, Vector3f(-5, 0, 0), Vector3f(0), 5.f);
+			entity->setRotationSpeed(0, 0.3f, 0);
+			entity2 = new Entity(texturedModel, Vector3f(-5, 2, 0), Vector3f(0), 5.f);
 			lights.emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 			water = new Water(engine.generateWater(Vector3f(-16, 0, -16)));
 		}

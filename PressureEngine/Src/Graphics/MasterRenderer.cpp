@@ -107,7 +107,7 @@ namespace Pressure {
 		prepare();
 		shader.start();
 		shader.connectTextureUnits();
-		shader.loadClipPlane(Vector4f(0, -1, 0, water[0].getPosition().getY() + 0.2f));
+		shader.loadClipPlane(Vector4f(0,-1, 0, water[0].getPosition().getY() + 0.2f));
 		shader.loadLights(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities, shadowMapRenderer.getToShadowMapSpaceMatrix());

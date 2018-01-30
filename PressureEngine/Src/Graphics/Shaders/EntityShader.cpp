@@ -4,7 +4,7 @@
 namespace Pressure {
 
 	EntityShader::EntityShader() {
-		ShaderProgram::loadShaders(Shaders::vertexShader, Shaders::fragmentShader);
+		ShaderProgram::loadShaders(Shaders::vertexShader, Shaders::geometryShader, Shaders::fragmentShader);
 	}
 
 	void EntityShader::bindAttributes() {
