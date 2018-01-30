@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Res\default.png" />
+    <Image Include="Res\Jetty.png" />
     <Image Include="Res\particleAtlas.png" />
     <Image Include="Res\skybox.png" />
     <Image Include="Res\skybox\skybox_0.png" />

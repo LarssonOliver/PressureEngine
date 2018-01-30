@@ -53,6 +53,9 @@
     <Image Include="Res\test.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Res\Jetty.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="pressure.properties" />
