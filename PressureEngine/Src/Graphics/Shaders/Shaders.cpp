@@ -3,7 +3,7 @@
 namespace Pressure {
 		
 	const std::string Shaders::vertexShader = 
-R"(#version 400
+R"(#version 440
 
 in vec3 position;
 in vec2 textureCoords;
@@ -57,7 +57,7 @@ void main(void) {
 })";
 
 	const std::string Shaders::geometryShader = 
-R"(#version 450
+R"(#version 440
 
 layout (triangles) in;
 layout (triangle_strip, max_vertices = 3) out;
@@ -88,7 +88,7 @@ void main(void) {
 })";
 
 	const std::string Shaders::fragmentShader = 
-R"(#version 400
+R"(#version 440
 
 in vec2 textureCoords;
 in vec3 surfaceNormal;
