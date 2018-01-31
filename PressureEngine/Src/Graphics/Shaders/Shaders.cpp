@@ -83,8 +83,7 @@ out VertexData {
 void main(void) {
 	for (int i = 0; i < vertexIn.length(); i++) {
 		vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
-		//surfaceNormal = (vertexIn[0].surfaceNormal + vertexIn[1].surfaceNormal + vertexIn[2].surfaceNormal) / 3;
-		vertexOut.surfaceNormal = vertexIn[i].surfaceNormal;
+		vertexOut.surfaceNormal = (vertexIn[0].surfaceNormal + vertexIn[1].surfaceNormal + vertexIn[2].surfaceNormal) / 3;
 		vertexOut.toLightVector = vertexIn[i].toLightVector;
 		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
 		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
