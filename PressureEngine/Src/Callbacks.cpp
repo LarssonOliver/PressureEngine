@@ -13,7 +13,9 @@ namespace Pressure {
 		using namespace std;
 
 		// Not interested in notifications.
-		if (severity == GL_DEBUG_SEVERITY_NOTIFICATION || severity == GL_DEBUG_SEVERITY_LOW)
+		if (severity == GL_DEBUG_SEVERITY_NOTIFICATION)
+			return;
+		else if (severity == GL_DEBUG_SEVERITY_LOW)
 			return;
 
 		cout << "*** [OpengGL Error START] ***" << endl;
