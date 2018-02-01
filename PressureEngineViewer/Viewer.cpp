@@ -76,9 +76,9 @@ namespace PressureEngineViewer {
 		}
 
 		void render() {
-			//engine.process(*entity);
+			engine.process(*entity);
 			engine.process(*entity2);
-			engine.process(*water);
+			//engine.process(*water);
 			engine.process(lights);
 			engine.render();
 		}

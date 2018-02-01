@@ -59,7 +59,7 @@ void main(void) {
 })";
 
 	const std::string Shaders::geometryShader = 
-R"(#version 440
+R"(#version 440 compatibility
 
 layout (triangles) in;
 layout (triangle_strip, max_vertices = 3) out;
@@ -81,12 +81,15 @@ out VertexData {
 } vertexOut;
 
 void main(void) {
-	for (int i = 0; i < vertexIn.length(); i++) {
-		vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
+	for (int i = 0; i < 3; i++) {
+
+		//vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
+		//vertexOut.toCameraVector = vertexIn[i].toCameraVector;
+		//vertexOut.shadowCoords = vertexIn[i].shadowCoords;
+
 		vertexOut.surfaceNormal = (vertexIn[0].surfaceNormal + vertexIn[1].surfaceNormal + vertexIn[2].surfaceNormal) / 3;
 		vertexOut.toLightVector = vertexIn[i].toLightVector;
-		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
-		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
+
 		gl_Position = gl_in[i].gl_Position;
 		EmitVertex();
 	}
@@ -164,7 +167,9 @@ void main(void) {
 	}
 
 	out_Color = vec4(totalDiffuse, 1.0) * textureColor + vec4(totalSpecular * lightFactor, 1.0);
+	//out_Color = vec4(totalDiffuse, 1.0) * textureColor;
 	//out_Color = vec4(lightFactor);
+	//out_Color = vertexIn.shadowCoords;
 
 })";
 
