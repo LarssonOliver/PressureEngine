@@ -3,7 +3,7 @@
 namespace Pressure {
 		
 	const std::string Shaders::vertexShader = 
-R"(#version 440
+R"(#version 330 core
 
 in vec3 position;
 in vec2 textureCoords;
@@ -33,7 +33,7 @@ void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
 	vertexOut.shadowCoords = toShadowMapSpace * worldPosition;
-	vertexOut.shadowCoords.z -= 0.001; // Hack to stop shadows clipping the shadowmap.
+	vertexOut.shadowCoords.z -= 0.002; // Hack to stop shadows clipping the shadowmap.
 
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 
@@ -59,7 +59,7 @@ void main(void) {
 })";
 
 	const std::string Shaders::geometryShader = 
-R"(#version 440 compatibility
+R"(#version 330 core
 
 layout (triangles) in;
 layout (triangle_strip, max_vertices = 3) out;
@@ -83,9 +83,9 @@ out VertexData {
 void main(void) {
 	for (int i = 0; i < 3; i++) {
 
-		//vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
-		//vertexOut.toCameraVector = vertexIn[i].toCameraVector;
-		//vertexOut.shadowCoords = vertexIn[i].shadowCoords;
+		vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
+		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
+		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
 
 		vertexOut.surfaceNormal = (vertexIn[0].surfaceNormal + vertexIn[1].surfaceNormal + vertexIn[2].surfaceNormal) / 3;
 		vertexOut.toLightVector = vertexIn[i].toLightVector;
@@ -97,7 +97,7 @@ void main(void) {
 })";
 
 	const std::string Shaders::fragmentShader = 
-R"(#version 440
+R"(#version 330 core
 
 in VertexData {
 	vec2 pass_textureCoords;
