@@ -91,6 +91,7 @@ void main(void) {
 		vertexOut.toLightVector = vertexIn[i].toLightVector;
 
 		gl_Position = gl_in[i].gl_Position;
+		gl_ClipDistance[0] = gl_in[i].gl_ClipDistance[0];
 		EmitVertex();
 	}
 	EndPrimitive();
@@ -159,7 +160,7 @@ void main(void) {
 		totalDiffuse += (brightness * lightColor[i]) / attFactor;
 		totalSpecular += (dampedFactor * reflectivity * lightColor[i]) / attFactor;
 	}
-	totalDiffuse = max(totalDiffuse * lightFactor, 0.1);
+	totalDiffuse = max(totalDiffuse * lightFactor, 0.2);
 
 	vec4 textureColor = texture(textureSampler, vertexIn.pass_textureCoords);
 	if (textureColor.a < 0.5) {

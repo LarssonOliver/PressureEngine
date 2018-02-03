@@ -176,7 +176,7 @@ void main(void) {
 	float waterDepth = floorDistance - waterDistance;
 
 	vec2 distortion = ndc - vec2(surfaceNormal.x / 8.0, surfaceNormal.z / 8.0) * clamp(waterDepth / 20.0, 0.0, 1.0);
-	distortion = clamp(distortion, 0.001, 0.999);
+	distortion = clamp(distortion, 0.002, 0.998);
 
 	vec4 reflectColor = texture(reflectionTexture, vec2(distortion.x, -distortion.y));
 	vec4 refractColor = texture(refractionTexture, distortion);

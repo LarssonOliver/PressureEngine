@@ -9,11 +9,10 @@ namespace PressureEngineViewer {
 	private: 
 		PressureEngine engine;
 
-		Entity* entity;
-		Entity* entity2;
+		std::vector<Entity> entities;
 		std::vector<Light> lights;
 		ParticleSystem* particleSystem;
-		Water* water;
+		std::vector<Water> waters;
 
 	public:
 		EngineViewer() {
@@ -23,16 +22,30 @@ namespace PressureEngineViewer {
 		}
 
 		void init() {
-			RawModel model = engine.loadObjModel("Rock2");
-			ModelTexture* texture = new ModelTexture(engine.loadTexture("default.png"));
-			texture->setShineDamper(10);
-			texture->setReflectivity(1);
-			TexturedModel texturedModel(model, texture);
-			entity = new Entity(texturedModel, Vector3f(-4, 6, 5), Vector3f(0, 0, 0), 1.f);
-			entity->setRotationSpeed(0, 0.3f, 0);
-			entity2 = new Entity(texturedModel, Vector3f(-5, -3, 0), Vector3f(0), 5.f);
+			// Island
+			RawModel islandModel = engine.loadObjModel("Island");
+			ModelTexture* islandTexture = new ModelTexture(engine.loadTexture("Jetty.png"));
+			islandTexture->setShineDamper(10);
+			islandTexture->setReflectivity(.1f);
+			TexturedModel island(islandModel, islandTexture);
+			entities.emplace_back(island, Vector3f(0), Vector3f(0, 0, 0), 8.f);
+
+			RawModel jettyModel = engine.loadObjModel("Jetty");
+			ModelTexture* jettyTexture = new ModelTexture(engine.loadTexture("Jetty.png"));
+			islandTexture->setShineDamper(10);
+			islandTexture->setReflectivity(.5f);
+			TexturedModel jetty(jettyModel, jettyTexture);
+			entities.emplace_back(jetty, Vector3f(-12, 0.5f, 6), Vector3f(0, 155, 0), 2.f);
+			
+			// Lights
 			lights.emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
-			water = new Water(engine.generateWater(Vector3f(-16, 0, -16)));
+
+			// Waters
+			waters.emplace_back(engine.generateWater(Vector3f(-39, 0, -13)));
+			waters.emplace_back(engine.generateWater(Vector3f(-39, 0, 3)));
+			waters.emplace_back(engine.generateWater(Vector3f(-23, 0, -13)));
+			waters.emplace_back(engine.generateWater(Vector3f(-23, 0, 3)));
+			waters.emplace_back(engine.generateWater(Vector3f(-7, 0, -5)));
 		}
 
 		void loop() {
@@ -69,16 +82,17 @@ namespace PressureEngineViewer {
 
 		void tick() {
 			engine.tick();
-			entity->tick();
+			for (auto& entity : entities) {
+				entity.tick();
+			}
 
 			if (Keyboard::isPressed(GLFW_KEY_ESCAPE))
 				engine.getWindow().close();
 		}
 
 		void render() {
-			engine.process(*entity);
-			engine.process(*entity2);
-			engine.process(*water);
+			engine.process(entities);
+			engine.process(waters);
 			engine.process(lights);
 			engine.render();
 		}

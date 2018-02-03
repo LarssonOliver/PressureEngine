@@ -6,7 +6,7 @@
 namespace Pressure {
 
 	Camera::Camera()
-		: position(0), pitch(50), yaw(0), roll(0), anchor(0), distanceFromAnchor(10),
+		: position(0), pitch(50), yaw(0), roll(0), anchor(0), distanceFromAnchor(20),
 		angleAroundAnchor(0), max_speed(0.5f), speed(0), acceleration(0)
 	{ }
 
@@ -96,8 +96,8 @@ namespace Pressure {
 	}
 
 	void Camera::calculateZoom() {
-		distanceFromAnchor -= Mouse::getDWheel();
-		Math::frange(distanceFromAnchor, 2, 50);
+		distanceFromAnchor -= Mouse::getDWheel() * 3;
+		Math::frange(distanceFromAnchor, 2, 100);
 	}
 
 	void Camera::calculatePitch() {
