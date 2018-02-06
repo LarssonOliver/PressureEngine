@@ -161,7 +161,6 @@
     <ClCompile Include="Src\Graphics\Skybox\SkyboxRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\EntityShader.cpp" />
     <ClCompile Include="Src\Graphics\Skybox\SkyboxShader.cpp" />
-    <ClCompile Include="Src\Graphics\Textures\ModelTexture.cpp" />
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Water\Water.cpp" />

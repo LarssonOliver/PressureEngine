@@ -9,17 +9,17 @@ namespace Pressure {
 
 	private:
 		RawModel m_RawModel;
-		ModelTexture* m_Texture;
+		ModelTexture m_Texture;
 
 	public:
-		TexturedModel(RawModel model, ModelTexture* texture)
+		TexturedModel(RawModel model, ModelTexture texture)
 			: m_RawModel(model), m_Texture(texture) { }
 
 		inline RawModel getRawModel() const { return m_RawModel; }
-		inline ModelTexture* getTexture() const { return m_Texture; }
+		inline ModelTexture getTexture() const { return m_Texture; }
 
 		inline bool operator<(const TexturedModel& model) const {
-			return m_Texture->getID() < model.getTexture()->getID();
+			return m_Texture.getID() < model.getTexture().getID();
 		}
 
 	};

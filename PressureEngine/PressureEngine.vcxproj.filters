@@ -45,9 +45,6 @@
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\Textures\ModelTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

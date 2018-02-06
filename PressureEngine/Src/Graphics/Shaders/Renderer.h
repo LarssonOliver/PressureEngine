@@ -17,11 +17,14 @@ namespace Pressure {
 		EntityShader shader;
 		GLFWwindow* const window;
 
+		float windModifier;
+
 	public:
 		Renderer(EntityShader& shader, GLFWwindow* window);
 		void render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace);
 
 		void updateProjectionMatrix(EntityShader& shader);
+		void tick();
 
 	private:
 		void prepareTexturedModel(const TexturedModel& texturedModel);

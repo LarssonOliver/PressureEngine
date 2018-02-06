@@ -5,7 +5,7 @@
 namespace Pressure {
 	
 	Renderer::Renderer(EntityShader& shader, GLFWwindow* window)
-		: shader(shader), window(window) {
+		: shader(shader), window(window), windModifier(0) {
 		updateProjectionMatrix(shader);
 	}
 
@@ -29,6 +29,12 @@ namespace Pressure {
 		shader.stop();
 	}
 
+	void Renderer::tick() {
+		windModifier += 0.005;
+		if (windModifier > 360)
+			windModifier -= 360;
+	}
+
 	void Renderer::prepareTexturedModel(const TexturedModel& texturedModel) {
 		RawModel& model = texturedModel.getRawModel();
 		model.getVertexArray().bind();
@@ -36,11 +42,14 @@ namespace Pressure {
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
 		glActiveTexture(GL_TEXTURE0);
-		if (texturedModel.getTexture()->isHasTransparency()) 
+		if (texturedModel.getTexture().hasTransparency()) 
 			MasterRenderer::disableCulling();
-		shader.loadShineVariables(texturedModel.getTexture()->getShineDamper(), texturedModel.getTexture()->getReflectivity());
-		shader.loadFakeLighting(texturedModel.getTexture()->isUseFakeLighting());
-		TextureManager::Inst()->BindTexture(texturedModel.getTexture()->getID());
+		if (texturedModel.getRawModel().isWindAffected())
+			shader.loadWindModifier(windModifier);
+		else shader.loadWindModifier(0);
+		shader.loadShineVariables(texturedModel.getTexture().getShineDamper(), texturedModel.getTexture().getReflectivity());
+		shader.loadFakeLighting(texturedModel.getTexture().useFakeLighting());
+		TextureManager::Inst()->BindTexture(texturedModel.getTexture().getID());
 		setTexParams();
 	}
 

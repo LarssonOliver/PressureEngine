@@ -31,6 +31,7 @@ namespace Pressure {
 
 	void MasterRenderer::tick() {
 		waterRenderer.tick();
+		renderer.tick();
 	}
 
 	void MasterRenderer::renderShadowMap(Light& sun) {

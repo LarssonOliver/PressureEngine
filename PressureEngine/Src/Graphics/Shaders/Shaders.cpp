@@ -23,15 +23,27 @@ uniform mat4 viewMatrix;
 uniform vec3 lightPosition[4];
 uniform float useFakeLighting;
 uniform vec4 plane;
+uniform float windModifier;
 
 uniform mat4 toShadowMapSpace;
 
 const float shadowDistance = 150.0;
 const float transitionDistance = 10.0;
 
+float getWindX() {
+	return 0.2 * (0.4 * sin(4 * windModifier) + 0.2 * sin(7.2 * windModifier) + 0.4 * sin(-windModifier));
+}
+
+float getWindZ() {
+	return 0.2 * (0.4 * sin(4 * windModifier) + 0.4 * sin(6 * windModifier) + 0.2 * sin(-windModifier));
+}
+
 void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
+	
+	worldPosition.xz = vec2(worldPosition.x + position.y * getWindX(), worldPosition.z + position.y * getWindZ());
+
 	vertexOut.shadowCoords = toShadowMapSpace * worldPosition;
 	vertexOut.shadowCoords.z -= 0.002; // Hack to stop shadows clipping the shadowmap.
 
@@ -82,8 +94,7 @@ out VertexData {
 
 void main(void) {
 	for (int i = 0; i < 3; i++) {
-
-		vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
+		vertexOut.pass_textureCoords = (vertexIn[0].pass_textureCoords + vertexIn[1].pass_textureCoords + vertexIn[2].pass_textureCoords) / 3;
 		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
 		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
 

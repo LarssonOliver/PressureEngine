@@ -11,13 +11,13 @@ namespace Pressure {
 		for (const auto& model : entities) {
 			model.first.getRawModel().getVertexArray().bind();
 			glEnableVertexAttribArray(0);
-			if (model.first.getTexture()->isHasTransparency())
+			if (model.first.getTexture().hasTransparency())
 				MasterRenderer::disableCulling();
 			for (const auto& entity : model.second) {
 				prepareInstance(entity);
 				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 			}
-			if (model.first.getTexture()->isHasTransparency())
+			if (model.first.getTexture().hasTransparency())
 				MasterRenderer::enableCulling();
 		}
 		glDisableVertexAttribArray(0);

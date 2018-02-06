@@ -24,25 +24,26 @@ namespace PressureEngineViewer {
 		void init() {
 			// Island
 			RawModel islandModel = engine.loadObjModel("Island");
-			ModelTexture* islandTexture = new ModelTexture(engine.loadTexture("Jetty.png"));
-			islandTexture->setShineDamper(10);
-			islandTexture->setReflectivity(.1f);
+			ModelTexture islandTexture(engine.loadTexture("Island.png"));
+			islandTexture.setFakeLighting(true);
+			islandTexture.setShineDamper(10);
+			islandTexture.setReflectivity(.1f);
 			TexturedModel island(islandModel, islandTexture);
 			entities.emplace_back(island, Vector3f(0), Vector3f(0, 0, 0), 8.f);
 
 			RawModel jettyModel = engine.loadObjModel("Jetty");
-			ModelTexture* jettyTexture = new ModelTexture(engine.loadTexture("Jetty.png"));
-			islandTexture->setShineDamper(10);
-			islandTexture->setReflectivity(.5f);
+			ModelTexture jettyTexture(engine.loadTexture("Jetty.png"));
+			jettyTexture.setShineDamper(10);
+			jettyTexture.setReflectivity(.5f);
 			TexturedModel jetty(jettyModel, jettyTexture);
 			entities.emplace_back(jetty, Vector3f(-12, 0.5f, 6), Vector3f(0, 155, 0), 2.f);
 
 			RawModel grassModel = engine.loadObjModel("Grass");
+			grassModel.setWindAffected(true);
 			RawModel grass2Model = engine.loadObjModel("Grass2");
-			ModelTexture* grassTexture = new ModelTexture(engine.loadTexture("Grass.png"));
-			ModelTexture* grass2Texture = new ModelTexture(engine.loadTexture("Grass.png"));
-			//grassTexture->setUseFakeLighting(true);			
-			grassTexture->setHasTransparency(true);
+			grass2Model.setWindAffected(true);
+			ModelTexture grassTexture(engine.loadTexture("Grass.png"));
+			ModelTexture grass2Texture(engine.loadTexture("Grass.png"));
 			TexturedModel grass(grassModel, grassTexture);
 			TexturedModel grass2(grass2Model, grass2Texture);
 			Random<float> r(-2, 2);
