@@ -20,7 +20,7 @@ namespace Pressure {
 			__debugbreak();
 		}
 
-		//std::cout << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+		//std::cout << glGetString(GL_VENDOR) << std::endl;
 
 #ifdef PRESSURE_DEBUG
 		// Enable OpenGL debugging callback.

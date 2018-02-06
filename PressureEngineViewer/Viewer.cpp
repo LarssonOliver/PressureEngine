@@ -36,6 +36,22 @@ namespace PressureEngineViewer {
 			islandTexture->setReflectivity(.5f);
 			TexturedModel jetty(jettyModel, jettyTexture);
 			entities.emplace_back(jetty, Vector3f(-12, 0.5f, 6), Vector3f(0, 155, 0), 2.f);
+
+			RawModel grassModel = engine.loadObjModel("Grass");
+			RawModel grass2Model = engine.loadObjModel("Grass2");
+			ModelTexture* grassTexture = new ModelTexture(engine.loadTexture("Grass.png"));
+			ModelTexture* grass2Texture = new ModelTexture(engine.loadTexture("Grass.png"));
+			//grassTexture->setUseFakeLighting(true);			
+			grassTexture->setHasTransparency(true);
+			TexturedModel grass(grassModel, grassTexture);
+			TexturedModel grass2(grass2Model, grass2Texture);
+			Random<float> r(-2, 2);
+			entities.emplace_back(grass, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
+			entities.emplace_back(grass, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
+			entities.emplace_back(grass, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
+			entities.emplace_back(grass2, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
+			entities.emplace_back(grass2, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
+			entities.emplace_back(grass2, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
 			
 			// Lights
 			lights.emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));

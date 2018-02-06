@@ -17,6 +17,9 @@ namespace Pressure {
 	}
 
 	void ShaderProgram::loadShaders(const std::string& vertexShader, const std::string& geometryShader, const std::string& fragmentShader) {
+		if (strcmp((const char*)glGetString(GL_VENDOR), "Intel") == 0) { // Can't run geometry shader on intel.	
+			return loadShaders(vertexShader, fragmentShader);
+		}
 		vertexShaderID = loadShader(vertexShader, GL_VERTEX_SHADER);
 		geometryShaderID = loadShader(geometryShader, GL_GEOMETRY_SHADER);
 		fragmentShaderID = loadShader(fragmentShader, GL_FRAGMENT_SHADER);
