@@ -14,8 +14,10 @@ namespace PressureEngineViewer {
 		ParticleSystem* particleSystem;
 		std::vector<Water> waters;
 
+		Random<float> r;
+
 	public:
-		EngineViewer() {
+		EngineViewer() : r(-2, 2) {
 			engine.init();
 			init();
 			loop();
@@ -38,22 +40,24 @@ namespace PressureEngineViewer {
 			TexturedModel jetty(jettyModel, jettyTexture);
 			entities.emplace_back(jetty, Vector3f(-12, 0.5f, 6), Vector3f(0, 155, 0), 2.f);
 
-			RawModel grassModel = engine.loadObjModel("Grass");
-			grassModel.setWindAffected(true);
-			RawModel grass2Model = engine.loadObjModel("Grass2");
-			grass2Model.setWindAffected(true);
-			ModelTexture grassTexture(engine.loadTexture("Grass.png"));
-			ModelTexture grass2Texture(engine.loadTexture("Grass.png"));
-			TexturedModel grass(grassModel, grassTexture);
-			TexturedModel grass2(grass2Model, grass2Texture);
-			Random<float> r(-2, 2);
-			entities.emplace_back(grass, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
-			entities.emplace_back(grass, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
-			entities.emplace_back(grass, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
-			entities.emplace_back(grass2, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
-			entities.emplace_back(grass2, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
-			entities.emplace_back(grass2, Vector3f(r.next(), 1, r.next()), Vector3f(0, r.next() * 180, 0), 1.0);
-			
+			if (std::stoi(Properties::get("renderGrass")) == 1) {
+				RawModel grassModel = engine.loadObjModel("Grass");
+				grassModel.setWindAffected(true);
+				RawModel grass2Model = engine.loadObjModel("Grass2");
+				grass2Model.setWindAffected(true);
+				ModelTexture grassTexture(engine.loadTexture("Grass.png"));
+				ModelTexture grass2Texture(engine.loadTexture("Grass.png"));
+				TexturedModel grass(grassModel, grassTexture);
+				TexturedModel grass2(grass2Model, grass2Texture);
+				setGrassPatch(-39, 0.75, 12, grass, grass2, -0.17, 0);
+				setGrassPatch(-39, 0.75, 15, grass, grass2, -0.17, 0);
+				setGrassPatch(-38, 0.55, 18, grass, grass2, -0.05, -0.05);
+				setGrassPatch(-35, 0.5, 20, grass, grass2, 0.10, 0.05);
+				setGrassPatch(-31, 0.8, 22, grass, grass2, 0.10, 0.05);
+				setGrassPatch(-28, 0.8, 22, grass, grass2, 0.10, 0.05);
+				setGrassPatch(-25, 0.8, 22, grass, grass2, 0.10, 0.05);
+			}
+
 			// Lights
 			lights.emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
 
@@ -117,6 +121,21 @@ namespace PressureEngineViewer {
 		void terminate() {
 			engine.terminate();
 		}
+
+	private:
+		void setGrassPatch(const float x, const float y, const float z, const TexturedModel& grass, const TexturedModel& grass2, const float slopeX = 0.f, const float slopeZ = 0.f) {
+			float offsetX, offsetZ, offsetY;
+			for (int i = 0; i < 16; i++) {
+				offsetX = r.next();
+				offsetZ = r.next();
+				offsetY = offsetX * slopeX + offsetZ * slopeZ;
+				if (i < 8)
+					entities.emplace_back(grass, Vector3f(x + offsetX, y + offsetY, z + offsetZ), Vector3f(0, r.next() * 180, 0), 1.0 + 0.3 * r.next());
+				else
+					entities.emplace_back(grass2, Vector3f(x + offsetX, y + offsetY, z + offsetZ), Vector3f(0, r.next() * 180, 0), 1.0 + 0.3 * r.next());
+			}
+		}
+
 
 	};
 

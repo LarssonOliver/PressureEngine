@@ -67,7 +67,9 @@ namespace Pressure {
 		{ "windowVsync", "0" },
 
 		{ "fov", "70" },
-		{ "hideConsole", "1" }
+		{ "hideConsole", "1" },
+
+		{ "renderGrass", "1" }
 	};
 
 }
