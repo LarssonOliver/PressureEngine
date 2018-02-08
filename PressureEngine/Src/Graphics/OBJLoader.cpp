@@ -72,7 +72,7 @@ namespace Pressure {
 			}
 		}
 
-		return loader.loadToVao(VertexBuffer(&vertices[0], vertices.size() * sizeof(float)), VertexBuffer(&textureArray[0], textureArray.size() * sizeof(float)), VertexBuffer(&normalsArray[0], normalsArray.size() * sizeof(float)), indices);
+		return loader.loadToVao(vertices, textureArray, normalsArray, indices);
 
 	}
 	

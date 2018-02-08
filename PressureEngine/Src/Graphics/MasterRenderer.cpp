@@ -16,8 +16,8 @@ namespace Pressure {
 		glDisable(GL_CLIP_DISTANCE0);
 		shader.loadClipPlane(Vector4f(0, -1, 0, 1000000)); // Bit of a hack, as some drivers do not support disabling clip distance.
 		shader.loadLights(lights);
-		shader.loadViewMatrix(camera);
-		renderer.render(entities, shadowMapRenderer.getToShadowMapSpaceMatrix());
+		shader.loadToShadowMapSpace(shadowMapRenderer.getToShadowMapSpaceMatrix());
+		renderer.render(entities, camera);
 		shader.stop();
 		skyboxRenderer.render(camera);
 		if (water.size() > 0) {
@@ -95,8 +95,8 @@ namespace Pressure {
 		shader.connectTextureUnits();
 		shader.loadClipPlane(Vector4f(0, 1, 0, -water[0].getPosition().getY() + 0.1f)); 
 		shader.loadLights(lights);
-		shader.loadViewMatrix(camera);
-		renderer.render(entities, shadowMapRenderer.getToShadowMapSpaceMatrix());
+		shader.loadToShadowMapSpace(shadowMapRenderer.getToShadowMapSpaceMatrix());
+		renderer.render(entities, camera);
 		shader.stop();
 		skyboxRenderer.render(camera);
 		ParticleMaster::renderParticles(camera); // Refractionrendering too, clipplane?
@@ -110,8 +110,8 @@ namespace Pressure {
 		shader.connectTextureUnits();
 		shader.loadClipPlane(Vector4f(0,-1, 0, water[0].getPosition().getY() + 0.2f));
 		shader.loadLights(lights);
-		shader.loadViewMatrix(camera);
-		renderer.render(entities, shadowMapRenderer.getToShadowMapSpaceMatrix());
+		shader.loadToShadowMapSpace(shadowMapRenderer.getToShadowMapSpaceMatrix());
+		renderer.render(entities, camera);
 		shader.stop();
 		skyboxRenderer.render(camera);
 

@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "../Textures\TextureManager.h"
 #include "../MasterRenderer.h"
+#include "../../Math/FrustumCulling.h"
 
 namespace Pressure {
 	
@@ -9,14 +10,17 @@ namespace Pressure {
 		updateProjectionMatrix(shader);
 	}
 
-	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace) {
-		shader.loadToShadowMapSpace(toShadowSpace);
+	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
+		Matrix4f viewMatrix = Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll());
+		shader.loadViewMatrix(viewMatrix);
 		for (auto const& model : entities) {
 			prepareTexturedModel(model.first);
 			std::vector<Entity>& batch = entities[model.first];
 			for (Entity& entity : batch) {
-				prepareInstance(entity);
-				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
+				Matrix4f transformationMatrix = Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
+				shader.loadTransformationMatrix(transformationMatrix);
+				//if (FrustumCulling::boxInFrustum(entity.getTexturedModel().getRawModel().getBox(), transformationMatrix, viewMatrix, projectionMatrix))
+					glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 			}
 			unbindTexturedModel(model.first.getRawModel());
 		}
@@ -59,10 +63,6 @@ namespace Pressure {
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 		model.getVertexArray().unbind();
-	}
-
-	void Renderer::prepareInstance(Entity& entity) {
-		shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
 	}
 
 	void Renderer::setTexParams() const {

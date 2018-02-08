@@ -102,6 +102,8 @@ namespace Pressure {
 		/* OPERATOR OVERLOADING */
 		bool operator==(const Vector3f& other) const;
 		bool operator!=(const Vector3f& other) const;
+		bool operator<(const Vector3f& other) const;
+		bool operator>(const Vector3f& other) const;
 		friend std::ostream& operator<<(std::ostream& os, const Vector3f& vec);
 
 	};

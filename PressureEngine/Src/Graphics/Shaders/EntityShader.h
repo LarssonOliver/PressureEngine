@@ -18,7 +18,7 @@ namespace Pressure {
 		//load uniforms.
 		void loadTransformationMatrix(Matrix4f& matrix);
 		void loadProjectionmatrix(Matrix4f& matrix);
-		void loadViewMatrix(Camera& camera);
+		void loadViewMatrix(Matrix4f& matrix);
 		void loadLights(std::vector<Light>& lights);
 		void loadShineVariables(float damper, float reflectivity);
 		void loadFakeLighting(bool useFakeLighting);

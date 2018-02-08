@@ -411,6 +411,14 @@ namespace Pressure {
 		return !equals(other);
 	}
 
+	bool Vector3f::operator<(const Vector3f& other) const {
+		return (x < other.x && y < other.y && z < other.z);
+	}
+
+	bool Vector3f::operator>(const Vector3f& other) const {
+		return (x > other.x && y > other.y && z > other.z);
+	}
+
 	std::ostream& operator<<(std::ostream& os, const Vector3f& vec) {
 		os << vec.x << ", " << vec.y << ", " << vec.z;
 		return os;

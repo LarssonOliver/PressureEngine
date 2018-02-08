@@ -18,8 +18,8 @@ namespace Pressure {
 	public:
 		~Loader();
 
-		RawModel loadToVao(const VertexBuffer& positions, const VertexBuffer& textureCoords, const VertexBuffer& normals, const std::vector<unsigned int>& indices);
-		RawModel loadToVao(const VertexBuffer& positions, const std::vector<unsigned int>& indices);
+		RawModel loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<unsigned int>& indices);
+		RawModel loadToVao(const std::vector<float>& positions, const std::vector<unsigned int>& indices);
 		RawModel loadToVao(const std::vector<float>& positions, const unsigned int dimensions);
 		unsigned int loadTexture(const char* filePath);
 		unsigned int loadCubeMap(const char* filePath);

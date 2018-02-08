@@ -48,7 +48,7 @@ namespace PressureEngineViewer {
 			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
 			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
 			TexturedModel tombstone(tombstoneModel, tombstoneTexture);
-			entities.emplace_back(tombstone, Vector3f(-26, .6, -13.7), Vector3f(0, 83, 0), .9);
+			entities.emplace_back(tombstone, Vector3f(-26, .6, -13.7), Vector3f(0, 86, 0), .9);
 
 			if (std::stoi(Properties::Inst()->get("renderGrass")) == 1) { 				
 				RawModel grassModel = engine.loadObjModel("Grass");

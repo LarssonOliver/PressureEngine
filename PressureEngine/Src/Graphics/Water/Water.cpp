@@ -52,7 +52,7 @@ namespace Pressure {
 				indices[pointer++] = bottomLeft + 1;
 			}
 		}
-		return loader.loadToVao(VertexBuffer(&vertices[0], vertices.size() * sizeof(float)), indices);
+		return loader.loadToVao(vertices, indices);
 	}
 
 }

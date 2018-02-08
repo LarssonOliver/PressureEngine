@@ -19,30 +19,62 @@ namespace Pressure {
 		TextureManager::Inst()->UnloadAllTextures();
 	}
 
-	RawModel Loader::loadToVao(const VertexBuffer& positions, const VertexBuffer& textureCoords, const VertexBuffer& normals, const std::vector<unsigned int>& indices) {
+	RawModel Loader::loadToVao(const std::vector<float>& positions, const std::vector<float>& textureCoords, const std::vector<float>& normals, const std::vector<unsigned int>& indices) {
 		VertexBufferLayout layout;
-		layout.push<float>(3, positions);
-		layout.push<float>(2, textureCoords);
-		layout.push<float>(3, normals);
+		layout.push<float>(3, VertexBuffer(&positions[0], positions.size() * sizeof(float)));
+		layout.push<float>(2, VertexBuffer(&textureCoords[0], positions.size() * sizeof(float)));
+		layout.push<float>(3, VertexBuffer(&normals[0], positions.size() * sizeof(float)));
 		VertexArray va;
 		m_IndexBuffers.emplace_back(&indices[0], indices.size());
 		va.bindLayout(layout);
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);
-		return RawModel(va, indices.size());
+		Vector3f max;
+		Vector3f min;
+		for (int i = 0; i < positions.size() / 3; i++) {
+			if (max.x < positions[i])
+				max.x = positions[i];
+			if (min.x > positions[i])
+				min.x = positions[i];
+			if (max.y < positions[i + 1])
+				max.y = positions[i + 1];
+			if (min.y > positions[i + 1])
+				min.y = positions[i + 1];
+			if (max.z < positions[i + 2])
+				max.z = positions[i + 2];
+			if (min.z > positions[i + 2])
+				min.z = positions[i + 2];
+		}
+		return RawModel(va, indices.size(), Box(min, max));
 	}
 
-	RawModel Loader::loadToVao(const VertexBuffer& positions, const std::vector<unsigned int>& indices) {
+	RawModel Loader::loadToVao(const std::vector<float>& positions, const std::vector<unsigned int>& indices) {
 		VertexBufferLayout layout;
-		layout.push<float>(3, positions);
+		layout.push<float>(3, VertexBuffer(&positions[0], positions.size() * sizeof(float)));
 		VertexArray va;
 		m_IndexBuffers.emplace_back(&indices[0], indices.size());
 		va.bindLayout(layout);
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
-		m_VertexArrays.push_back(va);
-		return RawModel(va, indices.size());
+		m_VertexArrays.push_back(va);		
+		Vector3f max;
+		Vector3f min;
+		for (int i = 0; i < positions.size() / 3; i++) {
+			if (max.x < positions[i])
+				max.x = positions[i];
+			if (min.x > positions[i])
+				min.x = positions[i];
+			if (max.y < positions[i + 1])
+				max.y = positions[i + 1];
+			if (min.y > positions[i + 1])
+				min.y = positions[i + 1];
+			if (max.z < positions[i + 2])
+				max.z = positions[i + 2];
+			if (min.z > positions[i + 2])
+				min.z = positions[i + 2];
+		}
+		return RawModel(va, indices.size(), Box(min, max));
 	}
 
 	RawModel Loader::loadToVao(const std::vector<float>& positions, const unsigned int dimensions) {
@@ -53,7 +85,25 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);
-		return RawModel(va, positions.size() / dimensions);
+		Vector3f max;
+		Vector3f min;
+		for (int i = 0; i < positions.size() / dimensions; i++) {
+			if (max.x < positions[i])
+				max.x = positions[i];
+			if (min.x > positions[i])
+				min.x = positions[i];
+			if (max.y < positions[i + 1])
+				max.y = positions[i + 1];
+			if (min.y > positions[i + 1])
+				min.y = positions[i + 1];
+			if (dimensions > 2) {
+				if (max.z < positions[i + 2])
+					max.z = positions[i + 2];
+				if (min.z > positions[i + 2])
+					min.z = positions[i + 2];
+			}
+		}
+		return RawModel(va, positions.size() / dimensions, Box(min, max));
 	}
 
 	unsigned int Loader::loadTexture(const char* filePath) {

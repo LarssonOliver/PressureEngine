@@ -41,8 +41,8 @@ namespace Pressure {
 		ShaderProgram::loadMatrix(location_projectionMatrix, matrix);
 	}
 
-	void EntityShader::loadViewMatrix(Camera& camera) {
-		ShaderProgram::loadMatrix(location_viewMatrix, Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll()));
+	void EntityShader::loadViewMatrix(Matrix4f& matrix) {
+		ShaderProgram::loadMatrix(location_viewMatrix, matrix);
 	}
 
 	void EntityShader::loadLights(std::vector<Light>& lights) {

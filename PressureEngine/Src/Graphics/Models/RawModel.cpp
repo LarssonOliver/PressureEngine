@@ -2,12 +2,16 @@
 
 namespace Pressure {
 
-	VertexArray& Pressure::RawModel::getVertexArray() const {
+	VertexArray& RawModel::getVertexArray() const {
 		return (VertexArray&)m_VertexArray;
 	}
 
 	unsigned int RawModel::getVertexCount() const {
 		return m_VertexCount;
+	}
+
+	Box RawModel::getBox() const {
+		return m_Bounds;
 	}
 
 }

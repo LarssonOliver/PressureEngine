@@ -21,7 +21,7 @@ namespace Pressure {
 
 	public:
 		Renderer(EntityShader& shader, GLFWwindow* window);
-		void render(std::map<TexturedModel, std::vector<Entity>>& entities, Matrix4f& toShadowSpace);
+		void render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera);
 
 		void updateProjectionMatrix(EntityShader& shader);
 		void tick();
@@ -29,7 +29,6 @@ namespace Pressure {
 	private:
 		void prepareTexturedModel(const TexturedModel& texturedModel);
 		void unbindTexturedModel(const RawModel& model);
-		void prepareInstance(Entity& entity);
 
 		void setTexParams() const;
 
