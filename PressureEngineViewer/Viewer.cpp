@@ -45,6 +45,11 @@ namespace PressureEngineViewer {
 			TexturedModel tree(treeModel, treeTexture);
 			entities.emplace_back(tree, Vector3f(-30.5, 0, -14), Vector3f(), 8.0);
 
+			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
+			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
+			TexturedModel tombstone(tombstoneModel, tombstoneTexture);
+			entities.emplace_back(tombstone, Vector3f(-26, .6, -13.7), Vector3f(0, 83, 0), .9);
+
 			if (std::stoi(Properties::Inst()->get("renderGrass")) == 1) { 				
 				RawModel grassModel = engine.loadObjModel("Grass");
 				grassModel.setWindAffected(true);
@@ -54,6 +59,9 @@ namespace PressureEngineViewer {
 				ModelTexture grass2Texture(engine.loadTexture("Grass.png"));
 				TexturedModel grass(grassModel, grassTexture);
 				TexturedModel grass2(grass2Model, grass2Texture);
+				setGrassPatch(-38, 0.9, -12, grass, grass2, -0.2, 0);
+				setGrassPatch(-39.5, 1.4, -9, grass, grass2, -0.2, .2);
+				setGrassPatch(-40, 1.3, -5, grass, grass2, -0.45, -.25);
 				setGrassPatch(-39, 0.75, 12, grass, grass2, -0.17, 0);
 				setGrassPatch(-39, 0.75, 15, grass, grass2, -0.17, 0);
 				setGrassPatch(-38, 0.55, 18, grass, grass2, -0.05, -0.05);
