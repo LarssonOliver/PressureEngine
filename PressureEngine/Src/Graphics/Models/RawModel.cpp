@@ -10,8 +10,4 @@ namespace Pressure {
 		return m_VertexCount;
 	}
 
-	Box RawModel::getBox() const {
-		return m_Bounds;
-	}
-
 }

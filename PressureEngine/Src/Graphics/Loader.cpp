@@ -30,23 +30,7 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);
-		Vector3f max;
-		Vector3f min;
-		for (int i = 0; i < positions.size() / 3; i++) {
-			if (max.x < positions[i])
-				max.x = positions[i];
-			if (min.x > positions[i])
-				min.x = positions[i];
-			if (max.y < positions[i + 1])
-				max.y = positions[i + 1];
-			if (min.y > positions[i + 1])
-				min.y = positions[i + 1];
-			if (max.z < positions[i + 2])
-				max.z = positions[i + 2];
-			if (min.z > positions[i + 2])
-				min.z = positions[i + 2];
-		}
-		return RawModel(va, indices.size(), Box(min, max));
+		return RawModel(va, indices.size());
 	}
 
 	RawModel Loader::loadToVao(const std::vector<float>& positions, const std::vector<unsigned int>& indices) {
@@ -58,23 +42,7 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);		
-		Vector3f max;
-		Vector3f min;
-		for (int i = 0; i < positions.size() / 3; i++) {
-			if (max.x < positions[i])
-				max.x = positions[i];
-			if (min.x > positions[i])
-				min.x = positions[i];
-			if (max.y < positions[i + 1])
-				max.y = positions[i + 1];
-			if (min.y > positions[i + 1])
-				min.y = positions[i + 1];
-			if (max.z < positions[i + 2])
-				max.z = positions[i + 2];
-			if (min.z > positions[i + 2])
-				min.z = positions[i + 2];
-		}
-		return RawModel(va, indices.size(), Box(min, max));
+		return RawModel(va, indices.size());
 	}
 
 	RawModel Loader::loadToVao(const std::vector<float>& positions, const unsigned int dimensions) {
@@ -85,25 +53,7 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);
-		Vector3f max;
-		Vector3f min;
-		for (int i = 0; i < positions.size() / dimensions; i++) {
-			if (max.x < positions[i])
-				max.x = positions[i];
-			if (min.x > positions[i])
-				min.x = positions[i];
-			if (max.y < positions[i + 1])
-				max.y = positions[i + 1];
-			if (min.y > positions[i + 1])
-				min.y = positions[i + 1];
-			if (dimensions > 2) {
-				if (max.z < positions[i + 2])
-					max.z = positions[i + 2];
-				if (min.z > positions[i + 2])
-					min.z = positions[i + 2];
-			}
-		}
-		return RawModel(va, positions.size() / dimensions, Box(min, max));
+		return RawModel(va, positions.size() / dimensions);
 	}
 
 	unsigned int Loader::loadTexture(const char* filePath) {
