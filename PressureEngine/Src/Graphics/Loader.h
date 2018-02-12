@@ -23,6 +23,9 @@ namespace Pressure {
 		RawModel loadToVao(const std::vector<float>& positions, const unsigned int dimensions);
 		unsigned int loadTexture(const char* filePath);
 		unsigned int loadCubeMap(const char* filePath);
+
+	private:
+		AABB calculateAABB(const std::vector<float>& positions, unsigned int dimensions = 3);
 		
 	};
 

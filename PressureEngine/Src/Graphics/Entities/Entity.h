@@ -13,6 +13,8 @@ namespace Pressure {
 		Vector3f rotationSpeed;
 		float scale;
 
+		AABB bounds;
+
 		Vector3f position;
 		Vector3f speed;
 		Vector3f acceleration;
@@ -26,6 +28,8 @@ namespace Pressure {
 		Vector3f getRotation() const;
 		Vector3f getRotationSpeed() const;
 		float getScale() const;
+
+		AABB getBounds() const;
 
 		Vector3f getPosition() const;
 		Vector3f getSpeed() const;

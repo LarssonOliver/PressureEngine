@@ -10,13 +10,17 @@ namespace Pressure {
 	}
 
 	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
-		shader.loadViewMatrix(Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll()));
+		Matrix4f viewMatrix = Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll());
+		shader.loadViewMatrix(viewMatrix);
+		frustum.extractPlanes(projectionMatrix.mul(viewMatrix, Matrix4f()));
 		for (auto const& model : entities) {
 			prepareTexturedModel(model.first);
 			std::vector<Entity>& batch = entities[model.first];
 			for (Entity& entity : batch) {
-				shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
-				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
+				if (frustum.sphereInFrustum(entity.getBounds().getCenter(), entity.getBounds().getRadius())) {
+					shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
+					glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
+				}
 			}
 			unbindTexturedModel(model.first.getRawModel());
 		}

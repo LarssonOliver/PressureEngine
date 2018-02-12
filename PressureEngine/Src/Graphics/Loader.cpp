@@ -30,7 +30,8 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);
-		return RawModel(va, indices.size());
+		Vector3f min, max;
+		return RawModel(va, indices.size(), calculateAABB(positions));
 	}
 
 	RawModel Loader::loadToVao(const std::vector<float>& positions, const std::vector<unsigned int>& indices) {
@@ -42,7 +43,7 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);		
-		return RawModel(va, indices.size());
+		return RawModel(va, indices.size(), calculateAABB(positions));
 	}
 
 	RawModel Loader::loadToVao(const std::vector<float>& positions, const unsigned int dimensions) {
@@ -53,7 +54,7 @@ namespace Pressure {
 		m_VertexBufferLayouts.push_back(layout);
 		va.unbind();
 		m_VertexArrays.push_back(va);
-		return RawModel(va, positions.size() / dimensions);
+		return RawModel(va, positions.size() / dimensions, calculateAABB(positions, dimensions));
 	}
 
 	unsigned int Loader::loadTexture(const char* filePath) {
@@ -80,6 +81,19 @@ namespace Pressure {
 		}
 		m_Textures.push_back(newTextureID);
 		return newTextureID;
+	}
+
+	AABB Loader::calculateAABB(const std::vector<float>& positions, unsigned int dimensions) {
+		Vector3f min, max;
+		for (unsigned int i = 0; i < positions.size() / dimensions; i++) {
+			for (unsigned int j = 0; j < dimensions; j++) {
+				if (positions[i + j] < min[j])
+					min[j] = positions[i + j];
+				else if (positions[i + j] > max[j])
+					max[j] = positions[i + j];
+			}
+		}
+		return AABB(min, max);
 	}
 
 }

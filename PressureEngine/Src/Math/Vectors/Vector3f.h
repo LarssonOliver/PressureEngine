@@ -104,6 +104,7 @@ namespace Pressure {
 		bool operator!=(const Vector3f& other) const;
 		bool operator<(const Vector3f& other) const;
 		bool operator>(const Vector3f& other) const;
+		float& operator[](int id);
 		friend std::ostream& operator<<(std::ostream& os, const Vector3f& vec);
 
 	};

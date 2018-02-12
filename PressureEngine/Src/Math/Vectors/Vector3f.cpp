@@ -255,7 +255,7 @@ namespace Pressure {
 	}
 
 	float Vector3f::dot(const Vector3f& v) const {
-		return this->x * v.getX() + this->y * v.getY() + this->z * z;
+		return this->x * v.getX() + this->y * v.getY() + this->z * v.getZ();
 	}
 
 	Vector3f& Vector3f::normalize() {
@@ -417,6 +417,13 @@ namespace Pressure {
 
 	bool Vector3f::operator>(const Vector3f& other) const {
 		return (x > other.x && y > other.y && z > other.z);
+	}
+
+	float& Vector3f::operator[](int id) {
+		if (id == 0) return x;
+		else if (id == 1) return y;
+		else if (id == 2) return z;
+		else return x;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector3f& vec) {

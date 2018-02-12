@@ -148,11 +148,11 @@ namespace PressureEngineViewer {
 				entities.emplace_back(plane, Vector3f(x, y, z), Vector3f(180.0 / Math::PI * atan(-slopeZ / 2), 0, 180.0 / Math::PI * atan(slopeX / 2)), 2.0f);
 			} else {
 				float offsetX, offsetZ, offsetY;
-				for (int i = 0; i < 16; i++) {
+				for (int i = 0; i < 4; i++) {
 					offsetX = r.next();
 					offsetZ = r.next();
 					offsetY = offsetX/2 * slopeX + offsetZ/2 * slopeZ;
-					if (i < 8)
+					if (i < 2)
 						entities.emplace_back(grass, Vector3f(x + offsetX, y + offsetY, z + offsetZ), Vector3f(0, r.next() * 180, 0), 1.0 + 0.3 * r.next());
 					else
 						entities.emplace_back(grass2, Vector3f(x + offsetX, y + offsetY, z + offsetZ), Vector3f(0, r.next() * 180, 0), 1.0 + 0.3 * r.next());

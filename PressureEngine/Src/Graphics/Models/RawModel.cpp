@@ -10,4 +10,8 @@ namespace Pressure {
 		return m_VertexCount;
 	}
 
+	AABB RawModel::getBounds() const {
+		return m_Bounds;
+	}
+
 }

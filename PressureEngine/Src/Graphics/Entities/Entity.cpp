@@ -4,7 +4,7 @@
 namespace Pressure {
 
 	Entity::Entity(const TexturedModel& model, const Vector3f& position, const Vector3f& rotation, const float scale)
-		: model(TexturedModel(model.getRawModel(), model.getTexture())), rotation(rotation), rotationSpeed(0), scale(scale), position(position), speed(Vector3f(0)), acceleration(Vector3f(0))
+		: model(TexturedModel(model.getRawModel(), model.getTexture())), rotation(rotation), rotationSpeed(0), scale(scale), bounds(model.getRawModel().getBounds().transform(position).scale(scale)), position(position), speed(Vector3f(0)), acceleration(Vector3f(0))
 	{}
 
 	void Entity::tick() {
@@ -27,6 +27,10 @@ namespace Pressure {
 
 	float Entity::getScale() const {
 		return this->scale;
+	}
+
+	AABB Entity::getBounds() const {
+		return bounds;
 	}
 
 	Vector3f Entity::getPosition() const {

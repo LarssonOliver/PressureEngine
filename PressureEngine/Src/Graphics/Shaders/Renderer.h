@@ -7,6 +7,7 @@
 #include "../Entities\Entity.h"
 #include "../Models\RawModel.h"
 #include "../Models\TexturedModel.h"
+#include "../../Math/Geometry/ViewFrustum.h"
 
 namespace Pressure {
 
@@ -16,6 +17,7 @@ namespace Pressure {
 		Matrix4f projectionMatrix;
 		EntityShader shader;
 		GLFWwindow* const window;
+		ViewFrustum frustum;
 
 		float windModifier;
 
