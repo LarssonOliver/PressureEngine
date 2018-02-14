@@ -62,7 +62,7 @@ namespace PressureEngineViewer {
 
 			entities.emplace_back(stones[1], Vector3f(-30, -5.1, 1), Vector3f(-10, 70, 0), 1);
 			entities.emplace_back(stones[2], Vector3f(-21, -3.9, 13), Vector3f(-10, 70, 0), .6);
-			entities.emplace_back(stones[0], Vector3f(-26, -4.5, 9), Vector3f(-10, 70, 0), .6);
+			entities.emplace_back(stones[0], Vector3f(-26, -4.2, 9), Vector3f(-10, 70, 0), .6);
 
 			if (std::stoi(Properties::Inst()->get("renderGrass")) == 1) { 				
 				RawModel grassModel = engine.loadObjModel("Grass");
@@ -99,8 +99,8 @@ namespace PressureEngineViewer {
 			waters.emplace_back(engine.generateWater(Vector3f(-25, 0, 3)));
 			waters.emplace_back(engine.generateWater(Vector3f(-9, 0, -5)));
 
-			ParticleTexture particleTex = engine.loadParticleTexture("particleAtlas.png", 4, false);
-			particleSystem = new ParticleSystem(particleTex, 40, Vector3f(.1), 0.02, 1 * 60);
+			ParticleTexture particleTex = engine.loadParticleTexture("WaterParticles.png", 4, false);
+			particleSystem = new ParticleSystem(particleTex, 128, (Vector3f&)Vector3f(-.1, 0, 0), 0.02, 1.4 * 60);
 		}
 
 		void loop() {
@@ -136,7 +136,7 @@ namespace PressureEngineViewer {
 		}
 
 		void tick() {
-			particleSystem->generateParticles(Vector3f(0));
+			particleSystem->generateParticles((Vector3f&)Vector3f(-42, 0.2, 3), Vector3f(.2, .1, 2));
 			engine.tick();
 			for (auto& entity : entities) {
 				entity.tick();

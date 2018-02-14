@@ -10,13 +10,13 @@ namespace Pressure {
 		ppt *= PRESSURE_TICKTIME;
 	}
 
-	void ParticleSystem::generateParticles(Vector3f& center) {
+	void ParticleSystem::generateParticles(Vector3f& center, const Vector3f& spread) {
 		Random<float> r;
 		for (unsigned int i = 0; i < (int)ppt; i++) {
-			emitParticle(center);
+			emitParticle(center, spread);
 		}
 		if (r.next() < fmod(ppt, 1)) {
-			emitParticle(center);
+			emitParticle(center, spread);
 		}
 	}
 
@@ -27,7 +27,7 @@ namespace Pressure {
 			center.y += r.next() * spread.getY();
 			center.z += r.next() * spread.getZ();
 		}
-		Particle(texture, center, velocity, gravityComplient, lifeLength, 0, 1); 
+		Particle(texture, center, velocity, gravityComplient, lifeLength, 0, 2); 
 	}
 
 }
