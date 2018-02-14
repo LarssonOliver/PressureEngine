@@ -41,7 +41,7 @@ namespace PressureEngineViewer {
 			entities.emplace_back(jetty, Vector3f(-12, 0.5f, 6), Vector3f(0, 155, 0), 2.f);
 
 			RawModel treeModel = engine.loadObjModel("Tree");
-			ModelTexture treeTexture(engine.loadTexture("Tree.png"));
+			ModelTexture treeTexture = engine.loadTexture("Tree.png");
 			TexturedModel tree(treeModel, treeTexture);
 			entities.emplace_back(tree, Vector3f(-30.5, 0, -14), Vector3f(), 8.0);
 
@@ -49,6 +49,20 @@ namespace PressureEngineViewer {
 			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
 			TexturedModel tombstone(tombstoneModel, tombstoneTexture);
 			entities.emplace_back(tombstone, Vector3f(-26, .6, -13.7), Vector3f(0, 86, 0), .9);
+
+			// Stones			
+			RawModel stoneModels[3] = { engine.loadObjModel("Stone"), engine.loadObjModel("Stone2"), engine.loadObjModel("Stone3") };
+			ModelTexture stoneTextures[3] = { engine.loadTexture("Stone.png"), engine.loadTexture("Stone.png"), engine.loadTexture("Stone.png") };
+			TexturedModel stones[3] = { { stoneModels[0], stoneTextures[0] }, { stoneModels[1], stoneTextures[1] }, { stoneModels[2], stoneTextures[2] } };
+
+			entities.emplace_back(stones[0], Vector3f(-41.7, -1, .6), Vector3f(10, 50, 10), 2.8);
+			entities.emplace_back(stones[1], Vector3f(-42, -1.4, 3.5), Vector3f(20), 3.3);
+			entities.emplace_back(stones[2], Vector3f(-41, -.6, 5), Vector3f(-10), 1.6);
+			entities.emplace_back(stones[2], Vector3f(-40.5, -2, 2.5), Vector3f(-10, 70, 0), 1.6);
+
+			entities.emplace_back(stones[1], Vector3f(-30, -5.1, 1), Vector3f(-10, 70, 0), 1);
+			entities.emplace_back(stones[2], Vector3f(-21, -3.9, 13), Vector3f(-10, 70, 0), .6);
+			entities.emplace_back(stones[0], Vector3f(-26, -4.5, 9), Vector3f(-10, 70, 0), .6);
 
 			if (std::stoi(Properties::Inst()->get("renderGrass")) == 1) { 				
 				RawModel grassModel = engine.loadObjModel("Grass");

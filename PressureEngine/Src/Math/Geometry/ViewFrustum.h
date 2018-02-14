@@ -17,6 +17,8 @@ namespace Pressure {
 
 		bool pointInFrustum(const Vector3f& point) const;
 		bool sphereInFrustum(const Vector3f center, const float radius) const;
+		
+		// Not working as intended.
 		bool aabbInFrustum(const AABB& bounds) const;
 
 	};

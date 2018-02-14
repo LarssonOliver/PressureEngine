@@ -58,7 +58,7 @@ namespace Pressure {
 	}
 
 	bool ViewFrustum::sphereInFrustum(const Vector3f center, const float radius) const {
-		for (const Plane& p : m_Planes) {			
+		for (const Plane& p : m_Planes) {
 			if ((center.dot(p.getNormal()) + p.getDistance() + radius) < 0)
 				return false;
 		}
@@ -66,7 +66,25 @@ namespace Pressure {
 	}
 
 	bool ViewFrustum::aabbInFrustum(const AABB& bounds) const {
-		return pointInFrustum(bounds.getMin()) || pointInFrustum(bounds.getMax());
+		Vector3f corners[6];
+
+		corners[0] = Vector3f(bounds.getMax().getX(), bounds.getMax().getY(), bounds.getMin().getZ());
+		corners[1] = Vector3f(bounds.getMax().getX(), bounds.getMin().getY(), bounds.getMin().getZ());
+		corners[2] = Vector3f(bounds.getMax().getX(), bounds.getMin().getY(), bounds.getMax().getZ());
+		corners[3] = Vector3f(bounds.getMin().getX(), bounds.getMax().getY(), bounds.getMin().getZ());
+		corners[4] = Vector3f(bounds.getMin().getX(), bounds.getMin().getY(), bounds.getMin().getZ());
+		corners[5] = Vector3f(bounds.getMin().getX(), bounds.getMin().getY(), bounds.getMax().getZ());
+
+		
+		if (pointInFrustum(bounds.getMin()) || pointInFrustum(bounds.getMax())) {
+			return true;
+		}
+
+		for (const Vector3f& v : corners) {
+			if (pointInFrustum(v)) return true;
+		}
+
+		return false;
 	}
 
 }
