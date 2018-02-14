@@ -92,6 +92,7 @@ namespace Pressure {
 			renderer->renderShadowMap(lights[0]);
 		renderer->render(lights, *camera);
 		guiRenderer->render(guis);
+		ParticleMaster::renderParticles(*camera);
 		window->swapBuffers();
 		lights.clear();
 		guis.clear();
@@ -103,6 +104,10 @@ namespace Pressure {
 
 	ModelTexture PressureEngine::loadTexture(const char* filePath) {
 		return ModelTexture(loader->loadTexture(filePath));		
+	}
+
+	ParticleTexture PressureEngine::loadParticleTexture(const char* filePath, const unsigned int numberOfRows, const bool additiveBlending) {
+		return ParticleTexture(loader->loadTexture(filePath), numberOfRows, additiveBlending);
 	}
 
 	Water PressureEngine::generateWater(const Vector3f& position) const {

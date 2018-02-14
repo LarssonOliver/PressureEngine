@@ -6,6 +6,7 @@
 #include "ParticleShader.h"
 #include "Particle.h"
 #include "../Models/RawModel.h"
+#include "../../Math/Geometry/ViewFrustum.h"
 
 namespace Pressure {
 
@@ -14,8 +15,8 @@ namespace Pressure {
 	private:
 		const static std::vector<float> VERTICES;
 		const static int MAX_INSTANCES;
-		const static int INSTANCE_DATA_LENGTH;
-		
+		const static int INSTANCE_DATA_LENGTH;		
+
 		static std::vector<float> buffer;
 		int pointer;
 

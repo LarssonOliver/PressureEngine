@@ -17,7 +17,6 @@ namespace Pressure {
 		Matrix4f projectionMatrix;
 		EntityShader shader;
 		GLFWwindow* const window;
-		ViewFrustum frustum;
 
 		float windModifier;
 

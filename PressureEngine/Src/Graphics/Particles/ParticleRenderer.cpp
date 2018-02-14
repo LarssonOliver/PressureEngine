@@ -33,8 +33,10 @@ namespace Pressure {
 			pointer = 0;
 			this->buffer = std::vector<float>(it->second.size() * INSTANCE_DATA_LENGTH);
 			for (Particle& particle : it->second) {
-				updateViewMatrix(particle.getPosition(), particle.getRotation(), particle.getScale(), viewMatrix);
-				updateTexCoordInfo(particle);
+				if (ViewFrustum::Inst().sphereInFrustum(particle.getPosition(), std::sqrtf(3.f) / 2 * particle.getScale())) {
+					updateViewMatrix(particle.getPosition(), particle.getRotation(), particle.getScale(), viewMatrix);
+					updateTexCoordInfo(particle);
+				}
 			}
 			vbo.update(&buffer[0], buffer.size() * sizeof(float));
 			glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, quad.getVertexCount(), it->second.size());

@@ -98,6 +98,9 @@ namespace PressureEngineViewer {
 			waters.emplace_back(engine.generateWater(Vector3f(-25, 0, -13)));
 			waters.emplace_back(engine.generateWater(Vector3f(-25, 0, 3)));
 			waters.emplace_back(engine.generateWater(Vector3f(-9, 0, -5)));
+
+			ParticleTexture particleTex = engine.loadParticleTexture("particleAtlas.png", 4, false);
+			particleSystem = new ParticleSystem(particleTex, 40, Vector3f(.1), 0.02, 1 * 60);
 		}
 
 		void loop() {
@@ -133,6 +136,7 @@ namespace PressureEngineViewer {
 		}
 
 		void tick() {
+			particleSystem->generateParticles(Vector3f(0));
 			engine.tick();
 			for (auto& entity : entities) {
 				entity.tick();

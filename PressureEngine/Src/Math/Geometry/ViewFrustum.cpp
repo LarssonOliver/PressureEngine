@@ -2,6 +2,15 @@
 
 namespace Pressure {
 
+	ViewFrustum* ViewFrustum::m_Inst = nullptr;
+
+	ViewFrustum& ViewFrustum::Inst() {
+		if (!m_Inst)
+			m_Inst = new ViewFrustum();
+		return *m_Inst;
+		
+	}
+
 	void ViewFrustum::extractPlanes(const Matrix4f& projectionViewMatrix) {
 		Vector3f n;
 

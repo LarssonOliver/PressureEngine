@@ -52,6 +52,7 @@ namespace Pressure {
 		// Loads model.
 		RawModel loadObjModel(const char* fileNmae);
 		ModelTexture loadTexture(const char* filePath);
+		ParticleTexture loadParticleTexture(const char* filePath, const unsigned int numberOfRows, const bool additiveBlending = false);
 
 		Water generateWater(const Vector3f& position) const;
 

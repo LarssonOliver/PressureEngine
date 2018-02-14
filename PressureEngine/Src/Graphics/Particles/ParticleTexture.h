@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../DllExport.h"
+
 namespace Pressure {
 
-	class ParticleTexture {
+	class PRESSURE_API ParticleTexture {
 
 	private:
 		int textureID;
