@@ -92,6 +92,7 @@ out VertexData {
 void main(void) {
 	for (int i = 0; i < 3; i++) {
 		vertexOut.pass_textureCoords = (vertexIn[0].pass_textureCoords + vertexIn[1].pass_textureCoords + vertexIn[2].pass_textureCoords) / 3;
+		//vertexOut.pass_textureCoords = vertexIn[i].pass_textureCoords;
 		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
 		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
 
