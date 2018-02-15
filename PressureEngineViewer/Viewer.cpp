@@ -100,7 +100,7 @@ namespace PressureEngineViewer {
 			waters.emplace_back(engine.generateWater(Vector3f(-9, 0, -5)));
 
 			ParticleTexture particleTex = engine.loadParticleTexture("WaterParticles.png", 4, false);
-			particleSystem = new ParticleSystem(particleTex, 128, (Vector3f&)Vector3f(-.1, 0, 0), 0.02, 1.4 * 60);
+			particleSystem = new ParticleSystem(particleTex, 128, (Vector3f&)Vector3f(-.09, 0, 0), 0.01, 1.4 * 60);
 		}
 
 		void loop() {

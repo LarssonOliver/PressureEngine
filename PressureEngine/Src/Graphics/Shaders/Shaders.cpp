@@ -93,10 +93,18 @@ out VertexData {
 } vertexOut;
 
 void main(void) {
+	float shadowMinimum = vertexIn[0].shadowCoords.z;
+	if (vertexIn[1].shadowCoords.z < shadowMinimum) {
+		shadowMinimum = vertexIn[1].shadowCoords.z;
+	}
+	if (vertexIn[2].shadowCoords.z < shadowMinimum) {
+		shadowMinimum = vertexIn[2].shadowCoords.z;
+	}
 	for (int i = 0; i < 3; i++) {
 		vertexOut.pass_textureCoords = (vertexIn[0].pass_textureCoords + vertexIn[1].pass_textureCoords + vertexIn[2].pass_textureCoords) / 3;
 		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
 		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
+		vertexOut.shadowCoords.z = shadowMinimum + 0.002;
 
 		vertexOut.surfaceNormal = (vertexIn[0].surfaceNormal + vertexIn[1].surfaceNormal + vertexIn[2].surfaceNormal) / 3;
 		vertexOut.toLightVector = vertexIn[i].toLightVector;

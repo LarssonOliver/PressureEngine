@@ -27,7 +27,7 @@ namespace Pressure {
 			center.y += r.next() * spread.getY();
 			center.z += r.next() * spread.getZ();
 		}
-		Particle(texture, center, velocity, gravityComplient, lifeLength, 0, 2); 
+		Particle(texture, center, velocity, gravityComplient, lifeLength + 6 * r.next(), 0, 2); 
 	}
 
 }

@@ -99,7 +99,7 @@ namespace Pressure {
 		renderer.render(entities, camera);
 		shader.stop();
 		skyboxRenderer.render(camera);
-		ParticleMaster::renderParticles(camera); // Refractionrendering too, clipplane?
+		//ParticleMaster::renderParticles(camera); // Refractionrendering too, clipplane?
 		camera.getPosition().y += distance;
 		camera.invertPitch();
 
