@@ -44,6 +44,7 @@ namespace Pressure {
 		void updateProjectionMatrix();
 
 		static void enableCulling();
+		static void enableFrontFaceCulling();
 		static void disableCulling();
 
 		//for debugging.

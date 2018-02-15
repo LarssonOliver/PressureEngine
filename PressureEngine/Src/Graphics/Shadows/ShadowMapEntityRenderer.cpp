@@ -8,6 +8,7 @@ namespace Pressure {
 	}
 
 	void ShadowMapEntityRenderer::render(const std::map<TexturedModel, std::vector<Entity>>& entities) {
+		MasterRenderer::enableFrontFaceCulling();
 		for (const auto& model : entities) {
 			model.first.getRawModel().getVertexArray().bind();
 			glEnableVertexAttribArray(0);
@@ -18,8 +19,9 @@ namespace Pressure {
 				glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 			}
 			if (model.first.getTexture().hasTransparency())
-				MasterRenderer::enableCulling();
+				MasterRenderer::enableFrontFaceCulling();
 		}
+		MasterRenderer::enableCulling();
 		glDisableVertexAttribArray(0);
 		glBindVertexArray(0);
 	}

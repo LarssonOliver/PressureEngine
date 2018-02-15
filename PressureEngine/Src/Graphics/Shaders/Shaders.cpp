@@ -41,11 +41,8 @@ float getWindZ() {
 void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
-	
 	worldPosition.xz = vec2(worldPosition.x + position.y * getWindX(), worldPosition.z + position.y * getWindZ());
-
 	vertexOut.shadowCoords = toShadowMapSpace * worldPosition;
-	vertexOut.shadowCoords.z -= 0.002; // Hack to stop shadows clipping the shadowmap.
 
 	gl_ClipDistance[0] = dot(worldPosition, plane);
 
@@ -93,18 +90,10 @@ out VertexData {
 } vertexOut;
 
 void main(void) {
-	float shadowMinimum = vertexIn[0].shadowCoords.z;
-	if (vertexIn[1].shadowCoords.z < shadowMinimum) {
-		shadowMinimum = vertexIn[1].shadowCoords.z;
-	}
-	if (vertexIn[2].shadowCoords.z < shadowMinimum) {
-		shadowMinimum = vertexIn[2].shadowCoords.z;
-	}
 	for (int i = 0; i < 3; i++) {
 		vertexOut.pass_textureCoords = (vertexIn[0].pass_textureCoords + vertexIn[1].pass_textureCoords + vertexIn[2].pass_textureCoords) / 3;
 		vertexOut.toCameraVector = vertexIn[i].toCameraVector;
 		vertexOut.shadowCoords = vertexIn[i].shadowCoords;
-		vertexOut.shadowCoords.z = shadowMinimum + 0.002;
 
 		vertexOut.surfaceNormal = (vertexIn[0].surfaceNormal + vertexIn[1].surfaceNormal + vertexIn[2].surfaceNormal) / 3;
 		vertexOut.toLightVector = vertexIn[i].toLightVector;
@@ -138,13 +127,13 @@ uniform float shineDamper;
 uniform float reflectivity;
 
 const int pcfCount = 2;
-const float totalTexels = (pcfCount * 2.2 + 1.0) * (pcfCount * 2.2 + 1.0);
+const float totalTexels = (pcfCount * 2.0 + 1.0) * (pcfCount * 2.0 + 1.0);
 
 void main(void) {
 
 	const float shadowMapSize = 8192;
 	float texelSize = 1.0 / shadowMapSize;
-	float total = 0.0;
+	float total = 0.0;	
 
 	for(int x = -pcfCount; x <= pcfCount; x++) {	
 		for(int y = -pcfCount; y <= pcfCount; y++) {

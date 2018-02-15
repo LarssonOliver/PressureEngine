@@ -59,6 +59,11 @@ namespace Pressure {
 		glCullFace(GL_BACK);
 	}
 
+	void MasterRenderer::enableFrontFaceCulling() {
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
+	}
+
 	void MasterRenderer::disableCulling() {
 		glDisable(GL_CULL_FACE);
 	}
