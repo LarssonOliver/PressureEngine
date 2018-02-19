@@ -48,12 +48,12 @@ namespace PressureEngineViewer {
 			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
 			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
 			TexturedModel tombstone(tombstoneModel, tombstoneTexture);
-			entities.emplace_back(tombstone, Vector3f(-27, .3, -13.7), Vector3f(0, 88, 0), .9);
+			entities.emplace_back(tombstone, Vector3f(-27, .3, -13.7), Vector3f(0, 88, 0), 1.2);
 
 			RawModel wellModel = engine.loadObjModel("Well");
-			ModelTexture wellTexture(engine.loadTexture("default.png"));
+			ModelTexture wellTexture(engine.loadTexture("Well.png"));
 			TexturedModel well(wellModel, wellTexture);
-			entities.emplace_back(well, Vector3f(0, 1, 0), Vector3f(0, 0, 0), 1);
+			entities.emplace_back(well, Vector3f(-1, .3, 17), Vector3f(0, -10, 0), 1.6);
 
 			// Stones			
 			RawModel stoneModels[3] = { engine.loadObjModel("Stone"), engine.loadObjModel("Stone2"), engine.loadObjModel("Stone3") };
