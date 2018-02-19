@@ -5,7 +5,7 @@
 namespace Pressure {
 
 	MasterRenderer::MasterRenderer(Window& window, Loader& loader, Camera& camera)
-		: shader(), renderer(shader, window.getWindow()), skyboxRenderer(loader, window.getWindow()), shadowMapRenderer(camera, window), waterRenderer(window.getWindow(), waterBuffers), waterBuffers(window.getWindow()), entities() {
+		: shader(), renderer(shader, window.getWindow()), skyboxRenderer(loader, window.getWindow()), shadowMapRenderer(camera, window), waterRenderer(window), entities() {
 		enableCulling();
 	}
 
@@ -91,7 +91,7 @@ namespace Pressure {
 
 	void MasterRenderer::renderWaterFrameBuffers(std::vector<Light>& lights, Camera& camera) {
 		// Reflection rendering.
-		waterBuffers.bindReflectionFrameBuffer();
+		waterRenderer.getReflectionBuffer().bind();
 		float distance = 2 * (camera.getPosition().getY() - water[0].getPosition().getY()); // Set up checking for which water is in frame.
 		camera.getPosition().y -= distance;
 		camera.invertPitch();
@@ -109,7 +109,7 @@ namespace Pressure {
 		camera.invertPitch();
 
 		// Refraction rendering.
-		waterBuffers.bindRefractionFrameBuffer();
+		waterRenderer.getRefractionBuffer().bind();
 		prepare();
 		shader.start();
 		shader.connectTextureUnits();
@@ -120,7 +120,7 @@ namespace Pressure {
 		shader.stop();
 		skyboxRenderer.render(camera);
 
-		waterBuffers.unbindFrameBuffer();
+		waterRenderer.getRefractionBuffer().unbind();
 	}
 
 }

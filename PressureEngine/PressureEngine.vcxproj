@@ -130,6 +130,7 @@
     <ClCompile Include="Src\Graphics\Entities\Camera.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Entity.cpp" />
     <ClCompile Include="Src\Graphics\Entities\Light.cpp" />
+    <ClCompile Include="Src\Graphics\GLObjects\FrameBuffer.cpp" />
     <ClCompile Include="Src\Graphics\GLObjects\IndexBuffer.cpp" />
     <ClCompile Include="Src\Graphics\GLObjects\VertexArray.cpp" />
     <ClCompile Include="Src\Graphics\GLObjects\VertexBuffer.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Src\Graphics\Entities\Camera.h" />
     <ClInclude Include="Src\Graphics\Entities\Entity.h" />
     <ClInclude Include="Src\Graphics\Entities\Light.h" />
+    <ClInclude Include="Src\Graphics\GLObjects\FrameBuffer.h" />
     <ClInclude Include="Src\Graphics\GLObjects\GLObjects.h" />
     <ClInclude Include="Src\Graphics\GLObjects\IndexBuffer.h" />
     <ClInclude Include="Src\Graphics\GLObjects\VertexArray.h" />

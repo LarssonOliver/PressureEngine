@@ -3,7 +3,7 @@
 #include "../Models/RawModel.h"
 #include "WaterShader.h"
 #include "Water.h"
-#include "WaterFrameBuffers.h"
+#include "../GLObjects/FrameBuffer.h"
 
 namespace Pressure {
 
@@ -11,18 +11,22 @@ namespace Pressure {
 
 	private:
 		WaterShader shader;
-		GLFWwindow* window;
+		Window& window;
 		float waveModifier;
 
-		WaterFrameBuffers& fbos;
+		FrameBuffer reflectionBuffer;
+		FrameBuffer refractionBuffer;
 
 	public:
-		WaterRenderer(GLFWwindow* window, WaterFrameBuffers& fbos);
+		WaterRenderer(Window& window);
 		void updateProjectionmatrix();
 
 		// Used to time the waves.
 		void tick();
 		void render(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera);
+
+		FrameBuffer& getReflectionBuffer();
+		FrameBuffer& getRefractionBuffer();
 
 	private:
 		void prepare(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera);

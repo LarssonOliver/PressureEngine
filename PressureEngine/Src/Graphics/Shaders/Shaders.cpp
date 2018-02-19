@@ -169,7 +169,7 @@ void main(void) {
 		totalDiffuse += (brightness * lightColor[i]) / attFactor;
 		totalSpecular += (dampedFactor * reflectivity * lightColor[i]) / attFactor;
 	}
-	totalDiffuse = max(totalDiffuse * lightFactor, 0.2);
+	totalDiffuse = max(totalDiffuse * lightFactor, 0.3);
 
 	vec4 textureColor = texture(textureSampler, vertexIn.pass_textureCoords);
 	if (textureColor.a < 0.5) {

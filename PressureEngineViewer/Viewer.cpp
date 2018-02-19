@@ -53,7 +53,25 @@ namespace PressureEngineViewer {
 			RawModel wellModel = engine.loadObjModel("Well");
 			ModelTexture wellTexture(engine.loadTexture("Well.png"));
 			TexturedModel well(wellModel, wellTexture);
-			entities.emplace_back(well, Vector3f(-1, .3, 17), Vector3f(0, -10, 0), 1.6);
+			entities.emplace_back(well, Vector3f(4, 0.1, 18), Vector3f(0, 195, 0), 1.6);
+			
+			RawModel rackModel = engine.loadObjModel("Fishingrack");
+			ModelTexture rackTexture = engine.loadTexture("Fishingrack.png");
+			TexturedModel rack(rackModel, rackTexture);
+			entities.emplace_back(rack, Vector3f(-3, 0.4, 16), Vector3f(0, 150, 0), 1);
+
+			// Fences
+			RawModel fenceModel = engine.loadObjModel("Fence");
+			RawModel fence2Model = engine.loadObjModel("Fence2");
+			ModelTexture fenceTexture = engine.loadTexture("Jetty.png");
+			ModelTexture fence2Texture = engine.loadTexture("Jetty.png");
+			TexturedModel fence(fenceModel, fenceTexture);
+			TexturedModel fence2(fence2Model, fence2Texture);
+			entities.emplace_back(fence, Vector3f(-7, 0.3, 19), Vector3f(0, 145, 0), 2.7);
+			entities.emplace_back(fence2, Vector3f(-0.2, 0.1, 21.5), Vector3f(0, 173, 0), 2.7);
+			entities.emplace_back(fence, Vector3f(7, -0.1, 22.5), Vector3f(0, 173, 0), 2.7);
+			entities.emplace_back(fence, Vector3f(14, -0.4, 23), Vector3f(0, 175, 0), 2.7);
+			entities.emplace_back(fence2, Vector3f(21, -0.6, 23), Vector3f(0, 183, 0), 2.7);
 
 			// Stones			
 			RawModel stoneModels[3] = { engine.loadObjModel("Stone"), engine.loadObjModel("Stone2"), engine.loadObjModel("Stone3") };
@@ -94,6 +112,7 @@ namespace PressureEngineViewer {
 				setGrassPatch(-19, 0.6, 22, grass, grass2, 0.10, 0.15);
 				setGrassPatch(-16, 0.7, 22, grass, grass2, 0.20, 0.25);
 				setGrassPatch(-13, .5, 20, grass, grass2, 0.20, 0.3);
+				setGrassPatch(-8, 0.7, 22, grass, grass2, -0.20, 0.3);
 			}
 
 			// Lights

@@ -1,5 +1,5 @@
 #pragma once
-#include "ShadowFrameBuffer.h"
+#include "../GLObjects/FrameBuffer.h"
 #include "ShadowShader.h"
 #include "ShadowBox.h"
 #include "ShadowMapEntityRenderer.h"
@@ -12,7 +12,7 @@ namespace Pressure {
 	private:
 		static const int SHADOW_MAP_SIZE;
 
-		ShadowFrameBuffer shadowFbo;
+		FrameBuffer shadowFbo;
 		ShadowShader shader;
 		ShadowBox shadowBox;
 		Matrix4f projectionMatrix;

@@ -3,7 +3,8 @@
 
 namespace Pressure {
 
-	WaterRenderer::WaterRenderer(GLFWwindow* window, WaterFrameBuffers& fbos) : window(window), fbos(fbos)  {
+	WaterRenderer::WaterRenderer(Window& window)
+		: window(window), reflectionBuffer(window, window.getWidth() / 4, window.getHeight() / 4, DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, DepthBufferType::TEXTURE) {
 		shader.start();
 		shader.connectTextureUnits();
 		updateProjectionmatrix();
@@ -11,7 +12,7 @@ namespace Pressure {
 
 	void WaterRenderer::updateProjectionmatrix() {
 		shader.start();
-		shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(window));
+		shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(window.getWindow()));
 		shader.stop();
 	}
 
@@ -31,6 +32,14 @@ namespace Pressure {
 		finish(water);
 	}
 
+	FrameBuffer& WaterRenderer::getReflectionBuffer() {
+		return reflectionBuffer;
+	}
+
+	FrameBuffer& WaterRenderer::getRefractionBuffer() {
+		return reflectionBuffer;
+	}
+
 	void WaterRenderer::prepare(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera) {
 		shader.start();
 		shader.loadViewMatrix(camera);
@@ -39,11 +48,11 @@ namespace Pressure {
 		Water::getModel().getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, fbos.getReflectionTexture());
+		glBindTexture(GL_TEXTURE_2D, reflectionBuffer.getColorTexture());
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionTexture());
+		glBindTexture(GL_TEXTURE_2D, refractionBuffer.getColorTexture());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, fbos.getRefractionDepthTexture());
+		glBindTexture(GL_TEXTURE_2D, refractionBuffer.getDepthTexture());
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}

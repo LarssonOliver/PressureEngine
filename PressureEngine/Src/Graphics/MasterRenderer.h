@@ -11,7 +11,7 @@
 #include "Skybox\SkyboxRenderer.h"
 #include "Loader.h"
 #include "Water\WaterRenderer.h"
-#include "Water\WaterFrameBuffers.h"
+#include "GLObjects\FrameBuffer.h"
 #include "Shadows\ShadowMapMasterRenderer.h"
 
 namespace Pressure {
@@ -26,7 +26,6 @@ namespace Pressure {
 		ShadowMapMasterRenderer shadowMapRenderer;
 		
 		WaterRenderer waterRenderer;
-		WaterFrameBuffers waterBuffers;
 
 		std::map<TexturedModel, std::vector<Entity>> entities;
 		std::vector<Water> water;
