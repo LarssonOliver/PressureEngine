@@ -9,6 +9,7 @@
 #include "Graphics\GraphicsCommon.h"
 #include "Services\Properties.h"
 #include <Windows.h>
+#include "Graphics\PostProcessing\PostProcessing.h"
 
 namespace Pressure {
 
@@ -21,6 +22,8 @@ namespace Pressure {
 		std::unique_ptr<Camera> camera = nullptr;
 		std::unique_ptr<MasterRenderer> renderer = nullptr;
 		std::unique_ptr<GuiRenderer> guiRenderer = nullptr;
+		std::unique_ptr<FrameBuffer> frameBuffer = nullptr;
+		std::unique_ptr<FrameBuffer> lightFrameBuffer = nullptr;
 
 		std::vector<Light> lights;
 		std::vector<GuiTexture> guis;
