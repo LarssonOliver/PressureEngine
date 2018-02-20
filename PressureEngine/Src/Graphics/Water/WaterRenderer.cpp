@@ -37,7 +37,7 @@ namespace Pressure {
 	}
 
 	FrameBuffer& WaterRenderer::getRefractionBuffer() {
-		return reflectionBuffer;
+		return refractionBuffer;
 	}
 
 	void WaterRenderer::prepare(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera) {

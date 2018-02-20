@@ -6,6 +6,7 @@ namespace Pressure {
 
 	ShadowMapMasterRenderer::ShadowMapMasterRenderer(Camera& camera, Window& window)
 		: shadowFbo(window, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, DepthBufferType::TEXTURE), shadowBox(lightViewMatrix, camera, window), entityRenderer(shader, projectionViewMatrix) {
+		//: shadowFbo(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, window), shadowBox(lightViewMatrix, camera, window), entityRenderer(shader, projectionViewMatrix) {
 		createOffset();
 	}
 
@@ -26,6 +27,7 @@ namespace Pressure {
 
 	unsigned int ShadowMapMasterRenderer::getShadowMap() {
 		return shadowFbo.getDepthTexture();
+		//return shadowFbo.getShadowMap();
 	}
 
 	Matrix4f& ShadowMapMasterRenderer::getLightSpaceTransform() {

@@ -176,6 +176,7 @@ namespace PressureEngineViewer {
 			engine.process(entities);
 			engine.process(waters);
 			engine.process(lights);
+			//engine.process(GuiTexture(4, Vector2f(0.5), Vector2f(0.5), false));
 			engine.render();
 		}
 

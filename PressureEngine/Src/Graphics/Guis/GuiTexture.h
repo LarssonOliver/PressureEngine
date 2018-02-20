@@ -1,9 +1,11 @@
 #pragma once
+
+#include "../../DllExport.h"
 #include "../../Math/Vectors/Vector2f.h"
 
 namespace Pressure {
 
-	class GuiTexture {
+	class PRESSURE_API GuiTexture {
 
 	private:
 		unsigned int texture;

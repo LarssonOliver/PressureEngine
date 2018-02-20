@@ -154,7 +154,6 @@
     <ClCompile Include="Src\Graphics\Shaders\Shaders.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowBox.cpp" />
-    <ClCompile Include="Src\Graphics\Shadows\ShadowFrameBuffer.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowMapEntityRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowMapMasterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Shadows\ShadowShader.cpp" />
@@ -165,7 +164,6 @@
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterShaderSource.cpp" />
     <ClCompile Include="Src\Graphics\Water\Water.cpp" />
-    <ClCompile Include="Src\Graphics\Water\WaterFrameBuffers.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterRenderer.cpp" />
     <ClCompile Include="Src\Graphics\Water\WaterShader.cpp" />
     <ClCompile Include="Src\Graphics\Window.cpp" />
@@ -220,7 +218,6 @@
     <ClInclude Include="Src\Graphics\Shaders\Shaders.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowShaderSource.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowBox.h" />
-    <ClInclude Include="Src\Graphics\Shadows\ShadowFrameBuffer.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowMapEntityRenderer.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowMapMasterRenderer.h" />
     <ClInclude Include="Src\Graphics\Shadows\ShadowShader.h" />
@@ -231,7 +228,6 @@
     <ClInclude Include="Src\Graphics\Textures\TextureManager.h" />
     <ClInclude Include="Src\Graphics\Water\WaterShaderSource.h" />
     <ClInclude Include="Src\Graphics\Water\Water.h" />
-    <ClInclude Include="Src\Graphics\Water\WaterFrameBuffers.h" />
     <ClInclude Include="Src\Graphics\Water\WaterRenderer.h" />
     <ClInclude Include="Src\Graphics\Water\WaterShader.h" />
     <ClInclude Include="Src\Graphics\Window.h" />
