@@ -31,7 +31,12 @@ uniform samplerCube cubeMap;
 void main(void){
 
     out_Color = texture(cubeMap, textureCoords);
-	out_LightColor = out_Color; 	
+	out_LightColor = out_Color;
+	if ((out_LightColor.r + out_LightColor.g + out_LightColor.b) > 2.5) {
+		out_LightColor.rgb = vec3(0.8);
+	} else {
+		out_LightColor.rgb = vec3(0.1);
+	}
 
 })";
 

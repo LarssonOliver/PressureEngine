@@ -35,7 +35,8 @@ void main(void) {
 	const std::string ParticleShaderSource::fragmentShader = 
 R"(#version 400
 
-out vec4 out_Color;
+layout (location = 0) out vec4 out_Color;
+layout (location = 1) out vec4 out_LightColor;
 
 in vec2 textureCoords1;
 in vec2 textureCoords2;
@@ -49,6 +50,7 @@ void main(void) {
 	vec4 color2 = texture(particleTexture, textureCoords2);
 
 	out_Color = mix(color1, color2, blend);
+	out_LightColor = vec4(0.0);
 
 })";
 

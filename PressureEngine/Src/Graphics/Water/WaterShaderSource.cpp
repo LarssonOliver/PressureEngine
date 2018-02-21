@@ -150,7 +150,8 @@ in vec3 toLightVector[4];
 in vec3 toCameraVector;
 in vec4 clipSpace;
 
-out vec4 out_Color;
+layout (location = 0) out vec4 out_Color;
+layout (location = 1) out vec4 out_LightColor;
 
 uniform vec3 lightColor[4];
 uniform vec3 attenuation[4];
@@ -204,6 +205,7 @@ void main(void) {
 	out_Color = vec4(totalDiffuse, 1.0) * mix(reflectColor, refractColor, refractiveFactor) + vec4(totalSpecular, 1.0);
 	out_Color = mix(out_Color, waterColor, 0.2);
 	out_Color.a = clamp(waterDepth / 5.0, 0.0, 1.0);
+	out_LightColor = vec4(0.0);
 
 })";
 

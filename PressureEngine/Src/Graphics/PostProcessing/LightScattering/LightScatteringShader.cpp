@@ -24,36 +24,51 @@ in vec2 textureCoords;
 out vec4 out_Color;
 
 uniform sampler2D lightTexture;
+uniform sampler2D colorTexture;
 uniform vec2 lightPositionOnScreen;
 
-const float exposure = 0.2;
-const float decay = 0.95;
-const float density = 2;
-const float weight = 0.2;
+const float exposure = 0.0034;
+const float decay = 1.0;
+const float density = 0.84;
+const float weight = 5.65;
 
 const int NUM_SAMPLES = 100;
 
+const vec2 outsideScreen = vec2(100.0, 0.0);
+
 void main()
 {	
-
-    vec2 deltaTextCoord = textureCoords - lightPositionOnScreen;
-    vec2 textCoo = textureCoords;
-    deltaTextCoord *= 1.0 /  float(NUM_SAMPLES) * density;
-    float illuminationDecay = 1.0;
+	if (lightPositionOnScreen != outsideScreen) {
+		vec4 lightColor;
+		vec2 deltaTextCoord = textureCoords - lightPositionOnScreen;
+		vec2 textCoo = textureCoords;
+		deltaTextCoord *= 1.0 /  float(NUM_SAMPLES) * density;
+		float illuminationDecay = 1.0;
 	
-	
-    for(int i=0; i < NUM_SAMPLES ; i++)
-    {
-        textCoo -= deltaTextCoord;
-        vec4 sample = texture2D(lightTexture, textCoo);
+		for(int i=0; i < NUM_SAMPLES ; i++)
+		{
+			textCoo -= deltaTextCoord;
+			vec4 sample = texture2D(lightTexture, textCoo);
 			
-        sample *= illuminationDecay * weight;
+			sample *= illuminationDecay * weight;
 
-        out_Color += sample;
+			lightColor += sample;
 
-        illuminationDecay *= decay;
-    }
-    out_Color *= exposure;
+			illuminationDecay *= decay;
+		}
+
+		lightColor *= exposure;
+		out_Color = texture(colorTexture, textureCoords);
+
+		vec2 blendFactor = vec2(textureCoords);
+
+		blendFactor -= 1.0;
+		blendFactor = sqrt(blendFactor * blendFactor);
+
+		out_Color += lightColor * (blendFactor.x + blendFactor.y) / 2;
+	} else {		
+		out_Color = texture(colorTexture, textureCoords);		
+	}
 
 })";
 
@@ -63,10 +78,17 @@ void main()
 
 	void LightScatteringShader::getAllUniformLocations() {
 		location_lightPositionOnScreen = ShaderProgram::getUniformLocation("lightPositionOnScreen");
+		location_lightTexture = ShaderProgram::getUniformLocation("lightTexture");
+		location_colorTexture = ShaderProgram::getUniformLocation("colorTexture");
 	}
 
 	void LightScatteringShader::bindAttributes() {
 		ShaderProgram::bindAttribute(0, "position");
+	}
+
+	void LightScatteringShader::connectTextureUnits() {
+		ShaderProgram::loadInt(location_lightTexture, 0);
+		ShaderProgram::loadInt(location_colorTexture, 1);
 	}
 
 	void LightScatteringShader::loadLightPosition(Vector2f& lightPosition) {

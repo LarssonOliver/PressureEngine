@@ -116,7 +116,7 @@ namespace PressureEngineViewer {
 			}
 
 			// Lights
-			lights.emplace_back(Vector3f(150000, 170000, 200000), Vector3f(1));
+			lights.emplace_back(Vector3f(100000, 150000, 200000), Vector3f(1));
 
 			// Waters
 			waters.emplace_back(engine.generateWater(Vector3f(-41, 0, -13)));
