@@ -38,7 +38,8 @@ namespace Pressure {
 		
 		frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), true);
 		outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), DepthBufferType::RENDER_BUFFER);
-		PostProcessing::init(*loader);
+		lightScatterBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), DepthBufferType::RENDER_BUFFER);
+		PostProcessing::init(*window, *loader);
 
 		initialized = true;
 	}
@@ -102,7 +103,8 @@ namespace Pressure {
 		ParticleMaster::renderParticles(*camera);
 		frameBuffer->unbind();
 		frameBuffer->resolveToFrameBuffer(GL_COLOR_ATTACHMENT0, *outputBuffer);
-		PostProcessing::process(outputBuffer->getColorTexture());
+		frameBuffer->resolveToFrameBuffer(GL_COLOR_ATTACHMENT1, *lightScatterBuffer);
+		PostProcessing::process(outputBuffer->getColorTexture(), lightScatterBuffer->getColorTexture());
 
 		guiRenderer->render(guis);
 		

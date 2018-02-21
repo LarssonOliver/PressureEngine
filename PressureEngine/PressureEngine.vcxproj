@@ -152,6 +152,8 @@
     <ClCompile Include="Src\Graphics\PostProcessing\Contrast\ContrastChanger.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\Contrast\ContrastShader.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\ImageRenderer.cpp" />
+    <ClCompile Include="Src\Graphics\PostProcessing\LightScattering\LightScatterer.cpp" />
+    <ClCompile Include="Src\Graphics\PostProcessing\LightScattering\LightScatteringShader.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\PostProcessing.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp" />
     <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp" />
@@ -217,6 +219,8 @@
     <ClInclude Include="Src\Graphics\PostProcessing\Contrast\ContrastChanger.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\Contrast\ContrastShader.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\ImageRenderer.h" />
+    <ClInclude Include="Src\Graphics\PostProcessing\LightScattering\LightScatterer.h" />
+    <ClInclude Include="Src\Graphics\PostProcessing\LightScattering\LightScatteringShader.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\PostProcessing.h" />
     <ClInclude Include="Src\Graphics\Shaders\Renderer.h" />
     <ClInclude Include="Src\Graphics\Loader.h" />

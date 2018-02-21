@@ -36,7 +36,6 @@ namespace Pressure {
 	}
 
 	void FrameBuffer::bind() const {
-		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_ID);
 		glViewport(0, 0, m_Width, m_Height);
 	}

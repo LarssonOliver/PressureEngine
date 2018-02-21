@@ -4,6 +4,7 @@
 #include "../Models/RawModel.h"
 #include "../Loader.h"
 #include "Contrast\ContrastChanger.h"
+#include "LightScattering\LightScatterer.h"
 
 namespace Pressure {
 
@@ -13,10 +14,12 @@ namespace Pressure {
 		static const std::vector<float> s_Positions;
 		static std::unique_ptr<RawModel> s_Quad;
 		static std::unique_ptr<ContrastChanger> s_ContrastChanger;
+		static std::unique_ptr<LightScatterer> s_LightScatterer;
+		static Window* s_Window;
 	
 	public:
-		static void init(Loader& loader);
-		static void process(unsigned int colorTexture);
+		static void init(Window& window, Loader& loader);
+		static void process(unsigned int colorTexture, unsigned int lightScatterTexture);
 
 	private:
 		static void start();
