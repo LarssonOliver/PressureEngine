@@ -24,12 +24,12 @@ in vec2 textureCoords;
 out vec4 out_Color;
 
 uniform sampler2D lightTexture;
+uniform vec2 lightPositionOnScreen;
 
 const float exposure = 0.2;
-const float decay = 0.8;
-const float density = 1;
-const float weight = 1;
-const vec2 lightPositionOnScreen = vec2(0, 0);
+const float decay = 0.95;
+const float density = 2;
+const float weight = 0.2;
 
 const int NUM_SAMPLES = 100;
 
@@ -61,8 +61,16 @@ void main()
 		ShaderProgram::loadShaders(s_VertexShader, s_FragmentShader);
 	}
 
+	void LightScatteringShader::getAllUniformLocations() {
+		location_lightPositionOnScreen = ShaderProgram::getUniformLocation("lightPositionOnScreen");
+	}
+
 	void LightScatteringShader::bindAttributes() {
 		ShaderProgram::bindAttribute(0, "position");
+	}
+
+	void LightScatteringShader::loadLightPosition(Vector2f& lightPosition) {
+		ShaderProgram::loadVector(location_lightPositionOnScreen, lightPosition);
 	}
 
 }

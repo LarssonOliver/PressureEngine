@@ -13,7 +13,7 @@ namespace Pressure {
 
 	public:
 		LightScatterer(unsigned int targetWidth, unsigned int targetHeight, Window& window);
-		void render(unsigned int texture);
+		void render(unsigned int texture, Vector2f& lightPosition);
 		unsigned int getResult();
 
 	};
