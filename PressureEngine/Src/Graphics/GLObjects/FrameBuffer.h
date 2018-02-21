@@ -40,7 +40,7 @@ namespace Pressure {
 		void bindToRead() const;
 
 		void resolveToFrameBuffer(unsigned int readBuffer, FrameBuffer& buffer);
-		void resolveToScreen();
+		void resolveToScreen(unsigned int readBuffer);
 
 		unsigned int getColorTexture() const;
 		unsigned int getDepthTexture() const;

@@ -178,7 +178,7 @@ void main(void) {
 	}
 
 	out_Color = vec4(totalDiffuse, 1.0) * textureColor + vec4(totalSpecular * lightFactor, 1.0);
-	out_LightColor = vec4(1.0, 0.0, 0.0, 1.0);
+	out_LightColor = vec4(0.0, 0.0, 0.0, 1.0);
 	//out_Color = vec4(totalDiffuse, 1.0) * textureColor;
 	//out_Color = vec4(lightFactor);
 	//out_Color = vertexIn.shadowCoords;

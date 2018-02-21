@@ -60,9 +60,11 @@ namespace Pressure {
 		unbind();
 	}
 
-	void FrameBuffer::resolveToScreen() {
+	void FrameBuffer::resolveToScreen(unsigned int readBuffer) {
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
+		glReadBuffer(readBuffer);
+		glDrawBuffer(GL_BACK);
 		glBlitFramebuffer(0, 0, m_Width, m_Height, 0, 0, m_Window.getWidth(), m_Window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
 		unbind();
 	}
@@ -130,7 +132,10 @@ namespace Pressure {
 	void FrameBuffer::createDepthBufferAttachment() {
 		glGenRenderbuffers(1, &m_DepthBufferID);
 		glBindRenderbuffer(GL_RENDERBUFFER, m_DepthBufferID);
-		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT32, m_Width, m_Height);
+		if (!m_MultiTarget)
+			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT32, m_Width, m_Height);
+		else 
+			glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT32, m_Width, m_Height);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_DepthBufferID);
 	}
 

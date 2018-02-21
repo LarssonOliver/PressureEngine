@@ -19,6 +19,7 @@ namespace Pressure {
 		shader.loadToShadowMapSpace(shadowMapRenderer.getToShadowMapSpaceMatrix());
 		renderer.render(entities, camera);
 		shader.stop();
+		skyboxRenderer.render(camera);
 		if (water.size() > 0) {
 			waterRenderer.render(water, lights, camera);
 		}
@@ -81,6 +82,7 @@ namespace Pressure {
 	void MasterRenderer::prepare() {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CLIP_DISTANCE0);
+		glEnable(GL_MULTISAMPLE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, shadowMapRenderer.getShadowMap());
@@ -121,10 +123,6 @@ namespace Pressure {
 		skyboxRenderer.render(camera);
 
 		waterRenderer.getRefractionBuffer().unbind();
-	}
-
-	void MasterRenderer::renderSkybox(Camera& camera) {
-		skyboxRenderer.render(camera);
 	}
 
 }

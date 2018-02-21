@@ -38,7 +38,6 @@ namespace Pressure {
 		// IMPORTANT! Has to be called before render();
 		void renderShadowMap(Light& sun);
 		void renderWaterFrameBuffers(std::vector<Light>& lights, Camera& camera);
-		void renderSkybox(Camera& camera);
 
 		void processEntity(Entity& entity);
 		void processWater(Water& water);

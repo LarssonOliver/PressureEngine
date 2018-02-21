@@ -22,12 +22,17 @@ void main(void){
 R"(#version 400
 
 in vec3 textureCoords;
-out vec4 out_Color;
+
+layout (location = 0) out vec4 out_Color;
+layout (location = 1) out vec4 out_LightColor;
 
 uniform samplerCube cubeMap;
 
 void main(void){
+
     out_Color = texture(cubeMap, textureCoords);
+	out_LightColor = out_Color; 	
+
 })";
 
 }

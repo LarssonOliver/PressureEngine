@@ -37,7 +37,7 @@ namespace Pressure {
 		ParticleMaster::init(*loader, window->getWindow());		
 		
 		frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), true);
-		lightFrameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), DepthBufferType::RENDER_BUFFER);
+		outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), DepthBufferType::RENDER_BUFFER);
 		PostProcessing::init(*loader);
 
 		initialized = true;
@@ -96,17 +96,13 @@ namespace Pressure {
 		if (lights.size() > 0)
 			renderer->renderShadowMap(lights[0]);
 		renderer->renderWaterFrameBuffers(lights, *camera);
-/*
-		lightFrameBuffer->bind();
-		renderer->renderSkybox(*camera);*/
 
 		frameBuffer->bind();
 		renderer->render(lights, *camera);
-		renderer->renderSkybox(*camera);
 		ParticleMaster::renderParticles(*camera);
 		frameBuffer->unbind();
-		//frameBuffer->resolveToFrameBuffer(GL_COLOR_ATTACHMENT0, *lightFrameBuffer);
-		//PostProcessing::process(lightFrameBuffer->getColorTexture());
+		frameBuffer->resolveToFrameBuffer(GL_COLOR_ATTACHMENT0, *outputBuffer);
+		PostProcessing::process(outputBuffer->getColorTexture());
 
 		guiRenderer->render(guis);
 		

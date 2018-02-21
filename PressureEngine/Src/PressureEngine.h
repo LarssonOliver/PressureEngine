@@ -23,7 +23,7 @@ namespace Pressure {
 		std::unique_ptr<MasterRenderer> renderer = nullptr;
 		std::unique_ptr<GuiRenderer> guiRenderer = nullptr;
 		std::unique_ptr<FrameBuffer> frameBuffer = nullptr;
-		std::unique_ptr<FrameBuffer> lightFrameBuffer = nullptr;
+		std::unique_ptr<FrameBuffer> outputBuffer = nullptr;
 
 		std::vector<Light> lights;
 		std::vector<GuiTexture> guis;
