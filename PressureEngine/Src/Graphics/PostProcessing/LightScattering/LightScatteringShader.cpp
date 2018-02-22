@@ -65,6 +65,7 @@ void main()
 		blendFactor *= 2.0;
 		blendFactor -= 1.0;
 		blendFactor = sqrt(blendFactor * blendFactor);
+		blendFactor = clamp(blendFactor, 0.0, 1.0);
 
 		out_Color += lightColor * (1 - (blendFactor.x + blendFactor.y) / 2);
 	} else {		
