@@ -45,6 +45,11 @@ namespace PressureEngineViewer {
 			TexturedModel tree(treeModel, treeTexture);
 			entities.emplace_back(tree, Vector3f(-31.5, 0, -14), Vector3f(3, 0, 0), 8.0);
 
+			RawModel tree2Model = engine.loadObjModel("Tree2");
+			ModelTexture tree2Texture = engine.loadTexture("Tree.png");
+			TexturedModel tree2(tree2Model, tree2Texture);
+			entities.emplace_back(tree2, Vector3f(33, 0, -11), Vector3f(0, 0, 0), 8.0);
+
 			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
 			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
 			TexturedModel tombstone(tombstoneModel, tombstoneTexture);

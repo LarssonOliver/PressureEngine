@@ -52,6 +52,10 @@ namespace Pressure {
 			it->second.emplace_front(particle);
 	}
 
+	void ParticleMaster::updateProjectionMatrix(Window& window) {
+		renderer->updateProjectionMatrix(window);
+	}
+
 	bool ParticleMaster::sort_particles(const Particle& left, const Particle& right) {
 		return left.getDistance() > right.getDistance();
 	}

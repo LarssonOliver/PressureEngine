@@ -25,7 +25,7 @@ namespace Pressure {
 	}
 
 	void PostProcessing::updateProjectionMatrix() {
-		s_LightScatterer->updateProjectionMatrix();
+		s_LightScatterer = std::make_unique<LightScatterer>(s_Window->getWidth(), s_Window->getHeight(), *s_Window);
 	}
 
 	void PostProcessing::start() {

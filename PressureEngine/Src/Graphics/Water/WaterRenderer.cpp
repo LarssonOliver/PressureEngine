@@ -4,7 +4,7 @@
 namespace Pressure {
 
 	WaterRenderer::WaterRenderer(Window& window)
-		: window(window), reflectionBuffer(window, window.getWidth() / 4, window.getHeight() / 4, DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, DepthBufferType::TEXTURE) {
+		: window(window), reflectionBuffer(window, window.getWidth() / 4, window.getWidth() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE) {
 		shader.start();
 		shader.connectTextureUnits();
 		updateProjectionmatrix();
@@ -18,7 +18,6 @@ namespace Pressure {
 
 	void WaterRenderer::tick() {
 		waveModifier += 0.3f;
-		//std::cout << waveModifier << std::endl;
 		if (waveModifier > 360)
 			waveModifier -= 360;
 	}

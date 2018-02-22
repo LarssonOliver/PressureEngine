@@ -3,7 +3,7 @@
 namespace Pressure {
 
 	ImageRenderer::ImageRenderer(unsigned int width, unsigned int height, Window& window) {
-		m_Buffer = std::make_unique<FrameBuffer>(window, width, height, DepthBufferType::NONE);
+		m_Buffer = std::make_unique<FrameBuffer>(window, width, height, 1, 1, FrameBuffer::DepthBufferType::NONE);
 	}
 
 	void ImageRenderer::render() {

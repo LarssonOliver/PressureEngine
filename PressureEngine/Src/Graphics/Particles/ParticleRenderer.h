@@ -7,6 +7,7 @@
 #include "Particle.h"
 #include "../Models/RawModel.h"
 #include "../../Math/Geometry/ViewFrustum.h"
+#include "../Window.h"
 
 namespace Pressure {
 
@@ -27,6 +28,7 @@ namespace Pressure {
 	public:
 		ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix);
 		void render(std::map<ParticleTexture, std::list<Particle>>& particles, Camera& camera);
+		void updateProjectionMatrix(Window& window);
 		void cleanUp();
 		
 	private:

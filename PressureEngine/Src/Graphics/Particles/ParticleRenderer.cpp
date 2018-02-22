@@ -119,6 +119,11 @@ namespace Pressure {
 		buffer[pointer++] = particle.getBlend();
 	}
 
+	void ParticleRenderer::updateProjectionMatrix(Window& window) {
+		shader.start();
+		shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(window.getWindow()));
+	}
+
 	void ParticleRenderer::finish() {
 		glDepthMask(true);
 		glDisable(GL_BLEND);

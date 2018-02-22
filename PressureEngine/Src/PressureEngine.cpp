@@ -36,9 +36,9 @@ namespace Pressure {
 		guiRenderer = std::make_unique<GuiRenderer>(*loader);
 		ParticleMaster::init(*loader, window->getWindow());		
 		
-		frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), true);
-		outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), DepthBufferType::RENDER_BUFFER);
-		lightScatterBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), DepthBufferType::RENDER_BUFFER);
+		frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 2, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+		outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+		lightScatterBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
 		PostProcessing::init(*window, *camera, *loader);
 
 		initialized = true;
@@ -51,6 +51,10 @@ namespace Pressure {
 		if (window->resized) {
 			renderer->updateProjectionMatrix();
 			PostProcessing::updateProjectionMatrix();
+			ParticleMaster::updateProjectionMatrix(*window);
+			frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 2, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+			outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+			lightScatterBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
 			window->resized = false;
 		}
 
@@ -103,8 +107,8 @@ namespace Pressure {
 		renderer->render(lights, *camera);
 		ParticleMaster::renderParticles(*camera);
 		frameBuffer->unbind();
-		frameBuffer->resolveToFrameBuffer(GL_COLOR_ATTACHMENT0, *outputBuffer);
-		frameBuffer->resolveToFrameBuffer(GL_COLOR_ATTACHMENT1, *lightScatterBuffer);
+		frameBuffer->resolve(0, *outputBuffer);
+		frameBuffer->resolve(1, *lightScatterBuffer);
 		PostProcessing::process(outputBuffer->getColorTexture(), lightScatterBuffer->getColorTexture(), lights[0].getPosition());
 
 		guiRenderer->render(guis);

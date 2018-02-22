@@ -23,6 +23,8 @@ namespace Pressure {
 
 		static void addParticle(Particle& particle);
 
+		static void updateProjectionMatrix(Window& window);
+
 	private:
 		static bool sort_particles(const Particle& left, const Particle& right);
 

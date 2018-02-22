@@ -2,39 +2,37 @@
 
 namespace Pressure {
 
-	FrameBuffer::FrameBuffer(Window& window, unsigned int width, unsigned int height, DepthBufferType type)
-		: m_Window(window), m_Width(width), m_Height(height), m_MultiTarget(false) {
-		createFrameBuffer();	
-		createColorTextureAttachment();
-		if (type == DepthBufferType::RENDER_BUFFER)
-			createDepthBufferAttachment();
-		else if (type == DepthBufferType::TEXTURE)
-			createDepthTextureAttachment();		
-		unbind();
-	}
-
-	FrameBuffer::FrameBuffer(Window& window, unsigned int width, unsigned int height, bool multiTarget) 
-		: m_Window(window), m_Width(width), m_Height(height), m_MultiTarget(multiTarget) {
+	FrameBuffer::FrameBuffer(Window& const window, unsigned int width, unsigned int height, unsigned int targetCount, unsigned int samples, DepthBufferType depthType) 
+		: m_Window(window), m_Width(width), m_Height(height), m_TargetCount(targetCount) {
+		
 		createFrameBuffer();
 
-		m_ColorBufferID[0] = createMultisampleColorAttachment(GL_COLOR_ATTACHMENT0);
-		if (m_MultiTarget) {
-			m_ColorBufferID[1] = createMultisampleColorAttachment(GL_COLOR_ATTACHMENT1);
-		} else
-			createColorTextureAttachment();
-		
-		createDepthBufferAttachment();
+		if (samples <= 1) {
+			createColorTextureAttachments(targetCount);
+			m_MultiSampled = true;
+		} else {
+			createMultisampleColorBufferAttachments(targetCount, samples);
+			m_MultiSampled = true;
+		}
+
+		if (depthType == DepthBufferType::TEXTURE)
+			createDepthTextureAttachment();
+		else if (depthType == DepthBufferType::RENDER_BUFFER)
+			createDepthBufferAttachment(samples);
+
 		unbind();
 	}
 
 	FrameBuffer::~FrameBuffer() {
-		glDeleteFramebuffers(1, &m_ID);
-		glDeleteTextures(1, &m_ColorTextureID);
+		glDeleteFramebuffers(1, &m_ID);		
+		if (m_ColorTextureIDs.size())
+			glDeleteTextures(m_ColorTextureIDs.size(), &m_ColorTextureIDs[0]);
+		if (m_ColorBufferIDs.size())
+			glDeleteRenderbuffers(m_ColorBufferIDs.size(), &m_ColorBufferIDs[0]);
 		glDeleteTextures(1, &m_DepthTextureID);
-		glDeleteRenderbuffers(m_MultiTarget ? 2 : 1, m_ColorBufferID);
 		glDeleteRenderbuffers(1, &m_DepthBufferID);
 	}
-
+	
 	void FrameBuffer::bind() const {
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_ID);
 		glViewport(0, 0, m_Width, m_Height);
@@ -45,35 +43,21 @@ namespace Pressure {
 		glViewport(0, 0, m_Window.getWidth(), m_Window.getHeight());
 	}
 
-	void FrameBuffer::bindToRead() const {
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
-		glReadBuffer(GL_COLOR_ATTACHMENT0);
-	}
-
-	void FrameBuffer::resolveToFrameBuffer(unsigned int readBuffer, FrameBuffer& buffer) {
+	void FrameBuffer::resolve(unsigned int readBuffer, FrameBuffer& buffer) {
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, buffer.getID());
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
-		glReadBuffer(readBuffer);
+		glReadBuffer(GL_COLOR_ATTACHMENT0 + readBuffer);
 		glBlitFramebuffer(0, 0, m_Width, m_Height, 0, 0, buffer.getWidth(), buffer.getHeight(), GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 		unbind();
 	}
 
-	void FrameBuffer::resolveToScreen(unsigned int readBuffer) {
+	void FrameBuffer::resolve(unsigned int readBuffer) {
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_ID);
-		glReadBuffer(readBuffer);
+		glReadBuffer(GL_COLOR_ATTACHMENT0 + readBuffer);
 		glDrawBuffer(GL_BACK);
 		glBlitFramebuffer(0, 0, m_Width, m_Height, 0, 0, m_Window.getWidth(), m_Window.getHeight(), GL_COLOR_BUFFER_BIT, GL_NEAREST);
 		unbind();
-	}
-
-	unsigned int FrameBuffer::getColorTexture() const {
-		return m_ColorTextureID;
-	}
-
-	unsigned int FrameBuffer::getDepthTexture() const {
-		return m_DepthTextureID;
 	}
 
 	unsigned int FrameBuffer::getID() const {
@@ -88,6 +72,14 @@ namespace Pressure {
 		return m_Height;
 	}
 
+	unsigned int FrameBuffer::getColorTexture(unsigned int attachment) const {
+		return m_ColorTextureIDs[attachment];
+	}
+
+	unsigned int FrameBuffer::getDepthTexture() const {
+		return m_DepthTextureID;
+	}
+
 	void FrameBuffer::createFrameBuffer() {
 		glGenFramebuffers(1, &m_ID);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_ID);
@@ -95,28 +87,36 @@ namespace Pressure {
 	}
 
 	void FrameBuffer::determineDrawBuffers() {
-		unsigned int drawBuffers[2] = { GL_COLOR_ATTACHMENT0, 0 };
-		if (m_MultiTarget)
-			drawBuffers[1] = GL_COLOR_ATTACHMENT1;
-		glDrawBuffers(2, drawBuffers);
+		std::vector<unsigned int> drawBuffers;
+		drawBuffers.resize(m_TargetCount);
+		for (int i = 0; i < m_TargetCount; i++) {
+			drawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
+		}
+		glDrawBuffers(m_TargetCount, &drawBuffers[0]);
 	}
 
-	void FrameBuffer::createColorTextureAttachment() {
-		glGenTextures(1, &m_ColorTextureID);
-		glBindTexture(GL_TEXTURE_2D, m_ColorTextureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_ColorTextureID, 0);
+	void FrameBuffer::createColorTextureAttachments(unsigned int count) {
+		m_ColorTextureIDs.resize(count);
+		glGenTextures(count, &m_ColorTextureIDs[0]);
+		
+		for (unsigned int i = 0; i < count; i++) {
+			glBindTexture(GL_TEXTURE_2D, m_ColorTextureIDs[i]);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, m_ColorTextureIDs[i], 0);
+		}
 	}
 
-	unsigned int FrameBuffer::createMultisampleColorAttachment(unsigned int attachment) {
-		unsigned int ID;
-		glGenRenderbuffers(1, &ID);
-		glBindRenderbuffer(GL_RENDERBUFFER, ID);
-		glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA8, m_Width, m_Height);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, attachment, GL_RENDERBUFFER, ID);
-		return ID;
+	void FrameBuffer::createMultisampleColorBufferAttachments(unsigned int count, unsigned int samples) {
+		m_ColorBufferIDs.resize(count);
+		glGenRenderbuffers(count, &m_ColorBufferIDs[0]);
+
+		for (unsigned int i = 0; i < count; i++) {
+			glBindRenderbuffer(GL_RENDERBUFFER, m_ColorBufferIDs[i]);
+			glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, GL_RGBA8, m_Width, m_Height);
+			glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_RENDERBUFFER, m_ColorBufferIDs[i]);
+		}
 	}
 
 	void FrameBuffer::createDepthTextureAttachment() {
@@ -128,13 +128,13 @@ namespace Pressure {
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, m_DepthTextureID, 0);
 	}
 
-	void FrameBuffer::createDepthBufferAttachment() {
+	void FrameBuffer::createDepthBufferAttachment(unsigned int samples) {
 		glGenRenderbuffers(1, &m_DepthBufferID);
 		glBindRenderbuffer(GL_RENDERBUFFER, m_DepthBufferID);
-		if (!m_MultiTarget)
+		if (samples <= 1)
 			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT32, m_Width, m_Height);
-		else 
-			glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT32, m_Width, m_Height);
+		else
+			glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, GL_DEPTH_COMPONENT32, m_Width, m_Height);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_DepthBufferID);
 	}
 
