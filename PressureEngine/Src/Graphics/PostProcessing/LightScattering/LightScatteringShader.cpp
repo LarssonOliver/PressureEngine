@@ -60,14 +60,16 @@ void main()
 		lightColor *= exposure;
 		out_Color = texture(colorTexture, textureCoords);
 
-		vec2 blendFactor = vec2(lightPositionOnScreen);
-
+		vec2 blendFactor = lightPositionOnScreen;
 		blendFactor *= 2.0;
 		blendFactor -= 1.0;
 		blendFactor = sqrt(blendFactor * blendFactor);
 		blendFactor = clamp(blendFactor, 0.0, 1.0);
-
-		out_Color += lightColor * (1 - (blendFactor.x + blendFactor.y) / 2);
+		
+		float blend = (blendFactor.x + blendFactor.y) / 2;
+		blend = 1 - blend;
+		
+		out_Color += lightColor * blend;
 	} else {		
 		out_Color = texture(colorTexture, textureCoords);		
 	}
