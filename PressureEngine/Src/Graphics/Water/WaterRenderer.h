@@ -16,6 +16,8 @@ namespace Pressure {
 
 		FrameBuffer reflectionBuffer;
 		FrameBuffer refractionBuffer;
+		FrameBuffer reflectionResultsBuffer;
+		FrameBuffer refractionResultsBuffer;
 
 	public:
 		WaterRenderer(Window& window);

@@ -4,7 +4,7 @@
 namespace Pressure {
 
 	WaterRenderer::WaterRenderer(Window& window)
-		: window(window), reflectionBuffer(window, window.getWidth() / 4, window.getWidth() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE) {
+		: window(window), reflectionBuffer(window, window.getWidth() / 4, window.getHeight() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE), reflectionResultsBuffer(window, window.getWidth() / 4, window.getHeight() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionResultsBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE) {
 		shader.start();
 		shader.connectTextureUnits();
 		updateProjectionmatrix();
@@ -40,18 +40,38 @@ namespace Pressure {
 	}
 
 	void WaterRenderer::prepare(std::vector<Water>& water, std::vector<Light>& lights, Camera& camera) {
+		if (reflectionBuffer.isMultisampled())
+			reflectionBuffer.resolve(0, reflectionResultsBuffer);
+		if (refractionBuffer.isMultisampled())
+			refractionBuffer.resolve(0, refractionResultsBuffer);
+
 		shader.start();
 		shader.loadViewMatrix(camera);
 		shader.loadWaveModifier((float) Math::toRadians(waveModifier));
 		shader.loadLights(lights);
 		Water::getModel().getVertexArray().bind();
 		glEnableVertexAttribArray(0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, reflectionBuffer.getColorTexture());
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, refractionBuffer.getColorTexture());
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, refractionBuffer.getDepthTexture());
+
+		if (reflectionBuffer.isMultisampled()) {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, reflectionResultsBuffer.getColorTexture());
+		} else {
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, reflectionBuffer.getColorTexture());
+		}
+
+		if (refractionBuffer.isMultisampled()) {
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, refractionResultsBuffer.getColorTexture());
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, refractionResultsBuffer.getDepthTexture());
+		} else {
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, refractionBuffer.getColorTexture());
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, refractionBuffer.getDepthTexture());
+		}
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}

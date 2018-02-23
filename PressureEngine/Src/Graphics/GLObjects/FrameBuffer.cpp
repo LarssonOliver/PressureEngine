@@ -9,7 +9,7 @@ namespace Pressure {
 
 		if (samples <= 1) {
 			createColorTextureAttachments(targetCount);
-			m_MultiSampled = true;
+			m_MultiSampled = false;
 		} else {
 			createMultisampleColorBufferAttachments(targetCount, samples);
 			m_MultiSampled = true;
@@ -78,6 +78,10 @@ namespace Pressure {
 
 	unsigned int FrameBuffer::getDepthTexture() const {
 		return m_DepthTextureID;
+	}
+
+	bool FrameBuffer::isMultisampled() const {
+		return m_MultiSampled;
 	}
 
 	void FrameBuffer::createFrameBuffer() {
