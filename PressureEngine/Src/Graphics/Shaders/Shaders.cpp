@@ -148,6 +148,7 @@ void main(void) {
 
 	total /= totalTexels;
 	float lightFactor = 1.0 - (total * vertexIn.shadowCoords.w);
+	lightFactor = max(lightFactor, 0.1);
 
 
 	vec3 unitNormal = normalize(vertexIn.surfaceNormal);
@@ -168,9 +169,11 @@ void main(void) {
 		specularFactor = max(specularFactor, 0.0);
 		float dampedFactor = pow(specularFactor, shineDamper);
 		totalDiffuse += (brightness * lightColor[i]) / attFactor;
+		if (i == 0) { // Only lower the sun's light with shadows.			
+			totalDiffuse = max(totalDiffuse * lightFactor, 0.3);
+		}
 		totalSpecular += (dampedFactor * reflectivity * lightColor[i]) / attFactor;
 	}
-	totalDiffuse = max(totalDiffuse * lightFactor, 0.3);
 
 	vec4 textureColor = texture(textureSampler, vertexIn.pass_textureCoords);
 	if (textureColor.a < 0.5) {

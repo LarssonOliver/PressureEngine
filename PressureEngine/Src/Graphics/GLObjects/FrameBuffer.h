@@ -10,7 +10,7 @@ namespace Pressure {
 	class PRESSURE_API FrameBuffer {
 
 	public:
-		static enum DepthBufferType {
+		static enum class DepthBufferType {
 			NONE,
 			TEXTURE,
 			RENDER_BUFFER

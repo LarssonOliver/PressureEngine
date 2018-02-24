@@ -45,10 +45,21 @@ namespace PressureEngineViewer {
 			TexturedModel tree(treeModel, treeTexture);
 			entities.emplace_back(tree, Vector3f(-31.5, 0, -14), Vector3f(3, 0, 0), 8.0);
 
+			RawModel houseModel = engine.loadObjModel("House");
+			ModelTexture houseTexture = engine.loadTexture("House.png");
+			TexturedModel house(houseModel, houseTexture);
+			entities.emplace_back(house, Vector3f(20, 0.2, -3), Vector3f(0, -84, 0), 1.8);
+
+			RawModel lampModel = engine.loadObjModel("Lamp");
+			ModelTexture lampTexture = engine.loadTexture("Lamp.png");
+			lampTexture.setTransparency(true);
+			TexturedModel lamp(lampModel, lampTexture);
+			entities.emplace_back(lamp, Vector3f(12, 3.5, -2.6), Vector3f(0, -84, 0), 1.2);
+
 			RawModel tree2Model = engine.loadObjModel("Tree2");
 			ModelTexture tree2Texture = engine.loadTexture("Tree.png");
 			TexturedModel tree2(tree2Model, tree2Texture);
-			entities.emplace_back(tree2, Vector3f(33, 0, -11), Vector3f(0, 0, 0), 8.0);
+			entities.emplace_back(tree2, Vector3f(32.5, 0, -10.5), Vector3f(0, 0, 0), 8.0);
 
 			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
 			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
@@ -122,6 +133,7 @@ namespace PressureEngineViewer {
 
 			// Lights
 			lights.emplace_back(Vector3f(100000, 150000, 200000), Vector3f(1));
+			lights.emplace_back(Vector3f(12, 3.5, -2.6), Vector3f(.8, 0.5, 0.25), Vector3f(.5, .4, .4));
 
 			// Waters
 			waters.emplace_back(engine.generateWater(Vector3f(-41, 0, -13)));
