@@ -193,8 +193,10 @@ namespace PressureEngineViewer {
 			engine.process(entities);
 			engine.process(waters);
 			engine.process(lights);
-			//GuiTexture gui(8, (Vector2f&)Vector2f(0.5), (Vector2f&)Vector2f(0.5), false);
+			//GuiTexture gui(5, (Vector2f&)Vector2f(0.5), (Vector2f&)Vector2f(0.5), false);
 			//engine.process(gui);
+			//GuiTexture gui2(4, (Vector2f&)Vector2f(-0.5, 0.5), (Vector2f&)Vector2f(0.5), false);
+			//engine.process(gui2);
 			engine.render();
 		}
 

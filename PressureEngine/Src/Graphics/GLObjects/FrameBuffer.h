@@ -49,6 +49,7 @@ namespace Pressure {
 		unsigned int getHeight() const;
 		unsigned int getColorTexture(unsigned int attachment = 0) const;
 		unsigned int getDepthTexture() const;
+		bool isMultisampled() const;
 
 	private:
 		void createFrameBuffer();
