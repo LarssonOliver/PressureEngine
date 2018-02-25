@@ -15,7 +15,7 @@ namespace Pressure {
 		ImageRenderer(unsigned int width, unsigned int height, Window& window);
 		
 		void render();
-		unsigned int getOutputTexture();
+		unsigned int getOutputTexture() const;
 
 	};
 

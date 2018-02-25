@@ -151,6 +151,8 @@
     <ClCompile Include="Src\Graphics\Particles\ParticleTexture.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\Contrast\ContrastChanger.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\Contrast\ContrastShader.cpp" />
+    <ClCompile Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfField.cpp" />
+    <ClCompile Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfFieldShader.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\ImageRenderer.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\LightScattering\LightScatterer.cpp" />
     <ClCompile Include="Src\Graphics\PostProcessing\LightScattering\LightScatteringShader.cpp" />
@@ -218,6 +220,8 @@
     <ClInclude Include="Src\Graphics\Particles\ParticleTexture.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\Contrast\ContrastChanger.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\Contrast\ContrastShader.h" />
+    <ClInclude Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfField.h" />
+    <ClInclude Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfFieldShader.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\ImageRenderer.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\LightScattering\LightScatterer.h" />
     <ClInclude Include="Src\Graphics\PostProcessing\LightScattering\LightScatteringShader.h" />

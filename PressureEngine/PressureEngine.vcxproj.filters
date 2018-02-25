@@ -195,6 +195,12 @@
     <ClCompile Include="Src\Graphics\GLObjects\FrameBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfFieldShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -405,6 +411,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\GLObjects\FrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfFieldShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

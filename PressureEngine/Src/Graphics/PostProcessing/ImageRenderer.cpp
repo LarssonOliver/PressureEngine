@@ -15,7 +15,7 @@ namespace Pressure {
 			m_Buffer->unbind();
 	}
 
-	unsigned int ImageRenderer::getOutputTexture() {
+	unsigned int ImageRenderer::getOutputTexture() const {
 		return m_Buffer->getColorTexture();
 	}
 

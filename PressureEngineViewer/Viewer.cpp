@@ -48,13 +48,13 @@ namespace PressureEngineViewer {
 			RawModel houseModel = engine.loadObjModel("House");
 			ModelTexture houseTexture = engine.loadTexture("House.png");
 			TexturedModel house(houseModel, houseTexture);
-			entities.emplace_back(house, Vector3f(20, 0.2, -3), Vector3f(0, -84, 0), 1.8);
+			entities.emplace_back(house, Vector3f(22, 0.2, -3), Vector3f(0, -84, 0), 1.8);
 
 			RawModel lampModel = engine.loadObjModel("Lamp");
 			ModelTexture lampTexture = engine.loadTexture("Lamp.png");
 			lampTexture.setTransparency(true);
 			TexturedModel lamp(lampModel, lampTexture);
-			entities.emplace_back(lamp, Vector3f(12, 3.5, -2.6), Vector3f(0, -84, 0), 1.2);
+			entities.emplace_back(lamp, Vector3f(14, 3.5, -2.6), Vector3f(0, -84, 0), 1.2);
 
 			RawModel tree2Model = engine.loadObjModel("Tree2");
 			ModelTexture tree2Texture = engine.loadTexture("Tree.png");
@@ -133,7 +133,7 @@ namespace PressureEngineViewer {
 
 			// Lights
 			lights.emplace_back(Vector3f(100000, 150000, 200000), Vector3f(1));
-			lights.emplace_back(Vector3f(12, 3.5, -2.6), Vector3f(.8, 0.5, 0.25), Vector3f(.5, .4, .4));
+			lights.emplace_back(Vector3f(14, 3.5, -2.6), Vector3f(.8, 0.5, 0.25), Vector3f(.5, .4, .4));
 
 			// Waters
 			waters.emplace_back(engine.generateWater(Vector3f(-41, 0, -13)));
@@ -193,10 +193,8 @@ namespace PressureEngineViewer {
 			engine.process(entities);
 			engine.process(waters);
 			engine.process(lights);
-			//GuiTexture gui(5, (Vector2f&)Vector2f(0.5), (Vector2f&)Vector2f(0.5), false);
+			//GuiTexture gui(11, (Vector2f&)Vector2f(0.5), (Vector2f&)Vector2f(0.5), false);
 			//engine.process(gui);
-			//GuiTexture gui2(4, (Vector2f&)Vector2f(-0.5, 0.5), (Vector2f&)Vector2f(0.5), false);
-			//engine.process(gui2);
 			engine.render();
 		}
 
