@@ -12,12 +12,17 @@ namespace Pressure {
 
 		unsigned int location_colorTexture;
 		unsigned int location_depthTexture;
+		unsigned int location_focus;
+		unsigned int location_targetSize;
 
 	public:
 		DepthOfFieldShader();
 		void getAllUniformLocations() override;
 		void bindAttributes() override;
 		void connectTextureUnits();
+
+		void loadFocus(float focus);
+		void loadTargetSize(Vector2f& targetSize);
 
 	};
 
