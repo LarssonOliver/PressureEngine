@@ -4,7 +4,7 @@
 namespace Pressure {
 
 	WaterRenderer::WaterRenderer(Window& window)
-		: window(window), reflectionBuffer(window, window.getWidth() / 4, window.getHeight() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE), reflectionResultsBuffer(window, window.getWidth() / 4, window.getHeight() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionResultsBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE) {
+		: window(window), reflectionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE), reflectionResultsBuffer(window, window.getWidth() / 4, window.getHeight() / 4, 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER), refractionResultsBuffer(window, window.getWidth() / 2, window.getHeight() / 2, 1, 1, FrameBuffer::DepthBufferType::TEXTURE) {
 		shader.start();
 		shader.connectTextureUnits();
 		updateProjectionmatrix();
