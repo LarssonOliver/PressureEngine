@@ -27,7 +27,7 @@ namespace Pressure {
 	}
 
 	Properties::Properties()
-	: properties() {
+		: properties() {
 		if (!loadFromFile())
 			createFileWithDefaults();
 	}
@@ -39,10 +39,10 @@ namespace Pressure {
 		while (std::getline(file, line)) {
 			if (line[0] == '#')
 				continue;
-			
+
 			int nPos;
 			if ((nPos = line.find("=")) != line.npos) {
-				properties[line.substr(0, nPos)] = line.substr(nPos + 1);				
+				properties[line.substr(0, nPos)] = line.substr(nPos + 1);
 			}
 		}
 		return (properties.size());
@@ -50,7 +50,7 @@ namespace Pressure {
 
 	bool Properties::createFileWithDefaults() {
 		properties = defaults;
-		
+
 		std::string out;
 		out += "# Pressure Engine Properties #\n";
 		for (auto pair : defaults) {
@@ -69,7 +69,8 @@ namespace Pressure {
 		{ "fov", "70" },
 		{ "hideConsole", "1" },
 
-		{ "renderGrass", "1" }
+		{ "renderGrass", "1" },
+		{ "useDepthOfField", "1" }
 	};
 
 }

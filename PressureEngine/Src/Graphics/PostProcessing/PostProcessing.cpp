@@ -1,4 +1,5 @@
 #include "PostProcessing.h"
+#include "../../Services/Properties.h"
 
 namespace Pressure {
 
@@ -22,8 +23,11 @@ namespace Pressure {
 	void PostProcessing::process(FrameBuffer& frameBuffer, unsigned int lightScatterTexture, Vector3f& lightPosition) {
 		start();
 		s_LightScatterer->render(frameBuffer.getColorTexture(), lightScatterTexture, lightPosition, *s_Camera);
-		s_DepthOfField->render(s_LightScatterer->getResult(), frameBuffer.getDepthTexture());
-		s_ContrastChanger->render(s_DepthOfField->getResult());
+		if (Properties::Inst()->get("useDepthOfField") == "1") {
+			s_DepthOfField->render(s_LightScatterer->getResult(), frameBuffer.getDepthTexture());
+			s_ContrastChanger->render(s_DepthOfField->getResult());
+		} else
+			s_ContrastChanger->render(s_LightScatterer->getResult());
 		stop();
 	}
 

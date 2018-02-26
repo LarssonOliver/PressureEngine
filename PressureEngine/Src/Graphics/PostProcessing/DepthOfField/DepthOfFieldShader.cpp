@@ -27,28 +27,81 @@ uniform sampler2D colorTexture;
 uniform sampler2D depthTexture;
 
 uniform vec2 targetSize;
-uniform float focus;
 
 const float near = 0.1;
 const float far = 1000.0;
 const float imageDistance = 0.5;
-const float maxBlur = 3.0;
+const float maxBlur = 1.0;
 
-vec4 horizontalBlur(vec4 color, float pixelWidth, float samples) {
+const float sqrt2pi = sqrt(2 * 3.1415926); // Used in deviation().
+
+float deviation(float sigma, float x) {
+	return 1 / (sigma * sqrt2pi) * exp(-0.5 * pow(x / sigma, 2));	
+}
+
+vec4 verticalBlur(float pixelHeight, float samples) { // samples has to be an odd number.
 	float sigma = samples / 2.5;
+	float minmax = (samples - 1) / 2;
+	
+	vec4 result = vec4(0.0);
+	vec2 blurCoords = textureCoords;
+	blurCoords.y -= minmax * pixelHeight;
+	float totalDeviation = 0.0;
+	for (float i = -minmax; i <= minmax; i++) {
+		float dev = deviation(sigma, i);
+		totalDeviation += dev;
+		result += texture(colorTexture, clamp(blurCoords, 0.0, 1.0)) * dev;
+		blurCoords.y += pixelHeight;
+	}
+	result /= totalDeviation;
+	result.a = 1.0;
+	return result;
+}
+
+vec4 horizontalBlur(float pixelWidth, float samples) { // samples has to be an odd number.
+	float sigma = samples / 2.5;
+	float minmax = (samples - 1) / 2;
+	
+	vec4 result = vec4(0.0);
+	vec2 blurCoords = textureCoords;
+	blurCoords.x -= minmax * pixelWidth;
+	float totalDeviation = 0.0;
+	for (float i = -minmax; i <= minmax; i++) {
+		float dev = deviation(sigma, i);
+		totalDeviation += dev;
+		result += texture(colorTexture, clamp(blurCoords, 0.0, 1.0)) * dev;
+		blurCoords.x += pixelWidth;
+	}
+	result /= totalDeviation;
+	result.a = 1.0;
+	return result;
 }
 
 void main(void) {
-	
-	float aperture = focus / 2;
+	float focus = texture(depthTexture, vec2(0.5)).r;
+	focus += texture(depthTexture, vec2(0.51)).r;
+	focus += texture(depthTexture, vec2(0.49)).r;
+	focus += texture(depthTexture, vec2(0.51, 0.49)).r;
+	focus += texture(depthTexture, vec2(0.49, 0.51)).r;
+	focus /= 5;
+	float focusPlane = 2.0 * near * far / (near + far - (2.0 * focus - 1.0) * (far - near));
+	if (focusPlane > 100) {
+		focusPlane = 40;
+	}
+
+	float aperture = max(focusPlane / 4, 1.0);
 	float depth = texture(depthTexture, textureCoords).r;
 	float objectDistance = -far * near / (depth * (far - near) - far);
-	float focalLength = 1 / (1 / focus + 1 / imageDistance);
-	float CoC = abs(aperture * (focalLength * (objectDistance - focus)) / (objectDistance * (focus - focalLength)));
+	float focalLength = 1 / (1 / focusPlane + 1 / imageDistance);
+	float CoC = abs(aperture * (focalLength * (objectDistance - focusPlane)) / (objectDistance * (focusPlane - focalLength)));
     CoC = min(CoC, maxBlur);     
-		
-	out_Color = texture(colorTexture, textureCoords);
-	out_Color = vec4(CoC);
+	
+	float samples = floor(CoC * 15 + 0.5) * 2 + 1;
+	if (samples > 1.0) {
+		out_Color = (horizontalBlur(1 / targetSize.x, samples) + verticalBlur(1 / targetSize.y, samples)) / 2;
+	} else {
+		out_Color = texture(colorTexture, textureCoords);
+	}
 
 })";
 
@@ -59,7 +112,6 @@ void main(void) {
 	void DepthOfFieldShader::getAllUniformLocations() {
 		location_colorTexture = ShaderProgram::getUniformLocation("colorTexture");
 		location_depthTexture = ShaderProgram::getUniformLocation("depthTexture");
-		location_focus = ShaderProgram::getUniformLocation("focus");
 		location_targetSize = ShaderProgram::getUniformLocation("targetSize");
 	}
 
@@ -72,12 +124,8 @@ void main(void) {
 		ShaderProgram::loadInt(location_depthTexture, 1);
 	}
 
-	void DepthOfFieldShader::loadFocus(float focus) {
-		ShaderProgram::loadFloat(location_focus, focus);
-	}
-
 	void DepthOfFieldShader::loadTargetSize(Vector2f& targetSize) {
-		ShaderProgram::loadVector(targetSize);
+		ShaderProgram::loadVector(location_targetSize, targetSize);
 	}
 
 }

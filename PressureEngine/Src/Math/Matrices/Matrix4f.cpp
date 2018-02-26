@@ -209,14 +209,14 @@ namespace Pressure {
 		float aspectRatio = (float)width / (float)height;
 		float y_scale = 1.f / tanf((float)Math::toRadians(std::stof(Properties::Inst()->get("fov")) / 2.f));
 		float x_scale = y_scale / aspectRatio;
-		float frustum_length = PRESSRE_FAR_PLANE - PRESSRE_NEAR_PLANE;
+		float frustum_length = PRESSURE_FAR_PLANE - PRESSURE_NEAR_PLANE;
 
 		identity();
 		set(0, 0, x_scale);
 		set(1, 1, y_scale);
-		set(2, 2, -((PRESSRE_FAR_PLANE + PRESSRE_NEAR_PLANE) / frustum_length));
+		set(2, 2, -((PRESSURE_FAR_PLANE + PRESSURE_NEAR_PLANE) / frustum_length));
 		set(2, 3, -1.f);
-		set(3, 2, -((2 * PRESSRE_FAR_PLANE * PRESSRE_NEAR_PLANE) / frustum_length));
+		set(3, 2, -((2 * PRESSURE_FAR_PLANE * PRESSURE_NEAR_PLANE) / frustum_length));
 		set(3, 3, 0.f);
 		return *this;
 	}

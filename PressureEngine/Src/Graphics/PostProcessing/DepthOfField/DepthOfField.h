@@ -9,6 +9,8 @@ namespace Pressure {
 	class DepthOfField {
 
 	private:
+		Window & m_Window;
+
 		ImageRenderer m_Renderer;
 		DepthOfFieldShader m_Shader;
 

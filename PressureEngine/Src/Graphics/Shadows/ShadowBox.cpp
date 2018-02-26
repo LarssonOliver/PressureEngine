@@ -22,7 +22,7 @@ namespace Pressure {
 		Vector3f toFar(forwardVector);
 		toFar.scale(SHADOW_DISTANCE);
 		Vector3f toNear(forwardVector);
-		toNear.scale(PRESSRE_NEAR_PLANE);
+		toNear.scale(PRESSURE_NEAR_PLANE);
 		Vector3f centerNear;
 		toNear.add(cam.getPosition(), centerNear);
 		Vector3f centerFar;
@@ -117,7 +117,7 @@ namespace Pressure {
 
 	void ShadowBox::calculateWidthsAndHeights() {
 		farWidth = (float) (SHADOW_DISTANCE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
-		nearWidth = (float) (PRESSRE_NEAR_PLANE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
+		nearWidth = (float) (PRESSURE_NEAR_PLANE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
 		farHeight = farWidth / getAspectRatio();
 		nearHeight = nearWidth / getAspectRatio();
 	}
