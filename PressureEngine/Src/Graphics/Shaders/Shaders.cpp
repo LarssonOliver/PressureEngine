@@ -41,7 +41,9 @@ float getWindZ() {
 void main(void) {
 
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
-	worldPosition.xz = vec2(worldPosition.x + position.y * getWindX(), worldPosition.z + position.y * getWindZ());
+	if (position.y > 0) {
+		worldPosition.xz = vec2(worldPosition.x + position.y * getWindX(), worldPosition.z + position.y * getWindZ());	
+	}
 	vertexOut.shadowCoords = toShadowMapSpace * worldPosition;
 
 	gl_ClipDistance[0] = dot(worldPosition, plane);

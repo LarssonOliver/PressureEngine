@@ -41,14 +41,29 @@ namespace PressureEngineViewer {
 			entities.emplace_back(jetty, Vector3f(-10, 0.5f, 4), Vector3f(0, 185, 0), 2.f);
 
 			RawModel treeModel = engine.loadObjModel("Tree");
+			treeModel.setWindAffected(true);
 			ModelTexture treeTexture = engine.loadTexture("Tree.png");
 			TexturedModel tree(treeModel, treeTexture);
-			entities.emplace_back(tree, Vector3f(-31.5, 0, -14), Vector3f(3, 0, 0), 8.0);
+			entities.emplace_back(tree, Vector3f(-31.5, 12.2, -14), Vector3f(3, 0, 0), 8.0);
 
 			RawModel houseModel = engine.loadObjModel("House");
 			ModelTexture houseTexture = engine.loadTexture("House.png");
 			TexturedModel house(houseModel, houseTexture);
 			entities.emplace_back(house, Vector3f(22, 0.2, -3), Vector3f(0, -84, 0), 1.8);
+
+			RawModel gardenModel = engine.loadObjModel("Garden");
+			gardenModel.setWindAffected(true);
+			ModelTexture gardenTexture = engine.loadTexture("Garden.png");
+			TexturedModel garden(gardenModel, gardenTexture);
+			entities.emplace_back(garden, Vector3f(25, 1, 14), Vector3f(0, 84, 0), 1.5);
+
+			RawModel bushModel = engine.loadObjModel("Bush");
+			bushModel.setWindAffected(true);
+			ModelTexture bushTexture = engine.loadTexture("Tree.png");
+			TexturedModel bush(bushModel, bushTexture);
+			entities.emplace_back(bush, Vector3f(34.5, 1, 0), Vector3f(0, 0, 0), 10.0);
+			entities.emplace_back(bush, Vector3f(37.5, 1, 4), Vector3f(0, 70, 0), 9.0);
+			entities.emplace_back(bush, Vector3f(33.5, 1, 8), Vector3f(0, 45, 0), 9.5);
 
 			RawModel lampModel = engine.loadObjModel("Lamp");
 			ModelTexture lampTexture = engine.loadTexture("Lamp.png");
@@ -57,9 +72,10 @@ namespace PressureEngineViewer {
 			entities.emplace_back(lamp, Vector3f(14, 3.5, -2.6), Vector3f(0, -84, 0), 1.2);
 
 			RawModel tree2Model = engine.loadObjModel("Tree2");
+			tree2Model.setWindAffected(true);
 			ModelTexture tree2Texture = engine.loadTexture("Tree.png");
 			TexturedModel tree2(tree2Model, tree2Texture);
-			entities.emplace_back(tree2, Vector3f(32.5, 0, -10.5), Vector3f(0, 0, 0), 8.0);
+			entities.emplace_back(tree2, Vector3f(32.5, 12.4, -10.5), Vector3f(0, 0, 0), 8.0);
 
 			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
 			ModelTexture tombstoneTexture(engine.loadTexture("Tombstone.png"));
@@ -88,6 +104,10 @@ namespace PressureEngineViewer {
 			entities.emplace_back(fence, Vector3f(7, -0.1, 22.5), Vector3f(0, 173, 0), 2.7);
 			entities.emplace_back(fence, Vector3f(14, -0.4, 23), Vector3f(0, 175, 0), 2.7);
 			entities.emplace_back(fence2, Vector3f(21, -0.6, 23), Vector3f(0, 183, 0), 2.7);
+			entities.emplace_back(fence, Vector3f(28, -0.6, 22), Vector3f(0, 195, 0), 2.7);
+			entities.emplace_back(fence, Vector3f(34, -0.6, 19), Vector3f(0, 220, 0), 2.7);
+			entities.emplace_back(fence, Vector3f(38, -0.3, 13), Vector3f(0, 250, 0), 2.7);
+			entities.emplace_back(fence2, Vector3f(40, 0.2, 6), Vector3f(0, 260, 0), 2.7);
 
 			// Stones			
 			RawModel stoneModels[3] = { engine.loadObjModel("Stone"), engine.loadObjModel("Stone2"), engine.loadObjModel("Stone3") };
