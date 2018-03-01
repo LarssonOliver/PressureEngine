@@ -58,6 +58,16 @@ namespace PressureEngineViewer {
 			entities.emplace_back(garden, Vector3f(30, 0.9, 12), Vector3f(2, 50, -2), 1.5);
 			entities.emplace_back(garden, Vector3f(24, 0.8, 16), Vector3f(5, 20, 0), 1.5);
 
+			RawModel benchModel = engine.loadObjModel("Bench");
+			ModelTexture benchTexture = engine.loadTexture("Bench.png");
+			TexturedModel bench(benchModel, benchTexture);
+			entities.emplace_back(bench, Vector3f(18, 1.85, 5), Vector3f(0, -86, 0), 1.4);			
+			
+			RawModel barrowModel = engine.loadObjModel("Wheelbarrow");
+			ModelTexture barrowTexture = engine.loadTexture("Wheelbarrow.png");
+			TexturedModel barrow(barrowModel, barrowTexture);
+			entities.emplace_back(barrow, Vector3f(28, 0.60, 5), Vector3f(0, -60, 0), 1.6);
+
 			RawModel bushModel = engine.loadObjModel("Bush");
 			bushModel.setWindAffected(true);
 			ModelTexture bushTexture = engine.loadTexture("Tree.png");
