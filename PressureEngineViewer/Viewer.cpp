@@ -55,7 +55,8 @@ namespace PressureEngineViewer {
 			gardenModel.setWindAffected(true);
 			ModelTexture gardenTexture = engine.loadTexture("Garden.png");
 			TexturedModel garden(gardenModel, gardenTexture);
-			entities.emplace_back(garden, Vector3f(25, 1, 14), Vector3f(0, 84, 0), 1.5);
+			entities.emplace_back(garden, Vector3f(30, 0.9, 12), Vector3f(2, 50, -2), 1.5);
+			entities.emplace_back(garden, Vector3f(24, 0.8, 16), Vector3f(5, 20, 0), 1.5);
 
 			RawModel bushModel = engine.loadObjModel("Bush");
 			bushModel.setWindAffected(true);
@@ -123,7 +124,7 @@ namespace PressureEngineViewer {
 			entities.emplace_back(stones[0], Vector3f(-26, -5.9, 9), Vector3f(-10, 70, 0), .6);
 			entities.emplace_back(stones[2], Vector3f(-21, -5.2, 13), Vector3f(-10, 70, 0), .6);
 
-			entities.emplace_back(stones[0], Vector3f(-12, 0.3, -20), Vector3f(0, 0, 0), 2.3);
+			//entities.emplace_back(stones[0], Vector3f(-12, 0.3, -20), Vector3f(0, 0, 0), 2.3);
 
 			if (std::stoi(Properties::Inst()->get("renderGrass")) == 1) { 				
 				RawModel grassModel = engine.loadObjModel("Grass");
@@ -149,6 +150,12 @@ namespace PressureEngineViewer {
 				setGrassPatch(-16, 0.7, 22, grass, grass2, 0.20, 0.25);
 				setGrassPatch(-13, .5, 20, grass, grass2, 0.20, 0.3);
 				setGrassPatch(-8, 0.7, 22, grass, grass2, -0.20, 0.3);
+
+				setGrassPatch(32.5, 0.2, -4, grass, grass2, 0.05, -0.1);
+				setGrassPatch(36.5, 0.5, -4, grass, grass2, 0.2, -0.3);
+				setGrassPatch(37.5, 2, -8, grass, grass2, 0.7, -0.7);
+				setGrassPatch(38.5, 0.3, 0, grass, grass2, 0.1, -0.2);
+				setGrassPatch(32.5, 0.2, 4, grass, grass2, 0, 0);
 			}
 
 			// Lights
