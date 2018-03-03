@@ -32,11 +32,11 @@ namespace Pressure {
 		return w;
 	}
 
-	Vector2f Vector4f::getXY() {
+	Vector2f Vector4f::getXY() const {
 		return Vector2f(x, y);
 	}
 
-	Vector3f Vector4f::getXYZ() {
+	Vector3f Vector4f::getXYZ() const {
 		return Vector3f(x, y, z);
 	}
 
@@ -275,7 +275,11 @@ namespace Pressure {
 
 	/* TRIGONOMETRY */
 	float Vector4f::length() const {
-		return std::sqrtf(x * x + y * y + z * z + w * w);
+		return std::sqrtf(lengthSquared());
+	}
+
+	float Vector4f::lengthSquared() const {
+		return x * x + y * y + z * z + w * w;
 	}
 
 	float Vector4f::distance(float x, float y, float z, float w) const {
@@ -423,6 +427,14 @@ namespace Pressure {
 
 	bool Vector4f::operator!=(const Vector4f& other) const {
 		return !equals(other);
+	}
+
+	float& Vector4f::operator[](int id) {
+		if (id == 0) return x;
+		else if (id == 1) return y;
+		else if (id == 2) return z;
+		else if (id == 3) return w;
+		else return -1;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector4f& vec) {

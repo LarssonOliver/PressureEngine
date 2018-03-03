@@ -28,8 +28,8 @@ namespace Pressure {
 		float getY() const;
 		float getZ() const;
 		float getW() const;
-		Vector2f getXY();
-		Vector3f getXYZ();
+		Vector2f getXY() const;
+		Vector3f getXYZ() const;
 
 		/* SETTERS */
 		Vector4f& set(float d);
@@ -75,6 +75,7 @@ namespace Pressure {
 
 		/* TRIGONOMETRY */
 		float length() const;
+		float lengthSquared() const;
 		float distance(float x, float y, float z, float w) const;
 		float distance(const Vector4f& v) const;
 
@@ -103,6 +104,7 @@ namespace Pressure {
 		/* OPERATOR OVERLOADING */
 		bool operator==(const Vector4f& other) const;
 		bool operator!=(const Vector4f& other) const;
+		float& operator[](int id);
 		friend std::ostream& operator<<(std::ostream& os, const Vector4f& vec);
 
 	};

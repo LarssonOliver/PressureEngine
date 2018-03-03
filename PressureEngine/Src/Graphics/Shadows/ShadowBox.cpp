@@ -20,9 +20,9 @@ namespace Pressure {
 		Vector3f forwardVector(rotation.transform(FORWARD, Vector4f()).getXYZ());
 
 		Vector3f toFar(forwardVector);
-		toFar.scale(SHADOW_DISTANCE);
+		toFar.mul(SHADOW_DISTANCE);
 		Vector3f toNear(forwardVector);
-		toNear.scale(PRESSURE_NEAR_PLANE);
+		toNear.mul(PRESSURE_NEAR_PLANE);
 		Vector3f centerNear;
 		toNear.add(cam.getPosition(), centerNear);
 		Vector3f centerFar;

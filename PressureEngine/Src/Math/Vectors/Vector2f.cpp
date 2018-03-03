@@ -178,7 +178,12 @@ namespace Pressure {
 
 	/* TRIGONOMETRY */
 	float Vector2f::length() const {
-		return std::sqrtf(x * x + y * y);
+		return std::sqrtf(lengthSquared());
+	}
+
+	float Vector2f::lengthSquared() const
+	{
+		return x * x + y * y;
 	}
 
 	float Vector2f::distance(float x, float y) const {
@@ -234,6 +239,25 @@ namespace Pressure {
 		return dest;
 	}
 
+	Vector2f& Vector2f::reflect(float x, float y) {
+		return reflect({ x, y }, *this);
+	}
+
+	Vector2f& Vector2f::reflect(float x, float y, Vector2f& dest) const {
+		return reflect({ x, y }, dest);
+	}
+
+	Vector2f& Vector2f::reflect(const Vector2f& normal) {
+		return reflect(normal, *this);
+	}
+
+	Vector2f& Vector2f::reflect(const Vector2f& normal, Vector2f& dest) const {
+		float dot = this->dot(normal);
+		dest.x = x - dot * 2 * x;
+		dest.y = y - dot * 2 * y;
+		return dest;
+	}
+
 	Vector2f& Vector2f::perpendicular() {
 		return set(y, x * -1);
 	}
@@ -263,6 +287,12 @@ namespace Pressure {
 
 	bool Vector2f::operator!=(const Vector2f& other) const {
 		return !equals(other);
+	}
+
+	float& Vector2f::operator[](int id) {
+		if (id == 0) return x;
+		else if (id == 1) return y;
+		else return -1;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector2f& vec) {

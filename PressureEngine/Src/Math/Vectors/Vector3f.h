@@ -23,6 +23,7 @@ namespace Pressure {
 		float getX() const;
 		float getY() const;
 		float getZ() const;
+		Vector2f getXY() const;
 
 		/* SETTERS */
 		Vector3f& set(float d);
@@ -69,8 +70,7 @@ namespace Pressure {
 		float lengthSquared() const;
 		float distance(float x, float y, float z) const;
 		float distance(const Vector3f& v) const;
-		Vector3f& scale(const float scalar);
-		Vector3f& scale(const float scalar, Vector3f& dest) const;
+		float angle(const Vector3f& v) const;
 
 		/* VECTOR MATH */
 		float dot(float x, float y, float z) const;

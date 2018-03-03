@@ -61,6 +61,7 @@ namespace Pressure {
 
 		/* TRIGONOMETRY */
 		float length() const;
+		float lengthSquared() const;
 		float distance(float x, float y) const;
 		float distance(const Vector2f& v) const;
 		float angle(const Vector2f& v) const;
@@ -72,6 +73,10 @@ namespace Pressure {
 		Vector2f& normalize(Vector2f& dest) const;
 		Vector2f& normalize(float length);
 		Vector2f& normalize(float length, Vector2f& dest) const;
+		Vector2f& reflect(float x, float y);
+		Vector2f& reflect(float x, float y, Vector2f& dest) const;
+		Vector2f& reflect(const Vector2f& normal);
+		Vector2f& reflect(const Vector2f& normal, Vector2f& dest) const;
 		Vector2f& perpendicular();
 
 		/* EXTRA FUNCTIONS */
@@ -82,6 +87,7 @@ namespace Pressure {
 		/* OPERATOR OVERLOADING */
 		bool operator==(const Vector2f& other) const;
 		bool operator!=(const Vector2f& other) const;
+		float& operator[](int id);
 		friend std::ostream& operator<<(std::ostream& os, const Vector2f& vec);
 
 	};

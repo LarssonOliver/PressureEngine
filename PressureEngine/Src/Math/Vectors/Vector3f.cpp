@@ -26,6 +26,10 @@ namespace Pressure {
 		return z;
 	}
 
+	Vector2f Vector3f::getXY() const {
+		return Vector2f(x, y);
+	}
+
 	/* SETTERS */
 	Vector3f& Vector3f::set(float d) {
 		this->x = d;
@@ -241,6 +245,12 @@ namespace Pressure {
 		return distance(v.getX(), v.getY(), v.getZ());
 	}
 
+	float Vector3f::angle(const Vector3f& v) const {
+		float dot = x * v.getX() + y * v.getY() + z * v.getZ();
+		float det = x * v.getY() - y * v.getX() - z * v.getZ();
+		return std::atan2f(det, dot);
+	}
+
 	Vector3f& Vector3f::scale(const float scalar) {
 		return this->mul(scalar);
 	}
@@ -423,7 +433,7 @@ namespace Pressure {
 		if (id == 0) return x;
 		else if (id == 1) return y;
 		else if (id == 2) return z;
-		else return x;
+		else return -1;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector3f& vec) {
