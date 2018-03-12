@@ -40,6 +40,8 @@ namespace Pressure {
 		void setSpeed(const float speed);
 		float getSpeed() const;
 
+		float getDistanceFromAnchor() const;
+
 	private: 
 		float calculateHorizontalDistance();
 		float calculateVerticalDistance();

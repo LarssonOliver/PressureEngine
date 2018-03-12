@@ -30,6 +30,14 @@ namespace Pressure {
 		//return shadowFbo.getShadowMap();
 	}
 
+	float ShadowMapMasterRenderer::getShadowDistance() const {
+		return shadowBox.getShadowDistance();
+	}
+
+	void ShadowMapMasterRenderer::setShadowDistance(float shadowDistance) {
+		shadowBox.setShadowDistance(shadowDistance);
+	}
+
 	Matrix4f& ShadowMapMasterRenderer::getLightSpaceTransform() {
 		return lightViewMatrix;
 	}

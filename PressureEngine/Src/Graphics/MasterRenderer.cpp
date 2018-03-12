@@ -11,12 +11,14 @@ namespace Pressure {
 
 	void MasterRenderer::render(std::vector<Light>& lights, Camera& camera) {
 		prepare();
+		shadowMapRenderer.setShadowDistance(25 + camera.getDistanceFromAnchor() * 1.5);
 		shader.start();
 		shader.connectTextureUnits();
 		glDisable(GL_CLIP_DISTANCE0);
 		shader.loadClipPlane(Vector4f(0, -1, 0, 1000000)); // Bit of a hack, as some drivers do not support disabling clip distance.
 		shader.loadLights(lights);
 		shader.loadToShadowMapSpace(shadowMapRenderer.getToShadowMapSpaceMatrix());
+		shader.loadShadowDistance(shadowMapRenderer.getShadowDistance());
 		renderer.render(entities, camera);
 		shader.stop();
 		skyboxRenderer.render(camera);
