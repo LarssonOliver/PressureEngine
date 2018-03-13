@@ -26,6 +26,7 @@ namespace Pressure {
 		void loadToShadowMapSpace(Matrix4f& matrix);
 		void connectTextureUnits();
 		void loadWindModifier(const float windModifier);
+		void loadShadowDistance(float shadowDistance);
 
 	private:
 		//uniform locations.
@@ -43,6 +44,7 @@ namespace Pressure {
 		int location_shadowMap;
 		int location_textureSampler;
 		int location_windModifier;
+		int location_shadowDistance;
 
 	};
 

@@ -79,6 +79,10 @@ namespace Pressure {
 		return max_speed;
 	}
 
+	float Camera::getDistanceFromAnchor() const {
+		return distanceFromAnchor;
+	}
+
 	float Camera::calculateHorizontalDistance() {
 		return distanceFromAnchor * std::cosf((float) Math::toRadians(pitch));
 	}

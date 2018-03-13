@@ -25,6 +25,7 @@ namespace Pressure {
 		location_shadowMap = ShaderProgram::getUniformLocation("shadowMap");
 		location_textureSampler = ShaderProgram::getUniformLocation("textureSampler");
 		location_windModifier = ShaderProgram::getUniformLocation("windModifier");
+		location_shadowDistance = ShaderProgram::getUniformLocation("shadowDistance");
 
 		for (int i = 0; i < 4; i++) {
 			location_lightColor[i] = ShaderProgram::getUniformLocation(("lightColor[" + std::to_string(i) + "]").c_str());
@@ -83,6 +84,10 @@ namespace Pressure {
 
 	void EntityShader::loadWindModifier(const float windModifier) {
 		ShaderProgram::loadFloat(location_windModifier, windModifier);
+	}
+
+	void EntityShader::loadShadowDistance(float shadowDistance) {
+		ShaderProgram::loadFloat(location_shadowDistance, shadowDistance);
 	}
 
 }

@@ -11,8 +11,8 @@ namespace Pressure {
 		static const float OFFSET;
 		static const Vector4f UP;
 		static const Vector4f FORWARD;
-		static const float SHADOW_DISTANCE;
 
+		float shadowDistance;
 		float minX, maxX;
 		float minY, maxY;
 		float minZ, maxZ;
@@ -25,10 +25,12 @@ namespace Pressure {
 		ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window);
 		void tick();
 		Vector3f getCenter();
+		void setShadowDistance(float distance);
 
 		float getWidth() const;
 		float getHeight() const;
 		float getLength() const;
+		float getShadowDistance() const;
 
 	private:
 		void calculateFrustumVertices(std::vector<Vector4f>& points, Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar);

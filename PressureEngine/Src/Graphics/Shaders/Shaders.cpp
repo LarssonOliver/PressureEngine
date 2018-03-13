@@ -27,7 +27,8 @@ uniform float windModifier;
 
 uniform mat4 toShadowMapSpace;
 
-const float shadowDistance = 150.0;
+uniform float shadowDistance;
+
 const float transitionDistance = 10.0;
 
 float getWindX() {
@@ -130,7 +131,7 @@ uniform vec3 attenuation[4];
 uniform float shineDamper;
 uniform float reflectivity;
 
-const int pcfCount = 2;
+const int pcfCount = 1;
 const float totalTexels = (pcfCount * 2.0 + 1.0) * (pcfCount * 2.0 + 1.0);
 
 void main(void) {

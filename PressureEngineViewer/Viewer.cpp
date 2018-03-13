@@ -230,8 +230,8 @@ namespace PressureEngineViewer {
 			engine.process(entities);
 			engine.process(waters);
 			engine.process(lights);
-			//GuiTexture gui(11, (Vector2f&)Vector2f(0.5), (Vector2f&)Vector2f(0.5), false);
-			//engine.process(gui);
+			GuiTexture gui(3, (Vector2f&)Vector2f(0.5), (Vector2f&)Vector2f(0.5), false);
+			engine.process(gui);
 			engine.render();
 		}
 

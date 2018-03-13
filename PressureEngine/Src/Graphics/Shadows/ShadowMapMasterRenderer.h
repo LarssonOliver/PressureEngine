@@ -29,6 +29,8 @@ namespace Pressure {
 		
 		Matrix4f getToShadowMapSpaceMatrix();
 		unsigned int getShadowMap();
+		float getShadowDistance() const;
+		void setShadowDistance(float shadowDistance);
 		Matrix4f& getLightSpaceTransform();
 
 	private:

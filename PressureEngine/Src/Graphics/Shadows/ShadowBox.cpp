@@ -7,10 +7,9 @@ namespace Pressure {
 	const float ShadowBox::OFFSET = 10;
 	const Vector4f ShadowBox::UP(0, 1, 0, 0);
 	const Vector4f ShadowBox::FORWARD(0, 0, -1, 0);
-	const float ShadowBox::SHADOW_DISTANCE = 150; // also in shaders
 
 	ShadowBox::ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window)
-		: lightViewMatrix(lightViewMatrix), cam(camera), window(window) {
+		: shadowDistance(150), lightViewMatrix(lightViewMatrix), cam(camera), window(window) {
 		calculateWidthsAndHeights();
 	}
 
@@ -20,7 +19,7 @@ namespace Pressure {
 		Vector3f forwardVector(rotation.transform(FORWARD, Vector4f()).getXYZ());
 
 		Vector3f toFar(forwardVector);
-		toFar.mul(SHADOW_DISTANCE);
+		toFar.mul(shadowDistance);
 		Vector3f toNear(forwardVector);
 		toNear.mul(PRESSURE_NEAR_PLANE);
 		Vector3f centerNear;
@@ -67,6 +66,13 @@ namespace Pressure {
 		return invertedLight.transform(cen, Vector4f()).getXYZ();
 	}
 
+	void ShadowBox::setShadowDistance(float distance) {
+		if (distance != shadowDistance) {
+			shadowDistance = distance;
+			calculateWidthsAndHeights();
+		}
+	}
+
 	float ShadowBox::getWidth() const {
 		return maxX - minX;
 	}
@@ -77,6 +83,10 @@ namespace Pressure {
 
 	float ShadowBox::getLength() const {
 		return maxZ - minZ;
+	}
+
+	float ShadowBox::getShadowDistance() const {
+		return shadowDistance;
 	}
 
 	void ShadowBox::calculateFrustumVertices(std::vector<Vector4f>& points, Matrix4f& rotation, Vector3f& forwardVector, Vector3f& centerNear, Vector3f& centerFar) {
@@ -116,7 +126,7 @@ namespace Pressure {
 	}
 
 	void ShadowBox::calculateWidthsAndHeights() {
-		farWidth = (float) (SHADOW_DISTANCE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
+		farWidth = (float) (shadowDistance * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
 		nearWidth = (float) (PRESSURE_NEAR_PLANE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
 		farHeight = farWidth / getAspectRatio();
 		nearHeight = nearWidth / getAspectRatio();
