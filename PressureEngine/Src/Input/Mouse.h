@@ -9,6 +9,14 @@ namespace Pressure {
 	// Singleton class for mouse input.
 	class PRESSURE_API Mouse {
 
+	private:
+		static Mouse* s_Inst;
+		std::vector<bool> m_Buttons;
+		float m_Scroll;
+
+		float m_dx, m_dy;
+		float m_LastXPos, m_LastYPos;
+
 	public:
 		static Mouse* Inst();
 		static bool isPressed(GLint key);
@@ -23,13 +31,6 @@ namespace Pressure {
 	protected:
 		Mouse();
 		Mouse(const Mouse& tm) = delete;
-
-		static Mouse* inst;
-		std::vector<bool> buttons;
-		float scroll;
-
-		float dx, dy;
-		float last_xpos, last_ypos;
 
 	};
 

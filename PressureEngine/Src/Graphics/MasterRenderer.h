@@ -2,9 +2,9 @@
 #include <map>
 #include <vector>
 
-#include "Shaders\EntityShader.h"
+#include "EntityShaders\EntityShader.h"
 #include "Models\TexturedModel.h"
-#include "Shaders\Renderer.h"
+#include "EntityShaders\EntityRenderer.h"
 #include "Entities\Entity.h"
 #include "Entities\Light.h"
 #include "Entities\Camera.h"
@@ -20,7 +20,7 @@ namespace Pressure {
 
 	private: 
 		EntityShader shader;
-		Renderer renderer;
+		EntityRenderer renderer;
 
 		SkyboxRenderer skyboxRenderer;
 		ShadowMapMasterRenderer shadowMapRenderer;
@@ -50,7 +50,7 @@ namespace Pressure {
 		//for debugging.
 		unsigned int getShadowMapTexture();
 
-		Renderer& getRenderer();
+		EntityRenderer& getRenderer();
 		void cleanUp();
 
 	private:

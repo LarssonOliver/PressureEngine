@@ -4,19 +4,19 @@
 namespace Pressure {
 
 	GuiShader::GuiShader() {
-		ShaderProgram::loadShaders(GuiShaderSource::vertexShader, GuiShaderSource::fragmentShader);
+		Shader::loadShaders(GuiShaderSource::vertexShader, GuiShaderSource::fragmentShader);
 	}
 
 	void GuiShader::loadTransformation(Matrix4f& matrix) {
-		ShaderProgram::loadMatrix(location_transformationMatrix, matrix);
+		Shader::loadMatrix(location_transformationMatrix, matrix);
 	}
 
 	void GuiShader::getAllUniformLocations() {
-		location_transformationMatrix = ShaderProgram::getUniformLocation("transformationMatrix");
+		location_transformationMatrix = Shader::getUniformLocation("transformationMatrix");
 	}
 
 	void GuiShader::bindAttributes() {
-		ShaderProgram::bindAttribute(0, "position");
+		Shader::bindAttribute(0, "position");
 	}
 
 }

@@ -10,14 +10,14 @@ namespace Pressure {
 	class WaterRenderer {
 
 	private:
-		WaterShader shader;
-		Window& window;
-		float waveModifier;
+		WaterShader m_Shader;
+		Window& m_Window;
+		float m_WaveModifier;
 
-		FrameBuffer reflectionBuffer;
-		FrameBuffer refractionBuffer;
-		FrameBuffer reflectionResultsBuffer;
-		FrameBuffer refractionResultsBuffer;
+		FrameBuffer m_ReflectionBuffer;
+		FrameBuffer m_RefractionBuffer;
+		FrameBuffer m_ReflectionResultsBuffer;
+		FrameBuffer m_RefractionResultsBuffer;
 
 	public:
 		WaterRenderer(Window& window);

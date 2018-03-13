@@ -16,18 +16,18 @@ namespace Pressure {
 	class PRESSURE_API PressureEngine {
 
 	private:
-		bool initialized = false;
-		std::unique_ptr<Window> window = nullptr;
-		std::unique_ptr<Loader> loader = nullptr;
-		std::unique_ptr<Camera> camera = nullptr;
-		std::unique_ptr<MasterRenderer> renderer = nullptr;
-		std::unique_ptr<GuiRenderer> guiRenderer = nullptr;
-		std::unique_ptr<FrameBuffer> frameBuffer = nullptr;
-		std::unique_ptr<FrameBuffer> outputBuffer = nullptr;
-		std::unique_ptr<FrameBuffer> lightScatterBuffer = nullptr;
+		bool m_Initialized = false;
+		std::unique_ptr<Window> m_Window = nullptr;
+		std::unique_ptr<Loader> m_Loader = nullptr;
+		std::unique_ptr<Camera> m_Camera = nullptr;
+		std::unique_ptr<MasterRenderer> m_Renderer = nullptr;
+		std::unique_ptr<GuiRenderer> m_GuiRenderer = nullptr;
+		std::unique_ptr<FrameBuffer> m_FrameBuffer = nullptr;
+		std::unique_ptr<FrameBuffer> m_OutputBuffer = nullptr;
+		std::unique_ptr<FrameBuffer> m_LightScatterBuffer = nullptr;
 
-		std::vector<Light> lights;
-		std::vector<GuiTexture> guis;
+		std::vector<Light> m_Lights;
+		std::vector<GuiTexture> m_Guis;
 
 	public:
 		// Always call this before anything else.
@@ -60,9 +60,9 @@ namespace Pressure {
 
 		Water generateWater(const Vector3f& position) const;
 
-		Window& getWindow() { return *window; };
+		Window& getWindow() { return *m_Window; };
 
-		const bool isInitialized() const { return initialized; }
+		const bool isInitialized() const { return m_Initialized; }
 
 		// Call after operation.
 		void terminate();

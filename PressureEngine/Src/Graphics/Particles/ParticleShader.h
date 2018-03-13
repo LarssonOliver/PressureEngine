@@ -1,9 +1,9 @@
 #pragma once
-#include "../Shaders/ShaderProgram.h"
+#include "../Shaders/Shader.h"
 
 namespace Pressure {
 
-	class ParticleShader : public ShaderProgram {
+	class ParticleShader : public Shader {
 
 	public:
 		ParticleShader();

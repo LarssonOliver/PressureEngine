@@ -3,13 +3,13 @@
 
 namespace Pressure {
 
-	class ShaderProgram {
+	class Shader {
 
 	private:
-		int programID;
-		int vertexShaderID;
-		int geometryShaderID;
-		int fragmentShaderID;
+		int m_ProgramID;
+		int m_VertexShaderID;
+		int m_GeometryShaderID;
+		int m_FragmentShaderID;
 
 	public:
 		void loadShaders(const std::string& vertexShader, const std::string& fragmentShader);

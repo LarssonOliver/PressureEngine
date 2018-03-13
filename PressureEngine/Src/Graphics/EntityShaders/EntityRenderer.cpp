@@ -1,15 +1,15 @@
-#include "Renderer.h"
+#include "EntityRenderer.h"
 #include "../Textures\TextureManager.h"
 #include "../MasterRenderer.h"
 
 namespace Pressure {
 	
-	Renderer::Renderer(EntityShader& shader, GLFWwindow* window)
+	EntityRenderer::EntityRenderer(EntityShader& shader, GLFWwindow* window)
 		: shader(shader), window(window), windModifier(0) {
 		updateProjectionMatrix(shader);
 	}
 
-	void Renderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
+	void EntityRenderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
 		Matrix4f viewMatrix = Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll());
 		shader.loadViewMatrix(viewMatrix);
 		ViewFrustum::Inst().extractPlanes(projectionMatrix.mul(viewMatrix, Matrix4f()));
@@ -26,20 +26,20 @@ namespace Pressure {
 		}
 	}
 
-	void Renderer::updateProjectionMatrix(EntityShader& shader) {
+	void EntityRenderer::updateProjectionMatrix(EntityShader& shader) {
 		projectionMatrix.createProjectionMatrix(window);
 		shader.start();
 		shader.loadProjectionmatrix(projectionMatrix);
 		shader.stop();
 	}
 
-	void Renderer::tick() {
+	void EntityRenderer::tick() {
 		windModifier += 0.005;
 		if (windModifier > 360)
 			windModifier -= 360;
 	}
 
-	void Renderer::prepareTexturedModel(const TexturedModel& texturedModel) {
+	void EntityRenderer::prepareTexturedModel(const TexturedModel& texturedModel) {
 		RawModel& model = texturedModel.getRawModel();
 		model.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
@@ -57,7 +57,7 @@ namespace Pressure {
 		setTexParams();
 	}
 
-	void Renderer::unbindTexturedModel(const RawModel& model) {
+	void EntityRenderer::unbindTexturedModel(const RawModel& model) {
 		MasterRenderer::enableCulling();
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
@@ -65,7 +65,7 @@ namespace Pressure {
 		model.getVertexArray().unbind();
 	}
 
-	void Renderer::setTexParams() const {
+	void EntityRenderer::setTexParams() const {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

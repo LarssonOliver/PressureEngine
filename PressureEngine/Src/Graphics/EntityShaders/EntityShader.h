@@ -1,11 +1,11 @@
 #pragma once
-#include "ShaderProgram.h"
+#include "../Shaders/Shader.h"
 #include "../Entities/Camera.h"
 #include "../Entities/Light.h"
 
 namespace Pressure {
 
-	class EntityShader : public ShaderProgram {
+	class EntityShader : public Shader {
 
 	public:
 		EntityShader();

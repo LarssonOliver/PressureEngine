@@ -13,10 +13,10 @@ namespace Pressure {
 	private:
 		static const std::vector<float> VERTICES;
 
-		RawModel cube;
-		int texture;
-		SkyboxShader shader;
-		GLFWwindow* const window;
+		RawModel m_Cube;
+		int m_Texture;
+		SkyboxShader m_Shader;
+		GLFWwindow* const m_Window;
 
 	public:
 		SkyboxRenderer(Loader& loader, GLFWwindow* window);

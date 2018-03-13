@@ -39,9 +39,6 @@
     <ClCompile Include="Src\Graphics\Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\Shaders\ShaderProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Graphics\Textures\TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -81,12 +78,6 @@
     <ClCompile Include="Src\Graphics\Water\Water.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Graphics\Shaders\EntityShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Graphics\Shaders\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Graphics\Particles\ParticleShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -124,9 +115,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\Graphics\Guis\GuiShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Graphics\Shaders\Shaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\Graphics\Guis\GuiShaderSource.cpp">
@@ -201,6 +189,18 @@
     <ClCompile Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfFieldShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Graphics\EntityShaders\EntityShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\Shaders\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\EntityShaders\EntityRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Graphics\EntityShaders\EntityShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Math\Matrices\Matrix4f.h">
@@ -231,9 +231,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\GraphicsCommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Graphics\Shaders\ShaderProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\Textures\TextureManager.h">
@@ -290,12 +287,6 @@
     <ClInclude Include="Src\Graphics\Water\Water.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Graphics\Shaders\EntityShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Graphics\Shaders\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Graphics\Particles\Particle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -342,9 +333,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\DllExport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Graphics\Shaders\Shaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\Guis\GuiShaderSource.h">
@@ -417,6 +405,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\Graphics\PostProcessing\DepthOfField\DepthOfFieldShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\EntityShaders\EntityShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\Shaders\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\EntityShaders\EntityRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Graphics\EntityShaders\EntityShaderSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

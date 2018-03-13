@@ -8,8 +8,7 @@ namespace Pressure {
 		fprintf(stderr, "Error: %s\n", description);
 	}
 
-	// Is required to be a C function by OpenGL.
-	void APIENTRY opengl_error_callback(GLenum soruce, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
+	void APIENTRY Callbacks::opengl_error_callback(GLenum soruce, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
 		using namespace std;
 
 		// Not interested in notifications.

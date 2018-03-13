@@ -106,26 +106,26 @@ void main(void) {
 })";
 
 	DepthOfFieldShader::DepthOfFieldShader() {
-		ShaderProgram::loadShaders(s_VertexShader, s_FragmentShader);
+		Shader::loadShaders(s_VertexShader, s_FragmentShader);
 	}
 
 	void DepthOfFieldShader::getAllUniformLocations() {
-		location_colorTexture = ShaderProgram::getUniformLocation("colorTexture");
-		location_depthTexture = ShaderProgram::getUniformLocation("depthTexture");
-		location_targetSize = ShaderProgram::getUniformLocation("targetSize");
+		location_colorTexture = Shader::getUniformLocation("colorTexture");
+		location_depthTexture = Shader::getUniformLocation("depthTexture");
+		location_targetSize = Shader::getUniformLocation("targetSize");
 	}
 
 	void DepthOfFieldShader::bindAttributes() {
-		ShaderProgram::bindAttribute(0, "position");
+		Shader::bindAttribute(0, "position");
 	}
 
 	void DepthOfFieldShader::connectTextureUnits() {
-		ShaderProgram::loadInt(location_colorTexture, 0);
-		ShaderProgram::loadInt(location_depthTexture, 1);
+		Shader::loadInt(location_colorTexture, 0);
+		Shader::loadInt(location_depthTexture, 1);
 	}
 
 	void DepthOfFieldShader::loadTargetSize(Vector2f& targetSize) {
-		ShaderProgram::loadVector(location_targetSize, targetSize);
+		Shader::loadVector(location_targetSize, targetSize);
 	}
 
 }

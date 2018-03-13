@@ -1,10 +1,10 @@
 #pragma once
-#include "../Shaders/ShaderProgram.h"
+#include "../Shaders/Shader.h"
 #include "../Entities/Camera.h"
 
 namespace Pressure {
 
-	class SkyboxShader : public ShaderProgram {
+	class SkyboxShader : public Shader {
 
 	public:
 		SkyboxShader();

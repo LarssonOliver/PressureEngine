@@ -1,8 +1,8 @@
-#include "Shaders.h"
+#include "EntityShaderSource.h"
 
 namespace Pressure {
 		
-	const std::string Shaders::vertexShader = 
+	const std::string EntityShaderSource::vertexShader = 
 R"(#version 330 core
 
 in vec3 position;
@@ -70,7 +70,7 @@ void main(void) {
 
 })";
 
-	const std::string Shaders::geometryShader = 
+	const std::string EntityShaderSource::geometryShader = 
 R"(#version 330 core
 
 layout (triangles) in;
@@ -109,7 +109,7 @@ void main(void) {
 	EndPrimitive();
 })";
 
-	const std::string Shaders::fragmentShader = 
+	const std::string EntityShaderSource::fragmentShader = 
 R"(#version 330 core
 
 in VertexData {

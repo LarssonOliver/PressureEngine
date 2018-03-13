@@ -5,21 +5,21 @@
 namespace Pressure {
 
 	class PRESSURE_API Window {
+
 	private:
-		GLFWwindow* window;
+		GLFWwindow* m_Window;
 
-		int width;
-		int height;
+		int m_Width;
+		int m_Height;
 
-		const char* title;
-		bool fullscreen;
-		bool vsync;		
+		const char* m_Title;
+		bool m_Fullscreen;
+		bool m_Vsync;		
 	
 	public: 
 		Window(int width, int height, const char* title, bool fullscreen, bool vsync);
 		~Window();
 		
-		//void tick();
 		void setTitle(const char* title);
 		void setSize(int width, int height);
 

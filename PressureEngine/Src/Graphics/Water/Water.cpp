@@ -3,30 +3,28 @@
 
 namespace Pressure {
 
-	using namespace std;
-
 	const int Water::SIZE = 16;
 	const int Water::VERTEX_COUNT = 32;
 
-	RawModel* Water::model;
+	RawModel* Water::s_Model;
 
 	Water::Water(const Vector3f& position, Loader& loader)
-		: position(position) {
-		if (!model)
-			model = new RawModel(generateWater(loader));
+		: m_Position(position) {
+		if (!s_Model)
+			s_Model = new RawModel(generateWater(loader));
 	}
 
 	RawModel Water::getModel() {
-		return *Water::model;
+		return *Water::s_Model;
 	}
 
 	Vector3f& Water::getPosition() {
-		return position;
+		return m_Position;
 	}
 
 	RawModel Water::generateWater(Loader& loader) {
 		int count = VERTEX_COUNT * VERTEX_COUNT;
-		vector<float> vertices(count * 3);
+		std::vector<float> vertices(count * 3);
 		int vertexPointer = 0;
 		for (int i = 0; i < VERTEX_COUNT; i++) {
 			for (int j = 0; j < VERTEX_COUNT; j++) {
@@ -36,7 +34,7 @@ namespace Pressure {
 				vertexPointer++;
 			}
 		}
-		vector<unsigned int> indices(6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1));
+		std::vector<unsigned int> indices(6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1));
 		int pointer = 0;
 		for (int gz = 0; gz < VERTEX_COUNT - 1; gz++) {
 			for (int gx = 0; gx < VERTEX_COUNT - 1; gx++) {

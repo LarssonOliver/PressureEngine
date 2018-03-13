@@ -3,25 +3,25 @@
 
 namespace Pressure {
 
-	Keyboard* Keyboard::inst(0);
+	Keyboard* Keyboard::s_Inst(0);
 
 	Keyboard* Keyboard::Inst() {
-		if (!inst) 
-			inst = new Keyboard();		
-		return inst;
+		if (!s_Inst) 
+			s_Inst = new Keyboard();		
+		return s_Inst;
 	}
 
 	bool Keyboard::isPressed(int key) {
-		return Inst()->keys[key];
+		return Inst()->m_Keys[key];
 	}
 
 	void Keyboard::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-		Inst()->keys[key] = action != GLFW_RELEASE;
+		Inst()->m_Keys[key] = action != GLFW_RELEASE;
 	}
 
 	Keyboard::Keyboard() 
-		: keys(GLFW_KEY_LAST) {
-		std::fill(keys.begin(), keys.end(), false);
+		: m_Keys(GLFW_KEY_LAST) {
+		std::fill(m_Keys.begin(), m_Keys.end(), false);
 	}
 
 }

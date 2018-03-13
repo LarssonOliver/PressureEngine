@@ -4,28 +4,28 @@
 namespace Pressure {
 
 	ParticleShader::ParticleShader() {
-		ShaderProgram::loadShaders(ParticleShaderSource::vertexShader, ParticleShaderSource::fragmentShader);
+		Shader::loadShaders(ParticleShaderSource::vertexShader, ParticleShaderSource::fragmentShader);
 	}
 
 	void ParticleShader::getAllUniformLocations() {
-		location_projectionMatrix = ShaderProgram::getUniformLocation("projectionMatrix");
-		location_numberOfRows = ShaderProgram::getUniformLocation("numberOfRows");
+		location_projectionMatrix = Shader::getUniformLocation("projectionMatrix");
+		location_numberOfRows = Shader::getUniformLocation("numberOfRows");
 	}
 
 	void ParticleShader::bindAttributes() {
-		ShaderProgram::bindAttribute(0, "position");
-		ShaderProgram::bindAttribute(1, "viewMatrix");
-		ShaderProgram::bindAttribute(5, "texOffsets");
-		ShaderProgram::bindAttribute(6, "blendFactor");
+		Shader::bindAttribute(0, "position");
+		Shader::bindAttribute(1, "viewMatrix");
+		Shader::bindAttribute(5, "texOffsets");
+		Shader::bindAttribute(6, "blendFactor");
 
 	}
 
 	void ParticleShader::loadProjectionMatrix(Matrix4f& matrix) {
-		ShaderProgram::loadMatrix(location_projectionMatrix, matrix);
+		Shader::loadMatrix(location_projectionMatrix, matrix);
 	}
 
 	void ParticleShader::loadNumberOfRows(const float numberOfRows) {
-		ShaderProgram::loadFloat(location_numberOfRows, numberOfRows);
+		Shader::loadFloat(location_numberOfRows, numberOfRows);
 	}
 
 }

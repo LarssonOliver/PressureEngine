@@ -1,9 +1,9 @@
 #pragma once
-#include "../Shaders/ShaderProgram.h"
+#include "../Shaders/Shader.h"
 
 namespace Pressure {
 
-	class GuiShader : public ShaderProgram {
+	class GuiShader : public Shader {
 
 	private:
 		int location_transformationMatrix;

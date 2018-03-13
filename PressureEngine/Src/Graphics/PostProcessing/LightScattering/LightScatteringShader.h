@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../../Shaders/ShaderProgram.h"
+#include "../../Shaders/Shader.h"
 
 namespace Pressure {
 
-	class LightScatteringShader : public ShaderProgram {
+	class LightScatteringShader : public Shader {
 
 	private: 
 		static const std::string s_VertexShader;

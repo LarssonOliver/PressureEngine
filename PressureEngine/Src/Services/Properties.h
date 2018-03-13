@@ -9,8 +9,8 @@ namespace Pressure {
 	class PRESSURE_API Properties {
 
 	private: 
-		static const std::unordered_map<std::string, std::string> defaults;
-		std::unordered_map<std::string, std::string> properties;
+		static const std::unordered_map<std::string, std::string> s_Defaults;
+		std::unordered_map<std::string, std::string> m_Properties;
 
 	public:
 		static Properties* Inst();

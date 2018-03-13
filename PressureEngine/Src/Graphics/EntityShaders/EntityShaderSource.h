@@ -3,7 +3,7 @@
 
 namespace Pressure {
 
-	struct Shaders {
+	struct EntityShaderSource {
 
 		const static std::string vertexShader;
 		const static std::string geometryShader;

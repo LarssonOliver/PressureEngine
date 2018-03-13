@@ -9,6 +9,10 @@ namespace Pressure {
 	// Singleton class for keyboard input.
 	class PRESSURE_API Keyboard {
 
+	private:
+		std::vector<bool> m_Keys;
+		static Keyboard* s_Inst;
+
 	public:
 		static Keyboard* Inst();
 		static bool isPressed(int key);
@@ -18,10 +22,6 @@ namespace Pressure {
 	protected:
 		Keyboard();
 		Keyboard(const Keyboard& tm) = delete;
-		static Keyboard* inst;
-
-	private:
-		std::vector<bool> keys;
 		
 	};
 

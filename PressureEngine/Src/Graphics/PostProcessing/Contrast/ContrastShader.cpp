@@ -35,11 +35,11 @@ void main(void) {
 })";
 
 	ContrastShader::ContrastShader() {	
-		ShaderProgram::loadShaders(s_VertexShader, s_FragmentShader);
+		Shader::loadShaders(s_VertexShader, s_FragmentShader);
 	}
 
 	void ContrastShader::bindAttributes() {
-		ShaderProgram::bindAttribute(0, "position");
+		Shader::bindAttribute(0, "position");
 	}
 
 }

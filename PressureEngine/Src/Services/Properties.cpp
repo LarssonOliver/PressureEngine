@@ -19,15 +19,15 @@ namespace Pressure {
 	}
 
 	std::string Properties::get(const char* property) {
-		return std::string(properties[property]);
+		return std::string(m_Properties[property]);
 	}
 
 	void Properties::set(const char* property, const char* value) {
-		properties[property] = value;
+		m_Properties[property] = value;
 	}
 
 	Properties::Properties()
-		: properties() {
+		: m_Properties() {
 		if (!loadFromFile())
 			createFileWithDefaults();
 	}
@@ -42,24 +42,24 @@ namespace Pressure {
 
 			int nPos;
 			if ((nPos = line.find("=")) != line.npos) {
-				properties[line.substr(0, nPos)] = line.substr(nPos + 1);
+				m_Properties[line.substr(0, nPos)] = line.substr(nPos + 1);
 			}
 		}
-		return (properties.size());
+		return (m_Properties.size());
 	}
 
 	bool Properties::createFileWithDefaults() {
-		properties = defaults;
+		m_Properties = s_Defaults;
 
 		std::string out;
 		out += "# Pressure Engine Properties #\n";
-		for (auto pair : defaults) {
+		for (auto pair : s_Defaults) {
 			out += pair.first + "=" + pair.second + "\n";
 		}
 		return FileStream::write("pressure.properties", out.c_str());
 	}
 
-	const std::unordered_map<std::string, std::string> Properties::defaults = {
+	const std::unordered_map<std::string, std::string> Properties::s_Defaults = {
 		{ "windowWidth", "1280" },
 		{ "windowHeight", "720" },
 		{ "windowTitle", "PressureEngine" },

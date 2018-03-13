@@ -12,8 +12,8 @@ namespace Pressure {
 		static const int SIZE;
 		static const int VERTEX_COUNT;
 
-		Vector3f position;
-		static RawModel* model;
+		Vector3f m_Position;
+		static RawModel* s_Model;
 
 	public:
 		Water(const Vector3f& position, Loader& loader);

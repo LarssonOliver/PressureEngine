@@ -10,6 +10,9 @@ namespace Pressure {
 
 	class OBJLoader {
 
+	private:
+		OBJLoader() = delete;
+
 	public:
 		static RawModel load(const char* fileName, Loader& loader);
 

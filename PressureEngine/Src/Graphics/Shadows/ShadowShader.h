@@ -1,9 +1,9 @@
 #pragma once
-#include "../Shaders/ShaderProgram.h"
+#include "../Shaders/Shader.h"
 
 namespace Pressure {
 
-	class ShadowShader : public ShaderProgram {
+	class ShadowShader : public Shader {
 
 	private: 
 		int location_mvpMatrix;

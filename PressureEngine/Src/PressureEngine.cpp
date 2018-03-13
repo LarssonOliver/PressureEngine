@@ -9,7 +9,7 @@ namespace Pressure {
 			__debugbreak();
 		}
 
-		window = std::make_unique<Window>(std::stoi(Properties::Inst()->get("windowWidth")),
+		m_Window = std::make_unique<Window>(std::stoi(Properties::Inst()->get("windowWidth")),
 			std::stoi(Properties::Inst()->get("windowHeight")), Properties::Inst()->get("windowTitle").c_str(),
 			std::stoi(Properties::Inst()->get("windowFullscreen")), std::stoi(Properties::Inst()->get("windowVsync")));
 		
@@ -30,40 +30,40 @@ namespace Pressure {
 		if (std::stoi(Properties::Inst()->get("hideConsole")))
 			::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
-		loader = std::make_unique<Loader>();
-		camera = std::make_unique<Camera>();
-		renderer = std::make_unique<MasterRenderer>(*window, *loader, *camera);
-		guiRenderer = std::make_unique<GuiRenderer>(*loader);
-		ParticleMaster::init(*loader, window->getWindow());		
+		m_Loader = std::make_unique<Loader>();
+		m_Camera = std::make_unique<Camera>();
+		m_Renderer = std::make_unique<MasterRenderer>(*m_Window, *m_Loader, *m_Camera);
+		m_GuiRenderer = std::make_unique<GuiRenderer>(*m_Loader);
+		ParticleMaster::init(*m_Loader, m_Window->getWindow());		
 		
-		frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 2, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
-		outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::TEXTURE);
-		lightScatterBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
-		PostProcessing::init(*window, *camera, *loader);
+		m_FrameBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 2, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+		m_OutputBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::TEXTURE);
+		m_LightScatterBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+		PostProcessing::init(*m_Window, *m_Camera, *m_Loader);
 
-		initialized = true;
+		m_Initialized = true;
 	}
 
 	void PressureEngine::tick() {
 		glfwPollEvents();
-		camera->tick();
+		m_Camera->tick();
 
-		if (window->resized) {
-			renderer->updateProjectionMatrix();
+		if (m_Window->resized) {
+			m_Renderer->updateProjectionMatrix();
 			PostProcessing::updateProjectionMatrix();
-			ParticleMaster::updateProjectionMatrix(*window);
-			frameBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
-			outputBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::TEXTURE);
-			lightScatterBuffer = std::make_unique<FrameBuffer>(*window, window->getWidth(), window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
-			window->resized = false;
+			ParticleMaster::updateProjectionMatrix(*m_Window);
+			m_FrameBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+			m_OutputBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::TEXTURE);
+			m_LightScatterBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+			m_Window->resized = false;
 		}
 
-		renderer->tick();
-		ParticleMaster::tick(*camera);
+		m_Renderer->tick();
+		ParticleMaster::tick(*m_Camera);
 	}
 
 	void PressureEngine::process(Entity& entity) {
-		renderer->processEntity(entity);
+		m_Renderer->processEntity(entity);
 	}
 
 	void PressureEngine::process(std::vector<Entity>& entities) {
@@ -73,7 +73,7 @@ namespace Pressure {
 	}
 
 	void PressureEngine::process(Water& water) {
-		renderer->processWater(water);
+		m_Renderer->processWater(water);
 	}
 
 	void PressureEngine::process(std::vector<Water>& water) {
@@ -83,55 +83,55 @@ namespace Pressure {
 	}
 
 	void PressureEngine::process(Light& light) {
-		lights.push_back(light);
+		m_Lights.push_back(light);
 	}
 
 	void PressureEngine::process(std::vector<Light>& light) {
-		lights.insert(std::end(lights), std::begin(light), std::end(light));
+		m_Lights.insert(std::end(m_Lights), std::begin(light), std::end(light));
 	}
 
 	void PressureEngine::process(GuiTexture& gui) {
-		guis.push_back(gui);
+		m_Guis.push_back(gui);
 	}
 
 	void PressureEngine::process(std::vector<GuiTexture>& gui) {
-		guis.insert(std::end(guis), std::begin(gui), std::end(gui));
+		m_Guis.insert(std::end(m_Guis), std::begin(gui), std::end(gui));
 	}
 
 	void PressureEngine::render() {
-		if (lights.size() > 0)
-			renderer->renderShadowMap(lights[0]);
-		renderer->renderWaterFrameBuffers(lights, *camera);
+		if (m_Lights.size() > 0)
+			m_Renderer->renderShadowMap(m_Lights[0]);
+		m_Renderer->renderWaterFrameBuffers(m_Lights, *m_Camera);
 
-		frameBuffer->bind();
-		renderer->render(lights, *camera);
-		ParticleMaster::renderParticles(*camera);
-		frameBuffer->unbind();
-		frameBuffer->resolve(0, *outputBuffer);
-		frameBuffer->resolve(1, *lightScatterBuffer);
-		PostProcessing::process(*outputBuffer, lightScatterBuffer->getColorTexture(), lights[0].getPosition());
+		m_FrameBuffer->bind();
+		m_Renderer->render(m_Lights, *m_Camera);
+		ParticleMaster::renderParticles(*m_Camera);
+		m_FrameBuffer->unbind();
+		m_FrameBuffer->resolve(0, *m_OutputBuffer);
+		m_FrameBuffer->resolve(1, *m_LightScatterBuffer);
+		PostProcessing::process(*m_OutputBuffer, m_LightScatterBuffer->getColorTexture(), m_Lights[0].getPosition());
 
-		guiRenderer->render(guis);
+		m_GuiRenderer->render(m_Guis);
 		
-		window->swapBuffers();
-		lights.clear();
-		guis.clear();
+		m_Window->swapBuffers();
+		m_Lights.clear();
+		m_Guis.clear();
 	}
 
 	RawModel PressureEngine::loadObjModel(const char* fileName) {
-		return OBJLoader::load(fileName, *loader);	
+		return OBJLoader::load(fileName, *m_Loader);	
 	}
 
 	ModelTexture PressureEngine::loadTexture(const char* filePath) {
-		return ModelTexture(loader->loadTexture(filePath));		
+		return ModelTexture(m_Loader->loadTexture(filePath));		
 	}
 
 	ParticleTexture PressureEngine::loadParticleTexture(const char* filePath, const unsigned int numberOfRows, const bool additiveBlending) {
-		return ParticleTexture(loader->loadTexture(filePath), numberOfRows, additiveBlending);
+		return ParticleTexture(m_Loader->loadTexture(filePath), numberOfRows, additiveBlending);
 	}
 
 	Water PressureEngine::generateWater(const Vector3f& position) const {
-		return Water(position, *loader);		
+		return Water(position, *m_Loader);		
 	}
 
 	void PressureEngine::enableErrorCallbacks() {
@@ -143,7 +143,7 @@ namespace Pressure {
 		if (glDebugMessageCallback) {
 			glEnable(GL_DEBUG_OUTPUT);
 			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-			glDebugMessageCallback(opengl_error_callback, nullptr);
+			glDebugMessageCallback(Callbacks::opengl_error_callback, nullptr);
 			unsigned int unusedIds = 0;
 			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
 		}
@@ -152,7 +152,7 @@ namespace Pressure {
 	}
 
 	void PressureEngine::terminate() {
-		renderer->cleanUp();
+		m_Renderer->cleanUp();
 		ParticleMaster::cleanUp();
 		glfwTerminate();
 	}

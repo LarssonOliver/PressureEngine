@@ -77,26 +77,26 @@ void main()
 })";
 
 	LightScatteringShader::LightScatteringShader() {
-		ShaderProgram::loadShaders(s_VertexShader, s_FragmentShader);
+		Shader::loadShaders(s_VertexShader, s_FragmentShader);
 	}
 
 	void LightScatteringShader::getAllUniformLocations() {
-		location_lightPositionOnScreen = ShaderProgram::getUniformLocation("lightPositionOnScreen");
-		location_lightTexture = ShaderProgram::getUniformLocation("lightTexture");
-		location_colorTexture = ShaderProgram::getUniformLocation("colorTexture");
+		location_lightPositionOnScreen = Shader::getUniformLocation("lightPositionOnScreen");
+		location_lightTexture = Shader::getUniformLocation("lightTexture");
+		location_colorTexture = Shader::getUniformLocation("colorTexture");
 	}
 
 	void LightScatteringShader::bindAttributes() {
-		ShaderProgram::bindAttribute(0, "position");
+		Shader::bindAttribute(0, "position");
 	}
 
 	void LightScatteringShader::connectTextureUnits() {
-		ShaderProgram::loadInt(location_lightTexture, 0);
-		ShaderProgram::loadInt(location_colorTexture, 1);
+		Shader::loadInt(location_lightTexture, 0);
+		Shader::loadInt(location_colorTexture, 1);
 	}
 
 	void LightScatteringShader::loadLightPosition(Vector2f& lightPosition) {
-		ShaderProgram::loadVector(location_lightPositionOnScreen, lightPosition);
+		Shader::loadVector(location_lightPositionOnScreen, lightPosition);
 	}
 
 }

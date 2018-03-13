@@ -11,7 +11,7 @@
 
 namespace Pressure {
 
-	const class Renderer {
+	const class EntityRenderer {
 
 	private:
 		Matrix4f projectionMatrix;
@@ -21,7 +21,7 @@ namespace Pressure {
 		float windModifier;
 
 	public:
-		Renderer(EntityShader& shader, GLFWwindow* window);
+		EntityRenderer(EntityShader& shader, GLFWwindow* window);
 		void render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera);
 
 		void updateProjectionMatrix(EntityShader& shader);

@@ -48,33 +48,33 @@ namespace Pressure {
 	};
 
 	SkyboxRenderer::SkyboxRenderer(Loader& loader, GLFWwindow* window)
-		: window(window), cube(loader.loadToVao(VERTICES, 3)) {
-		texture = loader.loadCubeMap(PRESSURE_SKYBOX_FILE);
+		: m_Window(window), m_Cube(loader.loadToVao(VERTICES, 3)) {
+		m_Texture = loader.loadCubeMap(PRESSURE_SKYBOX_FILE);
 		updateProjectionMatrix();
 	}
 
 	void SkyboxRenderer::updateProjectionMatrix() {
-		shader.start();
-		shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(window));
-		shader.stop();
+		m_Shader.start();
+		m_Shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(m_Window));
+		m_Shader.stop();
 	}
 
 	void SkyboxRenderer::render(Camera& camera) {
-		shader.start();
-		shader.loadViewMatrix(camera);
-		cube.getVertexArray().bind();
+		m_Shader.start();
+		m_Shader.loadViewMatrix(camera);
+		m_Cube.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glActiveTexture(GL_TEXTURE0);
-		TextureManager::Inst()->BindTexture(texture, GL_TEXTURE_CUBE_MAP);
+		TextureManager::Inst()->BindTexture(m_Texture, GL_TEXTURE_CUBE_MAP);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glDrawArrays(GL_TRIANGLES, 0, cube.getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, m_Cube.getVertexCount());
 		glDisableVertexAttribArray(0);
-		cube.getVertexArray().unbind();
-		shader.stop();
+		m_Cube.getVertexArray().unbind();
+		m_Shader.stop();
 	}
 
 }

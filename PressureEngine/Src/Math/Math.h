@@ -17,8 +17,12 @@ namespace Pressure {
 
 	class PRESSURE_API Math {
 
+	private:
+		Math() = delete;
+
 	public:
-		static float PI;
+
+		static const float PI;
 		
 		static long getTimeMillis();
 		static long getTimeNano();

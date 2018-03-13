@@ -73,7 +73,7 @@ namespace Pressure {
 		return shadowMapRenderer.getShadowMap();
 	}
 
-	Renderer& MasterRenderer::getRenderer() {
+	EntityRenderer& MasterRenderer::getRenderer() {
 		return renderer;
 	}
 
