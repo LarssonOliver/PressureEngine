@@ -292,7 +292,7 @@ namespace Pressure {
 	float& Vector2f::operator[](int id) {
 		if (id == 0) return x;
 		else if (id == 1) return y;
-		else return -1;
+		else return x;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector2f& vec) {

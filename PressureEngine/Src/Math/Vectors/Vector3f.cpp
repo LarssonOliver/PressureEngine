@@ -251,14 +251,6 @@ namespace Pressure {
 		return std::atan2f(det, dot);
 	}
 
-	Vector3f& Vector3f::scale(const float scalar) {
-		return this->mul(scalar);
-	}
-
-	Vector3f& Vector3f::scale(const float scalar, Vector3f& dest) const {
-		return this->mul(scalar, dest);
-	}
-
 	/* VECTOR MATH */
 	float Vector3f::dot(float x, float y, float z) const {
 		return this->x * x + this->y * y + this->z * x;
@@ -433,7 +425,7 @@ namespace Pressure {
 		if (id == 0) return x;
 		else if (id == 1) return y;
 		else if (id == 2) return z;
-		else return -1;
+		else return x;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector3f& vec) {

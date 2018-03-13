@@ -434,7 +434,7 @@ namespace Pressure {
 		else if (id == 1) return y;
 		else if (id == 2) return z;
 		else if (id == 3) return w;
-		else return -1;
+		else return x;
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector4f& vec) {
