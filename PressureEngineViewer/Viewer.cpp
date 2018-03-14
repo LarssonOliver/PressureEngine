@@ -27,11 +27,16 @@ namespace PressureEngineViewer {
 			// Island
 			RawModel islandModel = engine.loadObjModel("Island");
 			ModelTexture islandTexture(engine.loadTexture("Island.png"));
-			islandTexture.setFakeLighting(true);
 			islandTexture.setShineDamper(10);
 			islandTexture.setReflectivity(.1f);
 			TexturedModel island(islandModel, islandTexture);
 			entities.emplace_back(island, Vector3f(0), Vector3f(0, 0, 0), 8.f);
+
+			RawModel pathModel = engine.loadObjModel("Path");
+			ModelTexture pathTexture = engine.loadTexture("Path.png");
+			pathTexture.setFakeLighting(true);
+			TexturedModel path(pathModel, pathTexture);
+			entities.emplace_back(path, Vector3f(0), Vector3f(0), 8.f);
 
 			RawModel jettyModel = engine.loadObjModel("Jetty");
 			ModelTexture jettyTexture(engine.loadTexture("Jetty.png"));
