@@ -5,63 +5,63 @@
 namespace Pressure {
 
 	Particle::Particle(ParticleTexture& texture, Vector3f& position, Vector3f& speed, float gravityEffect, float lifeLength, float rotation, float scale)
-		: texture(texture),  position(position), speed(speed), gravityEffect(gravityEffect), lifeLength(lifeLength), rotation(rotation), scale(scale), elapsedTicks(0) {
+		: m_Texture(texture),  m_Position(position), m_Speed(speed), m_GravityEffect(gravityEffect), m_LifeLength(lifeLength), m_Rotation(rotation), m_Scale(scale), m_ElapsedTicks(0) {
 		ParticleMaster::addParticle(*this);
 	}
 
 	bool Particle::isAlive(Camera& camera) {
-		speed.y -= PRESSURE_GRAVITY * gravityEffect * elapsedTicks * PRESSURE_TICKTIME;
-		position.add(speed);
-		distance = camera.getPosition().sub(position, Vector3f()).lengthSquared();
+		m_Speed.y -= PRESSURE_GRAVITY * m_GravityEffect * m_ElapsedTicks * PRESSURE_TICKTIME;
+		m_Position.add(m_Speed);
+		m_Distance = camera.getPosition().sub(m_Position, Vector3f()).lengthSquared();
 		updateTextureCoordInfo();
-		elapsedTicks++;
-		return elapsedTicks < lifeLength;
+		m_ElapsedTicks++;
+		return m_ElapsedTicks < m_LifeLength;
 	}
 
 	ParticleTexture& Particle::getTexture() {
-		return texture;
+		return m_Texture;
 	}
 
 	Vector3f& Particle::getPosition() {
-		return position;
+		return m_Position;
 	}
 
 	float Particle::getRotation() const {
-		return rotation;
+		return m_Rotation;
 	}
 
 	float Particle::getScale() const {
-		return scale;
+		return m_Scale;
 	}
 
 	Vector2f& Particle::getCurrentUV() {
-		return currentUV;
+		return m_CurrentUV;
 	}
 
 	Vector2f& Particle::getBlendUV() {
-		return blendUV;
+		return m_BlendUV;
 	}
 
 	float Particle::getBlend() const {
-		return blend;
+		return m_Blend;
 	}
 
 	float Particle::getDistance() const {
-		return distance;
+		return m_Distance;
 	}
 
 	void Particle::updateTextureCoordInfo() {
-		int stageCount = texture.getNumberOfRows() * texture.getNumberOfRows();
-		float atlasProgression = elapsedTicks / lifeLength * stageCount;
+		int stageCount = m_Texture.getNumberOfRows() * m_Texture.getNumberOfRows();
+		float atlasProgression = m_ElapsedTicks / m_LifeLength * stageCount;
 		int index = (int)atlasProgression;
-		blend = std::fmodf(atlasProgression, 1);
-		setTextureOffset(currentUV, index);
-		setTextureOffset(blendUV, index < stageCount - 1 ? index + 1 : index);
+		m_Blend = std::fmodf(atlasProgression, 1);
+		setTextureOffset(m_CurrentUV, index);
+		setTextureOffset(m_BlendUV, index < stageCount - 1 ? index + 1 : index);
 	}
 
 	void Particle::setTextureOffset(Vector2f& offset, int index) {
-		offset.setX((index % texture.getNumberOfRows()) / (float)texture.getNumberOfRows());
-		offset.setY((index / texture.getNumberOfRows()) / (float)texture.getNumberOfRows());
+		offset.setX((index % m_Texture.getNumberOfRows()) / (float)m_Texture.getNumberOfRows());
+		offset.setY((index / m_Texture.getNumberOfRows()) / (float)m_Texture.getNumberOfRows());
 	}
 
 	bool operator<(const Particle& first, const Particle& second) {

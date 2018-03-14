@@ -3,19 +3,19 @@
 namespace Pressure {
 
 	Light::Light(const Vector3f& position, const Vector3f& color, const Vector3f& attenuation)
-		: position(position), color(color), attenuation(attenuation)
+		: m_Position(position), m_Color(color), m_Attenuation(attenuation)
 	{ }
 
 	Vector3f& Light::getPosition() {
-		return position;
+		return m_Position;
 	}
 
 	Vector3f& Light::getColor() {
-		return color;
+		return m_Color;
 	}
 
 	Vector3f& Light::getAttenuation() {
-		return attenuation;
+		return m_Attenuation;
 	}
 
 }

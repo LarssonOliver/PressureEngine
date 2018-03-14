@@ -8,16 +8,16 @@ namespace Pressure {
 	class PRESSURE_API Entity {
 
 	private:
-		TexturedModel model;
-		Vector3f rotation;
-		Vector3f rotationSpeed;
-		float scale;
+		TexturedModel m_Model;
+		Vector3f m_Rotation;
+		Vector3f m_RotationSpeed;
+		float m_Scale;
 
-		AABB bounds;
+		AABB m_Bounds;
 
-		Vector3f position;
-		Vector3f speed;
-		Vector3f acceleration;
+		Vector3f m_Position;
+		Vector3f m_Speed;
+		Vector3f m_Acceleration;
 
 	public:
 		Entity(const TexturedModel& model, const Vector3f& position, const Vector3f& rotation, const float scale);

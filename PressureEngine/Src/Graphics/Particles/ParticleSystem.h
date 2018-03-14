@@ -8,12 +8,12 @@ namespace Pressure {
 	class PRESSURE_API ParticleSystem {
 
 	private:
-		float ppt;
-		Vector3f velocity;
-		float gravityComplient;
-		float lifeLength;
+		float m_ppt;
+		Vector3f m_Velocity;
+		float m_GravityComplient;
+		float m_LifeLength;
 
-		ParticleTexture texture;
+		ParticleTexture m_Texture;
 
 	public:
 		ParticleSystem(ParticleTexture& texture, float pps, Vector3f& velocity, float gravityComplient, float lifeLength);

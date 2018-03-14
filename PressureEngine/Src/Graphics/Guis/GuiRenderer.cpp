@@ -5,16 +5,16 @@
 namespace Pressure {
 
 	GuiRenderer::GuiRenderer(Loader& loader) 
-		: quad(loader.loadToVao({ -1, 1, -1, -1, 1, 1, 1, -1 }, 2)) {
+		: m_Quad(loader.loadToVao({ -1, 1, -1, -1, 1, 1, 1, -1 }, 2)) {
 	}
 
 	GuiRenderer::~GuiRenderer() {
-		shader.cleanUp();
+		m_Shader.cleanUp();
 	}
 
 	void GuiRenderer::render(std::vector<GuiTexture>& guis) {
-		shader.start();
-		quad.getVertexArray().bind();
+		m_Shader.start();
+		m_Quad.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -25,14 +25,14 @@ namespace Pressure {
 				TextureManager::Inst()->BindTexture(gui.getTexture());
 			else 
 				glBindTexture(GL_TEXTURE_2D, gui.getTexture());
-			shader.loadTransformation(Matrix4f().createTransformationMatrix(gui.getPosition(), gui.getScale()));
-			glDrawArrays(GL_TRIANGLE_STRIP, 0, quad.getVertexCount());
+			m_Shader.loadTransformation(Matrix4f().createTransformationMatrix(gui.getPosition(), gui.getScale()));
+			glDrawArrays(GL_TRIANGLE_STRIP, 0, m_Quad.getVertexCount());
 		}
 		glDisable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);
 		glDisableVertexAttribArray(0);
-		quad.getVertexArray().unbind();
-		shader.stop();
+		m_Quad.getVertexArray().unbind();
+		m_Shader.stop();
 	}
 
 }

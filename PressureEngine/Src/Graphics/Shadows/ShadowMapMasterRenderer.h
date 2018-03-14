@@ -12,15 +12,15 @@ namespace Pressure {
 	private:
 		static const int SHADOW_MAP_SIZE;
 
-		FrameBuffer shadowFbo;
-		ShadowShader shader;
-		ShadowBox shadowBox;
-		Matrix4f projectionMatrix;
-		Matrix4f lightViewMatrix;
-		Matrix4f projectionViewMatrix;
-		Matrix4f offset;
+		FrameBuffer m_ShadowFbo;
+		ShadowShader m_Shader;
+		ShadowBox m_ShadowBox;
+		Matrix4f m_ProjectionMatrix;
+		Matrix4f m_LightViewMatrix;
+		Matrix4f m_ProjectionViewMatrix;
+		Matrix4f m_Offset;
 
-		ShadowMapEntityRenderer entityRenderer;
+		ShadowMapEntityRenderer m_EntityRenderer;
 
 	public:
 		ShadowMapMasterRenderer(Camera& camera, Window& window);

@@ -9,8 +9,8 @@ namespace Pressure {
 	class GuiRenderer {
 
 	private:
-		const RawModel quad;
-		GuiShader shader;
+		const RawModel m_Quad;
+		GuiShader m_Shader;
 
 	public:
 		GuiRenderer(Loader& loader);

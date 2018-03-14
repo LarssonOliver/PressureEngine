@@ -4,7 +4,7 @@
 namespace Pressure {
 
 	ShadowMapEntityRenderer::ShadowMapEntityRenderer(ShadowShader& shader, Matrix4f& projectionViewMatrix) 
-		: shader(shader), projectionViewMatrix(projectionViewMatrix) {		
+		: m_Shader(shader), m_ProjectionViewMatrix(projectionViewMatrix) {		
 	}
 
 	void ShadowMapEntityRenderer::render(const std::map<TexturedModel, std::vector<Entity>>& entities) {
@@ -28,7 +28,7 @@ namespace Pressure {
 
 	void ShadowMapEntityRenderer::prepareInstance(const Entity& entity) {
 		Matrix4f modelMatrix = Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
-		shader.loadMvpMatrix(projectionViewMatrix.mul(modelMatrix, Matrix4f()));	
+		m_Shader.loadMvpMatrix(m_ProjectionViewMatrix.mul(modelMatrix, Matrix4f()));	
 	}
 
 }

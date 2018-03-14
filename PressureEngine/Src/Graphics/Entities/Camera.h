@@ -7,23 +7,23 @@ namespace Pressure {
 
 	private:
 		// Cameras position.
-		Vector3f position;
+		Vector3f m_Position;
 		// Cameras rotational values.
-		float pitch;
-		float yaw;
-		float roll;
+		float m_Pitch;
+		float m_Yaw;
+		float m_Roll;
 
 		// Camera anchor variables.
 		// The point the camera moves around.
-		Vector3f anchor;
-		float distanceFromAnchor;
-		float angleAroundAnchor;
+		Vector3f m_Anchor;
+		float m_DistanceFromAnchor;
+		float m_AngleAroundAnchor;
 
 		// Movement Variables.
 		// Cameras movement speed.
-		float max_speed;
-		Vector3f speed;
-		Vector3f acceleration;
+		float m_MaxSpeed;
+		Vector3f m_Speed;
+		Vector3f m_Acceleration;
 
 	public:
 		Camera();

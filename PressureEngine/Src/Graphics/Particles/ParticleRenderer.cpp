@@ -7,20 +7,20 @@ namespace Pressure {
 	const int ParticleRenderer::MAX_INSTANCES = 10000;
 	const int ParticleRenderer::INSTANCE_DATA_LENGTH = 21;
 
-	std::vector<float> ParticleRenderer::buffer;
+	std::vector<float> ParticleRenderer::s_Buffer;
 
 	ParticleRenderer::ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix)
-		: quad(loader.loadToVao(VERTICES, 2)), vbo(nullptr, INSTANCE_DATA_LENGTH) {
-		quad.getVertexArray().bind();
-		vbo.addInstancedAttribute(1, 4, INSTANCE_DATA_LENGTH, 0);
-		vbo.addInstancedAttribute(2, 4, INSTANCE_DATA_LENGTH, 4);
-		vbo.addInstancedAttribute(3, 4, INSTANCE_DATA_LENGTH, 8);
-		vbo.addInstancedAttribute(4, 4, INSTANCE_DATA_LENGTH, 12);
-		vbo.addInstancedAttribute(5, 4, INSTANCE_DATA_LENGTH, 16);
-		vbo.addInstancedAttribute(6, 1, INSTANCE_DATA_LENGTH, 20);
-		quad.getVertexArray().unbind();
-		shader.start();
-		shader.loadProjectionMatrix(projectionMatrix);
+		: m_Quad(loader.loadToVao(VERTICES, 2)), m_vbo(nullptr, INSTANCE_DATA_LENGTH) {
+		m_Quad.getVertexArray().bind();
+		m_vbo.addInstancedAttribute(1, 4, INSTANCE_DATA_LENGTH, 0);
+		m_vbo.addInstancedAttribute(2, 4, INSTANCE_DATA_LENGTH, 4);
+		m_vbo.addInstancedAttribute(3, 4, INSTANCE_DATA_LENGTH, 8);
+		m_vbo.addInstancedAttribute(4, 4, INSTANCE_DATA_LENGTH, 12);
+		m_vbo.addInstancedAttribute(5, 4, INSTANCE_DATA_LENGTH, 16);
+		m_vbo.addInstancedAttribute(6, 1, INSTANCE_DATA_LENGTH, 20);
+		m_Quad.getVertexArray().unbind();
+		m_Shader.start();
+		m_Shader.loadProjectionMatrix(projectionMatrix);
 	}
 
 	void ParticleRenderer::render(std::map<ParticleTexture, std::list<Particle>>& particles, Camera& camera) {
@@ -30,27 +30,27 @@ namespace Pressure {
 
 		for (auto it = particles.begin(); it != particles.end(); it++) {
 			bindTexture(it->first);
-			pointer = 0;
-			this->buffer = std::vector<float>(it->second.size() * INSTANCE_DATA_LENGTH);
+			m_Pointer = 0;
+			this->s_Buffer = std::vector<float>(it->second.size() * INSTANCE_DATA_LENGTH);
 			for (Particle& particle : it->second) {
 				if (ViewFrustum::Inst().sphereInFrustum(particle.getPosition(), std::sqrtf(3.f) / 2 * particle.getScale())) {
 					updateViewMatrix(particle.getPosition(), particle.getRotation(), particle.getScale(), viewMatrix);
 					updateTexCoordInfo(particle);
 				}
 			}
-			vbo.update(&buffer[0], buffer.size() * sizeof(float));
-			glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, quad.getVertexCount(), it->second.size());
+			m_vbo.update(&s_Buffer[0], s_Buffer.size() * sizeof(float));
+			glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, m_Quad.getVertexCount(), it->second.size());
 		}
 		finish();
 	}
 
 	void ParticleRenderer::cleanUp() {
-		shader.cleanUp();
+		m_Shader.cleanUp();
 	}
 
 	void ParticleRenderer::prepare() {
-		shader.start();
-		quad.getVertexArray().bind();
+		m_Shader.start();
+		m_Quad.getVertexArray().bind();
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
@@ -71,7 +71,7 @@ namespace Pressure {
 		TextureManager::Inst()->BindTexture(texture.getTextureID());
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		shader.loadNumberOfRows((float) texture.getNumberOfRows());
+		m_Shader.loadNumberOfRows((float) texture.getNumberOfRows());
 	}
 
 	void ParticleRenderer::updateViewMatrix(Vector3f& position, float rotation, float scale, Matrix4f& viewMatrix) {
@@ -93,35 +93,35 @@ namespace Pressure {
 	}
 
 	void ParticleRenderer::storeMatrixData(Matrix4f& matrix) {
-		buffer[pointer++] = matrix.get(0, 0);
-		buffer[pointer++] = matrix.get(0, 1);
-		buffer[pointer++] = matrix.get(0, 2);
-		buffer[pointer++] = matrix.get(0, 3);
-		buffer[pointer++] = matrix.get(1, 0);
-		buffer[pointer++] = matrix.get(1, 1);
-		buffer[pointer++] = matrix.get(1, 2);
-		buffer[pointer++] = matrix.get(1, 3);
-		buffer[pointer++] = matrix.get(2, 0);
-		buffer[pointer++] = matrix.get(2, 1);
-		buffer[pointer++] = matrix.get(2, 2);
-		buffer[pointer++] = matrix.get(2, 3);
-		buffer[pointer++] = matrix.get(3, 0);
-		buffer[pointer++] = matrix.get(3, 1);
-		buffer[pointer++] = matrix.get(3, 2);
-		buffer[pointer++] = matrix.get(3, 3);
+		s_Buffer[m_Pointer++] = matrix.get(0, 0);
+		s_Buffer[m_Pointer++] = matrix.get(0, 1);
+		s_Buffer[m_Pointer++] = matrix.get(0, 2);
+		s_Buffer[m_Pointer++] = matrix.get(0, 3);
+		s_Buffer[m_Pointer++] = matrix.get(1, 0);
+		s_Buffer[m_Pointer++] = matrix.get(1, 1);
+		s_Buffer[m_Pointer++] = matrix.get(1, 2);
+		s_Buffer[m_Pointer++] = matrix.get(1, 3);
+		s_Buffer[m_Pointer++] = matrix.get(2, 0);
+		s_Buffer[m_Pointer++] = matrix.get(2, 1);
+		s_Buffer[m_Pointer++] = matrix.get(2, 2);
+		s_Buffer[m_Pointer++] = matrix.get(2, 3);
+		s_Buffer[m_Pointer++] = matrix.get(3, 0);
+		s_Buffer[m_Pointer++] = matrix.get(3, 1);
+		s_Buffer[m_Pointer++] = matrix.get(3, 2);
+		s_Buffer[m_Pointer++] = matrix.get(3, 3);
 	}
 
 	void ParticleRenderer::updateTexCoordInfo(Particle& particle) {
-		buffer[pointer++] = particle.getCurrentUV().getX();
-		buffer[pointer++] = particle.getCurrentUV().getY();
-		buffer[pointer++] = particle.getBlendUV().getX();
-		buffer[pointer++] = particle.getBlendUV().getY();
-		buffer[pointer++] = particle.getBlend();
+		s_Buffer[m_Pointer++] = particle.getCurrentUV().getX();
+		s_Buffer[m_Pointer++] = particle.getCurrentUV().getY();
+		s_Buffer[m_Pointer++] = particle.getBlendUV().getX();
+		s_Buffer[m_Pointer++] = particle.getBlendUV().getY();
+		s_Buffer[m_Pointer++] = particle.getBlend();
 	}
 
 	void ParticleRenderer::updateProjectionMatrix(Window& window) {
-		shader.start();
-		shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(window.getWindow()));
+		m_Shader.start();
+		m_Shader.loadProjectionMatrix(Matrix4f().createProjectionMatrix(window.getWindow()));
 	}
 
 	void ParticleRenderer::finish() {
@@ -136,7 +136,7 @@ namespace Pressure {
 		glDisableVertexAttribArray(5);
 		glDisableVertexAttribArray(6);
 		glBindVertexArray(NULL);
-		shader.stop();
+		m_Shader.stop();
 	}
 
 }

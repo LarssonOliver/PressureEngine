@@ -4,81 +4,81 @@
 namespace Pressure {
 
 	Entity::Entity(const TexturedModel& model, const Vector3f& position, const Vector3f& rotation, const float scale)
-		: model(TexturedModel(model.getRawModel(), model.getTexture())), rotation(rotation), rotationSpeed(0), scale(scale), bounds(model.getRawModel().getBounds().transform(position).scale(scale)), position(position), speed(Vector3f(0)), acceleration(Vector3f(0))
+		: m_Model(TexturedModel(model.getRawModel(), model.getTexture())), m_Rotation(rotation), m_RotationSpeed(0), m_Scale(scale), m_Bounds(model.getRawModel().getBounds().transform(position).scale(scale)), m_Position(position), m_Speed(Vector3f(0)), m_Acceleration(Vector3f(0))
 	{}
 
 	void Entity::tick() {
-		speed.add(acceleration);
-		position.add(speed);
-		rotation.add(rotationSpeed);
+		m_Speed.add(m_Acceleration);
+		m_Position.add(m_Speed);
+		m_Rotation.add(m_RotationSpeed);
 	}
 
 	TexturedModel Entity::getTexturedModel() const {
-		return model;
+		return m_Model;
 	}
 
 	Vector3f Entity::getRotation() const {
-		return rotation;
+		return m_Rotation;
 	}
 
 	Vector3f Entity::getRotationSpeed() const {
-		return rotationSpeed;
+		return m_RotationSpeed;
 	}
 
 	float Entity::getScale() const {
-		return this->scale;
+		return this->m_Scale;
 	}
 
 	AABB Entity::getBounds() const {
-		return bounds;
+		return m_Bounds;
 	}
 
 	Vector3f Entity::getPosition() const {
-		return position;
+		return m_Position;
 	}
 
 	Vector3f Entity::getSpeed() const {
-		return speed;
+		return m_Speed;
 	}
 
 	Vector3f Entity::getAcceleration() const {
-		return acceleration;
+		return m_Acceleration;
 	}
 
 	void Entity::rotate(const float x, const float y, const float z) {
-		rotation.add(x, y, z);
+		m_Rotation.add(x, y, z);
 	}
 
 	void Entity::setRotation(const float x, const float y, const float z) {
-		rotation.set(x, y, z);
+		m_Rotation.set(x, y, z);
 	}
 
 	void Entity::setRotationSpeed(const float x, const float y, const float z) {
-		rotationSpeed.set(x, y, z);
+		m_RotationSpeed.set(x, y, z);
 	}
 
 	void Entity::addScale(const float xyz) {
-		scale += xyz;
+		m_Scale += xyz;
 	}
 
 	void Entity::setScale(const float xyz) {
-		this->scale = xyz;
+		this->m_Scale = xyz;
 	}
 
 	void Entity::move(const float x, const float y, const float z) {
-		position.add(x, y, z);
+		m_Position.add(x, y, z);
 	}
 
 	void Entity::setPosition(const float x, const float y, const float z) {
-		position.set(x, y, z);
+		m_Position.set(x, y, z);
 	}
 
 	void Entity::setSpeed(const float x, const float y, const float z) {
-		speed.set(x, y, z);
+		m_Speed.set(x, y, z);
 	}
 
 	void Entity::setAcceleration(const float x, const float y, const float z) {
-		acceleration.set(x, y, z);
+		m_Acceleration.set(x, y, z);
 	}
 
 }

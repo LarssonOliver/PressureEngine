@@ -11,8 +11,8 @@ namespace Pressure {
 	class ParticleMaster {
 
 	private:
-		static std::map<ParticleTexture, std::list<Particle>> particles;
-		static std::unique_ptr<ParticleRenderer> renderer;
+		static std::map<ParticleTexture, std::list<Particle>> s_Particles;
+		static std::unique_ptr<ParticleRenderer> s_Renderer;
 
 	public:
 		static void init(Loader& loader, GLFWwindow* window);
@@ -26,6 +26,8 @@ namespace Pressure {
 		static void updateProjectionMatrix(Window& window);
 
 	private:
+		ParticleMaster() = delete;
+
 		static bool sort_particles(const Particle& left, const Particle& right);
 
 	};

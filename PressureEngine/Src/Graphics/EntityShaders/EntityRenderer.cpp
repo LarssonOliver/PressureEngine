@@ -5,20 +5,20 @@
 namespace Pressure {
 	
 	EntityRenderer::EntityRenderer(EntityShader& shader, GLFWwindow* window)
-		: shader(shader), window(window), windModifier(0) {
+		: m_Shader(shader), m_Window(window), m_WindModifier(0) {
 		updateProjectionMatrix(shader);
 	}
 
 	void EntityRenderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
 		Matrix4f viewMatrix = Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll());
-		shader.loadViewMatrix(viewMatrix);
-		ViewFrustum::Inst().extractPlanes(projectionMatrix.mul(viewMatrix, Matrix4f()));
+		m_Shader.loadViewMatrix(viewMatrix);
+		ViewFrustum::Inst().extractPlanes(m_ProjectionMatrix.mul(viewMatrix, Matrix4f()));
 		for (auto const& model : entities) {
 			prepareTexturedModel(model.first);
 			std::vector<Entity>& batch = entities[model.first];
 			for (Entity& entity : batch) {
 				if (ViewFrustum::Inst().sphereInFrustum(entity.getBounds().getCenter(), entity.getBounds().getRadius())) {
-					shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
+					m_Shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
 					glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 				}
 			}
@@ -27,16 +27,16 @@ namespace Pressure {
 	}
 
 	void EntityRenderer::updateProjectionMatrix(EntityShader& shader) {
-		projectionMatrix.createProjectionMatrix(window);
+		m_ProjectionMatrix.createProjectionMatrix(m_Window);
 		shader.start();
-		shader.loadProjectionmatrix(projectionMatrix);
+		shader.loadProjectionmatrix(m_ProjectionMatrix);
 		shader.stop();
 	}
 
 	void EntityRenderer::tick() {
-		windModifier += 0.005;
-		if (windModifier > 360)
-			windModifier -= 360;
+		m_WindModifier += 0.005;
+		if (m_WindModifier > 360)
+			m_WindModifier -= 360;
 	}
 
 	void EntityRenderer::prepareTexturedModel(const TexturedModel& texturedModel) {
@@ -49,10 +49,10 @@ namespace Pressure {
 		if (texturedModel.getTexture().hasTransparency()) 
 			MasterRenderer::disableCulling();
 		if (texturedModel.getRawModel().isWindAffected())
-			shader.loadWindModifier(windModifier);
-		else shader.loadWindModifier(0);
-		shader.loadShineVariables(texturedModel.getTexture().getShineDamper(), texturedModel.getTexture().getReflectivity());
-		shader.loadFakeLighting(texturedModel.getTexture().useFakeLighting());
+			m_Shader.loadWindModifier(m_WindModifier);
+		else m_Shader.loadWindModifier(0);
+		m_Shader.loadShineVariables(texturedModel.getTexture().getShineDamper(), texturedModel.getTexture().getReflectivity());
+		m_Shader.loadFakeLighting(texturedModel.getTexture().useFakeLighting());
 		TextureManager::Inst()->BindTexture(texturedModel.getTexture().getID());
 		setTexParams();
 	}

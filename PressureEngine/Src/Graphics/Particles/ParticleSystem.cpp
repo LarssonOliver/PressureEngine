@@ -6,16 +6,16 @@
 namespace Pressure {
 
 	ParticleSystem::ParticleSystem(ParticleTexture& texture, float pps, Vector3f& velocity, float gravityComplient, float lifeLength)
-		: ppt(pps), velocity(velocity), gravityComplient(gravityComplient), lifeLength(lifeLength), texture(texture) {
-		ppt *= PRESSURE_TICKTIME;
+		: m_ppt(pps), m_Velocity(velocity), m_GravityComplient(gravityComplient), m_LifeLength(lifeLength), m_Texture(texture) {
+		m_ppt *= PRESSURE_TICKTIME;
 	}
 
 	void ParticleSystem::generateParticles(Vector3f& center, const Vector3f& spread) {
 		Random<float> r;
-		for (unsigned int i = 0; i < (int)ppt; i++) {
+		for (unsigned int i = 0; i < (int)m_ppt; i++) {
 			emitParticle(center, spread);
 		}
-		if (r.next() < fmod(ppt, 1)) {
+		if (r.next() < fmod(m_ppt, 1)) {
 			emitParticle(center, spread);
 		}
 	}
@@ -27,7 +27,7 @@ namespace Pressure {
 			center.y += r.next() * spread.getY();
 			center.z += r.next() * spread.getZ();
 		}
-		Particle(texture, center, velocity, gravityComplient, lifeLength + 6 * r.next(), 0, 2); 
+		Particle(m_Texture, center, m_Velocity, m_GravityComplient, m_LifeLength + 6 * r.next(), 0, 2); 
 	}
 
 }

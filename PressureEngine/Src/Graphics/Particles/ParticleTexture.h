@@ -7,16 +7,16 @@ namespace Pressure {
 	class PRESSURE_API ParticleTexture {
 
 	private:
-		int textureID;
-		int numberOfRows;
-		bool useAdditiveBlending;
+		unsigned int m_Texture;
+		unsigned int m_NumberOfRows;
+		bool m_UseAdditiveBlending;
 
 	public:
-		ParticleTexture(const int textureID, const int numberOfRows, const bool additiveBlending = false);
+		ParticleTexture(const unsigned int textureID, const unsigned int numberOfRows, const bool additiveBlending = false);
 
 	public:
-		int getTextureID() const;
-		int getNumberOfRows() const;
+		unsigned int getTextureID() const;
+		unsigned int getNumberOfRows() const;
 		bool isUseAdditiveBlending() const;
 
 		friend bool operator<(const ParticleTexture& left, const ParticleTexture& right);

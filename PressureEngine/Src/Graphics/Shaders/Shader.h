@@ -6,10 +6,10 @@ namespace Pressure {
 	class Shader {
 
 	private:
-		int m_ProgramID;
-		int m_VertexShaderID;
-		int m_GeometryShaderID;
-		int m_FragmentShaderID;
+		unsigned int m_ProgramID;
+		unsigned int m_VertexShaderID;
+		unsigned int m_GeometryShaderID;
+		unsigned int m_FragmentShaderID;
 
 	public:
 		void loadShaders(const std::string& vertexShader, const std::string& fragmentShader);

@@ -14,11 +14,11 @@ namespace Pressure {
 	const class EntityRenderer {
 
 	private:
-		Matrix4f projectionMatrix;
-		EntityShader shader;
-		GLFWwindow* const window;
+		Matrix4f m_ProjectionMatrix;
+		EntityShader m_Shader;
+		GLFWwindow* const m_Window;
 
-		float windModifier;
+		float m_WindModifier;
 
 	public:
 		EntityRenderer(EntityShader& shader, GLFWwindow* window);

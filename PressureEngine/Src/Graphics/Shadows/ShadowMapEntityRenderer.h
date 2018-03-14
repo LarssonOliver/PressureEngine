@@ -11,8 +11,8 @@ namespace Pressure {
 	class ShadowMapEntityRenderer {
 
 	private:
-		ShadowShader& shader;
-		Matrix4f& projectionViewMatrix;
+		ShadowShader& m_Shader;
+		Matrix4f& m_ProjectionViewMatrix;
 
 	public:
 		ShadowMapEntityRenderer(ShadowShader& shader, Matrix4f& projectionViewMatrix);

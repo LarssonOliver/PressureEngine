@@ -9,22 +9,22 @@ namespace Pressure {
 	class Particle {
 
 	private:
-		Vector3f position;
-		Vector3f speed;
-		float gravityEffect;
-		float lifeLength;
-		float rotation;
-		float scale;
-		float elapsedTicks;
+		Vector3f m_Position;
+		Vector3f m_Speed;
+		float m_GravityEffect;
+		float m_LifeLength;
+		float m_Rotation;
+		float m_Scale;
+		float m_ElapsedTicks;
 
 		// For depth checking.
-		float distance;
+		float m_Distance;
 
-		ParticleTexture& texture;
+		ParticleTexture& m_Texture;
 
-		Vector2f currentUV;
-		Vector2f blendUV;
-		float blend;
+		Vector2f m_CurrentUV;
+		Vector2f m_BlendUV;
+		float m_Blend;
 
 	public:
 		Particle(ParticleTexture& texture, Vector3f& position, Vector3f& speed, float gravityEffect, float lifeLength, float rotation, float scale);

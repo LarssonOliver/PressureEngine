@@ -12,14 +12,14 @@ namespace Pressure {
 		static const Vector4f UP;
 		static const Vector4f FORWARD;
 
-		float shadowDistance;
-		float minX, maxX;
-		float minY, maxY;
-		float minZ, maxZ;
-		Matrix4f& lightViewMatrix;
-		Camera& cam;
-		Window& window;
-		float farHeight, farWidth, nearHeight, nearWidth;
+		float m_ShadowDistance;
+		float m_MinX, m_MaxX;
+		float m_MinY, m_MaxY;
+		float m_MinZ, m_MaxZ;
+		Matrix4f& m_LightViewMatrix;
+		Camera& m_Camera;
+		Window& m_Window;
+		float m_FarHeight, m_FarWidth, m_NearHeight, m_NearWidth;
 
 	public:
 		ShadowBox(Matrix4f& lightViewMatrix, Camera& camera, Window& window);

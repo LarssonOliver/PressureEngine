@@ -18,12 +18,12 @@ namespace Pressure {
 		const static int MAX_INSTANCES;
 		const static int INSTANCE_DATA_LENGTH;		
 
-		static std::vector<float> buffer;
-		int pointer;
+		static std::vector<float> s_Buffer;
+		unsigned int m_Pointer;
 
-		RawModel quad;
-		ParticleShader shader;
-		VertexBuffer vbo;
+		RawModel m_Quad;
+		ParticleShader m_Shader;
+		VertexBuffer m_vbo;
 
 	public:
 		ParticleRenderer(Loader& loader, Matrix4f& projectionMatrix);

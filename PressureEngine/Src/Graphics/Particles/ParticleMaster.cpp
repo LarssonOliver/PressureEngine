@@ -2,17 +2,17 @@
 
 namespace Pressure {
 
-	std::map<ParticleTexture, std::list<Particle>> ParticleMaster::particles;
-	std::unique_ptr<ParticleRenderer> ParticleMaster::renderer = nullptr;
+	std::map<ParticleTexture, std::list<Particle>> ParticleMaster::s_Particles;
+	std::unique_ptr<ParticleRenderer> ParticleMaster::s_Renderer = nullptr;
 
 	void ParticleMaster::init(Loader& loader, GLFWwindow* window) {
-		renderer = std::make_unique<ParticleRenderer>(loader, Matrix4f().createProjectionMatrix(window));
+		s_Renderer = std::make_unique<ParticleRenderer>(loader, Matrix4f().createProjectionMatrix(window));
 	}
 
 	void ParticleMaster::tick(Camera& camera) {
 		// Creates a loop that loop through all elements in all the lists in the map.
-		auto map = particles.begin();
-		while (map != particles.end()) {
+		auto map = s_Particles.begin();
+		while (map != s_Particles.end()) {
 			bool empty = false;
 			auto& list = map->second;
 			auto particle = list.begin();
@@ -29,31 +29,31 @@ namespace Pressure {
 				list.sort(sort_particles);
 
 			if (empty)
-				map = particles.erase(map);
+				map = s_Particles.erase(map);
 			else map++;
 		}
 
 	}
 
 	void ParticleMaster::renderParticles(Camera& camera) {
-		renderer.get()->render(particles, camera);
+		s_Renderer.get()->render(s_Particles, camera);
 	}
 
 	void ParticleMaster::cleanUp() {
-		renderer.get()->cleanUp();
+		s_Renderer.get()->cleanUp();
 	}
 
 	void ParticleMaster::addParticle(Particle& particle) {
 		// Creates new list if it does not exist, else grabs existing one.
-		auto it = particles.find(particle.getTexture());
-		if (it == particles.end())
-			particles.emplace(particle.getTexture(), std::list<Particle>({ particle }));
+		auto it = s_Particles.find(particle.getTexture());
+		if (it == s_Particles.end())
+			s_Particles.emplace(particle.getTexture(), std::list<Particle>({ particle }));
 		else
 			it->second.emplace_front(particle);
 	}
 
 	void ParticleMaster::updateProjectionMatrix(Window& window) {
-		renderer->updateProjectionMatrix(window);
+		s_Renderer->updateProjectionMatrix(window);
 	}
 
 	bool ParticleMaster::sort_particles(const Particle& left, const Particle& right) {

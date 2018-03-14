@@ -5,80 +5,80 @@ namespace Pressure {
 	const int ShadowMapMasterRenderer::SHADOW_MAP_SIZE = 8192; // Change in frag shader if changed here.
 
 	ShadowMapMasterRenderer::ShadowMapMasterRenderer(Camera& camera, Window& window)
-		: shadowFbo(window, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 1, 1, FrameBuffer::DepthBufferType::TEXTURE), shadowBox(lightViewMatrix, camera, window), entityRenderer(shader, projectionViewMatrix) {
+		: m_ShadowFbo(window, SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, 1, 1, FrameBuffer::DepthBufferType::TEXTURE), m_ShadowBox(m_LightViewMatrix, camera, window), m_EntityRenderer(m_Shader, m_ProjectionViewMatrix) {
 		//: shadowFbo(SHADOW_MAP_SIZE, SHADOW_MAP_SIZE, window), shadowBox(lightViewMatrix, camera, window), entityRenderer(shader, projectionViewMatrix) {
 		createOffset();
 	}
 
 	ShadowMapMasterRenderer::~ShadowMapMasterRenderer() {
-		shader.cleanUp();
+		m_Shader.cleanUp();
 	}
 
 	void ShadowMapMasterRenderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Light& sun) {
-		shadowBox.tick();
-		prepare(sun.getPosition().negate(Vector3f()), shadowBox);
-		entityRenderer.render(entities);
+		m_ShadowBox.tick();
+		prepare(sun.getPosition().negate(Vector3f()), m_ShadowBox);
+		m_EntityRenderer.render(entities);
 		finish();
 	}
 
 	Matrix4f ShadowMapMasterRenderer::getToShadowMapSpaceMatrix() {
-		return offset.mul(projectionViewMatrix, Matrix4f());
+		return m_Offset.mul(m_ProjectionViewMatrix, Matrix4f());
 	}
 
 	unsigned int ShadowMapMasterRenderer::getShadowMap() {
-		return shadowFbo.getDepthTexture();
+		return m_ShadowFbo.getDepthTexture();
 		//return shadowFbo.getShadowMap();
 	}
 
 	float ShadowMapMasterRenderer::getShadowDistance() const {
-		return shadowBox.getShadowDistance();
+		return m_ShadowBox.getShadowDistance();
 	}
 
 	void ShadowMapMasterRenderer::setShadowDistance(float shadowDistance) {
-		shadowBox.setShadowDistance(shadowDistance);
+		m_ShadowBox.setShadowDistance(shadowDistance);
 	}
 
 	Matrix4f& ShadowMapMasterRenderer::getLightSpaceTransform() {
-		return lightViewMatrix;
+		return m_LightViewMatrix;
 	}
 
 	void ShadowMapMasterRenderer::prepare(Vector3f& lightDirection, ShadowBox& box) {
 		updateOrthoProjectionMatrix(box.getWidth(), box.getHeight(), box.getLength());
 		updateLightViewMatrix(lightDirection, box.getCenter());
-		projectionMatrix.mul(lightViewMatrix, projectionViewMatrix);
-		shadowFbo.bind();
+		m_ProjectionMatrix.mul(m_LightViewMatrix, m_ProjectionViewMatrix);
+		m_ShadowFbo.bind();
 		glEnable(GL_DEPTH_TEST);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		shader.start();
+		m_Shader.start();
 	}
 
 	void ShadowMapMasterRenderer::finish() {
-		shader.stop();
-		shadowFbo.unbind();
+		m_Shader.stop();
+		m_ShadowFbo.unbind();
 	}
 
 	void ShadowMapMasterRenderer::updateLightViewMatrix(Vector3f& direction, Vector3f& center) {		
 		direction.normalize();
 		center.negate();
-		lightViewMatrix.identity();
+		m_LightViewMatrix.identity();
  		float pitch = std::acosf(Vector2f(direction.getX(), direction.getZ()).length());
-		lightViewMatrix.rotate(pitch, Vector3f(1, 0, 0));
+		m_LightViewMatrix.rotate(pitch, Vector3f(1, 0, 0));
 		float yaw = std::atanf(direction.getX() / direction.getZ());
 		yaw = direction.getZ() > 0 ? yaw - (float)std::_Pi : yaw;
-		lightViewMatrix.rotate(-yaw, Vector3f(0, 1, 0));
-		lightViewMatrix.translate(center);
+		m_LightViewMatrix.rotate(-yaw, Vector3f(0, 1, 0));
+		m_LightViewMatrix.translate(center);
 	}
 
 	void ShadowMapMasterRenderer::updateOrthoProjectionMatrix(float width, float height, float length) {
-		projectionMatrix.identity();
-		projectionMatrix.set(0, 0, 2.f / width);
-		projectionMatrix.set(1, 1, 2.f / height);
-		projectionMatrix.set(2, 2, -2.f / length);
+		m_ProjectionMatrix.identity();
+		m_ProjectionMatrix.set(0, 0, 2.f / width);
+		m_ProjectionMatrix.set(1, 1, 2.f / height);
+		m_ProjectionMatrix.set(2, 2, -2.f / length);
 	}
 
 	void ShadowMapMasterRenderer::createOffset() {
-		offset.translate(Vector3f(0.5f));
-		offset.scale(0.5f);
+		m_Offset.translate(Vector3f(0.5f));
+		m_Offset.scale(0.5f);
 	}
 
 }
