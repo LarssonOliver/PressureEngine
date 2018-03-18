@@ -84,7 +84,7 @@ namespace Pressure {
 	}
 
 	AABB Loader::calculateAABB(const std::vector<float>& positions, unsigned int dimensions) {
-		Vector3f min, max;
+		Vector3f min = 0, max = 0;
 		for (unsigned int i = 0; i < positions.size() / dimensions; i++) {
 			for (unsigned int j = 0; j < dimensions; j++) {
 				if (positions[i + j] < min[j])

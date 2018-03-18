@@ -126,8 +126,8 @@ namespace Pressure {
 	}
 
 	void ShadowBox::calculateWidthsAndHeights() {
-		m_FarWidth = (float) (m_ShadowDistance * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
-		m_NearWidth = (float) (PRESSURE_NEAR_PLANE * std::tan(Math::toRadians(std::stof(Properties::Inst()->get("fov")))));
+		m_FarWidth = (float) (m_ShadowDistance * std::tan(Math::toRadians(std::stof(Properties::get("fov")))));
+		m_NearWidth = (float) (PRESSURE_NEAR_PLANE * std::tan(Math::toRadians(std::stof(Properties::get("fov")))));
 		m_FarHeight = m_FarWidth / getAspectRatio();
 		m_NearHeight = m_NearWidth / getAspectRatio();
 	}

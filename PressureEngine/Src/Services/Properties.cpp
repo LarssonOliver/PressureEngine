@@ -19,11 +19,11 @@ namespace Pressure {
 	}
 
 	std::string Properties::get(const char* property) {
-		return std::string(m_Properties[property]);
+		return std::string(Inst()->m_Properties[property]);
 	}
 
 	void Properties::set(const char* property, const char* value) {
-		m_Properties[property] = value;
+		Inst()->m_Properties[property] = value;
 	}
 
 	Properties::Properties()
@@ -70,7 +70,10 @@ namespace Pressure {
 		{ "hideConsole", "1" },
 
 		{ "renderGrass", "1" },
-		{ "useDepthOfField", "1" }
+		{ "useDepthOfField", "1" },
+
+		{ "mouseLookSensitivity", "1.0" }
+
 	};
 
 }

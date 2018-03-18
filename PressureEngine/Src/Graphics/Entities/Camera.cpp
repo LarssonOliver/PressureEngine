@@ -2,6 +2,7 @@
 #include <cmath>
 #include "../../Input/Input.h"
 #include "../../Math/Math.h"
+#include "../../Services/Properties.h"
 
 namespace Pressure {
 
@@ -20,7 +21,7 @@ namespace Pressure {
 
 	void Camera::tick() {
 
-		static const float acc = 0.05f;
+		float acc = m_MaxSpeed * 0.1;
 
 		if (Keyboard::isPressed(GLFW_KEY_W))
 			m_Acceleration.setZ(-acc);
@@ -102,6 +103,7 @@ namespace Pressure {
 	void Camera::calculateZoom() {
 		m_DistanceFromAnchor -= Mouse::getDWheel() * 3;
 		Math::frange(m_DistanceFromAnchor, 2, 100);
+		m_MaxSpeed = m_DistanceFromAnchor / 32;
 	}
 
 	void Camera::calculatePitch() {
@@ -113,7 +115,7 @@ namespace Pressure {
 
 	void Camera::calculateAngleAroundAnchor() {
 		if (Mouse::isPressed(GLFW_MOUSE_BUTTON_LEFT)) {
-			m_AngleAroundAnchor -= Mouse::getDX() * 0.3f;
+			m_AngleAroundAnchor -= Mouse::getDX() * 0.3f * std::stof(Properties::get("mouseLookSensitivity"));
 
 			// Makes sure that the angle always is 0 >= x >= 360
 			if (m_AngleAroundAnchor > 360)

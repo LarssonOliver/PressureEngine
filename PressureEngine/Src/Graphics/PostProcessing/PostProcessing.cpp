@@ -23,7 +23,7 @@ namespace Pressure {
 	void PostProcessing::process(FrameBuffer& frameBuffer, unsigned int lightScatterTexture, Vector3f& lightPosition) {
 		start();
 		s_LightScatterer->render(frameBuffer.getColorTexture(), lightScatterTexture, lightPosition, *s_Camera);
-		if (Properties::Inst()->get("useDepthOfField") == "1") {
+		if (Properties::get("useDepthOfField") == "1") {
 			s_DepthOfField->render(s_LightScatterer->getResult(), frameBuffer.getDepthTexture());
 			s_ContrastChanger->render(s_DepthOfField->getResult());
 		} else

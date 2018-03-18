@@ -89,7 +89,7 @@ void main(void) {
 		focusPlane = 40;
 	}
 
-	float aperture = max(focusPlane / 4, 1.0);
+	float aperture = max(focusPlane / 2, 1.0);
 	float depth = texture(depthTexture, textureCoords).r;
 	float objectDistance = -far * near / (depth * (far - near) - far);
 	float focalLength = 1 / (1 / focusPlane + 1 / imageDistance);

@@ -141,7 +141,7 @@ namespace PressureEngineViewer {
 
 			//entities.emplace_back(stones[0], Vector3f(-12, 0.3, -20), Vector3f(0, 0, 0), 2.3);
 
-			if (std::stoi(Properties::Inst()->get("renderGrass")) == 1) { 				
+			if (std::stoi(Properties::get("renderGrass")) == 1) { 				
 				RawModel grassModel = engine.loadObjModel("Grass");
 				grassModel.setWindAffected(true);
 				RawModel grass2Model = engine.loadObjModel("Grass2");

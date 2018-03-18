@@ -17,7 +17,7 @@ namespace Pressure {
 			prepareTexturedModel(model.first);
 			std::vector<Entity>& batch = entities[model.first];
 			for (Entity& entity : batch) {
-				if (ViewFrustum::Inst().sphereInFrustum(entity.getBounds().getCenter(), entity.getBounds().getRadius())) {
+				if (ViewFrustum::Inst().sphereInFrustum(entity.getBounds().getCenter(), entity.getBounds().getRadius() * 1.1f)) {
 					m_Shader.loadTransformationMatrix(Matrix4f().createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale()));
 					glDrawElements(GL_TRIANGLES, model.first.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
 				}

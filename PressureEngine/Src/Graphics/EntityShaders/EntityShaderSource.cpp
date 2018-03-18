@@ -52,12 +52,11 @@ void main(void) {
 	gl_Position = projectionMatrix * viewMatrix * worldPosition;
 	vertexOut.pass_textureCoords = textureCoords;
 
-	vec3 actualNormal = normal;
+	vertexOut.surfaceNormal = (transformationMatrix * vec4(normal, 0.0)).xyz;
 	if (useFakeLighting > 0.5) {
-		actualNormal = vec3(0.0, 1.0, 0.0);
+		vertexOut.surfaceNormal = vec3(0.0, 1.0, 0.0);
 	}
 
-	vertexOut.surfaceNormal = (transformationMatrix * vec4(actualNormal, 0.0)).xyz;
 	for(int i = 0; i < 4; i++) {
 		vertexOut.toLightVector[i] = lightPosition[i] - worldPosition.xyz;	
 	}
@@ -131,7 +130,7 @@ uniform vec3 attenuation[4];
 uniform float shineDamper;
 uniform float reflectivity;
 
-const int pcfCount = 1;
+const int pcfCount = 2;
 const float totalTexels = (pcfCount * 2.0 + 1.0) * (pcfCount * 2.0 + 1.0);
 
 void main(void) {

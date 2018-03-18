@@ -9,9 +9,9 @@ namespace Pressure {
 			__debugbreak();
 		}
 
-		m_Window = std::make_unique<Window>(std::stoi(Properties::Inst()->get("windowWidth")),
-			std::stoi(Properties::Inst()->get("windowHeight")), Properties::Inst()->get("windowTitle").c_str(),
-			std::stoi(Properties::Inst()->get("windowFullscreen")), std::stoi(Properties::Inst()->get("windowVsync")));
+		m_Window = std::make_unique<Window>(std::stoi(Properties::get("windowWidth")),
+			std::stoi(Properties::get("windowHeight")), Properties::get("windowTitle").c_str(),
+			std::stoi(Properties::get("windowFullscreen")), std::stoi(Properties::get("windowVsync")));
 		
 		// Initialize GLEW.
 		unsigned int err = glewInit();
@@ -27,7 +27,7 @@ namespace Pressure {
 		enableErrorCallbacks();
 #endif
 		// Hide console if specified in properties file.
-		if (std::stoi(Properties::Inst()->get("hideConsole")))
+		if (std::stoi(Properties::get("hideConsole")))
 			::ShowWindow(::GetConsoleWindow(), SW_HIDE);
 
 		m_Loader = std::make_unique<Loader>();
