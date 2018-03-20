@@ -1,6 +1,8 @@
+#include "Vector4f.h"
+
+#include <array>
 #include <cmath>
 #include "../Math.h"
-#include "Vector4f.h"
 
 namespace Pressure {
 
@@ -430,11 +432,7 @@ namespace Pressure {
 	}
 
 	float& Vector4f::operator[](int id) {
-		if (id == 0) return x;
-		else if (id == 1) return y;
-		else if (id == 2) return z;
-		else if (id == 3) return w;
-		else return x;
+		return std::array<float, 4>{ x, y, z, w }[id];
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector4f& vec) {

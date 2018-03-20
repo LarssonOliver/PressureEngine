@@ -1,4 +1,5 @@
 #include <cmath>
+#include <array>
 #include "Vector2f.h"
 
 namespace Pressure {
@@ -290,9 +291,7 @@ namespace Pressure {
 	}
 
 	float& Vector2f::operator[](int id) {
-		if (id == 0) return x;
-		else if (id == 1) return y;
-		else return x;
+		return std::array<float, 2>{ x, y }[id];
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector2f& vec) {

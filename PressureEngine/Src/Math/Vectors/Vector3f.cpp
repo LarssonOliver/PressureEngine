@@ -1,6 +1,8 @@
-#include <cmath>
-#include "../Math.h"
 #include "Vector3f.h"
+
+#include <cmath>
+#include <array>
+#include "../Math.h"
 
 namespace Pressure {
 
@@ -422,10 +424,7 @@ namespace Pressure {
 	}
 
 	float& Vector3f::operator[](int id) {
-		if (id == 0) return x;
-		else if (id == 1) return y;
-		else if (id == 2) return z;
-		else return x;
+		return std::array<float, 3>{ x, y, z }[id];
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Vector3f& vec) {
