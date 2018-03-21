@@ -17,11 +17,11 @@ namespace Pressure {
 		return (long)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 	}
 
-	double Math::toRadians(const double v) {
+	constexpr double Math::toRadians(const double v) {
 		return v * (M_PI / 180.0);
 	}
 
-	double Math::toDegrees(const double r) {
+	constexpr double Math::toDegrees(const double r) {
 		return r * 180.0 / M_PI;
 	}
 
@@ -43,15 +43,15 @@ namespace Pressure {
 		return (s.substr(0, strlen(c)) == c);
 	}
 
-	float Math::fmax(float& f, float max) {		
+	constexpr float Math::fmax(float& f, float max) {		
 		return f = f < max ? f : max;
 	}
 
-	float Math::fmin(float& f, float min) {
+	constexpr float Math::fmin(float& f, float min) {
 		return f = f > min ? f : min;
 	}
 
-	float Math::frange(float& f, float min, float max) {		
+	constexpr float Math::frange(float& f, float min, float max) {
 		fmin(f, min);
 		return fmax(f, max);
 	}
