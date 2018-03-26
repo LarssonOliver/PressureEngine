@@ -9,7 +9,7 @@ namespace Pressure {
 		updateProjectionMatrix(shader);
 	}
 
-	void EntityRenderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
+	void EntityRenderer::render(std::unordered_map<TexturedModel, std::vector<Entity>>& entities, Camera& camera) {
 		Matrix4f viewMatrix = Matrix4f().createViewMatrix(camera.getPosition(), camera.getPitch(), camera.getYaw(), camera.getRoll());
 		m_Shader.loadViewMatrix(viewMatrix);
 		ViewFrustum::Inst().extractPlanes(m_ProjectionMatrix.mul(viewMatrix, Matrix4f()));

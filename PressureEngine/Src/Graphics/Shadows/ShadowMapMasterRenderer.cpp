@@ -14,7 +14,7 @@ namespace Pressure {
 		m_Shader.cleanUp();
 	}
 
-	void ShadowMapMasterRenderer::render(std::map<TexturedModel, std::vector<Entity>>& entities, Light& sun) {
+	void ShadowMapMasterRenderer::render(std::unordered_map<TexturedModel, std::vector<Entity>>& entities, Light& sun) {
 		m_ShadowBox.tick();
 		prepare(sun.getPosition().negate(Vector3f()), m_ShadowBox);
 		m_EntityRenderer.render(entities);

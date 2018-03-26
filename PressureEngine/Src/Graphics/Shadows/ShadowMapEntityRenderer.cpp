@@ -7,7 +7,7 @@ namespace Pressure {
 		: m_Shader(shader), m_ProjectionViewMatrix(projectionViewMatrix) {		
 	}
 
-	void ShadowMapEntityRenderer::render(const std::map<TexturedModel, std::vector<Entity>>& entities) {
+	void ShadowMapEntityRenderer::render(const std::unordered_map<TexturedModel, std::vector<Entity>>& entities) {
 		MasterRenderer::enableFrontFaceCulling();
 		for (const auto& model : entities) {
 			model.first.getRawModel().getVertexArray().bind();

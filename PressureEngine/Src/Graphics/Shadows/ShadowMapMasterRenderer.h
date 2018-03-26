@@ -1,4 +1,5 @@
 #pragma once
+#include <unordered_map>
 #include "../GLObjects/FrameBuffer.h"
 #include "ShadowShader.h"
 #include "ShadowBox.h"
@@ -25,7 +26,7 @@ namespace Pressure {
 	public:
 		ShadowMapMasterRenderer(Camera& camera, Window& window);
 		~ShadowMapMasterRenderer();
-		void render(std::map<TexturedModel, std::vector<Entity>>& entities, Light& sun);
+		void render(std::unordered_map<TexturedModel, std::vector<Entity>>& entities, Light& sun);
 		
 		Matrix4f getToShadowMapSpaceMatrix();
 		unsigned int getShadowMap();

@@ -17,6 +17,7 @@ namespace Pressure {
 		void bind() const;
 		void unbind() const;
 		void del() const;
+		unsigned int getID() const;
 
 		void bindLayout(const VertexBufferLayout& layout);
 		

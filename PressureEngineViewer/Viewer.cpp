@@ -66,8 +66,8 @@ namespace PressureEngineViewer {
 			RawModel benchModel = engine.loadObjModel("Bench");
 			ModelTexture benchTexture = engine.loadTexture("Bench.png");
 			TexturedModel bench(benchModel, benchTexture);
-			entities.emplace_back(bench, Vector3f(18, 1.85, 5), Vector3f(0, -86, 0), 1.4);			
-			
+			entities.emplace_back(bench, Vector3f(18, 1.85, 5), Vector3f(0, -86, 0), 1.4);
+
 			RawModel barrowModel = engine.loadObjModel("Wheelbarrow");
 			ModelTexture barrowTexture = engine.loadTexture("Wheelbarrow.png");
 			TexturedModel barrow(barrowModel, barrowTexture);
@@ -76,10 +76,23 @@ namespace PressureEngineViewer {
 			RawModel bushModel = engine.loadObjModel("Bush");
 			bushModel.setWindAffected(true);
 			ModelTexture bushTexture = engine.loadTexture("Tree.png");
+			RawModel bush2Model = engine.loadObjModel("Bush2");
+			bush2Model.setWindAffected(true);
 			TexturedModel bush(bushModel, bushTexture);
-			entities.emplace_back(bush, Vector3f(34.5, 1, 0), Vector3f(0, 0, 0), 10.0);
+			TexturedModel bush2(bush2Model, bushTexture);
+			// Behind house
+			entities.emplace_back(bush2, Vector3f(34.5, 1, 0), Vector3f(0, 0, 0), 10.0);
 			entities.emplace_back(bush, Vector3f(37.5, 1, 4), Vector3f(0, 70, 0), 9.0);
 			entities.emplace_back(bush, Vector3f(33.5, 1, 8), Vector3f(0, 45, 0), 9.5);
+			// Close gravestone
+			entities.emplace_back(bush2, Vector3f(-24, 1, -18), Vector3f(0, 10, 0), 9.5);
+			entities.emplace_back(bush2, Vector3f(-20, .8, -17.5), Vector3f(0, 154, 0), 8.5);
+			// House frontside
+			entities.emplace_back(bush2, Vector3f(11, 1.5, -10), Vector3f(0, 154, 0), 10);
+			entities.emplace_back(bush2, Vector3f(6, 1.5, -8), Vector3f(0, 45, 0), 9);
+			entities.emplace_back(bush, Vector3f(10, 1.5, -5), Vector3f(0, 154, 0), 7);
+			entities.emplace_back(bush, Vector3f(6, 1.5, -3), Vector3f(0, 270, 0), 6);
+			entities.emplace_back(bush, Vector3f(2, 1.3, -5.7), Vector3f(0, 47, 0), 7.5);
 
 			RawModel lampModel = engine.loadObjModel("Lamp");
 			ModelTexture lampTexture = engine.loadTexture("Lamp.png");
@@ -89,8 +102,7 @@ namespace PressureEngineViewer {
 
 			RawModel tree2Model = engine.loadObjModel("Tree2");
 			tree2Model.setWindAffected(true);
-			ModelTexture tree2Texture = engine.loadTexture("Tree.png");
-			TexturedModel tree2(tree2Model, tree2Texture);
+			TexturedModel tree2(tree2Model, treeTexture);
 			entities.emplace_back(tree2, Vector3f(32.5, 12.4, -10.5), Vector3f(0, 0, 0), 8.0);
 
 			RawModel tombstoneModel = engine.loadObjModel("Tombstone");
@@ -102,7 +114,7 @@ namespace PressureEngineViewer {
 			ModelTexture wellTexture(engine.loadTexture("Well.png"));
 			TexturedModel well(wellModel, wellTexture);
 			entities.emplace_back(well, Vector3f(4, 0.1, 18), Vector3f(0, 195, 0), 1.6);
-			
+
 			RawModel rackModel = engine.loadObjModel("Fishingrack");
 			ModelTexture rackTexture = engine.loadTexture("Fishingrack.png");
 			TexturedModel rack(rackModel, rackTexture);
@@ -112,9 +124,8 @@ namespace PressureEngineViewer {
 			RawModel fenceModel = engine.loadObjModel("Fence");
 			RawModel fence2Model = engine.loadObjModel("Fence2");
 			ModelTexture fenceTexture = engine.loadTexture("Jetty.png");
-			ModelTexture fence2Texture = engine.loadTexture("Jetty.png");
 			TexturedModel fence(fenceModel, fenceTexture);
-			TexturedModel fence2(fence2Model, fence2Texture);
+			TexturedModel fence2(fence2Model, fenceTexture);
 			entities.emplace_back(fence, Vector3f(-7, 0.3, 19), Vector3f(0, 145, 0), 2.7);
 			entities.emplace_back(fence2, Vector3f(-0.2, 0.1, 21.5), Vector3f(0, 173, 0), 2.7);
 			entities.emplace_back(fence, Vector3f(7, -0.1, 22.5), Vector3f(0, 173, 0), 2.7);
@@ -127,8 +138,8 @@ namespace PressureEngineViewer {
 
 			// Stones			
 			RawModel stoneModels[3] = { engine.loadObjModel("Stone"), engine.loadObjModel("Stone2"), engine.loadObjModel("Stone3") };
-			ModelTexture stoneTextures[3] = { engine.loadTexture("Stone.png"), engine.loadTexture("Stone.png"), engine.loadTexture("Stone.png") };
-			TexturedModel stones[3] = { { stoneModels[0], stoneTextures[0] }, { stoneModels[1], stoneTextures[1] }, { stoneModels[2], stoneTextures[2] } };
+			ModelTexture stoneTexture = engine.loadTexture("Stone.png");
+			TexturedModel stones[3] = { { stoneModels[0], stoneTexture }, { stoneModels[1], stoneTexture }, { stoneModels[2], stoneTexture } };
 
 			entities.emplace_back(stones[0], Vector3f(-41.2, -1, .6), Vector3f(10, 50, 10), 2.8);
 			entities.emplace_back(stones[1], Vector3f(-41, -1.4, 3.5), Vector3f(20), 3.3);
@@ -141,15 +152,14 @@ namespace PressureEngineViewer {
 
 			//entities.emplace_back(stones[0], Vector3f(-12, 0.3, -20), Vector3f(0, 0, 0), 2.3);
 
-			if (std::stoi(Properties::get("renderGrass")) == 1) { 				
+			if (std::stoi(Properties::get("renderGrass")) == 1) {
 				RawModel grassModel = engine.loadObjModel("Grass");
 				grassModel.setWindAffected(true);
 				RawModel grass2Model = engine.loadObjModel("Grass2");
 				grass2Model.setWindAffected(true);
 				ModelTexture grassTexture(engine.loadTexture("Grass.png"));
-				ModelTexture grass2Texture(engine.loadTexture("Grass.png"));
 				TexturedModel grass(grassModel, grassTexture);
-				TexturedModel grass2(grass2Model, grass2Texture);
+				TexturedModel grass2(grass2Model, grassTexture);
 				setGrassPatch(-38, 1, -12, grass, grass2, -0.2, 0);
 				setGrassPatch(-39.5, 1.2, -9, grass, grass2, -0.25, .05);
 				setGrassPatch(-40, 1.1, -5, grass, grass2, -0.45, -.25);
@@ -171,6 +181,10 @@ namespace PressureEngineViewer {
 				setGrassPatch(37.5, 2, -8, grass, grass2, 0.7, -0.7);
 				setGrassPatch(38.5, 0.3, 0, grass, grass2, 0.1, -0.2);
 				setGrassPatch(32.5, 0.2, 4, grass, grass2, 0, 0);
+
+				setGrassPatch(-18, 0, -18, grass, grass2, 0, -.2);
+				setGrassPatch(-14, 0, -17, grass, grass2, 0, -.1);
+				setGrassPatch(0, .8, -10, grass, grass2, .1, -.2);
 			}
 
 			// Lights
