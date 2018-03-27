@@ -126,6 +126,10 @@ namespace Pressure {
 		return ModelTexture(m_Loader->loadTexture(filePath));		
 	}
 
+	TexturedModel PressureEngine::loadModel(const char* objName, const char* texturePath) {
+		return TexturedModel(loadObjModel(objName), loadTexture(texturePath));
+	}
+
 	ParticleTexture PressureEngine::loadParticleTexture(const char* filePath, const unsigned int numberOfRows, const bool additiveBlending) {
 		return ParticleTexture(m_Loader->loadTexture(filePath), numberOfRows, additiveBlending);
 	}

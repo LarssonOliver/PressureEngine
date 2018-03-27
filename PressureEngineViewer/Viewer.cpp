@@ -115,6 +115,12 @@ namespace PressureEngineViewer {
 			TexturedModel well(wellModel, wellTexture);
 			entities.emplace_back(well, Vector3f(4, 0.1, 18), Vector3f(0, 195, 0), 1.6);
 
+			TexturedModel windmill = engine.loadModel("Windmill", "Windmill.png");
+			entities.emplace_back(windmill, Vector3f(13, 0, 17), Vector3f(0, 10, 0), 4);
+			TexturedModel windmillblades = engine.loadModel("Windmillblades", "Windmillblades.png");
+			entities.emplace_back(windmillblades, Vector3f(13.45, 10.35, 19.5), Vector3f(0, 10, 0), 4);
+			entities.back().setRotationSpeed(0, 0, -0.4);
+
 			RawModel rackModel = engine.loadObjModel("Fishingrack");
 			ModelTexture rackTexture = engine.loadTexture("Fishingrack.png");
 			TexturedModel rack(rackModel, rackTexture);
