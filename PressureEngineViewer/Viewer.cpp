@@ -24,6 +24,9 @@ namespace PressureEngineViewer {
 		}
 
 		void init() {
+			//TexturedModel mclaren = engine.loadModel("McLaren570S", "default.png");
+			//entities.emplace_back(mclaren, Vector3f(0), Vector3f(0), 0.1);
+
 			// Island
 			RawModel islandModel = engine.loadObjModel("Island");
 			ModelTexture islandTexture(engine.loadTexture("Island.png"));
@@ -241,7 +244,8 @@ namespace PressureEngineViewer {
 		}
 
 		void tick() {
-			particleSystem->generateParticles((Vector3f&)Vector3f(-41, 0, 3), Vector3f(.2, .1, 2));
+			if (particleSystem)
+				particleSystem->generateParticles((Vector3f&)Vector3f(-41, 0, 3), Vector3f(.2, .1, 2));
 			engine.tick();
 			for (auto& entity : entities) {
 				entity.tick();
