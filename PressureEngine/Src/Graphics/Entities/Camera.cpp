@@ -41,6 +41,15 @@ namespace Pressure {
 		if (Keyboard::isPressed(GLFW_KEY_A) && Keyboard::isPressed(GLFW_KEY_D))
 			m_Acceleration.setX(0);
 
+		if (Keyboard::isPressed(GLFW_KEY_X))
+			m_Acceleration.setY(-acc);
+		else if (Keyboard::isPressed(GLFW_KEY_SPACE))
+			m_Acceleration.setY(acc);
+		else
+			m_Acceleration.setY(0);
+		if (Keyboard::isPressed(GLFW_KEY_SPACE) && Keyboard::isPressed(GLFW_KEY_X))
+			m_Acceleration.setY(0);
+
 		m_Speed.add(m_Acceleration);
 		Math::frange(m_Speed.x, -m_MaxSpeed, m_MaxSpeed);
 		Math::frange(m_Speed.y, -m_MaxSpeed, m_MaxSpeed);
