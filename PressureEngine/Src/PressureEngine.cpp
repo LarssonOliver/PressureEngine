@@ -52,7 +52,7 @@ namespace Pressure {
 			m_Renderer->updateProjectionMatrix();
 			PostProcessing::updateProjectionMatrix();
 			ParticleMaster::updateProjectionMatrix(*m_Window);
-			m_FrameBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
+			m_FrameBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 2, 4, FrameBuffer::DepthBufferType::RENDER_BUFFER);
 			m_OutputBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::TEXTURE);
 			m_LightScatterBuffer = std::make_unique<FrameBuffer>(*m_Window, m_Window->getWidth(), m_Window->getHeight(), 1, 1, FrameBuffer::DepthBufferType::RENDER_BUFFER);
 			m_Window->resized = false;
