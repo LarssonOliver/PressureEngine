@@ -1,5 +1,5 @@
 # PressureEngine
 
-Oliver Larssons gymnasiearbete 2017/2018.
+Grephics engine developed for fun and educational purpouses.
 
 Gource Visualisation: https://youtu.be/M2wo7icSnmw 
