@@ -35,8 +35,8 @@ set_property(TARGET FreeImage PROPERTY IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/D
 target_link_libraries(PressureEngineCore FreeImage)
 include_directories(Dependencies/FreeImage/include)
 add_custom_command(TARGET PressureEngineCore POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${PROJECT_SOURCE_DIR}/Dependencies/FreeImage/bin
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${PROJECT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.dll
     $<TARGET_FILE_DIR:PressureEngineCore>)
 
 set_target_properties(PressureEngineCore PROPERTIES FOLDER "PressureEngine")
