@@ -1,0 +1,20 @@
+
+
+list(APPEND PRESSURE_SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/ShadowBox.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ShadowMapEntityRenderer.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ShadowMapMasterRenderer.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ShadowShader.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ShadowShaderSource.cpp)	
+	
+	
+list(APPEND PRESSURE_HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShadowBox.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShadowMapEntityRenderer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShadowMapMasterRenderer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShadowShader.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShadowShaderSource.h)
+
+
+set(PRESSURE_SRC ${PRESSURE_SRC} PARENT_SCOPE)	
+set(PRESSURE_HEADERS ${PRESSURE_HEADERS} PARENT_SCOPE)	

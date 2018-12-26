@@ -1,0 +1,6 @@
+[submodule "PressureEngineCore/Dependencies/glfw"]
+	path = PressureEngineCore/Dependencies/glfw
+	url = https://github.com/glfw/glfw
+[submodule "PressureEngineCore/Dependencies/glad"]
+	path = PressureEngineCore/Dependencies/glad
+	url = https://github.com/Dav1dde/glad

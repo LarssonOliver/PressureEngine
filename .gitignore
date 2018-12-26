@@ -261,3 +261,12 @@ __pycache__/
 
 # Blender Temp Files
 *.blend1
+
+# CMake files
+Makefile
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+cmake_install.cmake
+cmake_uninstall.cmake
+[Bb]uild/

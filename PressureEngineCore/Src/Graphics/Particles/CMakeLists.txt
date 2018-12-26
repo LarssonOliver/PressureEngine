@@ -1,0 +1,24 @@
+
+
+list(APPEND PRESSURE_SRC
+	${CMAKE_CURRENT_SOURCE_DIR}/Particle.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ParticleMaster.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ParticleRenderer.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ParticleShader.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ParticleShaderSource.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ParticleSystem.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ParticleTexture.cpp)	
+	
+	
+list(APPEND PRESSURE_HEADERS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Particle.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ParticleMaster.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ParticleRenderer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ParticleShader.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ParticleShaderSource.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ParticleSystem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ParticleTexture.h)
+
+
+set(PRESSURE_SRC ${PRESSURE_SRC} PARENT_SCOPE)	
+set(PRESSURE_HEADERS ${PRESSURE_HEADERS} PARENT_SCOPE)	

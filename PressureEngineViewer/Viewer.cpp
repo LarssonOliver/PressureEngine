@@ -1,4 +1,4 @@
-#include "PressureEngine.h"
+#include "PressureEngineCore/PressureEngine.h"
 
 namespace PressureEngineViewer {
 
