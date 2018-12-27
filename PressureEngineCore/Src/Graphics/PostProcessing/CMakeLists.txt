@@ -1,5 +1,3 @@
-
-
 list(APPEND PRESSURE_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/ImageRenderer.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/PostProcessing.cpp)	

@@ -2,22 +2,27 @@ cmake_minimum_required(VERSION 3.0)
 
 project(PressureEngineViewer)
 
-add_executable(PressureEngineViewer Viewer.cpp)
+add_executable(${PROJECT_NAME} Viewer.cpp)
 
+# Engine core.
 include_directories(${CMAKE_SOURCE_DIR}/PressureEngineCore/Include)
-target_link_libraries(PressureEngineViewer PressureEngineCore)
+target_link_libraries(${PROJECT_NAME} PressureEngineCore)
 
-set_target_properties(PressureEngineViewer PROPERTIES FOLDER "PressureEngine")
+# Organise project structure.
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${CMAKE_PROJECT_NAME})
 
-include_directories(${CMAKE_SOURCE_DIR}/build/PressureEngineCore/Dependencies/glad/include)
-include_directories(${CMAKE_SOURCE_DIR}/PressureEngineCore/Dependencies/glfw/include)
+# include_directories(${CMAKE_SOURCE_DIR}/build/PressureEngineCore/Dependencies/glad/include)
+# include_directories(${CMAKE_SOURCE_DIR}/PressureEngineCore/Dependencies/glfw/include)
 
-add_custom_command(TARGET PressureEngineViewer POST_BUILD
+# Copy resources to exe path.
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${PROJECT_SOURCE_DIR}/Res
-    $<TARGET_FILE_DIR:PressureEngineViewer>/Res)
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>/Res)
 
-add_custom_command(TARGET PressureEngineViewer POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${PROJECT_SOURCE_DIR}/Res
-    ${PROJECT_BINARY_DIR}/Res)
+if (MSVC) # Needed to find resources when debugging.
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${PROJECT_SOURCE_DIR}/Res
+        ${PROJECT_BINARY_DIR}/Res)  
+endif()

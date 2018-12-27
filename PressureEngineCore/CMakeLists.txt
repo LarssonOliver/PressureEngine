@@ -2,41 +2,57 @@ cmake_minimum_required(VERSION 3.0)
 
 project(PressureEngineCore)
 
-set(PRESSURE_SRC
-    Src/PressureEngine.cpp)
-
+# List of all sources, will be modified in subdirs before add_library.
+set(PRESSURE_SRC)
 set(PRESSURE_HEADERS
-    Include/PressureEngineCore/PressureEngine.h)
+    ${CMAKE_CURRENT_SOURCE_DIR}/Include/${PROJECT_NAME}/PressureEngine.h)
 
 include_directories(Include)
 
+# Will find all sources and save them in 
+# PRESSURE_SRC AND PRESSURE_HEADERS respectively.
 add_subdirectory(Src)
 
+# VS solution organisation.
 assign_source_group(${PRESSURE_SRC})
 assign_source_group(${PRESSURE_HEADERS})
 
+# Symbol visibility.
 add_definitions(-DPRESSURE_EXPORTS)
 
-add_library(PressureEngineCore SHARED ${PRESSURE_SRC} ${PRESSURE_HEADERS}) 
+add_library(${PROJECT_NAME} SHARED ${PRESSURE_SRC} ${PRESSURE_HEADERS}) 
 
+# Add and link dependencies.
+# GLFW
 add_subdirectory(Dependencies/glfw)
-target_link_libraries(PressureEngineCore glfw)
-include_directories(Dependencies/glfw/include)
+target_link_libraries(${PROJECT_NAME} glfw)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/glfw/include)
 
+
+# GLAD & OpenGL
 add_subdirectory(Dependencies/glad)
-target_link_libraries(PressureEngineCore glad)
-target_link_libraries(PressureEngineCore opengl32.lib)
-include_directories(${CMAKE_SOURCE_DIR}/build/${PROJECT_NAME}/Dependencies/glad/include)
+target_link_libraries(${PROJECT_NAME} glad)
+target_link_libraries(${PROJECT_NAME} opengl32.lib)
+include_directories(${PROJECT_BINARY_DIR}/Dependencies/glad/include)
+
+# Solution organisation.
 set_target_properties(glad PROPERTIES FOLDER "GLAD")
 set_target_properties(glad-generate-files PROPERTIES FOLDER "GLAD")
 
-add_library(FreeImage STATIC IMPORTED)
-set_property(TARGET FreeImage PROPERTY IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.lib)
-target_link_libraries(PressureEngineCore FreeImage)
-include_directories(Dependencies/FreeImage/include)
-add_custom_command(TARGET PressureEngineCore POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-    ${PROJECT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.dll
-    $<TARGET_FILE_DIR:PressureEngineCore>)
 
-set_target_properties(PressureEngineCore PROPERTIES FOLDER "PressureEngine")
+# FreeImage
+add_library(FreeImage STATIC IMPORTED)
+set_property(TARGET FreeImage PROPERTY IMPORTED_LOCATION
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.lib)
+target_link_libraries(${PROJECT_NAME} FreeImage)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeImage/include)
+
+# Copy dll into bin folder after build.
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.dll
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+
+
+# Solution organisation.
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${CMAKE_PROJECT_NAME})

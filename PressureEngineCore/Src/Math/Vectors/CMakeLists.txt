@@ -1,5 +1,3 @@
-
-
 list(APPEND PRESSURE_SRC
     ${CMAKE_CURRENT_SOURCE_DIR}/Vector2f.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Vector3f.cpp

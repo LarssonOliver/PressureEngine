@@ -1,5 +1,3 @@
-
-
 list(APPEND PRESSURE_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/Particle.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/ParticleMaster.cpp
