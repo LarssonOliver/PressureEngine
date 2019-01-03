@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(PressureEngineCore)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 # List of all sources, will be modified in subdirs before add_library.
 set(PRESSURE_SRC)
 set(PRESSURE_HEADERS
@@ -39,7 +41,6 @@ include_directories(${PROJECT_BINARY_DIR}/Dependencies/glad/include)
 set_target_properties(glad PROPERTIES FOLDER "GLAD")
 set_target_properties(glad-generate-files PROPERTIES FOLDER "GLAD")
 
-
 # FreeImage
 add_library(FreeImage STATIC IMPORTED)
 set_property(TARGET FreeImage PROPERTY IMPORTED_LOCATION
@@ -53,6 +54,7 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.dll
     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DPRESSURE_DEBUG")
 
 # Solution organisation.
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${CMAKE_PROJECT_NAME})

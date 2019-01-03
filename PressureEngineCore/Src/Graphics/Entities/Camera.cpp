@@ -21,7 +21,7 @@ namespace Pressure {
 
 	void Camera::tick() {
 
-		float acc = m_MaxSpeed * 0.1;
+		float acc = m_MaxSpeed * 0.1f;
 
 		if (Keyboard::isPressed(GLFW_KEY_W))
 			m_Acceleration.setZ(-acc);

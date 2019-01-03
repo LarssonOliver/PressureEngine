@@ -13,7 +13,7 @@ namespace Pressure {
 			return string;
 
 		file.seekg(0, std::ios::end);
-		string->reserve(file.tellg());
+		string->reserve((const unsigned int)file.tellg());
 		file.seekg(0, std::ios::beg);
 
 		string->assign((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());

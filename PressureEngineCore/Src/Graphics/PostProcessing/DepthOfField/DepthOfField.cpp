@@ -14,7 +14,7 @@ namespace Pressure {
 		glBindTexture(GL_TEXTURE_2D, colorTexture);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, depthTexture);				
-		m_Shader.loadTargetSize(Vector2f(m_Window.getWidth(), m_Window.getHeight()));
+		m_Shader.loadTargetSize(Vector2f((float)m_Window.getWidth(), (float)m_Window.getHeight()));
 		m_Renderer.render();
 		m_Shader.stop();
 	}

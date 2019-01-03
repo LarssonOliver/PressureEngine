@@ -8,7 +8,7 @@ namespace Pressure {
 		: m_Normal(normal), m_Distance(distance) { }
 
 	void Plane::normalize() {
-		float scale = 1.0 / m_Normal.length();
+		float scale = 1.f / m_Normal.length();
 		m_Normal.normalize();
 		m_Distance *= scale;
 	}

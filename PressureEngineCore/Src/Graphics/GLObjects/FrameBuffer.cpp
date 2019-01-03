@@ -2,7 +2,7 @@
 
 namespace Pressure {
 
-	FrameBuffer::FrameBuffer(Window& const window, unsigned int width, unsigned int height, unsigned int targetCount, unsigned int samples, DepthBufferType depthType) 
+	FrameBuffer::FrameBuffer(Window& window, unsigned int width, unsigned int height, unsigned int targetCount, unsigned int samples, DepthBufferType depthType) 
 		: m_Window(window), m_Width(width), m_Height(height), m_TargetCount(targetCount) {
 		
 		createFrameBuffer();
@@ -93,7 +93,7 @@ namespace Pressure {
 	void FrameBuffer::determineDrawBuffers() {
 		std::vector<unsigned int> drawBuffers;
 		drawBuffers.resize(m_TargetCount);
-		for (int i = 0; i < m_TargetCount; i++) {
+		for (unsigned int i = 0; i < m_TargetCount; i++) {
 			drawBuffers[i] = GL_COLOR_ATTACHMENT0 + i;
 		}
 		glDrawBuffers(m_TargetCount, &drawBuffers[0]);

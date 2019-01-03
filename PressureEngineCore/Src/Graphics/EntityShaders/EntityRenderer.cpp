@@ -34,7 +34,7 @@ namespace Pressure {
 	}
 
 	void EntityRenderer::tick() {
-		m_WindModifier += 0.005;
+		m_WindModifier += 0.005f;
 		if (m_WindModifier > 360)
 			m_WindModifier -= 360;
 	}

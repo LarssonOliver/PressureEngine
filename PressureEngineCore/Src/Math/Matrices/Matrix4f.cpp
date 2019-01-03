@@ -496,6 +496,8 @@ namespace Pressure {
 
 		for (int i = 0; i < 16; i++)
 			dest.val[i] = inv[i] * det;
+
+		return dest;
 	}
 
 	/* EQUALITY  CHECK */

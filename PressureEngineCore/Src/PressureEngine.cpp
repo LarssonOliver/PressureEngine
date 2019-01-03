@@ -13,21 +13,13 @@ namespace Pressure {
 			std::stoi(Properties::get("windowHeight")), Properties::get("windowTitle").c_str(),
 			std::stoi(Properties::get("windowFullscreen")), std::stoi(Properties::get("windowVsync")));
 		
-		// Initialize GLEW.
-		// unsigned int err = glewInit();
-		// if (GLEW_OK != err) {
-		// 	std::cout << "GLEW Failed to initialize!" << std::endl;
-		// 	__debugbreak();
-		// }
-
 		gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-		//std::cout << glGetString(GL_VENDOR) << std::endl;
 
 #ifdef PRESSURE_DEBUG
 		// Enable OpenGL debugging callback.
 		enableErrorCallbacks();
 #endif
+
 		// Hide console if specified in properties file.
 		if (std::stoi(Properties::get("hideConsole")))
 			::ShowWindow(::GetConsoleWindow(), SW_HIDE);

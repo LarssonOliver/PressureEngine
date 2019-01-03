@@ -233,7 +233,7 @@ namespace PressureEngineViewer {
 					render();
 				frames++;
 
-#if PRESSURE_DEBUG
+#ifndef NDEBUG
 				if (Math::getTimeMillis() - timer > 1000) {
 					timer += 1000;
 					std::cout << "FPS: " << frames << std::endl;

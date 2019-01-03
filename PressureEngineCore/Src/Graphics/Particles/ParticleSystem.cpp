@@ -12,7 +12,7 @@ namespace Pressure {
 
 	void ParticleSystem::generateParticles(Vector3f& center, const Vector3f& spread) {
 		Random<float> r;
-		for (unsigned int i = 0; i < (int)m_ppt; i++) {
+		for (unsigned int i = 0; i < (unsigned int)m_ppt; i++) {
 			emitParticle(center, spread);
 		}
 		if (r.next() < fmod(m_ppt, 1)) {

@@ -11,7 +11,7 @@ namespace Pressure {
 
 	void MasterRenderer::render(std::vector<Light>& lights, Camera& camera) {
 		prepare();
-		shadowMapRenderer.setShadowDistance(25 + camera.getDistanceFromAnchor() * 1.5);
+		shadowMapRenderer.setShadowDistance(25 + camera.getDistanceFromAnchor() * 1.5f);
 		shader.start();
 		shader.connectTextureUnits();
 		glDisable(GL_CLIP_DISTANCE0);

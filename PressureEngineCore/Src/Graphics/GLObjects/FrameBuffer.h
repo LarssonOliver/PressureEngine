@@ -10,14 +10,14 @@ namespace Pressure {
 	class PRESSURE_API FrameBuffer {
 
 	public:
-		static enum class DepthBufferType {
+		enum class DepthBufferType {
 			NONE,
 			TEXTURE,
 			RENDER_BUFFER
 		};
 
 	private:
-		Window & const m_Window;
+		Window & m_Window;
 
 		unsigned int m_ID;
 
@@ -35,7 +35,7 @@ namespace Pressure {
 		bool m_MultiSampled;
 
 	public:
-		FrameBuffer(Window& const window, unsigned int width, unsigned int height, unsigned int targetCount, unsigned int samples, DepthBufferType depthType);
+		FrameBuffer(Window& window, unsigned int width, unsigned int height, unsigned int targetCount, unsigned int samples, DepthBufferType depthType);
 		~FrameBuffer();
 
 		void bind() const;
