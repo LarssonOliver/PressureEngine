@@ -233,10 +233,11 @@ namespace PressureEngineViewer {
 					render();
 				frames++;
 
-#ifndef NDEBUG
+#ifdef PRESSURE_DEBUG
 				if (Math::getTimeMillis() - timer > 1000) {
 					timer += 1000;
-					std::cout << "FPS: " << frames << std::endl;
+
+					PRESSURE_LOG(LOG_INFO) << "FPS: " << frames << std::endl;
 					frames = 0;
 				}
 #endif
@@ -253,6 +254,13 @@ namespace PressureEngineViewer {
 
 			if (Keyboard::isPressed(GLFW_KEY_ESCAPE))
 				engine.getWindow().close();
+
+			if (Keyboard::isPressed(GLFW_KEY_K))
+				if (Log::ReportingLevel() == LOG_INFO)
+					PRESSURE_LOG_LEVEL(LOG_WARNING);
+				else
+					PRESSURE_LOG_LEVEL(LOG_INFO);
+
 		}
 
 		void render() {

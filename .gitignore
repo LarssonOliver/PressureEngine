@@ -270,3 +270,6 @@ CMakeScripts
 cmake_install.cmake
 cmake_uninstall.cmake
 [Bb]uild/
+
+# VS Code files.
+.vscode/

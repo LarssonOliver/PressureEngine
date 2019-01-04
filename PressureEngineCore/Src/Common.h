@@ -2,8 +2,6 @@
 
 // Most of the inclueds required.
 
-#define GLEW_STATIC
-
 #include "Constants.h"
 
 #include <glad/glad.h>
@@ -19,3 +17,4 @@
 #include <GLFW\glfw3.h>
 
 #include "Math\Math.h"
+#include "Log.h"

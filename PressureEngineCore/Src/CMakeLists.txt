@@ -7,7 +7,8 @@ list(APPEND PRESSURE_HEADERS
 	${CMAKE_CURRENT_SOURCE_DIR}/Callbacks.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Common.h
 	${CMAKE_CURRENT_SOURCE_DIR}/Constants.h
-	${CMAKE_CURRENT_SOURCE_DIR}/DllExport.h)
+	${CMAKE_CURRENT_SOURCE_DIR}/DllExport.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Log.h)
 
 
 add_subdirectory(Graphics)

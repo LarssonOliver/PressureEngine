@@ -14,6 +14,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${CMAKE_PROJECT_NAME})
 # include_directories(${CMAKE_SOURCE_DIR}/build/PressureEngineCore/Dependencies/glad/include)
 # include_directories(${CMAKE_SOURCE_DIR}/PressureEngineCore/Dependencies/glfw/include)
 
+# Debug define.
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DPRESSURE_DEBUG")
+
 # Copy resources to exe path.
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory

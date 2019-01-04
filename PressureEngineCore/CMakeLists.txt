@@ -48,13 +48,14 @@ set_property(TARGET FreeImage PROPERTY IMPORTED_LOCATION
 target_link_libraries(${PROJECT_NAME} FreeImage)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeImage/include)
 
+# Debug define.
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DPRESSURE_DEBUG")
+
 # Copy dll into bin folder after build.
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
     ${CMAKE_CURRENT_SOURCE_DIR}/Dependencies/FreeImage/lib/FreeImage.dll
     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DPRESSURE_DEBUG")
 
 # Solution organisation.
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER ${CMAKE_PROJECT_NAME})

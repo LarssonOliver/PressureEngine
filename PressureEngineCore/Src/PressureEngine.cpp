@@ -5,7 +5,7 @@ namespace Pressure {
 	void PressureEngine::init() {
 		// Initialize GLFW.
 		if (!glfwInit()) {
-			std::cout << "GLFW Failed to initialize!" << std::endl;
+			PRESSURE_LOG(LOG_FATAL) << "GLFW Failed to initialize!" << std::endl;
 			__debugbreak();
 		}
 
@@ -20,9 +20,11 @@ namespace Pressure {
 		enableErrorCallbacks();
 #endif
 
+#ifndef PRESSURE_DEBUG
 		// Hide console if specified in properties file.
 		if (std::stoi(Properties::get("hideConsole")))
 			::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+#endif
 
 		m_Loader = std::make_unique<Loader>();
 		m_Camera = std::make_unique<Camera>();
@@ -146,7 +148,7 @@ namespace Pressure {
 			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
 		}
 		else
-			std::cout << "glDebugMessageCallback Not Available! Disabling OpenGL Error Handling." << std::endl;
+			PRESSURE_LOG(LOG_WARNING) << "glDebugMessageCallback Not Available! Disabling OpenGL Error Handling." << std::endl;
 	}
 
 	void PressureEngine::terminate() {

@@ -22,7 +22,7 @@
 		#define PRESSURE_API __declspec(dllimport)		
 	#endif
 #else
-	#error PressureEngine only supports Win32!
+	#error PressureEngine only supports Win32 for now!
 	#ifdef PRESSURE_EXPORTS
 		#define PRESSURE_API __attribute__(visibility("default"))	
 	#else
