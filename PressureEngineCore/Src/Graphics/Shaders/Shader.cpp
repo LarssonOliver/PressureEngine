@@ -103,7 +103,7 @@ namespace Pressure {
 			glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &logLength);
 			std::vector<GLchar> shaderError((logLength > 1) ? logLength : 1);
 			glGetShaderInfoLog(shaderID, logLength, NULL, &shaderError[0]);
-			PRESSURE_LOG(LOG_ERROR) << &shaderError[0] << std::endl;
+			PRESSURE_LOG(LOG_ERROR, std::string(&shaderError[0]));
 		}
 
 		return shaderID;

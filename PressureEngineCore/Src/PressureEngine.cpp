@@ -4,16 +4,15 @@ namespace Pressure {
 
 	void PressureEngine::init() {
 		// Initialize GLFW.
-		if (!glfwInit()) {
-			PRESSURE_LOG(LOG_FATAL) << "GLFW Failed to initialize!" << std::endl;
-			__debugbreak();
-		}
+		int glfw = glfwInit();
+		PRESSURE_ASSERT(glfw, "GLFW Failed to initialize!");
 
 		m_Window = std::make_unique<Window>(std::stoi(Properties::get("windowWidth")),
 			std::stoi(Properties::get("windowHeight")), Properties::get("windowTitle").c_str(),
 			std::stoi(Properties::get("windowFullscreen")), std::stoi(Properties::get("windowVsync")));
 		
-		gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		int glad = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		PRESSURE_ASSERT(glad, "GLAD failed to load opengl!");
 
 #ifdef PRESSURE_DEBUG
 		// Enable OpenGL debugging callback.
@@ -148,7 +147,7 @@ namespace Pressure {
 			glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, &unusedIds, true);
 		}
 		else
-			PRESSURE_LOG(LOG_WARNING) << "glDebugMessageCallback Not Available! Disabling OpenGL Error Handling." << std::endl;
+			PRESSURE_LOG(LOG_WARNING, "glDebugMessageCallback Not Available! Disabling OpenGL Error Handling.");
 	}
 
 	void PressureEngine::terminate() {

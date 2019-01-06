@@ -237,7 +237,7 @@ namespace PressureEngineViewer {
 				if (Math::getTimeMillis() - timer > 1000) {
 					timer += 1000;
 
-					PRESSURE_LOG(LOG_INFO) << "FPS: " << frames << std::endl;
+					PRESSURE_LOG(LOG_INFO, std::string("FPS: ") + std::to_string(frames));
 					frames = 0;
 				}
 #endif
@@ -257,9 +257,9 @@ namespace PressureEngineViewer {
 
 			if (Keyboard::isPressed(GLFW_KEY_K))
 				if (Log::ReportingLevel() == LOG_INFO)
-					PRESSURE_LOG_LEVEL(LOG_WARNING);
+					Log::ReportingLevel() = LOG_WARNING;
 				else
-					PRESSURE_LOG_LEVEL(LOG_INFO);
+					Log::ReportingLevel() = LOG_INFO;
 
 		}
 

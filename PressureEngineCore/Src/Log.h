@@ -2,9 +2,11 @@
 
 // Plan is to convert this system to use an in engine console when support for text redering is implemented.
 
-#include "DllExport.h"
 #include <iostream>
 #include <ctime>
+#include <string>
+
+#include "DllExport.h"
 
 namespace Pressure {
 
@@ -16,7 +18,7 @@ namespace Pressure {
 		LOG_DEBUG
 	};
 
-	constexpr PRESSURE_API std::ostream& operator<<(std::ostream& os, LogLevel level) {
+	constexpr PRESSURE_API std::ostream& operator<<(std::ostream& os, const LogLevel level) {
 		switch (level) {
 		case LOG_FATAL:
 			os << "FATAL";
@@ -69,14 +71,14 @@ namespace Pressure {
 
 }
 #ifdef PRESSURE_DEBUG
-	#define PRESSURE_LOGGING // Used to determine wh
+	#define PRESSURE_LOGGING // Used to determine whether or not we should enable logging.
 	
-	#define PRESSURE_LOG(level) \
-		if (level > Log::ReportingLevel()); \
-		else Log().Get(level)
-
-	#define PRESSURE_LOG_LEVEL(level) Log::ReportingLevel() = level 
+	#define PRESSURE_LOG(lvl, msg) \
+		if (lvl > Log::ReportingLevel()); \
+		else Log().Get(lvl) << msg << std::endl
+	
+	#define PRESSURE_ASSERT(x, msg) { if(!(x)) { PRESSURE_LOG(LOG_ERROR, std::string("Assertion Failed: ") + msg); __debugbreak(); } }
 #else
-	#define PRESSURE_LOG(level)
-	#define PRESSURE_LOG_LEVEL(level)
+	#define PRESSURE_LOG(lvl, msg)
+	#define PRESSURE_ASSERT(x, msg)
 #endif

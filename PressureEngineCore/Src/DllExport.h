@@ -24,7 +24,7 @@
 #else
 	#error PressureEngine only supports Win32 for now!
 	#ifdef PRESSURE_EXPORTS
-		#define PRESSURE_API __attribute__(visibility("default"))	
+		#define PRESSURE_API __attribute__((visibility("default")))	
 	#else
 		#define PRESSURE_API	
 	#endif
